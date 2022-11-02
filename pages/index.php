@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <?php include("../includes/head.php"); ?>
+<?php
+  include("sesion.php"); 
+  $idPagina = 1;
+  include("../includes/verificar-paginas.php");
+  include("../includes/head.php");
+?>
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
       <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div>
 
       <?php include("../includes/encabezado.php"); ?>

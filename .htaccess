@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^admin\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.admin\.com$
+RewriteRule ^(.*)$ "https\:\/\/admin\.com\/$1" [R=301,L]
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit
