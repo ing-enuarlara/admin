@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <?php include("includes/head.php"); ?>
+    <?php include("../includes/head.php"); ?>
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -10,12 +10,12 @@
         <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
       </div>
 
-      <?php include("includes/encabezado.php"); ?>
+      <?php include("../includes/encabezado.php"); ?>
       
-      <?php include("includes/menu.php"); ?>
+      <?php include("../includes/menu.php"); ?>
       
       <div class="content-wrapper">
-        <?php include("includes/navegacion.php"); ?>
+        <?php include("../includes/navegacion.php"); ?>
 
         <!-- Main content -->
         <section class="content">
@@ -86,11 +86,11 @@
           </div>
         </section>
       </div>
-      <?php include("includes/footer.php"); ?>
+      <?php include("../includes/footer.php"); ?>
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
       </aside>
     </div>
-    <?php include("includes/pie.php"); ?>
+    <?php include("../includes/pie.php"); ?>
   </body>
 </html>
