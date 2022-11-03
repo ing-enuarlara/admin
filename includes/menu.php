@@ -132,6 +132,12 @@
                 </li>
             </ul>
         </li>
+        <li class="nav-item" style="position: absolute; margin-top: 720px;">
+            <a href="../salir.php" class="nav-link">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">Cerrar Sesion</p>
+            </a>
+        </li>
     </ul>
     </nav>
     <!-- /.sidebar-menu -->

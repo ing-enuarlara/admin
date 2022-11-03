@@ -9,4 +9,4 @@ $conexionBdGeneral = new mysqli(SERVER, USER, PASS, BDGENERAL);
 $conexionBdAdmin = new mysqli(SERVER, USER, PASS, BDADMIN);
 
 
-const REDIRECT_ROUTE = 'http://localhost/admin/';
+const REDIRECT_ROUTE = 'http://localhost/admin';
