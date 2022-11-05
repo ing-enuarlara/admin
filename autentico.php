@@ -6,7 +6,7 @@ include("conexion.php");
 $urlRed = REDIRECT_ROUTE;
 
 
-$rst_usrE = $conexionBdGeneral->query("SELECT usr_login, usr_id, usr_intentos_fallidos FROM usuarios WHERE usr_login='".trim(mysqli_real_escape_string($conexionBdGeneral, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL");
+$rst_usrE = $conexionBdGeneral->query("SELECT usr_login, usr_id, usr_intentos_fallidos, usr_bloqueado FROM usuarios WHERE usr_login='".trim(mysqli_real_escape_string($conexionBdGeneral, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL");
 
 $numE = $rst_usrE->num_rows;
 if($numE ==0 ){
@@ -15,7 +15,10 @@ if($numE ==0 ){
 }
 $usrE = mysqli_fetch_array($rst_usrE, MYSQLI_BOTH);
 
+if($usrE['usr_bloqueado']==1){header("Location:".$urlRed."/index.php?error=4");exit();}
+
 if($usrE['usr_intentos_fallidos']>=3 and md5($_POST["suma"])<>$_POST["sumaReal"]){
+	$conexionBdGeneral->query("UPDATE usuarios SET usr_bloqueado=1 WHERE usr_id='".$usrE['usr_id']."'");
 	header("Location:".$urlRed."/index.php?error=3");
 	exit();
 }
@@ -35,13 +38,11 @@ if($num>0)
 	else{$url = $urlRed.'/index.php';}
 	
 	$conexionBdGeneral->query("UPDATE usuarios SET usr_sesion=1, usr_ultimo_ingreso=now(), usr_intentos_fallidos=0 WHERE usr_id='".$fila[0]."'");
-	//if(mysql_errno()!=0){echo mysql_error();exit();}
 	
 	header("Location:".$url);	
 	exit();
 }else{
 	$conexionBdGeneral->query("UPDATE usuarios SET usr_intentos_fallidos=usr_intentos_fallidos+1 WHERE usr_id='".$usrE['usr_id']."'");
-	//if(mysql_errno()!=0){echo mysql_error();exit();}
 
 	header("Location:".$urlRed."/index.php?error=2&idseg=".$_POST["idseg"]);
 	exit();
