@@ -15,9 +15,10 @@ if($numE ==0 ){
 }
 $usrE = mysqli_fetch_array($rst_usrE, MYSQLI_BOTH);
 
-if($usrE['usr_bloqueado']==1){header("Location:".$urlRed."/index.php?error=4");exit();}
-
 if($usrE['usr_intentos_fallidos']>=3 and md5($_POST["suma"])<>$_POST["sumaReal"]){
+
+	if($usrE['usr_bloqueado']==1){header("Location:".$urlRed."/index.php?error=4");exit();}
+	
 	$conexionBdGeneral->query("UPDATE usuarios SET usr_bloqueado=1 WHERE usr_id='".$usrE['usr_id']."'");
 	header("Location:".$urlRed."/index.php?error=3");
 	exit();
