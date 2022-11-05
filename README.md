@@ -5,8 +5,8 @@ Software de administracion, adaptable a todo tipo de paginas web.
 ## Tabla de contenido
 1. [Información general](#información-general)
 2. [Tecnologías](#tecnologías)
-4. [Colaboración](#colaboración)
-5. [Preguntas frecuentes](#preguntas frecuentes)
+3. [Colaboración](#colaboración)
+4. [Preguntas frecuentes](#preguntas frecuentes)
 ***
 ## Información general
 ***
