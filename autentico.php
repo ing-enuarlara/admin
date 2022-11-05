@@ -46,4 +46,3 @@ if($num>0)
 	header("Location:".$urlRed."/index.php?error=2&idseg=".$_POST["idseg"]);
 	exit();
 }
-?>
