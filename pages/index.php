@@ -8,9 +8,8 @@
 
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-      <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="../dist/img/<?=$configuracion['conf_logo']?>" alt="AdminZEFELogo" height="60" width="60">
-      </div>
+      
+      <?php include("../includes/carga.php"); ?>
 
       <?php include("../includes/encabezado.php"); ?>
       
