@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="index.php" class="brand-link">
-    <img src="../../../dist/img/AdminZEFELogo.png" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="<?=REDIRECT_ROUTE?>dist/img/AdminZEFELogo.png" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AdminZEFE</span>
 </a>
 
@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
-        <img src="../../../dist/img/<?=$datosUsuarioActual['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
+        <img src="<?=REDIRECT_ROUTE?>dist/img/<?=$datosUsuarioActual['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
     </div>
     <div class="info">
         <a href="#" class="d-block"><?=$datosUsuarioActual['usr_nombre']?></br>
@@ -170,7 +170,7 @@
             </ul>
         </li>
         <li class="nav-item" style="position: absolute; margin-top: 695px;">
-            <a href="../salir.php" class="nav-link">
+            <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">Cerrar Sesion</p>
             </a>
