@@ -152,19 +152,19 @@
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
                         <i class="far fa-file nav-icon"></i>
-                        <p>Pàginas</p>
+                        <p>Páginas</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" class="nav-link">
                         <i class="fas fa-sitemap nav-icon"></i>
-                        <p>Mòdulos</p>
+                        <p>Módulos</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cog nav-icon"></i>
-                        <p>Configuraciòn</p>
+                        <p>Configuración</p>
                     </a>
                 </li>
             </ul>
