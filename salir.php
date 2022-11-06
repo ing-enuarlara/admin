@@ -11,4 +11,4 @@ if(isset($_SESSION["id"])){
 }
 
 session_destroy();
-header("Location:".REDIRECT_ROUTE."/index.php");
+header("Location:".REDIRECT_ROUTE."index.php");

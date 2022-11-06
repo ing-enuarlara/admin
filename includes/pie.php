@@ -33,4 +33,4 @@ $.widget.bridge('uibutton', $.ui.button)
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard.js"></script>
 
-<?php require_once(RUTA_PROYECTO."/includes/guardar-historial-acciones.php"); ?>
+<?php require_once(RUTA_PROYECTO."includes/guardar-historial-acciones.php"); ?>

@@ -57,7 +57,7 @@ function productosPrecioListaUSD($porcentajeUtilidad, $costoEnDolares)
 function contarClientesPorDepto($depto)
 {
 
-	require(RUTA_PROYECTO . "/conexion.php");
+	require(RUTA_PROYECTO . "conexion.php");
 
 	$consultaDeptos = $conexionBdAdmin->query("SELECT ciu_id FROM localidad_ciudades
 	WHERE ciu_departamento='" . $depto . "'");
