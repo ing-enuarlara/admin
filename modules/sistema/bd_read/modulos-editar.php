@@ -65,7 +65,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h1 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h1>
+                                <h5 class="float-sm-right"><?=$paginaActual['pag_nombre']?></h5>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->

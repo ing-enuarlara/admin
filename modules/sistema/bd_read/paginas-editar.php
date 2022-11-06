@@ -65,7 +65,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h1 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h1>
+                                <h5 class="float-sm-right"><?=$paginaActual['pag_nombre']?></h5>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -79,7 +79,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <div class="form-group col-md-6">
                                         <label>Tipo CRUD</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="crud">
-											<option value=""></option>
+											                      <option value=""></option>
                                             <?php
                                             $n=1;
                                             while($n<=4){
@@ -91,11 +91,11 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <div class="form-group col-md-6">
                                         <label>Modulos</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="modulo">
-											<option value=""></option>
+											                      <option value=""></option>
                                             <?php
-											$conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
-											while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
-											?>
+                                            $conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
+                                            while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                            ?>
                                             <option value="<?=$resOp[0];?>" <?php if($resultadoD['pag_id_modulo']==$resOp[0]) echo "selected";?>><?=$resOp[1];?></option>
                                             <?php }?>
                                         </select>

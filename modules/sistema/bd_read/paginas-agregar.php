@@ -60,9 +60,9 @@ include("../../../includes/head.php");
                     <!-- column -->
                     <div class="col-md-12">
                         <!-- general form elements -->
-                        <div class="card card-primary">
+                        <div class="card card-success">
                             <div class="card-header">
-                                <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
+                                <h5 class="float-sm-right"><?=$paginaActual['pag_nombre']?></h5>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -75,7 +75,7 @@ include("../../../includes/head.php");
                                     <div class="form-group col-md-6">
                                         <label>Tipo CRUD</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="crud">
-											<option value=""></option>
+											                      <option value=""></option>
                                             <?php
                                             $n=1;
                                             while($n<=4){
@@ -87,11 +87,11 @@ include("../../../includes/head.php");
                                     <div class="form-group col-md-6">
                                         <label>Modulos</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="modulo">
-											<option value=""></option>
+											                      <option value=""></option>
                                             <?php
-											$conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
-											while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
-											?>
+                                            $conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
+                                            while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                            ?>
                                             	<option value="<?=$resOp[0];?>"><?=$resOp['mod_nombre'];?></option>
                                             <?php }?>
                                         </select>
