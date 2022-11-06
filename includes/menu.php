@@ -34,7 +34,7 @@
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item menu-open">
-            <a href="index.php" class="nav-link active">
+            <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
             </a>
@@ -150,7 +150,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="sistema/bd_read/paginas.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
                         <i class="far fa-file nav-icon"></i>
                         <p>Pàginas</p>
                     </a>
