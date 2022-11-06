@@ -37,7 +37,15 @@
       <?php include("../includes/menu.php"); ?>
       
       <div class="content-wrapper">
-        <?php include("../includes/navegacion.php"); ?>
+        <div class="content-header">
+          <div class="container-fluid">
+              <div class="row mb-2">
+                  <div class="col-sm-6">
+                      <h2 class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></h2>
+                  </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
 
         <!-- Main content -->
         <section class="content">
