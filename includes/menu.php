@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="index.php" class="brand-link">
-    <img src="../dist/img/<?=$configuracion['conf_logo']?>" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="../dist/img/AdminZEFELogo.png" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AdminZEFE</span>
 </a>
 
@@ -40,95 +40,131 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>Widgets<span class="right badge badge-danger">New</span></p>
-            </a>
-        </li>
-        <li class="nav-item">
             <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-copy"></i>
-                <p>Layout Options<i class="fas fa-angle-left right"></i><span class="badge badge-info right">6</span></p>
+                <i class="nav-icon fas fa-regular fa-toolbox"></i>
+                <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Top Navigation</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-users nav-icon"></i>
+                        <p>Usuarios</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Top Navigation + Sidebar</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-list nav-icon"></i>
+                        <p>Roles</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/layout/boxed.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Boxed</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Fixed Sidebar</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Fixed Navbar</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-footer.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Fixed Footer</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Collapsed Sidebar</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-clock"></i>
+                        <p>Historial de acciones</p>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-chart-pie"></i>
-                <p>Charts<i class="right fas fa-angle-left"></i></p>
+                <i class="nav-icon fas fa-solid fa-money-bill"></i>
+                <p>Comercial<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>ChartJS</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-restroom nav-icon"></i>
+                        <p>Clientes</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/flot.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Flot</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-layer-group nav-icon"></i>
+                        <p>Producto<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-solid fa-barcode nav-icon"></i>
+                                <p>Productos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-solid fa-list nav-icon"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-solid fa-list-ol"></i>
+                                <p>Marcas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-file-invoice"></i>
+                        <p>Facturacion</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/inline.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Inline</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-truck"></i>
+                        <p>Pedidos</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>Editar Perfil</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/charts/uplot.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>uPlot</p>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-shopping-cart nav-icon"></i>
+                        <p>Mis Ventas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-calendar nav-icon"></i>
+                        <p>Mi calendario</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cogs"></i>
+                <p>Sistema<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-file nav-icon"></i>
+                        <p>Pàginas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sitemap nav-icon"></i>
+                        <p>Mòdulos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog nav-icon"></i>
+                        <p>Configuraciòn</p>
                     </a>
                 </li>
             </ul>
