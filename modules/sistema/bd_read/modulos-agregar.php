@@ -60,9 +60,9 @@ include("../../../includes/head.php");
                     <!-- column -->
                     <div class="col-md-12">
                         <!-- general form elements -->
-                        <div class="card card-primary">
+                        <div class="card card-success">
                             <div class="card-header">
-                                <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
+                                <h5 class="float-sm-right"><?=$paginaActual['pag_nombre']?></h5>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
