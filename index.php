@@ -21,6 +21,7 @@ $configuracion = mysqli_fetch_array($consultaConfiguracion, MYSQLI_BOTH);
 </head>
 
 <body class="hold-transition login-page">
+  <?php include("includes/carga.php"); ?>
   <div class="login-box">
     <div class="login-logo">
       <a href="index.php"><b>Admin</b>ZEFE</a>
