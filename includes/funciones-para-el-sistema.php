@@ -108,8 +108,7 @@ function validarAccesoModulo($empresa, $modulo)
 		return true;
 	}
 
-	$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_empresa
-	WHERE mxe_id_empresa='" . $empresa . "' AND mxe_id_modulo='" . $modulo . "'");
+	$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $empresa . "' AND mxca_id_modulo='" . $modulo . "'");
 	$numRegistros = $consulta->num_rows;
 
 	if ($numRegistros > 0) {
