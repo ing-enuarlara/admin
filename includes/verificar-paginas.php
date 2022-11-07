@@ -18,7 +18,7 @@ if ($numPaginaUsuario == 0 and $datosUsuarioActual[3] != 1) {
 	<span style='font-family:Arial; color:red;'>No tienes permiso para acceder a este pagina. Ser&aacute;s redireccionado al inicio...</samp>
 		<script type="text/javascript">
 			function sacar() {
-				window.location.href = "index.php";
+				window.location.href = "../index.php";
 			}
 			setInterval('sacar()', 3000);
 		</script>
