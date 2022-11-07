@@ -29,16 +29,18 @@
         </div>
     </div>
     </div>
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 1)){?>
         <li class="nav-item menu-open">
             <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
             </a>
         </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){?>
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-regular fa-toolbox"></i>
@@ -65,6 +67,8 @@
                 </li>
             </ul>
         </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 3)){?>
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-solid fa-money-bill"></i>
@@ -117,6 +121,8 @@
                 </li>
             </ul>
         </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 4)){?>
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
@@ -143,6 +149,8 @@
                 </li>
             </ul>
         </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 5)){?>
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-cogs"></i>
@@ -169,12 +177,15 @@
                 </li>
             </ul>
         </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 6)){?>
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link">
                 <i class="nav-icon fas fa-business-time"></i>
                 <p>Clientes AdminZEFE</p>
             </a>
         </li>
+        <?php } ?>
         <li class="nav-item" style="position: absolute; margin-top: 695px;">
             <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
