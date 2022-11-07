@@ -169,6 +169,12 @@
                 </li>
             </ul>
         </li>
+        <li class="nav-item">
+            <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link">
+                <i class="nav-icon fas fa-business-time"></i>
+                <p>Clientes AdminZEFE</p>
+            </a>
+        </li>
         <li class="nav-item" style="position: absolute; margin-top: 695px;">
             <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
