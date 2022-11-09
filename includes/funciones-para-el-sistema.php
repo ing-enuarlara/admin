@@ -45,15 +45,6 @@ function informarErrorAlUsuario($linea, $error)
 	";
 }
 
-function productosPrecioListaUSD($porcentajeUtilidad, $costoEnDolares)
-{
-	$utilidadPrincipal = $porcentajeUtilidad / 100;
-	$utilidadDelProducto = ($costoEnDolares * $utilidadPrincipal);
-	$precioListaUSD = $costoEnDolares + $utilidadDelProducto;
-
-	return $precioListaUSD;
-}
-
 function contarClientesPorDepto($depto)
 {
 
@@ -103,10 +94,6 @@ function validarAccesoModulo($empresa, $modulo)
 {
 
 	global $conexionBdAdmin, $datosUsuarioActual;
-
-	if ($datosUsuarioActual[3] == 1) {
-		return true;
-	}
 
 	$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $empresa . "' AND mxca_id_modulo='" . $modulo . "'");
 	$numRegistros = $consulta->num_rows;
