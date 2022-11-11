@@ -89,11 +89,12 @@ include("../../../includes/head.php");
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="modulo">
 											                      <option value=""></option>
                                             <?php
-                                            $conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
+                                            $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                              if(validarAccesoModulo($configuracion['conf_id_empresa'], $resOp[0])){
                                             ?>
                                             	<option value="<?=$resOp[0];?>"><?=$resOp['mod_nombre'];?></option>
-                                            <?php }?>
+                                            <?php }}?>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">

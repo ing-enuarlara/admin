@@ -106,7 +106,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <select class="select2" multiple="multiple" data-placeholder="Escoge los modulos" style="width: 100%;" name="modulo[]">
                                             <option value=""></option>
                                                 <?php
-                                                $conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
+                                                $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
                                                 while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
                                                     $consultaModulos=$conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='".$resultadoD['cliAdmi_id']."' AND mxca_id_modulo='".$resOp['mod_id']."'");
                                                     $numZ = $consultaModulos->num_rows;

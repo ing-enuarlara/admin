@@ -6,7 +6,7 @@ $idPagina = 10;
 include("../../../includes/verificar-paginas.php");
 include("../../../includes/head.php");
 
-$consuluta= $conexionBdAdmin->query("SELECT * FROM modulos WHERE mod_id='".$_GET["id"]."'");
+$consuluta= $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$_GET["id"]."'");
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->

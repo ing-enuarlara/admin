@@ -74,9 +74,10 @@ include("../../../includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $modulos= $conexionBdAdmin->query("SELECT * FROM modulos");
+                                $modulos= $conexionBdSistema->query("SELECT * FROM sistema_modulos");
                                 $num=1;
                                 while($page = mysqli_fetch_array($modulos, MYSQLI_BOTH)){
+                                    if(validarAccesoModulo($configuracion['conf_id_empresa'], $page[0])){
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
@@ -86,7 +87,7 @@ include("../../../includes/head.php");
                                         <a href="../bd_delete/modulos-eliminar.php?id=<?=$page[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
                                     </h4></td>
                                 </tr>
-								<?php $num++;}?>
+								<?php $num++;}}?>
                             </tbody>
                             <tfoot>
                                 <tr>

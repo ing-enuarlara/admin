@@ -4,9 +4,9 @@
     $idPagina = 11;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
     
-    $conexionBdAdmin->query("INSERT INTO modulos(mod_nombre)VALUES('" . $_POST["nombre"] . "')");
+    $conexionBdSistema->query("INSERT INTO sistema_modulos(mod_nombre)VALUES('" . $_POST["nombre"] . "')");
 
-    $idInsertU = mysqli_insert_id($conexionBdAdmin);
+    $idInsertU = mysqli_insert_id($conexionBdSistema);
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

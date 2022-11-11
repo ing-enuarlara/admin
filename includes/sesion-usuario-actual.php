@@ -1,6 +1,6 @@
 <?php
     //USUARIO ACTUAL
-	$consultaUsuarioActual = $conexionBdGeneral->query("SELECT * FROM usuarios WHERE usr_id='".$_SESSION["id"]."'");
+	$consultaUsuarioActual = $conexionBdGeneral->query("SELECT * FROM usuarios INNER JOIN usuarios_tipos ON utipo_id=usr_tipo WHERE usr_id='".$_SESSION["id"]."'");
 	$numUsuarioActual = $consultaUsuarioActual->num_rows;
 
 	if($numUsuarioActual == 0){
@@ -22,5 +22,5 @@
 		setInterval('sacar()', 3000);
         </script>
 <?php	
-    	exit();		
+    	exit();	
 	}

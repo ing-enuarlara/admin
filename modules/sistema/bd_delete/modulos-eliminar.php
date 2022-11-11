@@ -4,7 +4,7 @@
 	$idPagina = 13;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	$conexionBdAdmin->query("DELETE FROM modulos WHERE mod_id='" . $_GET["id"] . "'");
+	$conexionBdSistema->query("DELETE FROM sistema_modulos WHERE mod_id='" . $_GET["id"] . "'");
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

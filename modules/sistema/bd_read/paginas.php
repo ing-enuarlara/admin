@@ -76,12 +76,12 @@ include("../../../includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $paginas= $conexionBdAdmin->query("SELECT * FROM paginas");
+                                $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas");
                                 $num=1;
                                 while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){    
                                     $nombreModulo='Dashboard';
                                     if($page['pag_id_modulo']!=0){                                            
-                                        $consultaNombreMod = $conexionBdAdmin->query("SELECT * FROM modulos WHERE mod_id='".$page['pag_id_modulo']."'");
+                                        $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");
                                         $NombreModulo = mysqli_fetch_array($consultaNombreMod, MYSQLI_BOTH);                                                    
                                         $nombreModulo=$NombreModulo['mod_nombre'];
                                     }

@@ -72,6 +72,7 @@ include("../../../includes/head.php");
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre Modulo" name="nombre">
                                     </div>
+                                </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Guardar</button>

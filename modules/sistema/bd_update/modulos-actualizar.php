@@ -4,7 +4,7 @@
     $idPagina = 12;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-    $conexionBdAdmin->query("UPDATE modulos SET mod_nombre='" . $_POST["nombre"] . "'  WHERE mod_id='" . $_POST["id"] . "'");
+    $conexionBdSistema->query("UPDATE sistema_modulos SET mod_nombre='" . $_POST["nombre"] . "'  WHERE mod_id='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

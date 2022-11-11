@@ -6,7 +6,7 @@ $idPagina = 4;
 include("../../../includes/verificar-paginas.php");
 include("../../../includes/head.php");
 
-$consuluta= $conexionBdAdmin->query("SELECT * FROM paginas WHERE pag_id='".$_GET["id"]."'");
+$consuluta= $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='".$_GET["id"]."'");
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->
@@ -93,11 +93,12 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="modulo">
 											                      <option value=""></option>
                                             <?php
-                                            $conOp = $conexionBdAdmin->query("SELECT * FROM modulos");
+                                            $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                              if(validarAccesoModulo($configuracion['conf_id_empresa'], $resOp[0])){
                                             ?>
                                             <option value="<?=$resOp[0];?>" <?php if($resultadoD['pag_id_modulo']==$resOp[0]) echo "selected";?>><?=$resOp[1];?></option>
-                                            <?php }?>
+                                            <?php }}?>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">

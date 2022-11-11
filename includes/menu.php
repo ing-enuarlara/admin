@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="index.php" class="brand-link">
-    <img src="<?=REDIRECT_ROUTE?>dist/img/AdminZEFELogo.png" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="<?=REDIRECT_ROUTE?>files/logo/AdminZEFELogo.png" alt="AdminZEFE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AdminZEFE</span>
 </a>
 
@@ -10,11 +10,11 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
-        <img src="<?=REDIRECT_ROUTE?>dist/img/<?=$datosUsuarioActual['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
+        <img src="<?=REDIRECT_ROUTE?>files/perfil/<?=$datosUsuarioActual['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
     </div>
     <div class="info">
         <a href="#" class="d-block"><?=$datosUsuarioActual['usr_nombre']?></br>
-        <i><?=$configuracion['conf_empresa']?></i></a>
+        <i><?=$datosUsuarioActual['utipo_nombre']?></i></a>
     </div>
     </div>
 
@@ -33,8 +33,8 @@
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 1)){?>
-        <li class="nav-item menu-open">
-            <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link active">
+        <li class="nav-item">
+            <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==1){echo "active";}?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
             </a>
@@ -42,7 +42,7 @@
         <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){?>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==2){echo "active";}?>">
                 <i class="nav-icon fas fa-regular fa-toolbox"></i>
                 <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -70,7 +70,7 @@
         <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 3)){?>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==3){echo "active";}?>">
                 <i class="nav-icon fas fa-solid fa-money-bill"></i>
                 <p>Comercial<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -88,7 +88,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
                                 <i class="fas fa-solid fa-barcode nav-icon"></i>
                                 <p>Productos</p>
                             </a>
@@ -109,14 +109,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-file-invoice"></i>
-                        <p>Facturacion</p>
+                        <i class="fas fa-solid fa-truck"></i>
+                        <p>Pedidos</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-truck"></i>
-                        <p>Pedidos</p>
+                        <i class="fas fa-solid fa-file-invoice"></i>
+                        <p>Facturacion</p>
                     </a>
                 </li>
             </ul>
@@ -124,7 +124,7 @@
         <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 4)){?>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==4){echo "active";}?>">
                 <i class="nav-icon fas fa-user"></i>
                 <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -152,7 +152,7 @@
         <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 5)){?>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==5){echo "active";}?>">
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>Sistema<i class="right fas fa-angle-left"></i></p>
             </a>
@@ -180,7 +180,7 @@
         <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 6)){?>
         <li class="nav-item">
-            <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link">
+            <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
                 <i class="nav-icon fas fa-business-time"></i>
                 <p>Clientes AdminZEFE</p>
             </a>

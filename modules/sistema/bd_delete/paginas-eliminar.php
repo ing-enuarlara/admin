@@ -4,7 +4,7 @@
 	$idPagina = 7;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	$conexionBdAdmin->query("DELETE FROM paginas WHERE pag_id='" . $_GET["id"] . "'");
+	$conexionBdSistema->query("DELETE FROM sistema_paginas WHERE pag_id='" . $_GET["id"] . "'");
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
