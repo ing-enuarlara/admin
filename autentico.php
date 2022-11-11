@@ -6,7 +6,7 @@ include("conexion.php");
 $urlRed = REDIRECT_ROUTE;
 
 
-$rst_usrE = $conexionBdGeneral->query("SELECT usr_login, usr_id, usr_intentos_fallidos, usr_bloqueado FROM usuarios WHERE usr_login='".trim(mysqli_real_escape_string($conexionBdGeneral, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL");
+$rst_usrE = $conexionBdAdministrativo->query("SELECT usr_login, usr_id, usr_intentos_fallidos, usr_bloqueado FROM administrativo_usuarios WHERE usr_login='".trim(mysqli_real_escape_string($conexionBdAdministrativo, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL");
 
 $numE = $rst_usrE->num_rows;
 if($numE ==0 ){
@@ -19,12 +19,12 @@ if($usrE['usr_intentos_fallidos']>=3 and md5($_POST["suma"])<>$_POST["sumaReal"]
 
 	if($usrE['usr_bloqueado']==1){header("Location:".$urlRed."index.php?error=4");exit();}
 	
-	$conexionBdGeneral->query("UPDATE usuarios SET usr_bloqueado=1 WHERE usr_id='".$usrE['usr_id']."'");
+	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_bloqueado=1 WHERE usr_id='".$usrE['usr_id']."'");
 	header("Location:".$urlRed."index.php?error=3");
 	exit();
 }
 
-$rst_usr = $conexionBdGeneral->query("SELECT * FROM usuarios WHERE usr_login='".trim($_POST["Usuario"])."' AND usr_clave=SHA1('".$_POST["Clave"]."')");
+$rst_usr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_login='".trim($_POST["Usuario"])."' AND usr_clave=SHA1('".$_POST["Clave"]."')");
 $num = $rst_usr->num_rows;
 $fila = mysqli_fetch_array($rst_usr, MYSQLI_BOTH);
 if($num>0)
@@ -38,12 +38,12 @@ if($num>0)
 	if(!isset($_POST["idseg"]) or !is_numeric($_POST["idseg"])){$url = 'modules/';}
 	else{$url = $urlRed.'index.php';}
 	
-	$conexionBdGeneral->query("UPDATE usuarios SET usr_sesion=1, usr_ultimo_ingreso=now(), usr_intentos_fallidos=0 WHERE usr_id='".$fila[0]."'");
+	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_sesion=1, usr_ultimo_ingreso=now(), usr_intentos_fallidos=0 WHERE usr_id='".$fila[0]."'");
 	
 	header("Location:".$url);	
 	exit();
 }else{
-	$conexionBdGeneral->query("UPDATE usuarios SET usr_intentos_fallidos=usr_intentos_fallidos+1 WHERE usr_id='".$usrE['usr_id']."'");
+	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_intentos_fallidos=usr_intentos_fallidos+1 WHERE usr_id='".$usrE['usr_id']."'");
 
 	header("Location:".$urlRed."index.php?error=2&idseg=".$_POST["idseg"]);
 	exit();

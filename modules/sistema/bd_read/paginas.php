@@ -78,7 +78,8 @@ include("../../../includes/head.php");
                                 <?php
                                 $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas");
                                 $num=1;
-                                while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){    
+                                while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){
+                                    if(validarAccesoModulo($configuracion['conf_id_empresa'], $page['pag_id_modulo'])){
                                     $nombreModulo='Dashboard';
                                     if($page['pag_id_modulo']!=0){                                            
                                         $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");
@@ -96,7 +97,7 @@ include("../../../includes/head.php");
                                         <a href="../bd_delete/paginas-eliminar.php?id=<?=$page[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
                                     </h4></td>
                                 </tr>
-								<?php $num++;}?>
+								<?php $num++;}}?>
                             </tbody>
                             <tfoot>
                                 <tr>

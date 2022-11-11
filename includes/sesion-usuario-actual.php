@@ -1,6 +1,6 @@
 <?php
     //USUARIO ACTUAL
-	$consultaUsuarioActual = $conexionBdGeneral->query("SELECT * FROM usuarios INNER JOIN usuarios_tipos ON utipo_id=usr_tipo WHERE usr_id='".$_SESSION["id"]."'");
+	$consultaUsuarioActual = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id='".$_SESSION["id"]."'");
 	$numUsuarioActual = $consultaUsuarioActual->num_rows;
 
 	if($numUsuarioActual == 0){
