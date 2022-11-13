@@ -88,7 +88,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" class="nav-link">
                                 <i class="fas fa-solid fa-list nav-icon"></i>
                                 <p>Categorias</p>
                             </a>
