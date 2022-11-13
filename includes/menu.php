@@ -88,12 +88,6 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
-                                <i class="fas fa-solid fa-barcode nav-icon"></i>
-                                <p>Productos</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-solid fa-list nav-icon"></i>
                                 <p>Categorias</p>
@@ -103,6 +97,12 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-solid fa-list-ol"></i>
                                 <p>Marcas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
+                                <i class="fas fa-solid fa-barcode nav-icon"></i>
+                                <p>Productos</p>
                             </a>
                         </li>
                     </ul>
