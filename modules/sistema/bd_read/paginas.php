@@ -80,18 +80,15 @@ include("../../../includes/head.php");
                                 $num=1;
                                 while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){
                                     if(validarAccesoModulo($configuracion['conf_id_empresa'], $page['pag_id_modulo'])){
-                                    $nombreModulo='Dashboard';
-                                    if($page['pag_id_modulo']!=0){                                            
+
                                         $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");
-                                        $NombreModulo = mysqli_fetch_array($consultaNombreMod, MYSQLI_BOTH);                                                    
-                                        $nombreModulo=$NombreModulo['mod_nombre'];
-                                    }
+                                        $NombreModulo = mysqli_fetch_array($consultaNombreMod, MYSQLI_BOTH);
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$page['pag_nombre'];?></td>
                                     <td><?=$tipoCrud[$page['pag_tipo_crud']];?></td>
-                                    <td><?=$nombreModulo;?></td>
+                                    <td><?=$NombreModulo['mod_nombre'];?></td>
                                     <td><h4>
                                         <a href="paginas-editar.php?id=<?=$page[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/paginas-eliminar.php?id=<?=$page[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
