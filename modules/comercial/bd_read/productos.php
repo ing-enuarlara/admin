@@ -80,13 +80,16 @@ include("../../../includes/head.php");
                                 $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'");
                                 $num=1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
+                                                                       
+                                    $consultaNombreCat = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cprod_categoria']."'");
+                                    $NombreCategoria = mysqli_fetch_array($consultaNombreCat, MYSQLI_BOTH); 
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['cprod_nombre'];?></td>
                                     <td><?=$result['cprod_costo'];?></td>
                                     <td><?=$result['cprod_exitencia'];?></td>
-                                    <td><?=$result['cprod_categoria'];?></td>
+                                    <td><?=$NombreCategoria['ccat_nombre'];?></td>
                                     <td><h4>
                                         <a href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
