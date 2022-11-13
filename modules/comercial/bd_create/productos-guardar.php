@@ -9,7 +9,7 @@
 		$fileName = subirArchivosAlServidor($_FILES['foto'], 'pro', $destino);
 	}
     
-    $conexionBdComercial->query("INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_categoria, cprod_foto, cprod_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["costo"] . "', '" . $_POST["detalles"] . "', '" . $_POST["existencia"] . "', '" . $_POST["categoria"] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+    $conexionBdComercial->query("INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_foto, cprod_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["costo"] . "', '" . $_POST["detalles"] . "', '" . $_POST["existencia"] . "', '" . $_POST["marca"] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 

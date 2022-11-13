@@ -71,7 +71,7 @@ include("../../../includes/head.php");
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
-                                    <th>Categoria</th>
+                                    <th>Marca</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -81,15 +81,15 @@ include("../../../includes/head.php");
                                 $num=1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
                                                                        
-                                    $consultaNombreCat = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cprod_categoria']."'");
-                                    $NombreCategoria = mysqli_fetch_array($consultaNombreCat, MYSQLI_BOTH); 
+                                    $consultaNombreMar = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id='".$result['cprod_marca']."'");
+                                    $NombreMarca = mysqli_fetch_array($consultaNombreMar, MYSQLI_BOTH);
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['cprod_nombre'];?></td>
                                     <td><?=$result['cprod_costo'];?></td>
                                     <td><?=$result['cprod_exitencia'];?></td>
-                                    <td><?=$NombreCategoria['ccat_nombre'];?></td>
+                                    <td><?=$NombreMarca['cmar_nombre'];?></td>
                                     <td><h4>
                                         <a href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
@@ -103,7 +103,7 @@ include("../../../includes/head.php");
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
-                                    <th>Categoria</th>
+                                    <th>Marca</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

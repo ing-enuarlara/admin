@@ -95,14 +95,14 @@ include("../../../includes/head.php");
                                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Categoria:</label>
-                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria">
+                                        <label>Marca:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca">
 											                      <option value=""></option>
                                             <?php
-                                            $conOp = $conexionBdComercial->query("SELECT * FROM comercial_categorias");
+                                            $conOp = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
                                             ?>
-                                            	<option value="<?=$resOp[0];?>"><?=$resOp['ccat_nombre'];?></option>
+                                            	<option value="<?=$resOp[0];?>"><?=$resOp['cmar_nombre'];?></option>
                                             <?php }?>
                                         </select>
                                     </div>
