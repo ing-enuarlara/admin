@@ -8,7 +8,7 @@
     <a href="index.php" class="nav-link">Home</a>
     </li>
     <li class="nav-item d-none d-sm-inline-block">
-    <a href="<?=REDIRECT_ROUTE?>../tercer-proyecto-podcalopers/podcalopers" class="nav-link" target="_target">Tienda</a>
+    <a href="<?=REDIRECT_ROUTE.$configuracion['conf_web']?>" class="nav-link" target="_target">Tienda</a>
     </li>
 </ul>
 
