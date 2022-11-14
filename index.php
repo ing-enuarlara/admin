@@ -1,5 +1,10 @@
 <?php
 include("conexion.php");
+session_start();
+if(isset($_SESSION["id"])){
+	header("Location: modules/");
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
