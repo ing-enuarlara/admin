@@ -157,6 +157,7 @@
                 <p>Sistema<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
+                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
                         <i class="far fa-file nav-icon"></i>
@@ -169,6 +170,7 @@
                         <p>Módulos</p>
                     </a>
                 </li>
+                <?php }?>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cog nav-icon"></i>
