@@ -11,6 +11,20 @@
         $conexionBdGeneral->query("UPDATE configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 	}
 
+	if ($_FILES['banner1']['name'] != "") {
+		$destino = RUTA_PROYECTO."files/banner";
+		$fileName = subirArchivosAlServidor($_FILES['banner1'], 'bnr', $destino);
+    
+        $conexionBdGeneral->query("UPDATE configuracion SET conf_primerBanner='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+	}
+
+	if ($_FILES['banner2']['name'] != "") {
+		$destino = RUTA_PROYECTO."files/banner";
+		$fileName = subirArchivosAlServidor($_FILES['banner2'], 'bnr', $destino);
+    
+        $conexionBdGeneral->query("UPDATE configuracion SET conf_segundoBanner='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+	}
+
     $conexionBdGeneral->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . $_POST["email"] . "', conf_telefono='" . $_POST["telefono"] . "', conf_web='" . $_POST["web"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");

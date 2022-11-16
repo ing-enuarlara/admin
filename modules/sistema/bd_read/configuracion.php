@@ -119,11 +119,25 @@ include("../../../includes/head.php");
                                         <label for="exampleInputEmail1">URL de la tienda:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Direccion Web" name="web" value="<?=$configuracion['conf_web']?>">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="customFile">Primer Banner</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="banner1">
+                                            <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="customFile">Segundo Banner</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="banner2">
+                                            <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Guardar</button>
-					            <a href="configuracion-color-store.php" class="btn btn-success">Cambiar Color Store</a>
+					                          <a href="configuracion-color-store.php" class="btn btn-success">Cambiar Color Store</a>
                                 </div>
                             </form>
                         </div>
