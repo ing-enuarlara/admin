@@ -70,14 +70,26 @@ include("../../../includes/head.php");
                                     <th>Nº</th>
                                     <th>Nombre Marca</th>
                                     <th>Categoria</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas");
+                                if($datosUsuarioActual['usr_tipo']!=1){
+                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cmar_id_empresa']."'");
+                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                    }
                                                                        
                                     $consultaNombreCat = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cmar_categoria']."'");
                                     $NombreCategoria = mysqli_fetch_array($consultaNombreCat, MYSQLI_BOTH); 
@@ -86,6 +98,11 @@ include("../../../includes/head.php");
                                     <td><?=$num;?></td>
                                     <td><?=$result['cmar_nombre'];?></td>
                                     <td><?=$NombreCategoria['ccat_nombre'];?></td>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+								    <?php }?>
                                     <td><h4>
                                         <a href="marcas-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/marcas-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
@@ -98,6 +115,11 @@ include("../../../includes/head.php");
                                     <th>Nº</th>
                                     <th>Nombre Marca</th>
                                     <th>Categoria</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

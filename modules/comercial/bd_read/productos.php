@@ -72,14 +72,26 @@ include("../../../includes/head.php");
                                     <th>Precio</th>
                                     <th>Existencia</th>
                                     <th>Marca</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos");
+                                if($datosUsuarioActual['usr_tipo']!=1){
+                                    $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cprod_id_empresa']."'");
+                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                    }
                                                                        
                                     $consultaNombreMar = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id='".$result['cprod_marca']."'");
                                     $NombreMarca = mysqli_fetch_array($consultaNombreMar, MYSQLI_BOTH);
@@ -90,6 +102,11 @@ include("../../../includes/head.php");
                                     <td><?=$result['cprod_costo'];?></td>
                                     <td><?=$result['cprod_exitencia'];?></td>
                                     <td><?=$NombreMarca['cmar_nombre'];?></td>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+								    <?php }?>
                                     <td><h4>
                                         <a href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
@@ -104,6 +121,11 @@ include("../../../includes/head.php");
                                     <th>Precio</th>
                                     <th>Existencia</th>
                                     <th>Marca</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

@@ -69,18 +69,35 @@ include("../../../includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
+                                if($datosUsuarioActual['usr_tipo']!=1){
+                                    $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($categorias, MYSQLI_BOTH)){
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['ccat_id_empresa']."'");
+                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['ccat_nombre'];?></td>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+								    <?php }?>
                                     <td><h4>
                                         <a href="categorias-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
                                         <a href="../bd_delete/categorias-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
@@ -92,6 +109,11 @@ include("../../../includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

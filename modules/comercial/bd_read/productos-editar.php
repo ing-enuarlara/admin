@@ -109,14 +109,23 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <div class="form-group col-md-6">
                                             <label>Marca:</label>
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca">
-                                                                    <option value=""></option>
+                                                <option value=""></option>
                                                 <?php
-                                                $conOp = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
-                                                while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas");
+                                                if($datosUsuarioActual['usr_tipo']!=1){
+                                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                                }
+                                                while($resOp = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
+                                                    $nombreEmpresa='';
+                                                    if($datosUsuarioActual['usr_tipo']==1){
+                                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$resOp['cmar_id_empresa']."'");
+                                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                                        $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
+                                                    }
                                                     $selected='';
                                                     if($resultadoD['cprod_marca']==$resOp[0]){$selected='selected';}
                                                 ?>
-                                                    <option value="<?=$resOp[0];?>" <?=$selected;?>><?=$resOp['cmar_nombre'];?></option>
+                                                    <option value="<?=$resOp[0];?>" <?=$selected;?>><?=$resOp['cmar_nombre'].$nombreEmpresa;?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
