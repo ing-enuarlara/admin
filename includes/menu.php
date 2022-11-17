@@ -180,7 +180,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 6)){?>
+        <?php if($datosUsuarioActual['usr_tipo']==1){?>
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
                 <i class="nav-icon fas fa-business-time"></i>
