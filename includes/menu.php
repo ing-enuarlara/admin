@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
                         <i class="fas fa-solid fa-list nav-icon"></i>
                         <p>Roles</p>
                     </a>
