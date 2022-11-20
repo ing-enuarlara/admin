@@ -59,12 +59,6 @@
                         <p>Roles</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-clock"></i>
-                        <p>Historial de acciones</p>
-                    </a>
-                </li>
             </ul>
         </li>
         <?php }?>
@@ -175,6 +169,12 @@
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion.php" class="nav-link">
                         <i class="fas fa-cog nav-icon"></i>
                         <p>Configuración</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-solid fa-clock"></i>
+                        <p>Historial de acciones</p>
                     </a>
                 </li>
             </ul>

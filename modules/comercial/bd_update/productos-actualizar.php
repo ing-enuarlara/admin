@@ -11,7 +11,7 @@
         $conexionBdComercial->query("UPDATE comercial_productos SET cprod_foto='" . $fileName . "' WHERE cprod_id='" . $_POST["id"] . "'");
 	}
     
-    $conexionBdComercial->query("UPDATE comercial_productos SET cprod_nombre='" . $_POST["nombre"] . "', cprod_costo='" . $_POST["costo"] . "', cprod_detalles='" . $_POST["detalles"] . "', cprod_exitencia='" . $_POST["existencia"] . "', cprod_marca='" . $_POST["marca"] . "', cprod_id_empresa='" . $datosUsuarioActual['usr_id_empresa'] . "' WHERE cprod_id='" . $_POST["id"] . "'");
+    $conexionBdComercial->query("UPDATE comercial_productos SET cprod_nombre='" . $_POST["nombre"] . "', cprod_costo='" . $_POST["costo"] . "', cprod_detalles='" . $_POST["detalles"] . "', cprod_exitencia='" . $_POST["existencia"] . "', cprod_marca='" . $_POST["marca"] . "' WHERE cprod_id='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

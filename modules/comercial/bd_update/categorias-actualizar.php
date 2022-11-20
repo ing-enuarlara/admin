@@ -4,7 +4,7 @@
     $idPagina = 30;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
     
-    $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "', ccat_id_empresa='" . $datosUsuarioActual['usr_id_empresa'] . "' WHERE ccat_id='" . $_POST["id"] . "'");
+    $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "' WHERE ccat_id='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
