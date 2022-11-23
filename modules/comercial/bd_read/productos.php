@@ -77,7 +77,7 @@ include("../../../includes/head.php");
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
-                                    <th>Acciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,10 +107,19 @@ include("../../../includes/head.php");
                                     ?>
                                     <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
 								    <?php }?>
-                                    <td><h4>
-                                        <a href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
-                                        <a href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
-                                    </h4></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info">Acciones</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                <!--<div class="dropdown-divider"></div>-->
+                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
 								<?php $num++;}?>
                             </tbody>
@@ -126,7 +135,7 @@ include("../../../includes/head.php");
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
-                                    <th>Acciones</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

@@ -69,7 +69,7 @@ include("../../../includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Modulo</th>
-                                    <th>Acciones</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,10 +82,19 @@ include("../../../includes/head.php");
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$page['mod_nombre'];?></td>
-                                    <td><h4>
-                                        <a href="modulos-editar.php?id=<?=$page[0];?>" data-toggle="tooltip" title="Editar"><i class="fas fa-solid fa-edit"></i></a>
-                                        <a href="../bd_delete/modulos-eliminar.php?id=<?=$page[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip" title="Eliminar"><i class="fas fa-solid fa-trash"></i></a>
-                                    </h4></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info">Acciones</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="modulos-editar.php?id=<?=$page[0];?>" data-toggle="tooltip">Editar</a>
+                                                <!--<div class="dropdown-divider"></div>-->
+                                                <a class="dropdown-item" href="../bd_delete/modulos-eliminar.php?id=<?=$page[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
 								<?php $num++;}}?>
                             </tbody>
@@ -93,7 +102,7 @@ include("../../../includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Modulo</th>
-                                    <th>Acciones</th>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>
