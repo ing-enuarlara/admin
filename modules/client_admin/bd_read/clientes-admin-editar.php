@@ -3,8 +3,8 @@ include("../../sesion.php");
 
 $idPagina = 16;
 
-include("../../../includes/verificar-paginas.php");
-include("../../../includes/head.php");
+include(RUTA_PROYECTO."includes/verificar-paginas.php");
+include(RUTA_PROYECTO."includes/head.php");
 
 $consuluta= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$_GET["id"]."'");
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
@@ -36,11 +36,11 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     
-    <?php include("../../../includes/carga.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
 
-    <?php include("../../../includes/encabezado.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
     
-    <?php include("../../../includes/menu.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/menu.php"); ?>
     
     <div class="content-wrapper">
         <div class="content-header">
@@ -147,7 +147,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
             <!-- /.container-fluid -->
         </section>
     </div>
-    <?php include("../../../includes/footer.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/footer.php"); ?>
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
     </aside>
@@ -275,6 +275,6 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
   }
   // DropzoneJS Demo Code End
 </script>
-  <?php include("../../../includes/pie.php"); ?>
+  <?php include(RUTA_PROYECTO."includes/pie.php"); ?>
 </body>
 </html>

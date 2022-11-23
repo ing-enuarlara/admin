@@ -1,10 +1,6 @@
 <nav class="main-header">
-<?php 
-if($idPagina==1){
-    include("../includes/barra-developer.php");
-}else{
-    include("../../../includes/barra-developer.php");
-}
+<?php
+    include(RUTA_PROYECTO."includes/barra-developer.php");
 ?>
 </nav>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">

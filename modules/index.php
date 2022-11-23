@@ -1,8 +1,8 @@
 <?php
   include("sesion.php"); 
   $idPagina = 1;
-  include("../includes/verificar-paginas.php");
-  include("../includes/head.php");
+  include(RUTA_PROYECTO."includes/verificar-paginas.php");
+  include(RUTA_PROYECTO."includes/head.php");
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -30,11 +30,11 @@
   <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
       
-      <?php include("../includes/carga.php"); ?>
+      <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
 
-      <?php include("../includes/encabezado.php"); ?>
+      <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
       
-      <?php include("../includes/menu.php"); ?>
+      <?php include(RUTA_PROYECTO."includes/menu.php"); ?>
       
       <div class="content-wrapper">
         <div class="content-header">
@@ -77,17 +77,23 @@
                   <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
+              <?php
+              $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios");
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'");
+              }
+              $numUser = $usuarios->num_rows;
+              ?>
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                   <div class="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
+                    <h3><?=$numUser;?></h3>
+                    <p>Usuarios Registrados</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               
@@ -116,7 +122,7 @@
           </div>
         </section>
       </div>
-      <?php include("../includes/footer.php"); ?>
+      <?php include(RUTA_PROYECTO."includes/footer.php"); ?>
       <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
       </aside>
@@ -155,6 +161,6 @@
     <script src="<?=REDIRECT_ROUTE?>dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<?=REDIRECT_ROUTE?>dist/js/pages/dashboard.js"></script>
-    <?php include("../includes/pie.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/pie.php"); ?>
   </body>
 </html>

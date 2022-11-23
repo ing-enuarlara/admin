@@ -3,8 +3,8 @@ include("../../sesion.php");
 
 $idPagina = 32;
 
-include("../../../includes/verificar-paginas.php");
-include("../../../includes/head.php");
+include(RUTA_PROYECTO."includes/verificar-paginas.php");
+include(RUTA_PROYECTO."includes/head.php");
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -35,11 +35,11 @@ include("../../../includes/head.php");
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     
-    <?php include("../../../includes/carga.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
 
-    <?php include("../../../includes/encabezado.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
     
-    <?php include("../../../includes/menu.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/menu.php"); ?>
     
     <div class="content-wrapper">
         <div class="content-header">
@@ -140,7 +140,7 @@ include("../../../includes/head.php");
             </div>
         </section>
     </div>
-    <?php include("../../../includes/footer.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/footer.php"); ?>
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
     </aside>
@@ -209,6 +209,6 @@ include("../../../includes/head.php");
             });
         });
     </script>
-    <?php include("../../../includes/pie.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/pie.php"); ?>
 </body>
 </html>
