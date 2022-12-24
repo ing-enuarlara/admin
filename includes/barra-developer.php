@@ -6,6 +6,11 @@
   
   $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='".$idPagina."'");
   $rutaPagina = mysqli_fetch_array($paginas, MYSQLI_BOTH);
+
+  $lines = file(REDIRECT_ROUTE.'.git/HEAD');
+  foreach ($lines as $line_num => $line) {
+  }
+  $ramaActual = substr($line, 16);
 ?>
 
 	<div style="
@@ -22,6 +27,7 @@
         font-family:Arial;
         font-size:16px;
     ">
+    <b>Rama actual GIT:</b>&nbsp;<?php echo $ramaActual;?>&nbsp;|&nbsp;
     <b>Id pagina:</b>&nbsp;<?php echo $idPagina;?>&nbsp;|&nbsp;
     <b>Ruta de pagina:</b>&nbsp;<?php echo $rutaPagina['pag_ruta'];?>&nbsp;|&nbsp;
     <b>Id usuario actual:</b>&nbsp;<?php echo $datosUsuarioActual[0];?>&nbsp;|&nbsp;
