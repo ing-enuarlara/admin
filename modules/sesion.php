@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-const RUTA_PROYECTO = "C:/xampp/htdocs/admin/";
+const RUTA_PROYECTO = "C:/xampp/htdocs/ing-enuarlara.co/admin/";
 
 if( $_SESSION["id"]=="" || !is_numeric($_SESSION["id"]) ){
 	header("Location:../salir.php");
