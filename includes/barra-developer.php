@@ -33,6 +33,7 @@
     <b>Id usuario actual:</b>&nbsp;<?php echo $datosUsuarioActual[0];?>&nbsp;|&nbsp;
     <b>Tipo de Usuario:</b>&nbsp;<?php echo $nombreUSR['utipo_nombre'];?>&nbsp;|&nbsp;
 		<b>Versión PHP:&nbsp;</b> <?=phpversion(); ?>&nbsp;|&nbsp; 
+		<b>IP:&nbsp;</b> <?=$_SERVER['REMOTE_ADDR'];?>&nbsp;|&nbsp; 
 		<b>Server:&nbsp;</b> <?=$_SERVER['SERVER_NAME']; ?>&nbsp;|&nbsp;
 
     <?php if( isset($_SESSION['admin']) ){?>

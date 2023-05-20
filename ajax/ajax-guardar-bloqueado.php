@@ -4,7 +4,7 @@
 $mensajeNot = 'Hubo un error al guardar las cambios';
 //Bloquear y desbloquear
 if($_POST["operacion"]==1){
-	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_bloqueado='".$_POST["valor"]."' WHERE usr_id='".$_POST["idR"]."'");
+	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_estado='".$_POST["valor"]."' WHERE usr_id='".$_POST["idR"]."'");
 	$mensajeNot = 'El usuario ha cambiado de estado correctamente.';
 }
 ?>
