@@ -66,9 +66,12 @@ include(RUTA_PROYECTO."includes/head.php");
                             <!-- /.card-header -->
 
                             <?php
+                            $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='".$datosUsuarioActual['usr_id_empresa']."'");
+                            $configuracionPaginaWeb = mysqli_fetch_array($consultaConfigPaginaWeb, MYSQLI_BOTH);
+                            
                             $rutaLogo='files/default.png';
-                            if(isset($configuracion['conf_logo']) AND $configuracion['conf_logo']!=''){
-                                $rutaLogo='files/logo/'.$configuracion['conf_logo'];
+                            if(isset($configuracionPaginaWeb['conf_logo']) AND $configuracionPaginaWeb['conf_logo']!=''){
+                                $rutaLogo='files/logo/'.$configuracionPaginaWeb['conf_logo'];
                             }
                             ?>
                             <div class="col-md-6" style="margin-top: 10px;">
@@ -81,7 +84,7 @@ include(RUTA_PROYECTO."includes/head.php");
 
                             <!-- form start -->
                             <form class="form-horizontal" method="post" action="../bd_update/configuracion-actualizar.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?=$configuracion['conf_id_empresa']?>">
+                                <input type="hidden" name="id" value="<?=$configuracionPaginaWeb['conf_id_empresa']?>">
 
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
@@ -93,7 +96,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Empresa:</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Empresa" name="nombre" value="<?=$configuracion['conf_empresa']?>">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de Empresa" name="nombre" value="<?=$configuracionPaginaWeb['conf_empresa']?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Email:</label>
@@ -101,7 +104,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" placeholder="Email" name="email" value="<?=$configuracion['conf_email']?>">
+                                            <input type="email" class="form-control" placeholder="Email" name="email" value="<?=$configuracionPaginaWeb['conf_email']?>">
                                         </div>
                                     </div>
                                     <!-- phone mask -->
@@ -111,13 +114,13 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Telefono" name="telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask value="<?=$configuracion['conf_telefono']?>">
+                                            <input type="text" class="form-control" placeholder="Telefono" name="telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask value="<?=$configuracionPaginaWeb['conf_telefono']?>">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">URL de la tienda:</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Direccion Web" name="web" value="<?=$configuracion['conf_web']?>">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Direccion Web" name="web" value="<?=$configuracionPaginaWeb['conf_web']?>">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="customFile">Primer Banner</label>

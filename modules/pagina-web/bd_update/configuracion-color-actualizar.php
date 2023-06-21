@@ -4,12 +4,12 @@
     $idPagina = 41;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-    $consultaConfigColor = $conexionBdGeneral->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
+    $consultaConfigColor = $conexionBdPaginaWeb->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
     $numDatos= $consultaConfigColor->num_rows;
 
     if($numDatos>0){
 
-        $conexionBdGeneral->query("UPDATE general_color_store SET 
+        $conexionBdPaginaWeb->query("UPDATE general_color_store SET 
         gcs_encaPrimario='" . $_POST["encaPrimario"] . "', 
         gcs_encaSecundario='" . $_POST["encaSecundario"] . "', 
         gcs_encaLetras='" . $_POST["encaLetras"] . "', 
@@ -30,7 +30,7 @@
         WHERE gcs_id_empresa='" . $_POST["id"] . "'");
     }else{
 
-        $conexionBdGeneral->query("INSERT INTO general_color_store 
+        $conexionBdPaginaWeb->query("INSERT INTO general_color_store 
         (gcs_encaPrimario, gcs_encaSecundario, gcs_encaLetras, gcs_encaBorder, gcs_bodyFondo, gcs_bodyLetras, gcs_bodyLineas, gcs_bodyIconos, gcs_bottonPrimario, gcs_bottonSecundario, gcs_suscripcionFondo, gcs_suscripcionLetras, gcs_footerPrimario, gcs_footerSecundario, gcs_footerLetras, gcs_paginaFondo, gcs_paginaLetras, gcs_id_empresa) 
         VALUES 
         ('" . $_POST["encaPrimario"] . "', '" . $_POST["encaSecundario"] . "', '" . $_POST["encaLetras"] . "', '" . $_POST["encaBorder"] . "', '" . $_POST["bodyFondo"] . "', '" . $_POST["bodyLetras"] . "', '" . $_POST["bodyLineas"] . "', '" . $_POST["bodyIconos"] . "', '" . $_POST["bottonPrimario"] . "', '" . $_POST["bottonSecundario"] . "', '" . $_POST["suscripcionFondo"] . "', '" . $_POST["suscripcionLetras"] . "', '" . $_POST["footerPrimario"] . "', '" . $_POST["footerSecundario"] . "', '" . $_POST["footerLetras"] . "', '" . $_POST["paginaFondo"] . "', '" . $_POST["paginaLetras"] . "', '" . $_POST["id"] . "')");

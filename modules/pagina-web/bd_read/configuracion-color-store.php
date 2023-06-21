@@ -67,7 +67,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <!-- /.card-header -->
                             <?php
 
-                            $consultaConfigColor = $conexionBdGeneral->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
+                            $consultaConfigColor = $conexionBdPaginaWeb->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
                             $configuracionColor = mysqli_fetch_array($consultaConfigColor, MYSQLI_BOTH);
 
                             ?>
