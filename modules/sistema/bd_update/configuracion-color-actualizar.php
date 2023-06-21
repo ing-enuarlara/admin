@@ -24,14 +24,16 @@
         gcs_suscripcionLetras='" . $_POST["suscripcionLetras"] . "', 
         gcs_footerPrimario='" . $_POST["footerPrimario"] . "', 
         gcs_footerSecundario='" . $_POST["footerSecundario"] . "', 
-        gcs_footerLetras='" . $_POST["footerLetras"] . "'
+        gcs_footerLetras='" . $_POST["footerLetras"] . "', 
+        gcs_paginaFondo='" . $_POST["paginaFondo"] . "', 
+        gcs_paginaLetras='" . $_POST["paginaLetras"] . "'
         WHERE gcs_id_empresa='" . $_POST["id"] . "'");
     }else{
 
         $conexionBdGeneral->query("INSERT INTO general_color_store 
-        (gcs_encaPrimario, gcs_encaSecundario, gcs_encaLetras, gcs_encaBorder, gcs_bodyFondo, gcs_bodyLetras, gcs_bodyLineas, gcs_bodyIconos, gcs_bottonPrimario, gcs_bottonSecundario, gcs_suscripcionFondo, gcs_suscripcionLetras, gcs_footerPrimario, gcs_footerSecundario, gcs_footerLetras, gcs_id_empresa) 
+        (gcs_encaPrimario, gcs_encaSecundario, gcs_encaLetras, gcs_encaBorder, gcs_bodyFondo, gcs_bodyLetras, gcs_bodyLineas, gcs_bodyIconos, gcs_bottonPrimario, gcs_bottonSecundario, gcs_suscripcionFondo, gcs_suscripcionLetras, gcs_footerPrimario, gcs_footerSecundario, gcs_footerLetras, gcs_paginaFondo, gcs_paginaLetras, gcs_id_empresa) 
         VALUES 
-        ('" . $_POST["encaPrimario"] . "', '" . $_POST["encaSecundario"] . "', '" . $_POST["encaLetras"] . "', '" . $_POST["encaBorder"] . "', '" . $_POST["bodyFondo"] . "', '" . $_POST["bodyLetras"] . "', '" . $_POST["bodyLineas"] . "', '" . $_POST["bodyIconos"] . "', '" . $_POST["bottonPrimario"] . "', '" . $_POST["bottonSecundario"] . "', '" . $_POST["suscripcionFondo"] . "', '" . $_POST["suscripcionLetras"] . "', '" . $_POST["footerPrimario"] . "', '" . $_POST["footerSecundario"] . "', '" . $_POST["footerLetras"] . "', '" . $_POST["id"] . "')");
+        ('" . $_POST["encaPrimario"] . "', '" . $_POST["encaSecundario"] . "', '" . $_POST["encaLetras"] . "', '" . $_POST["encaBorder"] . "', '" . $_POST["bodyFondo"] . "', '" . $_POST["bodyLetras"] . "', '" . $_POST["bodyLineas"] . "', '" . $_POST["bodyIconos"] . "', '" . $_POST["bottonPrimario"] . "', '" . $_POST["bottonSecundario"] . "', '" . $_POST["suscripcionFondo"] . "', '" . $_POST["suscripcionLetras"] . "', '" . $_POST["footerPrimario"] . "', '" . $_POST["footerSecundario"] . "', '" . $_POST["footerLetras"] . "', '" . $_POST["paginaFondo"] . "', '" . $_POST["paginaLetras"] . "', '" . $_POST["id"] . "')");
     }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");

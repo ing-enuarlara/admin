@@ -131,6 +131,32 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
+                                        <label>Fondo Navegación:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="paginaFondo" value="<?=$configuracionColor['gcs_paginaFondo'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Letras Navegación:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="paginaLetras" value="<?=$configuracionColor['gcs_paginaLetras'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
                                         <label>Fondo Body:</label>
                                         <div class="input-group my-colorpicker2">
                                             <input type="color" class="form-control" name="bodyFondo" value="<?=$configuracionColor['gcs_bodyFondo'];?>">
