@@ -8,11 +8,30 @@
     $numDatos= $consultaConfigColor->num_rows;
 
     if($numDatos>0){
-        
-        $conexionBdGeneral->query("UPDATE general_color_store SET gcs_primario='" . $_POST["colorP"] . "', gcs_primarioOscuro='" . $_POST["colorPO"] . "', gcs_secundario='" . $_POST["colorS"] . "', gcs_secundarioOscuro='" . $_POST["colorSO"] . "', gcs_blanco='" . $_POST["colorC"] . "', gcs_negro='" . $_POST["colorO"] . "' WHERE gcs_id_empresa='" . $_POST["id"] . "'");
+
+        $conexionBdGeneral->query("UPDATE general_color_store SET 
+        gcs_encaPrimario='" . $_POST["encaPrimario"] . "', 
+        gcs_encaSecundario='" . $_POST["encaSecundario"] . "', 
+        gcs_encaLetras='" . $_POST["encaLetras"] . "', 
+        gcs_encaBorder='" . $_POST["encaBorder"] . "', 
+        gcs_bodyFondo='" . $_POST["bodyFondo"] . "', 
+        gcs_bodyLetras='" . $_POST["bodyLetras"] . "', 
+        gcs_bodyLineas='" . $_POST["bodyLineas"] . "', 
+        gcs_bodyIconos='" . $_POST["bodyIconos"] . "', 
+        gcs_bottonPrimario='" . $_POST["bottonPrimario"] . "', 
+        gcs_bottonSecundario='" . $_POST["bottonSecundario"] . "', 
+        gcs_suscripcionFondo='" . $_POST["suscripcionFondo"] . "', 
+        gcs_suscripcionLetras='" . $_POST["suscripcionLetras"] . "', 
+        gcs_footerPrimario='" . $_POST["footerPrimario"] . "', 
+        gcs_footerSecundario='" . $_POST["footerSecundario"] . "', 
+        gcs_footerLetras='" . $_POST["footerLetras"] . "'
+        WHERE gcs_id_empresa='" . $_POST["id"] . "'");
     }else{
 
-        $conexionBdGeneral->query("INSERT INTO general_color_store (gcs_primario, gcs_primarioOscuro, gcs_secundario, gcs_secundarioOscuro, gcs_blanco, gcs_negro, gcs_id_empresa) VALUES ('" . $_POST["colorP"] . "', '" . $_POST["colorPO"] . "', '" . $_POST["colorS"] . "', '" . $_POST["colorSO"] . "', '" . $_POST["colorC"] . "', '" . $_POST["colorO"] . "', '" . $_POST["id"] . "')");
+        $conexionBdGeneral->query("INSERT INTO general_color_store 
+        (gcs_encaPrimario, gcs_encaSecundario, gcs_encaLetras, gcs_encaBorder, gcs_bodyFondo, gcs_bodyLetras, gcs_bodyLineas, gcs_bodyIconos, gcs_bottonPrimario, gcs_bottonSecundario, gcs_suscripcionFondo, gcs_suscripcionLetras, gcs_footerPrimario, gcs_footerSecundario, gcs_footerLetras, gcs_id_empresa) 
+        VALUES 
+        ('" . $_POST["encaPrimario"] . "', '" . $_POST["encaSecundario"] . "', '" . $_POST["encaLetras"] . "', '" . $_POST["encaBorder"] . "', '" . $_POST["bodyFondo"] . "', '" . $_POST["bodyLetras"] . "', '" . $_POST["bodyLineas"] . "', '" . $_POST["bodyIconos"] . "', '" . $_POST["bottonPrimario"] . "', '" . $_POST["bottonSecundario"] . "', '" . $_POST["suscripcionFondo"] . "', '" . $_POST["suscripcionLetras"] . "', '" . $_POST["footerPrimario"] . "', '" . $_POST["footerSecundario"] . "', '" . $_POST["footerLetras"] . "', '" . $_POST["id"] . "')");
     }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");

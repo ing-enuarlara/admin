@@ -79,9 +79,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Primario:</label>
+                                        <label>Encabezado Primario:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorP" value="<?=$configuracionColor['gcs_primario'];?>">
+                                            <input type="color" class="form-control" name="encaPrimario" value="<?=$configuracionColor['gcs_encaPrimario'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
@@ -92,9 +92,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Primario 2:</label>
+                                        <label>Encabezado Secundario:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorPO" value="<?=$configuracionColor['gcs_primarioOscuro'];?>">
+                                            <input type="color" class="form-control" name="encaSecundario" value="<?=$configuracionColor['gcs_encaSecundario'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
@@ -105,9 +105,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Secundario:</label>
+                                        <label>Letras Encabezado:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorS" value="<?=$configuracionColor['gcs_secundario'];?>">
+                                            <input type="color" class="form-control" name="encaLetras" value="<?=$configuracionColor['gcs_encaLetras'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
@@ -118,9 +118,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Secundario 2:</label>
+                                        <label>Bordes Encabezado:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorSO" value="<?=$configuracionColor['gcs_secundarioOscuro'];?>">
+                                            <input type="color" class="form-control" name="encaBorder" value="<?=$configuracionColor['gcs_encaBorder'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
@@ -131,9 +131,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Letras:</label>
+                                        <label>Fondo Body:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorC" value="<?=$configuracionColor['gcs_blanco'];?>">
+                                            <input type="color" class="form-control" name="bodyFondo" value="<?=$configuracionColor['gcs_bodyFondo'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
@@ -144,9 +144,126 @@ include(RUTA_PROYECTO."includes/head.php");
 
                                     <!-- Color Picker -->
                                     <div class="form-group col-md-3">
-                                        <label>Color Oscuro:</label>
+                                        <label>Letras Body:</label>
                                         <div class="input-group my-colorpicker2">
-                                            <input type="color" class="form-control" name="colorO" value="<?=$configuracionColor['gcs_negro'];?>">
+                                            <input type="color" class="form-control" name="bodyLetras" value="<?=$configuracionColor['gcs_bodyLetras'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Lineas:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="bodyLineas" value="<?=$configuracionColor['gcs_bodyLineas'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Boton Primario:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="bottonPrimario" value="<?=$configuracionColor['gcs_bottonPrimario'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Boton Secundario:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="bottonSecundario" value="<?=$configuracionColor['gcs_bottonSecundario'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Iconos:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="bodyIconos" value="<?=$configuracionColor['gcs_bodyIconos'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Fondo Suscripcion:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="suscripcionFondo" value="<?=$configuracionColor['gcs_suscripcionFondo'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Letras Suscripcion:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="suscripcionLetras" value="<?=$configuracionColor['gcs_suscripcionLetras'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Footer Primario:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="footerPrimario" value="<?=$configuracionColor['gcs_footerPrimario'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Footer Secundario:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="footerSecundario" value="<?=$configuracionColor['gcs_footerSecundario'];?>">
+                                            <div class="input-group-append">
+                                              <span class="input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                    <!-- /.form group -->
+
+                                    <!-- Color Picker -->
+                                    <div class="form-group col-md-3">
+                                        <label>Letras Footer:</label>
+                                        <div class="input-group my-colorpicker2">
+                                            <input type="color" class="form-control" name="footerLetras" value="<?=$configuracionColor['gcs_footerLetras'];?>">
                                             <div class="input-group-append">
                                               <span class="input-group-text"></span>
                                             </div>
