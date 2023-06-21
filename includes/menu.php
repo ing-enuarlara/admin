@@ -166,15 +166,31 @@
                 </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion-sistema.php" class="nav-link">
                         <i class="fas fa-cog nav-icon"></i>
-                        <p>Configuración</p>
+                        <p>Configuración del Sistema</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-solid fa-clock"></i>
                         <p>Historial de acciones</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){?>
+        <li class="nav-item">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==7){echo "active";}?>">
+                <i class="nav-icon fas fa-regular fa-earth-americas"></i>
+                <p>Pagina Web<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php" class="nav-link">
+                        <i class="fas fa-cogs nav-icon"></i>
+                        <p>Configurar Pagina</p>
                     </a>
                 </li>
             </ul>
