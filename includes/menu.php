@@ -49,13 +49,13 @@
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="nav-link">
-                        <i class="fas fa-solid fa-users nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Usuarios</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
-                        <i class="fas fa-solid fa-list nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Roles</p>
                     </a>
                 </li>
@@ -71,31 +71,31 @@
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-restroom nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Clientes</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-layer-group nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Producto<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" class="nav-link">
-                                <i class="fas fa-solid fa-list nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Categorias</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" class="nav-link">
-                                <i class="fas fa-solid fa-list-ol"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Marcas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
-                                <i class="fas fa-solid fa-barcode nav-icon"></i>
+                                <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Productos</p>
                             </a>
                         </li>
@@ -103,13 +103,13 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-truck"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Pedidos</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-file-invoice"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Facturacion</p>
                     </a>
                 </li>
@@ -125,19 +125,19 @@
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-user-cog nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Editar Perfil</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-shopping-cart nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Mis Ventas</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-calendar nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Mi calendario</p>
                     </a>
                 </li>
@@ -154,26 +154,26 @@
                 <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
-                        <i class="far fa-file nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Páginas</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" class="nav-link">
-                        <i class="fas fa-sitemap nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Módulos</p>
                     </a>
                 </li>
                 <?php }?>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion-sistema.php" class="nav-link">
-                        <i class="fas fa-cog nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Configuración del Sistema</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-solid fa-clock"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Historial de acciones</p>
                     </a>
                 </li>
@@ -189,8 +189,14 @@
             <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php" class="nav-link">
-                        <i class="fas fa-cogs nav-icon"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>Configurar Pagina</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion-color-store.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cambiar Colores</p>
                     </a>
                 </li>
             </ul>
