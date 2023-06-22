@@ -46,7 +46,6 @@ include(RUTA_PROYECTO."includes/head.php");
                   <div class="col-sm-12">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php">Ver Configuracion</a></li>
                       <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
                   </ol>
                   </div><!-- /.col -->
