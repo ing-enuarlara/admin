@@ -204,8 +204,8 @@ include(RUTA_PROYECTO . "includes/head.php");
                           </div>
 
                           <div class="form-group col-md-6">
-                            <label for="exampleInputEmail1">Dirección de la tienda:</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Direccion de la tienda" name="direccion" value="<?= $configuracionPaginaWeb['conf_direccion'] ?>">
+                            <label for="direccion">Dirección de la tienda:</label>
+                            <textarea name="direccion" id="direccion"><?= $configuracionPaginaWeb['conf_direccion'] ?></textarea>
                           </div>
 
                           <div class="form-group col-md-6">
@@ -450,12 +450,14 @@ include(RUTA_PROYECTO . "includes/head.php");
                             <textarea name="textSlider2" id="textSlider2"><?= $configuracionPaginaWeb['conf_textSlider2'] ?></textarea>
                           </div>
                           <a class="btn btn-secondary" onclick="stepper.previous()">Anterior</a>
-                          <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <!-- /.card-body -->
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary float-sm-right">Guardar</button>
+                  </div>
                 </form>
               </div>
               <!-- /.card -->
@@ -509,6 +511,7 @@ include(RUTA_PROYECTO . "includes/head.php");
       $('#summernote').summernote()
       $('#textSlider1').summernote()
       $('#textSlider2').summernote()
+      $('#direccion').summernote()
 
       // CodeMirror
       CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
