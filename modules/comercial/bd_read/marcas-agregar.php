@@ -46,7 +46,7 @@ include(RUTA_PROYECTO."includes/head.php");
                   <div class="col-sm-12">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php">Ver Marcas</a></li>
+                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php">Ver Sub-Categorias</a></li>
                       <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
                   </ol>
                   </div><!-- /.col -->
@@ -70,7 +70,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Nombre:</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Marca" name="nombre">
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Sub-Categorias" name="nombre">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Categoria:</label>

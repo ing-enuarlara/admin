@@ -40,6 +40,34 @@
             </a>
         </li>
         <?php }?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 4)){?>
+        <li class="nav-item">
+            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==4){echo "active";}?>">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Editar Perfil</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mis Ventas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mi calendario</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <?php }?>
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==2){echo "active";}?>">
@@ -90,7 +118,7 @@
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Marcas</p>
+                                <p>Sub-Categorias</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -111,34 +139,6 @@
                     <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Facturacion</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 4)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==4){echo "active";}?>">
-                <i class="nav-icon fas fa-user"></i>
-                <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Editar Perfil</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Mis Ventas</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Mi calendario</p>
                     </a>
                 </li>
             </ul>

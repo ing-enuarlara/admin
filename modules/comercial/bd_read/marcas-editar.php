@@ -49,7 +49,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                   <div class="col-sm-12">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php">Ver Marcas</a></li>
+                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php">Ver Sub-Categorias</a></li>
                       <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
                   </ol>
                   </div><!-- /.col -->
@@ -74,7 +74,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <input type="hidden" name="id" value="<?=$_GET["id"];?>">
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Nombre:</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Marca" name="nombre" value="<?=$resultadoD['cmar_nombre'];?>">
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Sub-Categorias" name="nombre" value="<?=$resultadoD['cmar_nombre'];?>">
                                         </div>
                                     </div>
                                         <div class="form-group col-md-6">
