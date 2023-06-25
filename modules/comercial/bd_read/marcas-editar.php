@@ -32,6 +32,18 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>dist/css/adminlte.min.css">
+    <script type="application/javascript">
+        function ocultarMasJoyas(enviada){
+            var valueMasJoyas = enviada.value;
+            if(valueMasJoyas==1){
+                document.getElementById('masJoyas').value="0";
+                document.getElementById('groupMasJoyas').style.display='none';
+            }
+            if(valueMasJoyas==0){
+                document.getElementById('groupMasJoyas').style.display='block';
+            }
+        }
+    </script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -99,17 +111,17 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                                 <?php }?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-6" style="display:block;" id="groupMenu">
                                             <label>Ver en exclusivas:</label>
-                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu" id="menu" onchange="ocultarMasJoyas(this)">
                                               <option value=""></option>
                                               <option value="1"<?php if($resultadoD['cmar_menu']==1){echo "selected";}?>>SI</option>
                                               <option value="0"<?php if($resultadoD['cmar_menu']==0){echo "selected";}?>>NO</option>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-6" style="display:block;" id="groupMasJoyas">
                                             <label>Ver en mas joyas:</label>
-                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas">
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas" id="masJoyas">
                                               <option value=""></option>
                                               <option value="1"<?php if($resultadoD['cmar_mas_joyas']==1){echo "selected";}?>>SI</option>
                                               <option value="0"<?php if($resultadoD['cmar_mas_joyas']==0){echo "selected";}?>>NO</option>
