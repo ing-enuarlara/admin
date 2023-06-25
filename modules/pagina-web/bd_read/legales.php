@@ -70,6 +70,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Rol</th>
                                     <th>Ultima Modificación</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -81,12 +86,21 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($legales, MYSQLI_BOTH)){
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['pal_id_empresa']."'");
+                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                    }
 
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['pal_nombre'];?></td>
                                     <td><?=$result['pal_modificacion'];?></td>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+								    <?php }?>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-info">Acciones</button>
@@ -108,6 +122,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Rol</th>
                                     <th>Ultima Modificación</th>
+                                    <?php
+                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    ?>
+                                    <th>Nombre Empresa</th>
+								    <?php }?>
                                     <th></th>
                                 </tr>
                             </tfoot>
