@@ -69,6 +69,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
+                                    <th>Menu</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -89,10 +90,15 @@ include(RUTA_PROYECTO."includes/head.php");
                                         $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['ccat_id_empresa']."'");
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
+                                    $menu="NO";
+                                    if($result['ccat_menu']==1){
+                                        $menu="SI";
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['ccat_nombre'];?></td>
+                                    <td><?=$menu;?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -118,6 +124,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
+                                    <th>Menu</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>

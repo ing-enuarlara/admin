@@ -72,6 +72,14 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Categoria" name="nombre">
                                     </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Ver en Destacados:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
+                                          <option value=""></option>
+                                          <option value="1">SI</option>
+                                          <option value="0">NO</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

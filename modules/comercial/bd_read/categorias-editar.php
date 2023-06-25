@@ -72,10 +72,18 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <!-- form start -->
                                 <form class="form-horizontal" method="post" action="../bd_update/categorias-actualizar.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?=$_GET["id"];?>">
-                                        <div class="form-group col-md-6">
-                                            <label for="exampleInputEmail1">Nombre:</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Categoria" name="nombre" value="<?=$resultadoD['ccat_nombre'];?>">
-                                        </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="exampleInputEmail1">Nombre:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Categoria" name="nombre" value="<?=$resultadoD['ccat_nombre'];?>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Ver en Destacados:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
+                                          <option value=""></option>
+                                          <option value="1"<?php if($resultadoD['ccat_menu']==1){echo "selected";}?>>SI</option>
+                                          <option value="0"<?php if($resultadoD['ccat_menu']==0){echo "selected";}?>>NO</option>
+                                        </select>
+                                    </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
