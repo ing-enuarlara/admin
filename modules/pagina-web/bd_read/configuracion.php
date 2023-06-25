@@ -182,13 +182,13 @@ include(RUTA_PROYECTO . "includes/head.php");
                           </div>
 
                           <div class="form-group col-md-6">
-                            <label>Descripción de la Pagina:</label>
-                            <textarea class="form-control" rows="3" name="descripcionPagina" placeholder="Descripción ..."><?= $configuracionPaginaWeb['conf_descripcion_pagina'] ?></textarea>
+                            <label>Descripción Corta Para el Titulo:</label>
+                            <input type="text" class="form-control" rows="1" name="descripcionCorta" placeholder="Descripción Corta..." value="<?= $configuracionPaginaWeb['conf_descripcion_corta'] ?>" />
                           </div>
 
                           <div class="form-group col-md-6">
-                            <label>Descripción Corta Para el Titulo:</label>
-                            <input type="text" class="form-control" rows="1" name="descripcionCorta" placeholder="Descripción Corta..." value="<?= $configuracionPaginaWeb['conf_descripcion_corta'] ?>"/>
+                            <label>Descripción de la Pagina:</label>
+                            <textarea class="form-control" rows="3" name="descripcionPagina" placeholder="Descripción ..."><?= $configuracionPaginaWeb['conf_descripcion_pagina'] ?></textarea>
                           </div>
 
                           <div class="form-group col-md-6">
