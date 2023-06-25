@@ -199,6 +199,12 @@
                         <p>Cambiar Colores</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/legales.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Paginas Legales</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <?php }?>
