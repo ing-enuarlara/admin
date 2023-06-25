@@ -182,6 +182,16 @@ include(RUTA_PROYECTO . "includes/head.php");
                           </div>
 
                           <div class="form-group col-md-6">
+                            <label>Descripción Corta de la Pagina:</label>
+                            <textarea class="form-control" rows="1" name="descripcionPagina" placeholder="Descripción ..."><?= $configuracionPaginaWeb['conf_descripcion_pagina'] ?></textarea>
+                          </div>
+
+                          <div class="form-group col-md-6">
+                            <label>Palabras Claves para Busquedas en GOOGLE:</label>
+                            <textarea class="form-control" rows="3" name="palabrasClaves" placeholder="Escribe las palabras claves separadas por comas..."><?= $configuracionPaginaWeb['conf_palabras_claves'] ?></textarea>
+                          </div>
+
+                          <div class="form-group col-md-6">
                             <label>Email:</label>
                             <div class="input-group">
                               <div class="input-group-prepend">
@@ -508,10 +518,10 @@ include(RUTA_PROYECTO . "includes/head.php");
   <script>
     $(function() {
       // Summernote
+      $('#direccion').summernote()
       $('#summernote').summernote()
       $('#textSlider1').summernote()
       $('#textSlider2').summernote()
-      $('#direccion').summernote()
 
       // CodeMirror
       CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
