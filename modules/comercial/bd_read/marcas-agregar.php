@@ -93,6 +93,22 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <?php }?>
                                         </select>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                      <label>Ver en exclusivas:</label>
+                                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
+                                        <option value=""></option>
+                                        <option value="1">SI</option>
+                                        <option value="0">NO</option>
+                                      </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label>Ver en mas joyas:</label>
+                                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas">
+                                        <option value=""></option>
+                                        <option value="1">SI</option>
+                                        <option value="0">NO</option>
+                                      </select>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

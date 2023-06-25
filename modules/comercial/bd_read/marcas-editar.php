@@ -76,7 +76,6 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                             <label for="exampleInputEmail1">Nombre:</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Sub-Categorias" name="nombre" value="<?=$resultadoD['cmar_nombre'];?>">
                                         </div>
-                                    </div>
                                         <div class="form-group col-md-6">
                                             <label>Categoria:</label>
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria">
@@ -100,6 +99,23 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                                 <?php }?>
                                             </select>
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Ver en exclusivas:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
+                                              <option value=""></option>
+                                              <option value="1"<?php if($resultadoD['cmar_menu']==1){echo "selected";}?>>SI</option>
+                                              <option value="0"<?php if($resultadoD['cmar_menu']==0){echo "selected";}?>>NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Ver en mas joyas:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas">
+                                              <option value=""></option>
+                                              <option value="1"<?php if($resultadoD['cmar_mas_joyas']==1){echo "selected";}?>>SI</option>
+                                              <option value="0"<?php if($resultadoD['cmar_mas_joyas']==0){echo "selected";}?>>NO</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary">Guardar</button>

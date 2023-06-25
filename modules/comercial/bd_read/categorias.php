@@ -69,7 +69,8 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
-                                    <th>Menu</th>
+                                    <th>Destacada</th>
+                                    <th>Pie de Pagina</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -94,11 +95,16 @@ include(RUTA_PROYECTO."includes/head.php");
                                     if($result['ccat_menu']==1){
                                         $menu="SI";
                                     }
+                                    $footer="NO";
+                                    if($result['ccat_footer']==1){
+                                        $footer="SI";
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['ccat_nombre'];?></td>
                                     <td><?=$menu;?></td>
+                                    <td><?=$footer;?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -124,7 +130,8 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Nombre Categoria</th>
-                                    <th>Menu</th>
+                                    <th>Destacada</th>
+                                    <th>Pie de Pagina</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>

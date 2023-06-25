@@ -84,6 +84,14 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                           <option value="0"<?php if($resultadoD['ccat_menu']==0){echo "selected";}?>>NO</option>
                                         </select>
                                     </div>
+                                    <div class="form-group col-md-6">
+                                      <label>Ver en el pie de la pagina:</label>
+                                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="footer">
+                                        <option value=""></option>
+                                        <option value="1" <?php if ($resultadoD['ccat_footer'] == 1) { echo "selected";} ?>>SI</option>
+                                        <option value="0" <?php if ($resultadoD['ccat_footer'] == 0) { echo "selected";} ?>>NO</option>
+                                      </select>
+                                    </div>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">

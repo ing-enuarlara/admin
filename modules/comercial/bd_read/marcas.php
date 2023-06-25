@@ -70,6 +70,8 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Nombre Sub-Categorias</th>
                                     <th>Categoria</th>
+                                    <th>Exclusiva</th>
+                                    <th>Mas Joyas</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -80,9 +82,9 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas");
+                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria");
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
@@ -90,14 +92,21 @@ include(RUTA_PROYECTO."includes/head.php");
                                         $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cmar_id_empresa']."'");
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
-                                                                       
-                                    $consultaNombreCat = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cmar_categoria']."'");
-                                    $NombreCategoria = mysqli_fetch_array($consultaNombreCat, MYSQLI_BOTH); 
+                                    $menu="NO";
+                                    if($result['cmar_menu']==1){
+                                        $menu="SI";
+                                    }
+                                    $masJoyas="NO";
+                                    if($result['cmar_mas_joyas']==1){
+                                        $masJoyas="SI";
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['cmar_nombre'];?></td>
-                                    <td><?=$NombreCategoria['ccat_nombre'];?></td>
+                                    <td><?=$result['ccat_nombre'];?></td>
+                                    <td><?=$menu;?></td>
+                                    <td><?=$masJoyas;?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -124,6 +133,8 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Nombre Sub-Categorias</th>
                                     <th>Categoria</th>
+                                    <th>Exclusiva</th>
+                                    <th>Mas Joyas</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>

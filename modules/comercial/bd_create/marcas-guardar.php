@@ -4,7 +4,7 @@
     $idPagina = 34;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
     
-    $conexionBdComercial->query("INSERT INTO comercial_marcas(cmar_nombre, cmar_categoria, cmar_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["categoria"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+    $conexionBdComercial->query("INSERT INTO comercial_marcas(cmar_nombre, cmar_categoria, cmar_menu, cmar_mas_joyas, cmar_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["categoria"] . "', '" . $_POST["menu"] . "', '" . $_POST["masJoyas"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 
