@@ -146,7 +146,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                                 <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
                                                 <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
                                                 <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
                                         </div>
                                     </td>

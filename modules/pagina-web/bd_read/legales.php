@@ -110,7 +110,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="legales-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
                                                 <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/legales-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <a class="dropdown-item" href="../bd_delete/legales-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
                                         </div>
                                     </td>

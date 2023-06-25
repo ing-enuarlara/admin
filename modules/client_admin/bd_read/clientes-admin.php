@@ -98,7 +98,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-admin-editar.php?id=<?=$resp[0];?>" data-toggle="tooltip">Editar</a>
                                                 <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/clientes-admin-eliminar.php?id=<?=$resp[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <a class="dropdown-item" href="../bd_delete/clientes-admin-eliminar.php?id=<?=$resp[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
                                         </div>
                                     </td>

@@ -162,7 +162,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                                 <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['usr_id'];?>&tipe=<?=$result['usr_tipo'];?>">Autologin</a>
                                                 <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/usuarios-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}">Eliminar</a>
+                                                <a class="dropdown-item" href="../bd_delete/usuarios-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
                                             </div>
                                         </div>
                                     </td>
