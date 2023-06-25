@@ -68,27 +68,12 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 <h5 class="float-sm-right"><?=$paginaActual['pag_nombre']?></h5>
                             </div>
 
-                            <div class="col-md-6">
-                                    <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                                        <a href="<?=REDIRECT_ROUTE?>files/productos/<?=$resultadoD['cprod_foto'];?>" data-toggle="lightbox" data-title="<?=$resultadoD['cprod_nombre'];?>">
-                                            <img src="<?=REDIRECT_ROUTE?>files/productos/<?=$resultadoD['cprod_foto'];?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap;"/>
-                                        </a>
-                                    </div>
-                            </div>
-
                             <!-- /.card-header -->
                             <div class="col-md-12">
                                     <!-- form start -->
                                 <form class="form-horizontal" method="post" action="../bd_update/productos-actualizar.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?=$_GET["id"];?>">
                                     <div class="card-body">
-                                        <div class="form-group col-md-6">
-                                            <label for="customFile">Foto</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" name="foto">
-                                                <label class="custom-file-label" for="customFile">Escoger Foto...</label>
-                                            </div>
-                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Nombre:</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?=$resultadoD['cprod_nombre'];?>">
@@ -97,36 +82,86 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                             <label for="exampleInputEmail1">Precio:</label>
                                             <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?=$resultadoD['cprod_costo'];?>">
                                         </div>
-                                        <!-- textarea -->
-                                            <div class="form-group col-md-6">
-                                                <label>Detalles</label>
-                                                <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" value=""><?=$resultadoD['cprod_detalles'];?></textarea>
-                                            </div>
                                         <div class="form-group col-md-2">
                                             <label for="exampleInputEmail1">Existencia:</label>
                                             <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia" value="<?=$resultadoD['cprod_exitencia'];?>">
                                         </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Tipo:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
+                                                <option value=""></option>
+                                                <option value="1" <?php if($resultadoD['cprod_tipo']==1){echo "selected";} ?>>Oro Italy</option>
+                                                <option value="2" <?php if($resultadoD['cprod_tipo']==2){echo "selected";} ?>>Oro Nacional</option>
+                                            </select>
+                                        </div>
                                         <div class="form-group col-md-6">
-                                            <label>Marca:</label>
-                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca">
+                                            <label>Categoria:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria" onchange="traerSubCategorias()">
                                                 <option value=""></option>
                                                 <?php
-                                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas");
+                                                $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
                                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                                    $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
                                                 }
-                                                while($resOp = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
+                                                while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
                                                     $nombreEmpresa='';
                                                     if($datosUsuarioActual['usr_tipo']==1){
-                                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$resOp['cmar_id_empresa']."'");
+                                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['ccat_id_empresa']."'");
                                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                                         $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
                                                     }
                                                     $selected='';
-                                                    if($resultadoD['cprod_marca']==$resOp[0]){$selected='selected';}
+                                                    if($resultadoD['cprod_categoria']==$datosCategorias[0]){$selected='selected';}
                                                 ?>
-                                                    <option value="<?=$resOp[0];?>" <?=$selected;?>><?=$resOp['cmar_nombre'].$nombreEmpresa;?></option>
+                                                    <option value="<?=$datosCategorias[0];?>" <?=$selected;?>><?=$datosCategorias['ccat_nombre'].$nombreEmpresa;?></option>
                                                 <?php }?>
+                                            </select>
+                                            <span id="mensaje" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                        </div>
+                                        <div class="form-group col-md-6" id="subCategoria-container" style="display:none;">
+                                            <label>Sub-Categoria:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca" id="marca" disabled>
+                                            </select>
+                                            <script type="application/javascript">
+                                                $(document).ready(traerSubCategorias(document.getElementById('categoria')));
+                                                function traerSubCategorias(enviada){
+                                                var categoria = $('#categoria').val();
+                                                var subCategoria = <?=$resultadoD['cprod_marca'];?>;
+                                                document.getElementById('marca').removeAttribute('disabled');
+
+                                                datos = "categoria="+(categoria)+
+                                                        "&subCategoria="+(subCategoria);
+                                                console.log(datos);
+                                                $('#mensaje').show();
+                                                $.ajax({
+                                                        type: "POST",
+                                                        url: "../../../ajax/ajax-traer-sub-categorias.php",
+                                                        data: datos,
+                                                        success: function(response)
+                                                        {
+                                                            $('#marca').empty();
+                                                            $('#marca').append(response);
+                                                        }
+                                                });
+                                                }
+                                            </script>
+                                        </div>
+                                        <!-- textarea -->
+                                        <div class="form-group col-md-6">
+                                            <label>Detalles</label>
+                                            <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" value=""><?=$resultadoD['cprod_detalles'];?></textarea>
+                                        </div>
+                                        <!-- textarea -->
+                                        <div class="form-group col-md-6">
+                                            <label>Detalles</label>
+                                          <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?=$resultadoD['cprod_palabras_claves'];?></textarea>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Estado:</label>
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="estado">
+                                                <option value=""></option>
+                                                <option value="1" <?php if($resultadoD['cprod_estado']==1){echo "selected";} ?>>Activo</option>
+                                                <option value="0" <?php if($resultadoD['cprod_estado']==0){echo "selected";} ?>>Inactivo</option>
                                             </select>
                                         </div>
                                     </div>

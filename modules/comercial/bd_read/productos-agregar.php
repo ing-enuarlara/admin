@@ -69,13 +69,6 @@ include(RUTA_PROYECTO."includes/head.php");
                             <form class="form-horizontal" method="post" action="../bd_create/productos-guardar.php" enctype="multipart/form-data">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
-                                        <label for="customFile">Foto</label>
-                                        <div class="custom-file">
-                                          <input type="file" class="custom-file-input" id="customFile" name="foto">
-                                          <label class="custom-file-label" for="customFile">Escoger Foto...</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre">
                                     </div>
@@ -83,37 +76,78 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <label for="exampleInputEmail1">Precio:</label>
                                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo">
                                     </div>
-                                    <div class="col-sm-6">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Detalles</label>
-                                        <textarea class="form-control" rows="5" placeholder="Detalles del producto ..." name="detalles"></textarea>
-                                    </div>
-                                    </div>
                                     <div class="form-group col-md-2">
                                         <label for="exampleInputEmail1">Existencia:</label>
                                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia">
                                     </div>
+                                    <div class="form-group col-md-3">
+                                        <label>Tipo:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
+											                      <option value=""></option>
+                                            <option value="1">Oro Italy</option>
+                                            <option value="2">Oro Nacional</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group col-md-6">
-                                        <label>Marca:</label>
-                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca">
+                                        <label>Categoria:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria" onchange="traerSubCategorias()">
 											                      <option value=""></option>
                                             <?php
-                                            $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas");
+                                            $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
                                             if($datosUsuarioActual['usr_tipo']!=1){
-                                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                                $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
                                             }
-                                            while($resOp = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
+                                            while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
                                               $nombreEmpresa='';
                                               if($datosUsuarioActual['usr_tipo']==1){
-                                                  $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$resOp['cmar_id_empresa']."'");
+                                                  $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['ccat_id_empresa']."'");
                                                   $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                                   $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
                                               }
                                             ?>
-                                            	<option value="<?=$resOp[0];?>"><?=$resOp['cmar_nombre'].$nombreEmpresa;?></option>
+                                            	<option value="<?=$datosCategorias[0];?>"><?=$datosCategorias['ccat_nombre'].$nombreEmpresa;?></option>
                                             <?php }?>
                                         </select>
+                                        <span id="mensaje" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                    </div>
+                                    <div class="form-group col-md-6" id="subCategoria-container" style="display:none;">
+                                        <label>Sub-Categoria:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca" id="marca" disabled>
+                                        </select>
+                                        <script type="application/javascript">
+                                            function traerSubCategorias(enviada){
+                                            var categoria = $('#categoria').val();
+                                            document.getElementById('marca').removeAttribute('disabled');
+
+                                            datos = "categoria="+(categoria);
+                                            console.log(datos);
+                                            $('#mensaje').show();
+                                            $.ajax({
+                                                    type: "POST",
+                                                    url: "../../../ajax/ajax-traer-sub-categorias.php",
+                                                    data: datos,
+                                                    success: function(response)
+                                                    {
+                                                        $('#marca').empty();
+                                                        $('#marca').append(response);
+                                                    }
+                                            });
+                                            }
+                                        </script>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <!-- textarea -->
+                                      <div class="form-group">
+                                          <label>Detalles</label>
+                                          <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles"></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <!-- textarea -->
+                                      <div class="form-group">
+                                          <label>Palabras Claves</label>
+                                          <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"></textarea>
+                                      </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

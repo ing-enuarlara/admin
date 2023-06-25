@@ -68,10 +68,13 @@ include(RUTA_PROYECTO."includes/head.php");
                             <thead>
                                 <tr>
                                     <th>Nº</th>
+                                    <th>ID</th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
-                                    <th>Marca</th>
+                                    <th>Categoria</th>
+                                    <th>Sub-Categoria</th>
+                                    <th>Estado</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -92,16 +95,42 @@ include(RUTA_PROYECTO."includes/head.php");
                                         $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cprod_id_empresa']."'");
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
-                                                                       
-                                    $consultaNombreMar = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id='".$result['cprod_marca']."'");
-                                    $NombreMarca = mysqli_fetch_array($consultaNombreMar, MYSQLI_BOTH);
+
+                                    $categoria="";
+                                    if($result['cprod_categoria']!=0){
+                                        $consultaCategorias = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cprod_categoria']."'");
+                                        $datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH);
+                                        $categoria=$datosCategorias['ccat_nombre'];
+                                    }
+
+                                    $subCategoria="";
+                                    if($result['cprod_marca']!=0){
+                                        $consultaSubCategorias = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id='".$result['cprod_marca']."'");
+                                        $datosSubCategorias = mysqli_fetch_array($consultaSubCategorias, MYSQLI_BOTH);
+                                        $subCategoria=$datosSubCategorias['cmar_nombre'];
+                                    }
+
+                                    $estado="Activo";
+                                    $color="green";
+                                    if($result['cprod_estado']!=1){
+                                        $estado="Inactivo";
+                                        $color="red";
+                                    }
+
+                                    $colorExistencia="green";
+                                    if($result['cprod_exitencia']<=5){
+                                        $colorExistencia="red";
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
+                                    <td><?=$result['cprod_id'];?></td>
                                     <td><?=$result['cprod_nombre'];?></td>
-                                    <td><?=$result['cprod_costo'];?></td>
-                                    <td><?=$result['cprod_exitencia'];?></td>
-                                    <td><?=$NombreMarca['cmar_nombre'];?></td>
+                                    <td><?=number_format($result['cprod_costo'],0,",",".");?></td>
+                                    <td style="color: <?=$colorExistencia;?>;"><?=$result['cprod_exitencia'];?></td>
+                                    <td><?=$categoria;?></td>
+                                    <td><?=$subCategoria;?></td>
+                                    <td style="color: <?=$color;?>;"><?=$estado;?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -115,6 +144,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
                                                 <!--<div class="dropdown-divider"></div>-->
                                                 <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea eliminar el registro?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
@@ -126,10 +156,13 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tfoot>
                                 <tr>
                                     <th>Nº</th>
+                                    <th>ID</th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
-                                    <th>Marca</th>
+                                    <th>Categoria</th>
+                                    <th>Sub-Categoria</th>
+                                    <th>Estado</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>

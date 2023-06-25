@@ -4,12 +4,12 @@
     $idPagina = 22;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	if ($_FILES['foto']['name'] != "") {
-		$destino = RUTA_PROYECTO."files/productos";
-		$fileName = subirArchivosAlServidor($_FILES['foto'], 'pro', $destino);
-	}
+    $subCategoria=0;
+    if(!empty($_POST["marca"])){
+        $subCategoria=$_POST["marca"];
+    }
     
-    $conexionBdComercial->query("INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_foto, cprod_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["costo"] . "', '" . $_POST["detalles"] . "', '" . $_POST["existencia"] . "', '" . $_POST["marca"] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+    $conexionBdComercial->query("INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_categoria, cprod_tipo, cprod_palabras_claves, cprod_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["costo"] . "', '" . $_POST["detalles"] . "', '" . $_POST["existencia"] . "', '" . $subCategoria . "', '" . $_POST["categoria"] . "', '" . $_POST["tipo"] . "', '" . $_POST["paClave"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 
