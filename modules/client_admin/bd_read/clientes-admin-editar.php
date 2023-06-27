@@ -71,6 +71,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                             <!-- form start -->
                             <form class="form-horizontal" method="post" action="../bd_update/clientes-admin-actualizar.php">
                                 <input type="hidden" name="id" value="<?=$_GET["id"];?>">
+                                <input type="hidden" name="ussPrincipal" value="<?=$resultadoD['cliAdmi_id_uss_principal']?>">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Empresa:</label>
@@ -100,6 +101,10 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <label for="exampleInputEmail1">Contacto Principal:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Contacto Principal" name="contacto" value="<?=$resultadoD['cliAdmi_contacto_principal']?>">
                                     </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="exampleInputEmail1">Nº Cedula o NIT:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nº Cedula o NIT" name="cedula" value="<?=$resultadoD['cliAdmi_documento']?>">
+                                    </div>
                                     <!-- /.form group -->
                                     <div class="form-group col-md-6">
                                         <label>Modulos:</label>
@@ -124,7 +129,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     </div>
                                     <!-- Date -->
                                     <div class="form-group col-md-6">
-                                        <label for="exampleInputEmail1">Fecha Inicio:</label>
+                                        <label for="exampleInputEmail1">Fecha Final:</label>
                                         <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Aviso Previo" name="fechaFin" value="<?=$resultadoD['cliAdmi_fecha_fin']?>">
                                     </div>
                                     <div class="form-group col-md-2">

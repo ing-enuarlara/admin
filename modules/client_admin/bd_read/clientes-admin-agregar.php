@@ -96,6 +96,10 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <label for="exampleInputEmail1">Contacto Principal:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Contacto Principal" name="contacto">
                                     </div>
+                                    <div class="form-group col-md-2">
+                                        <label for="exampleInputEmail1">Nº Cedula o NIT:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nº Cedula o NIT" name="cedula">
+                                    </div>
                                     <!-- /.form group -->
                                     <div class="form-group col-md-6">
                                         <label>Modulos:</label>
@@ -114,12 +118,12 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <!-- Date -->
                                     <div class="form-group col-md-2">
                                         <label for="exampleInputEmail1">Fecha Inicio:</label>
-                                        <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Aviso Previo" name="fechaIni">
+                                        <input type="date" class="form-control" id="exampleInputEmail1" name="fechaIni">
                                     </div>
                                     <!-- Date -->
                                     <div class="form-group col-md-2">
-                                        <label for="exampleInputEmail1">Fecha Inicio:</label>
-                                        <input type="date" class="form-control" id="exampleInputEmail1" placeholder="Aviso Previo" name="fechaFin">
+                                        <label for="exampleInputEmail1">Fecha Final:</label>
+                                        <input type="date" class="form-control" id="exampleInputEmail1" name="fechaFin">
                                     </div>
                                     <div class="form-group col-md-2">
                                         <label for="exampleInputEmail1">Aviso Previo:</label>
