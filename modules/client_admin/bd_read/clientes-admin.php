@@ -97,6 +97,9 @@ include(RUTA_PROYECTO."includes/head.php");
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-admin-editar.php?id=<?=$resp[0];?>" data-toggle="tooltip">Editar</a>
+                                                <?php if($resp['cliAdmi_id']!=1 AND $datosUsuarioActual['usr_tipo']==1){?>
+                                                    <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$resp['cliAdmi_id_uss_principal'];?>&tipe=2">Autologin</a>
+                                                <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->
                                                 <a class="dropdown-item" href="../bd_delete/clientes-admin-eliminar.php?id=<?=$resp[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
