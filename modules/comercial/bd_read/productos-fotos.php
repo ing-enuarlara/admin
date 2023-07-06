@@ -83,9 +83,15 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <a href="<?= REDIRECT_ROUTE."files/productos/".$resultadoFotos['cpf_fotos'] ?>" data-toggle="lightbox" data-title="<?= $resultadoD['cprod_nombre'] ?>" data-gallery="gallery">
                                         <img src="<?= REDIRECT_ROUTE."files/productos/".$resultadoFotos['cpf_fotos'] ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
                                     </a>
-                                    <div class="form-group" style="display: flex;">
-                                        <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa-solid fa-trash"></i></a>
-                                    </div>
+                                    <?php
+                                        if($resultadoFotos['cpf_principal']!=1){
+                                    ?>
+                                        <div class="form-group" style="display: flex;">
+                                            <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa-solid fa-trash"></i></a>
+                                        </div>
+                                    <?php
+                                        }
+                                    ?>
                                 </div>
                                 <?php
                                     }

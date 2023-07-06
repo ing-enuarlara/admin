@@ -27,7 +27,9 @@
 
     $conexionBdGeneral->query("INSERT INTO configuracion (conf_empresa, conf_email, conf_telefono, conf_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["email"] . "', '" . $_POST["telefono"] . "', '" . $idInsert . "')");
 
+    $conexionBdPaginaWeb->query("INSERT INTO configuracion (conf_empresa, conf_email, conf_telefono, conf_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["email"] . "', '" . $_POST["telefono"] . "', '" . $idInsert . "')");
+
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
-    echo '<script type="text/javascript">window.location.href="../bd_read/clientes-admin-editar.php?id=' . $idInsertU . '";</script>';
+    echo '<script type="text/javascript">window.location.href="../bd_read/clientes-admin-editar.php?id=' . $idInsert . '";</script>';
     exit();

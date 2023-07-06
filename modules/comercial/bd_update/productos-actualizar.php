@@ -4,12 +4,6 @@
     $idPagina = 24;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	// if ($_FILES['foto']['name'] != "") {
-	// 	$destino = RUTA_PROYECTO."files/productos";
-	// 	$fileName = subirArchivosAlServidor($_FILES['foto'], 'pro', $destino);
-    
-    //     $conexionBdComercial->query("UPDATE comercial_productos SET cprod_foto='" . $fileName . "' WHERE cprod_id='" . $_POST["id"] . "'");
-	// }
     $subCategoria=0;
     if(!empty($_POST["marca"])){
         $subCategoria=$_POST["marca"];
@@ -25,7 +19,14 @@
     cprod_tipo='" . $_POST["tipo"] . "', 
     cprod_palabras_claves='" . $_POST["paClave"] . "', 
     cprod_estado='" . $_POST["estado"] . "'
-     WHERE cprod_id='" . $_POST["id"] . "'");
+    WHERE cprod_id='" . $_POST["id"] . "'");
+    
+	if ($_FILES['ftProducto']['name'] != "") {
+		$destino = RUTA_PROYECTO."files/productos";
+		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
+
+        $conexionBdComercial->query("UPDATE comercial_productos_fotos SET cpf_fotos='" . $fileName . "' WHERE cpf_id_producto='" . $_POST["id"] . "' AND cpf_principal=1");
+	}
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

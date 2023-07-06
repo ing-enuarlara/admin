@@ -8,6 +8,9 @@ include(RUTA_PROYECTO."includes/head.php");
 
 $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
+
+$consulutaFoto= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."' AND cpf_principal=1");
+$resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -74,6 +77,21 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 <form class="form-horizontal" method="post" action="../bd_update/productos-actualizar.php" enctype="multipart/form-data">
                                     <input type="hidden" name="id" value="<?=$_GET["id"];?>">
                                     <div class="card-body">
+                                        <div class="col-md-6" style="margin-top: 10px;">
+                                          <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
+                                            <a href="<?= REDIRECT_ROUTE ."files/productos/". $resultadoFoto['cpf_fotos'] ?>" data-toggle="lightbox" data-title="Foto principal del producto">
+                                              <img src="<?= REDIRECT_ROUTE ."files/productos/". $resultadoFoto['cpf_fotos'] ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
+                                            </a>
+                                          </div>
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                          <label for="customFile">Foto Principal</label>
+                                          <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
+                                            <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                          </div>
+                                        </div>
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Nombre:</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?=$resultadoD['cprod_nombre'];?>">

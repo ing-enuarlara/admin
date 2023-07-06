@@ -69,6 +69,13 @@ include(RUTA_PROYECTO."includes/head.php");
                             <form class="form-horizontal" method="post" action="../bd_create/productos-guardar.php" enctype="multipart/form-data">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
+                                      <label for="customFile">Foto Principal</label>
+                                      <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
+                                        <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre">
                                     </div>
