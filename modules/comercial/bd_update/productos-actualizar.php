@@ -18,7 +18,8 @@
     cprod_categoria='" . $_POST["categoria"] . "', 
     cprod_tipo='" . $_POST["tipo"] . "', 
     cprod_palabras_claves='" . $_POST["paClave"] . "', 
-    cprod_estado='" . $_POST["estado"] . "'
+    cprod_estado='" . $_POST["estado"] . "', 
+    cprod_fecha_creacion=new()
     WHERE cprod_id='" . $_POST["id"] . "'");
     
 	if ($_FILES['ftProducto']['name'] != "") {
