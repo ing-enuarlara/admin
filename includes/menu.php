@@ -122,6 +122,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-producto.php" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Tipo de Productos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Productos</p>
