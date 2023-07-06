@@ -114,7 +114,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                       </select>
                                     </div>
                                     <div class="form-group col-md-6" style="display:block;" id="groupMasJoyas">
-                                      <label>Ver en mas joyas:</label>
+                                      <label>Ver en mas productos:</label>
                                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas" id="masJoyas">
                                         <option value=""></option>
                                         <option value="1">SI</option>

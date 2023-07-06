@@ -71,7 +71,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nombre Sub-Categorias</th>
                                     <th>Categoria</th>
                                     <th>Exclusiva</th>
-                                    <th>Mas Joyas</th>
+                                    <th>Mas Productos</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -134,7 +134,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nombre Sub-Categorias</th>
                                     <th>Categoria</th>
                                     <th>Exclusiva</th>
-                                    <th>Mas Joyas</th>
+                                    <th>Mas Productos</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>

@@ -120,7 +120,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6" style="display:block;" id="groupMasJoyas">
-                                            <label>Ver en mas joyas:</label>
+                                            <label>Ver en mas productos:</label>
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="masJoyas" id="masJoyas">
                                               <option value=""></option>
                                               <option value="1"<?php if($resultadoD['cmar_mas_joyas']==1){echo "selected";}?>>SI</option>
