@@ -91,8 +91,21 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <label>Tipo:</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
 											                      <option value=""></option>
-                                            <option value="1">Oro Italy</option>
-                                            <option value="2">Oro Nacional</option>
+                                            <?php
+                                            $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_estado=1");
+                                            if($datosUsuarioActual['usr_tipo']!=1){
+                                                $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."' AND ctipo_estado=1");
+                                            }
+                                            while($datosTiposProd = mysqli_fetch_array($consultaTiposProd, MYSQLI_BOTH)){
+                                              $nombreEmpresa='';
+                                              if($datosUsuarioActual['usr_tipo']==1){
+                                                  $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosTiposProd['ctipo_id_empresa']."'");
+                                                  $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                                  $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
+                                              }
+                                            ?>
+                                            	<option value="<?=$datosTiposProd[0];?>"><?=$datosTiposProd['ctipo_nombre'].$nombreEmpresa;?></option>
+                                            <?php }?>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">

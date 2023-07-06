@@ -108,8 +108,23 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
                                             <label>Tipo:</label>
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
                                                 <option value=""></option>
-                                                <option value="1" <?php if($resultadoD['cprod_tipo']==1){echo "selected";} ?>>Oro Italy</option>
-                                                <option value="2" <?php if($resultadoD['cprod_tipo']==2){echo "selected";} ?>>Oro Nacional</option>
+                                                <?php
+                                                $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_estado=1");
+                                                if($datosUsuarioActual['usr_tipo']!=1){
+                                                    $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."' AND ctipo_estado=1");
+                                                }
+                                                while($datosTiposProd = mysqli_fetch_array($consultaTiposProd, MYSQLI_BOTH)){
+                                                  $nombreEmpresa='';
+                                                  if($datosUsuarioActual['usr_tipo']==1){
+                                                      $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosTiposProd['ctipo_id_empresa']."'");
+                                                      $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+                                                      $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
+                                                  }
+                                                  $selected='';
+                                                  if($resultadoD['cprod_tipo']==$datosTiposProd[0]){$selected='selected';}
+                                                ?>
+                                                  <option value="<?=$datosTiposProd[0];?>" <?=$selected;?>><?=$datosTiposProd['ctipo_nombre'].$nombreEmpresa;?></option>
+                                                <?php }?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6">
@@ -171,7 +186,7 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
                                         </div>
                                         <!-- textarea -->
                                         <div class="form-group col-md-6">
-                                            <label>Detalles</label>
+                                            <label>Palabras Claves</label>
                                           <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?=$resultadoD['cprod_palabras_claves'];?></textarea>
                                         </div>
                                         <div class="form-group col-md-3">
