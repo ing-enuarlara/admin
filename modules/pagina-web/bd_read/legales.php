@@ -68,7 +68,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <thead>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Rol</th>
+                                    <th>Titulo</th>
                                     <th>Ultima Modificación</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -120,7 +120,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tfoot>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Rol</th>
+                                    <th>Titulo</th>
                                     <th>Ultima Modificación</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
