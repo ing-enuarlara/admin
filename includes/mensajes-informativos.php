@@ -60,6 +60,12 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'El usuario no fue encontrado para esta institución en este año. Por favor verifique.';
             break;
 
+            case 'ER_2':
+                $mensaje = 'La clave no cumple con todos los requerimientos:<br>
+                            - Debe tener entre 8 y 20 caracteres.<br>
+                            - Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+            break;
+
 
             default:
                 $mensaje = 'Error desconocido: '.$_GET['error'];
