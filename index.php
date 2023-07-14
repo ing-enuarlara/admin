@@ -1,9 +1,9 @@
 <?php
 include("conexion.php");
 session_start();
-if(isset($_SESSION["id"])){
-	header("Location: modules/");
-	exit();
+if (isset($_SESSION["id"])) {
+    header("Location: modules/");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -14,8 +14,7 @@ if(isset($_SESSION["id"])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminZEFE 1.0 | Login</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- icheck bootstrap -->
@@ -31,38 +30,38 @@ if(isset($_SESSION["id"])){
             <a href="index.php"><b>Admin</b>ZEFE</a>
         </div>
         <?php
-    if (isset($_GET['error'])) {
-      switch ($_GET['error']) {
-        case 1:
-          $msjError = 'El usuario no existe.';
-          break;
+        if (isset($_GET['error'])) {
+            switch ($_GET['error']) {
+                case 1:
+                    $msjError = 'El usuario no existe.';
+                    break;
 
-        case 2:
-          $msjError = 'La clave no es correcta';
-          break;
+                case 2:
+                    $msjError = 'La clave no es correcta';
+                    break;
 
-        case 3:
-          $msjError = 'Los intentos fallidos de acceso superan el límite';
-          break;
+                case 3:
+                    $msjError = 'Los intentos fallidos de acceso superan el límite';
+                    break;
 
-        case 4:
-          $msjError = 'Su usuario se encuentra bloqueado';
-          break;
+                case 4:
+                    $msjError = 'Su usuario se encuentra bloqueado';
+                    break;
 
 
-        default:
-          $msjError = 'No hay mensaje';
-          break;
-      }
-    }
+                default:
+                    $msjError = 'No hay mensaje';
+                    break;
+            }
+        }
 
-    $idSeguimiento = '';
-    if (isset($_GET["idseg"]) and is_numeric($_GET["idseg"])) {
-      $idSeguimiento = $_GET["idseg"];
-    }
+        $idSeguimiento = '';
+        if (isset($_GET["idseg"]) and is_numeric($_GET["idseg"])) {
+            $idSeguimiento = $_GET["idseg"];
+        }
 
-    if (isset($_GET['error'])) { ?>
-        <p style="color:black; font-size: 16px; background-color: gold; padding: 5px;"><?php echo $msjError; ?></p>
+        if (isset($_GET['error'])) { ?>
+            <p style="color:black; font-size: 16px; background-color: gold; padding: 5px;"><?php echo $msjError; ?></p>
         <?php } ?>
         <!-- /.login-logo -->
         <div class="card">
@@ -78,11 +77,22 @@ if(isset($_SESSION["id"])){
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function cambiarTipoInput() {
+                            var campo = document.getElementById("passwordInput");
+
+                            if (campo.type === "password") {
+                                campo.type = "text";
+                            } else {
+                                campo.type = "password";
+                            }
+                        }
+                    </script>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="Clave">
+                        <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" name="Clave">
                         <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                            <div class="input-group-text" onclick="cambiarTipoInput()">
+                                <span class="fas fa-eye"></span>
                             </div>
                         </div>
                     </div>
