@@ -1,0 +1,43 @@
+<?php
+    require_once("../../sesion.php");
+
+    $idPagina = 68;
+    include(RUTA_PROYECTO."includes/verificar-paginas.php");
+    
+    $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET 
+    usr_tipo='" . $_POST["ussTipo"] . "', 
+    usr_nombre='" . $_POST["nombre"] . "', 
+    usr_documento='" . $_POST["documento"] . "', 
+    usr_email='" . $_POST["email"] . "', 
+    usr_telefono='" . $_POST["celular"] . "', 
+    usr_direccion='" . $_POST["direccion"] . "', 
+    usr_ciudad='" . $_POST["ciudad"] . "', 
+    usr_ocupacion='" . $_POST["ocupacion"] . "', 
+    usr_genero='" . $_POST["genero"] . "', 
+    usr_intentos_fallidos='" . $_POST["fallidos"] . "'
+    
+    WHERE usr_id='" . $_POST["id"] . "'");
+    
+	if ($_FILES['ftPerfil']['name'] != "") {
+		$destino = RUTA_PROYECTO."files/perfil";
+		$fileName = subirArchivosAlServidor($_FILES['ftPerfil'], 'ftp', $destino);
+
+        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_foto= '" . $fileName . "' WHERE usr_id='" . $_POST["id"] . "'");
+	}
+
+    if (!empty($_POST["clave"]) && $_POST["cambiarClave"] == 1) {
+    
+        $validarClave=validarClave($_POST["clave"]);
+        if($validarClave!=true){
+            echo '<script type="text/javascript">window.location.href="../bd_read/usuarios-editar.php?error=ER_2";</script>';
+            exit();
+        }
+
+        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_clave= SHA1('" . $_POST["clave"] . "') WHERE usr_id='" . $_POST["id"] . "'");
+    
+    }
+
+    include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
+
+    echo '<script type="text/javascript">window.location.href="../bd_read/usuarios.php";</script>';
+    exit();
