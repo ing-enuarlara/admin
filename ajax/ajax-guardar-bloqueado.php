@@ -1,40 +1,45 @@
-<?php include("../modules/sesion.php");?>
-<?php //include("verificar-carga.php");?>
 <?php
+include("../modules/sesion.php");
+
 $mensajeNot = 'Hubo un error al guardar las cambios';
-//Bloquear y desbloquear
+//Bloquear y desbloquear usuarios
 if($_POST["operacion"]==1){
 	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_estado='".$_POST["valor"]."' WHERE usr_id='".$_POST["idR"]."'");
 	$mensajeNot = 'El usuario ha cambiado de estado correctamente.';
 }
+//Bloquear y desbloquear clientes
+if($_POST["operacion"]==2){
+	$conexionBdComercial->query("UPDATE comercial_clientes SET cli_estado_cliente='".$_POST["valor"]."' WHERE cli_id='".$_POST["idR"]."'");
+	$mensajeNot = 'El cliente ha cambiado de estado correctamente.';
+}
 ?>
 
 <script type="text/javascript">
-function notifica(){
-	$.toast({
-		heading: 'Cambios guardados',  
-		text: '<?=$mensajeNot;?>',
-		position: 'botom-left',
-		loaderBg:'#ff6849',
-		icon: 'success',
-		hideAfter: 3000, 
-		stack: 6
-	});
-}
-setTimeout ("notifica()", 100);
+	function notifica(){
+		$.toast({
+			heading: 'Cambios guardados',  
+			text: '<?=$mensajeNot;?>',
+			position: 'botom-left',
+			loaderBg:'#ff6849',
+			icon: 'success',
+			hideAfter: 3000, 
+			stack: 6
+		});
+	}
+	setTimeout ("notifica()", 100);
 </script>
 
 <?php 
 if($_POST["operacion"]<1){
 ?>
-<div class="alert alert-success">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<i class="icon-exclamation-sign"></i><strong>INFORMACI&Oacute;N:</strong> <?=$mensajeNot;?>
-</div>
-<?php }?>
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<i class="icon-exclamation-sign"></i><strong>INFORMACI&Oacute;N:</strong> <?=$mensajeNot;?>
+	</div>
+<?php
+}
 
-<?php 
-if($_POST["operacion"]==2){
+if($_POST["operacion"]==3){
 ?>
 	<script type="text/javascript">
 	setTimeout('document.location.reload()',2000);
