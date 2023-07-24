@@ -9,7 +9,7 @@ if($_POST["operacion"]==1){
 }
 //Bloquear y desbloquear clientes
 if($_POST["operacion"]==2){
-	$conexionBdComercial->query("UPDATE comercial_clientes SET cli_estado_cliente='".$_POST["valor"]."' WHERE cli_id='".$_POST["idR"]."'");
+	$conexionBdComercial->query("UPDATE comercial_clientes SET cli_bloqueado='".$_POST["valor"]."' WHERE cli_id='".$_POST["idR"]."'");
 	$mensajeNot = 'El cliente ha cambiado de estado correctamente.';
 }
 ?>
