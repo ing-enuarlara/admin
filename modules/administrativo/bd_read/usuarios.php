@@ -135,9 +135,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                 <tr id="Reg<?=$result['usr_id'];?>" style="background-color:<?=$bgColor;?>;">
                                     <td><?=$num;?></td>
                                     <td>
-                                        <div class="card-body">
-                                            <input type="checkbox" id="<?=$result['usr_id'];?>" name="bloqueado" value="1" onChange="guardarAjax(this)" <?=$cheked;?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                                        </div>
+                                        <input type="checkbox" id="<?=$result['usr_id'];?>" name="bloqueado" value="1" onChange="guardarAjax(this)" <?=$cheked;?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                     </td>
                                     <td><?=$result['usr_id'];?></td>
                                     <td><?=$result['usr_login'];?></td>
