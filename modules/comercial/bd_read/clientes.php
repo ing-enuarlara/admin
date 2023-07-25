@@ -107,8 +107,8 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>Correo</th>
                                     <th>Telefono</th>
                                     <th>T. Cliente</th>
-                                    <th>PD</th>
                                     <th>CT</th>
+                                    <th>PD</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -185,8 +185,8 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>Correo</th>
                                     <th>Telefono</th>
                                     <th>T. Cliente</th>
-                                    <th>PD</th>
                                     <th>CT</th>
+                                    <th>PD</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
