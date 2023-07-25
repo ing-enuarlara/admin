@@ -108,6 +108,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>Telefono</th>
                                     <th>T. Cliente</th>
                                     <th>PD</th>
+                                    <th>CT</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -139,9 +140,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                 <tr id="Reg<?=$result['cli_id'];?>" style="background-color:<?=$bgColor;?>;">
                                     <td><?=$num;?></td>
                                     <td>
-                                        <div class="card-body">
-                                            <input type="checkbox" id="<?=$result['cli_id'];?>" name="bloqueado" value="1" onChange="guardarAjax(this)" <?=$cheked;?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                                        </div>
+                                        <input type="checkbox" id="<?=$result['cli_id'];?>" name="bloqueado" value="1" onChange="guardarAjax(this)" <?=$cheked;?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                     </td>
                                     <td><?=$ciudad;?></td>
                                     <td><?="Tipo: ".$tiposDocumento[$result['ogen_id']]."<br> Nº: ".$result['cli_documento'];?></td>
@@ -149,6 +148,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <td><?=$result['cli_email'];?></td>
                                     <td><?=$result['cli_telefono'];?></td>
                                     <td><?=$result['clicat_nombre'];?></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <?php
@@ -186,6 +186,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>Telefono</th>
                                     <th>T. Cliente</th>
                                     <th>PD</th>
+                                    <th>CT</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
