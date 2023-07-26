@@ -136,6 +136,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cotizaciones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pedidos</p>
