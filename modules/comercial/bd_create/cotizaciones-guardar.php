@@ -12,5 +12,5 @@
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
-    echo '<script type="text/javascript">window.location.href="../bd_read/cotizaciones.php?id=' . $idInsertU . '";</script>';
+    echo '<script type="text/javascript">window.location.href="../bd_read/cotizaciones-editar.php?id=' . $idInsertU . '";</script>';
     exit();
