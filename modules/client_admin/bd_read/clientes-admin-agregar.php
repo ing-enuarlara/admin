@@ -88,7 +88,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Telefono" name="telefono" data-inputmask='"mask": "(999) 999-9999"' data-mask>
+                                            <input type="text" class="form-control" placeholder="Telefono" name="telefono">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
