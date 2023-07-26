@@ -145,7 +145,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="cotizaciones-editar.php?id=<?=$result[0];?>">Editar</a>
+                                                <a class="dropdown-item" href="cotizaciones-editar.php?id=<?=$result[0];?>#productos">Editar</a>
                                                 <a class="dropdown-item" href="../bd_delete/cotizaciones-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
                                                 <a class="dropdown-item" href="../../reportes/formato-cotizacion-1.php?id=<?= $result[0]; ?>" target="_blank">Imprimir</a>
                                                 <?php if($IdGeneroPedido == ''){?>
