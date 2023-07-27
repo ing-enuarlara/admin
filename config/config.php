@@ -11,3 +11,5 @@ $formaPago = array("", "CONTADO", "CRÉDITO");
 $monedas = array("","COP","USD");
 $monedasExt = array("","USD","EURO");
 $simbolosMonedas = array("","$","USD");
+$estadoPedidos= array("", "En Preparación", "En Camino", "Entregado", "Devuelto");
+$colorEstadoPedidos= array("", "#ffd500", "#00c0ff", "#4bff00", "#ff0000");
