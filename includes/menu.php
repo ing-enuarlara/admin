@@ -142,15 +142,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pedidos</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Facturacion</p>
+                        <p>Remisiones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Facturación</p>
                     </a>
                 </li>
             </ul>
