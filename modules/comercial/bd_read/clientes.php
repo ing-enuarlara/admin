@@ -89,6 +89,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <span id="respuestaGuardar"></span>	
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
