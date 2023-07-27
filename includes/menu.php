@@ -234,10 +234,10 @@
             </a>
         </li>
         <?php } ?>
-        <li class="nav-item" style="position: absolute; margin-top: 695px;">
+        <li class="nav-item cerrar-sesion">
             <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
                 <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text">Cerrar Sesion</p>
+                <p class="text text-sesion">Cerrar Sesión</p>
             </a>
         </li>
     </ul>
@@ -246,3 +246,12 @@
 </div>
 <!-- /.sidebar -->
 </aside>
+<style>
+    .cerrar-sesion{
+        background-color: #3b0d0d;
+        border-radius: 10px;
+    }
+    .text-sesion{
+        color: #ffffff;
+    }
+</style>
