@@ -6,7 +6,7 @@
 
     $generoPedido = mysqli_fetch_array($conexionBdComercial->query("SELECT * FROM comercial_pedidos WHERE pedid_cotizacion='" . $_GET["id"] . "'"), MYSQLI_BOTH);
 
-    $consulta= $conexionBdComercial->query("INSERT INTO comercial_pedidos (pedid_fecha_propuesta, pedid_observaciones, pedid_cliente, pedid_fecha_vencimiento, pedid_vendedor, pedid_creador, pedid_sucursal, pedid_contacto, pedid_forma_pago, pedid_fecha_creacion, pedid_moneda, pedid_cotizacion, pedid_estado, pedid_id_empresa) SELECT now(), cotiz_observaciones, cotiz_cliente, cotiz_fecha_vencimiento, cotiz_vendedor, '" . $_SESSION["id"] . "', cotiz_sucursal, cotiz_contacto, cotiz_forma_pago, now(), cotiz_moneda, '" . $_GET["id"] . "', 1, cotiz_id_empresa FROM comercial_cotizaciones WHERE cotiz_id='" . $_GET["id"] . "'");
+    $consulta= $conexionBdComercial->query("INSERT INTO comercial_pedidos (pedid_fecha_propuesta, pedid_observaciones, pedid_cliente, pedid_fecha_vencimiento, pedid_vendedor, pedid_creador, pedid_sucursal, pedid_contacto, pedid_forma_pago, pedid_fecha_creacion, pedid_moneda, pedid_cotizacion, pedid_estado, pedid_id_empresa, pedid_fecha_cotizacion) SELECT now(), cotiz_observaciones, cotiz_cliente, cotiz_fecha_vencimiento, cotiz_vendedor, '" . $_SESSION["id"] . "', cotiz_sucursal, cotiz_contacto, cotiz_forma_pago, now(), cotiz_moneda, '" . $_GET["id"] . "', 1, cotiz_id_empresa, cotiz_fecha_propuesta FROM comercial_cotizaciones WHERE cotiz_id='" . $_GET["id"] . "'");
     $idInsert = mysqli_insert_id($conexionBdComercial);
 
 
