@@ -1,0 +1,13 @@
+<?php
+switch($_SERVER['HTTP_HOST']){
+	case 'localhost':
+        define('RUTA_PROYECTO', 'C:/xampp/htdocs/ing-enuarlara.co/admin/');
+        define('REDIRECT_ROUTE', 'http://localhost/ing-enuarlara.co/admin/');
+        break;
+
+	// case 'nuevo.orioncrm.com.co':
+        // define('RUTA_PROYECTO', '/home4/orioncrmcom/public_html/nuevo.orioncrm.com.co/softjmgit');
+        // define('REDIRECT_ROUTE', 'https://nuevo.orioncrm.com.co/softjmgit');
+        // error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
+        // break;
+}
