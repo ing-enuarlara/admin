@@ -396,7 +396,7 @@ if(!empty($_GET["cte"])){
                                         $totalDescuento=0;
                                         $totalCantidad=0;
                                         $productos = $conexionBdComercial->query("SELECT czpp_id, czpp_valor, czpp_cantidad, czpp_descuento, czpp_impuesto, czpp_orden, czpp_observacion, czpp_descuento_especial, czpp_aprobado_usuario, czpp_aprobado_fecha, cprod_costo, cprod_id, cprod_nombre, cprod_detalles FROM comercial_productos
-                                        INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_cotizacion='".$_GET["id"]."' ORDER BY czpp_orden");
+                                        INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_cotizacion='".$_GET["id"]."' AND czpp_tipo=1 ORDER BY czpp_orden");
                                         while($prod = mysqli_fetch_array($productos, MYSQLI_BOTH)){
                                             $dcto = 0;
                                             $valorTotal = 0;

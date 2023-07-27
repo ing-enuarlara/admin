@@ -122,7 +122,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td>
                                         <?php
                                             $productos = $conexionBdComercial->query("SELECT cprod_nombre FROM comercial_relacion_productos
-                                            INNER JOIN comercial_productos ON cprod_id=czpp_producto WHERE czpp_cotizacion='" . $result['cotiz_id'] . "'");
+                                            INNER JOIN comercial_productos ON cprod_id=czpp_producto WHERE czpp_cotizacion='" . $result['cotiz_id'] . "' AND czpp_tipo=1");
                                             $i = 1;
                                             while ($prod = mysqli_fetch_array($productos, MYSQLI_BOTH)) {
                                                 if($i==1){echo "<b>Productos:</b><br>";}
@@ -148,6 +148,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                                 <a class="dropdown-item" href="cotizaciones-editar.php?id=<?=$result[0];?>#productos">Editar</a>
                                                 <a class="dropdown-item" href="../bd_delete/cotizaciones-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
                                                 <a class="dropdown-item" href="../../reportes/formato-cotizacion-1.php?id=<?= $result[0]; ?>" target="_blank">Imprimir</a>
+                                                <a class="dropdown-item" href="../bd_create/cotizaciones-replicar.php?id=<?=$result[0];?>">Replicar</a>
                                                 <?php if($IdGeneroPedido == ''){?>
                                                 <a class="dropdown-item" href="../bd_create/cotizaciones-generar-pedido.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea generar pedido de esta cotización?')){return false;}">Generar pedido</a>
                                                 <?php }?>

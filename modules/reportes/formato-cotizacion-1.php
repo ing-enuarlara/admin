@@ -119,7 +119,7 @@ if(!empty($resultado['cotiz_envio'])){
 						INNER JOIN comercial_categorias ON ccat_id=cmar_categoria
 						INNER JOIN comercial_tipo_productos ON ctipo_id=cprod_tipo
 						INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1
-						INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_cotizacion='" . $_GET["id"] . "'
+						INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_tipo=1 AND czpp_cotizacion='" . $_GET["id"] . "'
 						ORDER BY czpp_orden");
 						$no=1;
 						$totalIva = 0;
