@@ -1,10 +1,30 @@
 <?php
-include("../sesion.php");
-
 $idPagina = 81;
+if(!empty($_GET['cte'])){
+	if ($_GET["cte"] == 1) {
+		$_GET["id"] = base64_decode($_GET["id"]);
+		$datosUsuarioActual["usr_id_empresa"] = base64_decode($_GET["idE"]);
+	}
 
-include(RUTA_PROYECTO."includes/verificar-paginas.php");
-require_once("logica-cotizacion.php");
+	session_start();
+	require_once($_SERVER['DOCUMENT_ROOT']."/ing-enuarlara.co/admin/constantes.php");
+
+	require_once(RUTA_PROYECTO."conexion.php");
+	require_once(RUTA_PROYECTO."config/config.php");
+}else{
+	include("../sesion.php");
+	include(RUTA_PROYECTO."includes/verificar-paginas.php");
+}
+
+$resultado = mysqli_fetch_array($conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
+INNER JOIN comercial_clientes ON cli_id=cotiz_cliente
+INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor
+WHERE cotiz_id='" . $_GET["id"] . "'"), MYSQLI_BOTH);
+
+$envio=0;
+if(!empty($resultado['cotiz_envio'])){
+	$envio=$resultado['cotiz_envio'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -191,7 +211,9 @@ require_once("logica-cotizacion.php");
 	</div>
 </body>
 <?php
-    require_once(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
+	if(empty($_GET['cte'])){
+		require_once(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
+	}
 ?>
 <script type="application/javascript">
 	print();
