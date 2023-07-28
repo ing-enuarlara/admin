@@ -38,7 +38,7 @@ if(!empty($_POST["producto"])){
                     $valorProducto = round(($productoDatos['cprod_costo']/$precioDolarCOP),2);
                 }
 
-                $conexionBdComercial->query("UPDATE comercial_relacion_productos SET czpp_valor='" . $valorProducto . "' WHERE czpp_id='" . $productoDatos['czpp_id'] . "'");
+                $conexionBdComercial->query("UPDATE comercial_relacion_productos SET czpp_valor='" . $valorProducto . "' WHERE czpp_id='" . $productoDatos['czpp_id'] . "' AND czpp_tipo='" . $tipo . "'");
             }
         }
 
