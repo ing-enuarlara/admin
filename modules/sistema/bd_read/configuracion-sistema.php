@@ -143,8 +143,13 @@ include(RUTA_PROYECTO . "includes/head.php");
                         </div>
 
                         <div class="form-group col-md-6">
-                          <label for="summernote">Términos y Condiciones Para las Cotizaciones:</label>
-                          <textarea name="notaCotiz" id="summernote"><?= $configuracion['conf_observaciones_cotizaciones'] ?></textarea>
+                          <label for="notaCotiz">Términos y Condiciones Para las Cotizaciones:</label>
+                          <textarea name="notaCotiz" id="notaCotiz"><?= $configuracion['conf_observaciones_cotizaciones'] ?></textarea>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="notaPedid">Términos y Condiciones Para los Pedidos:</label>
+                          <textarea name="notaPedid" id="notaPedid"><?= $configuracion['conf_observaciones_pedidos'] ?></textarea>
                         </div>
                       </div>
                     </div>
@@ -204,7 +209,8 @@ include(RUTA_PROYECTO . "includes/head.php");
     $(function() {
       // Summernote
       $('#direccion').summernote()
-      $('#summernote').summernote()
+      $('#notaCotiz').summernote()
+      $('#notaPedid').summernote()
 
       // CodeMirror
       CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {

@@ -11,7 +11,7 @@
         $conexionBdGeneral->query("UPDATE configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 	}
 
-    $conexionBdGeneral->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . $_POST["email"] . "', conf_telefono='" . $_POST["telefono"] . "', conf_ciudad='" . $_POST["ciudad"] . "', conf_direcion='" . $_POST["direccion"] . "', conf_observaciones_cotizaciones='" . $_POST["notaCotiz"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+    $conexionBdGeneral->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . $_POST["email"] . "', conf_telefono='" . $_POST["telefono"] . "', conf_ciudad='" . $_POST["ciudad"] . "', conf_direcion='" . $_POST["direccion"] . "', conf_observaciones_cotizaciones='" . $_POST["notaCotiz"] . "', conf_observaciones_pedidos='" . $_POST["notaPedid"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
