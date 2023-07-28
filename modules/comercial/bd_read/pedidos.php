@@ -105,7 +105,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     $infoRemi = '';
                                     if(!empty($generoRemi['remi_id'])){
                                         if($generoRemi['remi_id']!=""){
-                                            $infoRemi = 'Esta pedido ya generó la remisión con ID: '.$generoRemi['remi_id'].". En la fecha: ".$generoRemi['remi_fecha_creacion'];
+                                            $infoRemi = 'Este pedido ya generó la remisión con ID: '.$generoRemi['remi_id'].". En la fecha: ".$generoRemi['remi_fecha_creacion'];
                                             $IdGeneroRemi = $generoRemi['remi_id'];
                                             $fondoPedido = 'aquamarine';
                                         }
