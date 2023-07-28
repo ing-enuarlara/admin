@@ -1,7 +1,44 @@
 <?php
 if (!isset($idPagina)) {
-	echo "Falta el ID de esta página.";
-	exit();
+	$rutaSalida= REDIRECT_ROUTE."modules";
+?>
+	<!DOCTYPE html>
+	<html lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="2;url=<?= $rutaSalida ?>">
+	<title>Redireccionando...</title>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #FAFAFA;
+			/* font-family: Arial, sans-serif; */
+		}
+	
+		.mensaje {
+			text-align: center;
+		}
+	</style>
+	</head>
+	<body>
+	<div class="mensaje">
+		<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
+		<p><span style='font-family:Arial; font-weight:bold;'>Falta el ID de esta página.</samp></p>
+		<p>Redireccionando en 2 segundos...</p>
+	</div>
+	<script>
+		setTimeout(function() {
+			window.location.href = '<?= $rutaSalida ?>';
+		}, 2000);
+	</script>
+	</body>
+	</html>
+<?php
+	exit;
 }
 /*
 PAGINAS A LAS QUE TIENE PERMISO EL ROL DEL USUARIO
@@ -28,6 +65,44 @@ $consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas
 $paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
 
 if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {
-	echo "La empresa NO tiene permiso a este modulo.";
-	exit();
+	$rutaSalida= REDIRECT_ROUTE."modules";
+?>
+	<!DOCTYPE html>
+	<html lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="2;url=<?= $rutaSalida ?>">
+	<title>Redireccionando...</title>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #FAFAFA;
+			/* font-family: Arial, sans-serif; */
+		}
+	
+		.mensaje {
+			text-align: center;
+		}
+	</style>
+	</head>
+	<body>
+	<div class="mensaje">
+		<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
+		<p><span style='font-family:Arial; font-weight:bold;'>La empresa NO tiene permiso a este modulo.</samp></p>
+		<p>Redireccionando en 2 segundos...</p>
+	</div>
+	<script>
+		setTimeout(function() {
+			window.location.href = '<?= $rutaSalida ?>';
+		}, 2000);
+	</script>
+	</body>
+	</html>
+<?php
+	exit;
 }
+?>
