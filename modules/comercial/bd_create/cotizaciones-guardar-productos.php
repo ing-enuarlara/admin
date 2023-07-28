@@ -17,7 +17,7 @@ if(!empty($_POST["producto"])){
                 $valorProducto = round(($productoDatos['cprod_costo']/$precioDolarCOP),2);
             }
 
-            $conexionBdComercial->query("INSERT INTO comercial_relacion_productos(czpp_cotizacion, czpp_producto, czpp_valor, czpp_orden, czpp_cantidad, czpp_impuesto, czpp_tipo)VALUES('" . $idInsertU . "','" . $_POST["producto"][$contProducto] . "', '" . $valorProducto . "', '" . $numProductos . "', 1, 19, 1)");
+            $conexionBdComercial->query("INSERT INTO comercial_relacion_productos(czpp_cotizacion, czpp_producto, czpp_valor, czpp_orden, czpp_cantidad, czpp_impuesto, czpp_tipo)VALUES('" . $idInsertU . "','" . $_POST["producto"][$contProducto] . "', '" . $valorProducto . "', '" . $numProductos . "', 1, 19, '" . $tipo . "')");
 
             $contProducto++;
 

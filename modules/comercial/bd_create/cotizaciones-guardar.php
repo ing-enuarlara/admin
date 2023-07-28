@@ -8,6 +8,7 @@
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 
+    $tipo = 1;
     require("cotizaciones-guardar-productos.php");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
