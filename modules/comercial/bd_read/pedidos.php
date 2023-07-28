@@ -152,7 +152,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                                     }
                                                 ?>
                                                 <a class="dropdown-item" href="../bd_delete/pedidos-eliminar.php?id=<?=$result[0];?>&idC=<?=$result['pedid_cotizacion'];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
-                                                <a class="dropdown-item" href="../../reportes/formato-remision-1.php?id=<?= $result[0]; ?>" target="_blank">Imprimir</a>
+                                                <a class="dropdown-item" href="../../reportes/formato-pedido-1.php?id=<?= $result[0]; ?>" target="_blank">Imprimir</a>
                                                 <?php if($IdGeneroRemi == ''){?>
                                                 <a class="dropdown-item" href="../bd_create/pedidos-generar-remision.php?id=<?=$result[0];?>" onClick="if(!confirm('Desea generar la remisión de este pedido?')){return false;}">Generar Remisión</a>
                                                 <?php }?>
