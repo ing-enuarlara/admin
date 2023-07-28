@@ -193,12 +193,14 @@ if(!empty($resultado['cotiz_envio'])){
 				</table>
 			</div>
 			<div class="m-2" style="font-size: 13px;" id="pie">
-				<div class="border border-dark rounded">
-					<h5 class="card-title p-2" style="background-color: green; color:white; font-weight:bold;">TÉRMINOS Y CONDICIONES</h5>
-					<p class="card-text p-2">
-						<?= $configuracion['conf_observaciones_cotizaciones']; ?>
-					</p>
-				</div>
+				<?php if(!empty($configuracion['conf_observaciones_cotizaciones'])){ ?>
+					<div class="border border-dark rounded">
+						<h5 class="card-title p-2" style="background-color: green; color:white; font-weight:bold;">TÉRMINOS Y CONDICIONES</h5>
+						<p class="card-text p-2">
+							<?= $configuracion['conf_observaciones_cotizaciones']; ?>
+						</p>
+					</div>
+				<?php } ?>
 				<div class="mt-5 text-center">
 					<p>
 						Si usted tiene alguna pregunta sobre esta cotización, por favor, póngase en contacto con nosotros<br>
