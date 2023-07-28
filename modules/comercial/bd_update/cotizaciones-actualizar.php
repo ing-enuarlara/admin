@@ -18,6 +18,7 @@
     cotiz_envio='" . $_POST["envio"] . "' 
     WHERE cotiz_id='" . $_POST["id"] . "'");
 
+    $tipo = 1;
     require('cotizaciones-actualizar-productos.php');
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
