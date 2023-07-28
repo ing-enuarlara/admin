@@ -69,6 +69,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>ID</th>
+                                    <th></th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
@@ -85,10 +86,12 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos");
+                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where="WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
+                                $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
+                                INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 $where");
                                 $num=1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -125,6 +128,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['cprod_id'];?></td>
+                                    <td align="center">
+                                        <?php if (!empty($result['cpf_fotos'])) { ?>
+                                            <img src="<?= REDIRECT_ROUTE."files/productos/".$result['cpf_fotos'] ?>" width="40">
+                                        <?php } ?>
+                                    </td>
                                     <td><?=$result['cprod_nombre'];?></td>
                                     <td><?=number_format($result['cprod_costo'],0,",",".");?></td>
                                     <td style="color: <?=$colorExistencia;?>;"><?=$result['cprod_exitencia'];?></td>
@@ -157,6 +165,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>ID</th>
+                                    <th></th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
                                     <th>Existencia</th>
