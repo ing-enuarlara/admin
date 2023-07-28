@@ -1,5 +1,6 @@
 <?php
     require_once("../../sesion.php");
+    require('../../../apis/apis-dolar.php');
 
     $idPagina = 78;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
