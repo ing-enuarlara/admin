@@ -102,6 +102,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                 <tr>
                                     <th>Nº</th>
                                     <th>Bloq.</th>
+                                    <th>Pais</th>
                                     <th>Ciudad</th>
                                     <th>Documento</th>
                                     <th>Nombre</th>
@@ -136,13 +137,14 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     $bgColor = ''; $cheked = '';
                                     if($result['cli_bloqueado']==1) {$bgColor = '#ff572238'; $cheked = 'checked';}
                                     $ciudad = $result['ciu_nombre']."/".$result['dep_nombre'];
-                                    if($result['cli_ciudad']==1122) {$ciudad = $result['cli_ciudad_extranjera']."/".$result['cli_pais'];}
+                                    if($result['cli_ciudad']==1122) {$ciudad = $result['cli_ciudad_extranjera'];}
                                 ?>
                                 <tr id="Reg<?=$result['cli_id'];?>" style="background-color:<?=$bgColor;?>;">
                                     <td><?=$num;?></td>
                                     <td>
                                         <input type="checkbox" id="<?=$result['cli_id'];?>" name="bloqueado" value="1" onChange="guardarAjax(this)" <?=$cheked;?> data-bootstrap-switch data-off-color="danger" data-on-color="success">
                                     </td>
+                                    <td><?=$result['cli_pais'];?></td>
                                     <td><?=$ciudad;?></td>
                                     <td><?="Tipo: ".$tiposDocumento[$result['ogen_id']]."<br> Nº: ".$result['cli_documento'];?></td>
                                     <td><?=$result['cli_nombre'];?></td>
@@ -180,6 +182,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                 <tr>
                                     <th>Nº</th>
                                     <th>Bloq.</th>
+                                    <th>Pais</th>
                                     <th>Ciudad</th>
                                     <th>Documento</th>
                                     <th>Nombre</th>
