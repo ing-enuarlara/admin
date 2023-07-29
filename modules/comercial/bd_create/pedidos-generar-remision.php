@@ -26,7 +26,6 @@
 
         mysqli_query($conexionBdComercial,"INSERT INTO comercial_relacion_productos(czpp_cotizacion, czpp_producto, czpp_valor, czpp_orden, czpp_cantidad, czpp_impuesto, czpp_tipo, czpp_bodega, czpp_descuento)VALUES('" . $idInsert . "','" . $prod['czpp_producto'] . "', '" . $prod['czpp_valor'] . "', '" . $prod['czpp_orden'] . "', '".$prod['czpp_cantidad']."', '" . $prod['czpp_impuesto'] . "', 3, 1, '" . $prod['czpp_descuento'] . "')");
         
-        $contador++;
     }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
