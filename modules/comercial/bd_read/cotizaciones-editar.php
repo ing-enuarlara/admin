@@ -62,13 +62,12 @@ if(!empty($_GET["cte"])){
 <?php if($resultadoD['cotiz_vendida']!=1){?>
 	<script type="text/javascript">
         function productos(enviada){
-            var tipoCliente = enviada.alt;
             var campo = enviada.title;
             var producto = enviada.name;
             var proceso = 1;
             var valor = enviada.value;
             $('#resp').empty().hide().html("Esperando...").show(1);
-            datos = "producto="+(producto)+"&proceso="+(proceso)+"&valor="+(valor)+"&campo="+(campo)+"&tipoCliente="+(tipoCliente);
+            datos = "producto="+(producto)+"&proceso="+(proceso)+"&valor="+(valor)+"&campo="+(campo);
             $.ajax({
                 type: "POST",
                 url: "../../../ajax/ajax-productos.php",
