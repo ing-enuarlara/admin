@@ -151,6 +151,16 @@ include(RUTA_PROYECTO . "includes/head.php");
                           <label for="notaPedid">Términos y Condiciones Para los Pedidos:</label>
                           <textarea name="notaPedid" id="notaPedid"><?= $configuracion['conf_observaciones_pedidos'] ?></textarea>
                         </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="notaRemi">Términos y Condiciones Para las Remisones:</label>
+                          <textarea name="notaRemi" id="notaRemi"><?= $configuracion['conf_observaciones_remisiones'] ?></textarea>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="notaFacturas">Términos y Condiciones Para las Facturas:</label>
+                          <textarea name="notaFacturas" id="notaFacturas"><?= $configuracion['conf_observaciones_facturas'] ?></textarea>
+                        </div>
                       </div>
                     </div>
                   </div>
