@@ -221,6 +221,8 @@ include(RUTA_PROYECTO . "includes/head.php");
       $('#direccion').summernote()
       $('#notaCotiz').summernote()
       $('#notaPedid').summernote()
+      $('#notaRemi').summernote()
+      $('#notaFacturas').summernote()
 
       // CodeMirror
       CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
