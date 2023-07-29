@@ -184,11 +184,11 @@ WHERE remi_id='" . $_GET["id"] . "'"), MYSQLI_BOTH);
 				</table>
 			</div>
 			<div class="m-2" style="font-size: 13px;" id="pie">
-				<?php if(!empty($configuracion['conf_observaciones_pedidos'])){ ?>
+				<?php if(!empty($configuracion['conf_observaciones_remisiones'])){ ?>
 					<div class="border border-dark rounded">
 						<h5 class="card-title p-2" style="background-color: #a30000; color:white; font-weight:bold;">TÉRMINOS Y CONDICIONES</h5>
 						<p class="card-text p-2">
-							<?= $configuracion['conf_observaciones_pedidos']; ?>
+							<?= $configuracion['conf_observaciones_remisiones']; ?>
 						</p>
 					</div>
 				<?php } ?>
