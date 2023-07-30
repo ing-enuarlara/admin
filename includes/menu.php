@@ -76,15 +76,15 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Usuarios</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Roles</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Usuarios</p>
                     </a>
                 </li>
             </ul>
@@ -101,6 +101,12 @@
                     <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Clientes</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Proveedores</p>
                     </a>
                 </li>
                 <li class="nav-item">
