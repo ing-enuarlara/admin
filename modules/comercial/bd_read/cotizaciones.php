@@ -85,14 +85,18 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
+                                $filtro="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where="WHERE cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                    $filtro="AND cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
+                                $fCliente='';
+                                if(!empty($_GET["cte"])){ $fCliente="AND cli_id='" . $_GET["cte"] . "'";}
+
                                 $consulta= $conexionBdComercial->query("SELECT cotiz_id, cotiz_fecha_propuesta, cotiz_creador, cotiz_vendedor, cotiz_vendida, cli_id, cli_nombre, usr_id, usr_nombre, cliAdmi_nombre FROM comercial_cotizaciones
-                                INNER JOIN comercial_clientes ON cli_id=cotiz_cliente
+                                INNER JOIN comercial_clientes ON cli_id=cotiz_cliente $fCliente
                                 INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cotiz_id_empresa $where");
+                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cotiz_id_empresa 
+                                WHERE cotiz_id=cotiz_id $filtro ORDER BY cotiz_id DESC");
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                     $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['cotiz_vendedor'] . "'");
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);

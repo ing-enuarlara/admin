@@ -74,7 +74,6 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Cliente</th>
                                     <th>Responsable</th>
                                     <th>Vendedor</th>
-                                    <th>Estado</th>
                                     <th>Nº Pedido</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -86,14 +85,18 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
+                                $filtro="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where="WHERE remi_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                    $filtro="AND remi_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
+                                $fCliente='';
+                                if(!empty($_GET["cte"])){ $fCliente="AND cli_id='" . $_GET["cte"] . "'";}
+
                                 $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
-                                INNER JOIN comercial_clientes ON cli_id=remi_cliente
+                                INNER JOIN comercial_clientes ON cli_id=remi_cliente $fCliente
                                 INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=remi_id_empresa $where");
+                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=remi_id_empresa 
+                                WHERE remi_id=remi_id $filtro ORDER BY remi_id DESC");
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                     $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['remi_vendedor'] . "'");
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
@@ -113,10 +116,6 @@ include(RUTA_PROYECTO."includes/head.php");
                                             $factura = 1;
                                         }
                                     }
-                                    $estado=1;
-                                    if(!empty($result['remi_estado'])){
-                                        $estado=$result['remi_estado'];
-                                    }
                                     $pedido='';
                                     if(!empty($result['remi_pedido'])){
                                         $pedido=date("dmy", strtotime($result['remi_fecha_pedido']))."-".$result['remi_pedido'];
@@ -129,7 +128,6 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td><?=$result['cli_nombre'];?></td>
                                     <td><?=$result['usr_nombre'];?></td>
                                     <td><?=$vendedor['usr_nombre'];?></td>
-                                    <td><?=$estadoPedidos[$estado];?></td>
                                     <td><?= $pedido; ?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -163,7 +161,6 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Cliente</th>
                                     <th>Responsable</th>
                                     <th>Vendedor</th>
-                                    <th>Estado</th>
                                     <th>Nº Pedido</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){

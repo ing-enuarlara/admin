@@ -85,14 +85,18 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
+                                $filtro="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where="WHERE pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                    $filtro="AND pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
+                                $fCliente='';
+                                if(!empty($_GET["cte"])){ $fCliente="AND cli_id='" . $_GET["cte"] . "'";}
+
                                 $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
-                                INNER JOIN comercial_clientes ON cli_id=pedid_cliente
+                                INNER JOIN comercial_clientes ON cli_id=pedid_cliente $fCliente
                                 INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=pedid_id_empresa $where");
+                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=pedid_id_empresa 
+                                WHERE pedid_id=pedid_id $filtro ORDER BY pedid_id DESC");
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                     $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['pedid_vendedor'] . "'");
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
