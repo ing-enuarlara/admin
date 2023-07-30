@@ -323,7 +323,7 @@ if(!empty($_GET["cte"])){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
                                                         $consultaCotizacionP=$conexionBdComercial->query("SELECT czpp_producto, czpp_cotizacion 
-                                                        FROM comercial_relacion_productos WHERE czpp_producto='".$result[0]."' AND czpp_cotizacion='".$resultadoD['cotiz_id']."'");
+                                                        FROM comercial_relacion_productos WHERE czpp_producto='".$result[0]."' AND czpp_tipo=1 AND czpp_cotizacion='".$resultadoD['cotiz_id']."'");
                                                         $productoN = $consultaCotizacionP->num_rows;
 												?>
 													<option <?php if($productoN>0){echo "selected";}?> value="<?=$result[0];?>"><?=$result[0].". ".strtoupper($result['cprod_nombre'])."/".$result['ccat_nombre']." - (HAY ".$result['cprod_exitencia'].")".$empresa;?></option>
