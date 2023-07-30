@@ -111,6 +111,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>T. Cliente</th>
                                     <th>CT</th>
                                     <th>PD</th>
+                                    <th>RM</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
@@ -138,6 +139,19 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     if($result['cli_bloqueado']==1) {$bgColor = '#ff572238'; $cheked = 'checked';}
                                     $ciudad = $result['ciu_nombre']."/".$result['dep_nombre'];
                                     if($result['cli_ciudad']==1122) {$ciudad = $result['cli_ciudad_extranjera'];}
+								
+                                    $consultaNumeros = $conexionBdComercial->query("SELECT
+                                    (SELECT count(cotiz_id) FROM comercial_cotizaciones WHERE cotiz_cliente='".$result['cli_id']."'),
+                                    (SELECT count(pedid_id) FROM comercial_pedidos WHERE pedid_cliente='".$result['cli_id']."'),
+                                    (SELECT count(remi_id) FROM comercial_remisiones WHERE remi_cliente='".$result['cli_id']."'),
+                                    (SELECT count(factura_id) FROM comercial_facturas WHERE factura_cliente='".$result['cli_id']."')");
+                                    $numeros = mysqli_fetch_array($consultaNumeros, MYSQLI_BOTH);
+                                    
+                                    $color1='#FFF';	$color2='#FFF';	$color3='#FFF';	$color4='#FFF';
+                                    if($numeros[0]==0){$color1='#FFF090';}
+                                    if($numeros[1]==0){$color2='#FFF090';}
+                                    if($numeros[2]==0){$color3='#FFF090';}
+                                    if($numeros[3]==0){$color4='#FFF090';}
                                 ?>
                                 <tr id="Reg<?=$result['cli_id'];?>" style="background-color:<?=$bgColor;?>;">
                                     <td><?=$num;?></td>
@@ -151,9 +165,18 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <td><?=$result['cli_email'];?></td>
                                     <td><?=$result['cli_telefono'];?></td>
                                     <td><?=$result['clicat_nombre'];?></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td align="center" style="background-color:<?=$color1;?>;">
+                                        <a href="cotizaciones.php?cte=<?=$result['cli_id'];?>" target="_blank"><?=$numeros[0];?></a>
+                                    </td>
+                                    <td align="center" style="background-color:<?=$color2;?>;">
+                                        <a href="pedidos.php?cte=<?=$result['cli_id'];?>" target="_blank"><?=$numeros[1];?></a>
+                                    </td>
+                                    <td align="center" style="background-color:<?=$color3;?>;">
+                                        <a href="remisiones.php?cte=<?=$result['cli_id'];?>" target="_blank"><?=$numeros[2];?></a>
+                                    </td>
+                                    <td align="center" style="background-color:<?=$color4;?>;">
+                                        <a href="facturacion.php?cte=<?=$result['cli_id'];?>" target="_blank"><?=$numeros[3];?></a>
+                                    </td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -167,9 +190,6 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-editar.php?id=<?=$result[0];?>">Editar</a>
-                                                <?php //if($datosUsuarioActual['usr_tipo']==1){?>
-                                                <!-- <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['cli_id'];?>&tipe=<?=$result['cli_tipo'];?>">Autologin</a> -->
-                                                <?php //}?>
                                                 <!--<div class="dropdown-divider"></div>-->
                                                 <a class="dropdown-item" href="../bd_delete/clientes-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
                                             </div>
@@ -191,6 +211,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>T. Cliente</th>
                                     <th>CT</th>
                                     <th>PD</th>
+                                    <th>RM</th>
                                     <th>FC</th>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
