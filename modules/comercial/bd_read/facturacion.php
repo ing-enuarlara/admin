@@ -273,10 +273,10 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tfoot>
                                 <tr>
                                     <th colspan="8" style="text-align: right;">Total</th>
-                                    <th>$<?= number_format($sumaFacturasVentas, 0, ".", ".");?></th>
-                                    <th>$<?= number_format($sumaFacturasCompras, 0, ".", ".");?></th>
-                                    <th>$<?= number_format($sumaFacturasVendedor, 0, ".", ".");?></th>
-                                    <th>$<?= number_format($sumaFacturasCliente, 0, ".", ".");?></th>
+                                    <th align="center">$<?= number_format($sumaFacturasVentas, 0, ".", ".");?></th>
+                                    <th align="center">$<?= number_format($sumaFacturasCompras, 0, ".", ".");?></th>
+                                    <th align="center">$<?= number_format($sumaFacturasVendedor, 0, ".", ".");?></th>
+                                    <th align="center">$<?= number_format($sumaFacturasCliente, 0, ".", ".");?></th>
                                     <th colspan="<?=$colspan;?>"></th>
                                 </tr>
                             </tfoot>
