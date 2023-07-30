@@ -14,6 +14,7 @@ $simbolosMonedas = array("","$","USD");
 $estadoPedidos= array("Anulado", "En Preparación", "En Camino", "Entregado", "Devuelto");
 $colorEstadoPedidos= array("#dc3545", "#007bff", "#ffc107", "#28a745", "#dc3545");
 $colorEstadoTimelinePedidos= array("red", "blue", "yellow", "green", "red");
+$tipoFactura = array("Desc.", "Venta", "Compra");
 $enEspanol = array(
     'Sunday'    => 'Domingo',
     'Monday'    => 'Lunes',
