@@ -20,7 +20,9 @@
     conf_observaciones_cotizaciones='" . $_POST["notaCotiz"] . "', 
     conf_observaciones_pedidos='" . $_POST["notaPedid"] . "', 
     conf_observaciones_remisiones='" . $_POST["notaRemi"] . "', 
-    conf_observaciones_facturas='" . $_POST["notaFacturas"] . "' 
+    conf_observaciones_facturas='" . $_POST["notaFacturas"] . "', 
+    conf_comision_vendedores='" . $_POST["ComisiónVendedores"] . "', 
+    conf_porcentaje_clientes='" . $_POST["comisionCliente"] . "'  
     WHERE conf_id_empresa='" . $_POST["id"] . "'");
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");

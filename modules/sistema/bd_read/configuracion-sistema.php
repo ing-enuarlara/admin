@@ -137,6 +137,18 @@ include(RUTA_PROYECTO . "includes/head.php");
                           </select>
                         </div>
 
+                        <hr>
+
+                        <div class="form-group col-md-6">
+                          <label for="ComisionVendedores">Comisión Vendedores:</label>
+                          <input type="text" class="form-control col-md-2" id="ComisionVendedores" name="ComisionVendedores" value="<?= $configuracion['conf_comision_vendedores'] ?>">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label for="comisionCliente">Porcentaje para clientes por Compras:</label>
+                          <input type="text" class="form-control col-md-2" id="comisionCliente" name="comisionCliente" value="<?= $configuracion['conf_porcentaje_clientes'] ?>">
+                        </div>
+
                         <div class="form-group col-md-6">
                           <label for="direccion">Dirección:</label>
                           <textarea name="direccion" id="direccion"><?= $configuracion['conf_direcion'] ?></textarea>
