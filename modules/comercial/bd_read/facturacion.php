@@ -5,6 +5,32 @@ $idPagina = 103;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$filtro="";
+if($datosUsuarioActual['usr_tipo']!=1){
+    $filtro.=" AND factura_id_empresa='".$configuracion['conf_id_empresa']."'";
+}
+if(!empty($_GET["tipo"])){
+    $filtro.=" AND factura_tipo='".$_GET["tipo"]."'";
+}
+if(!empty($_GET["cte"])){
+    $filtro.=" AND ((factura_cliente='".$_GET["cte"]."' AND factura_tipo=1) OR (factura_proveedor='".$_GET["cte"]."' AND factura_tipo=2))";
+}
+if(!empty($_GET["respo"])){
+    $filtro.=" AND factura_creador='".$_GET["respo"]."'";
+}
+if(!empty($_GET["vende"])){
+    $filtro.=" AND factura_vendedor='".$_GET["vende"]."'";
+}
+if(!empty($_GET["moneda"])){
+    $filtro.=" AND factura_moneda='".$_GET["moneda"]."'";
+}
+if(!empty($_GET["estado"])){
+    $filtro.=" AND factura_estado='".$_GET["estado"]."'";
+}
+$filtroID="factura_id=factura_id";
+if(!empty($_GET["q"])){
+    $filtroID="factura_id='".$_GET["q"]."'";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -62,7 +88,11 @@ include(RUTA_PROYECTO."includes/head.php");
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="facturacion-venta-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Factura de Venta</a>
-					    <a href="facturacion-compra-agregar.php" class="btn btn-success"><i class="fas fa-solid fa-plus"></i> Agregar Factura de Compra</a>
+                        <?php
+                            if(!empty($filtro) || $filtroID!="factura_id=factura_id"){
+                        ?>
+					    <a href="facturacion.php" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -70,21 +100,21 @@ include(RUTA_PROYECTO."includes/head.php");
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nº Fact.</th>
+                                    <th>Nº Factura</th>
                                     <th>Tipo</th>
-                                    <th>Fec. Propuesta</th>
+                                    <th>Concepto</th>
+                                    <th>Fecha Propuesta</th>
                                     <th>Cliente/Proveedor</th>
                                     <th>Responsable</th>
                                     <th>Vendedor</th>
-                                    <th>Nº Rem.</th>
+                                    <th>Nº Remisión</th>
+                                    <th>Moneda</th>
                                     <th>Total F. Ventas</th>
-                                    <th>Total F. Compras</th>
-                                    <th>Comisión<br>Vendedor<br><?=$configuracion['conf_comision_vendedores'];?>%</th>
-                                    <th>Acumulado<br>Cliente<br><?=$configuracion['conf_porcentaje_clientes'];?>%</th>
+                                    <th>Estado</th>
                                     <?php
-                                    $colspan=1;
+                                    $colspan=2;
                                     if($datosUsuarioActual['usr_tipo']==1){
-                                        $colspan=2;
+                                        $colspan=3;
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -93,27 +123,6 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $filtro="";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $filtro.=" AND factura_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
-                                if(!empty($_GET["tipo"])){
-                                    $filtro.=" AND factura_tipo='".$_GET["tipo"]."'";
-                                }
-                                if(!empty($_GET["cte"])){
-                                    $filtro.=" AND ((factura_cliente='".$_GET["cte"]."' AND factura_tipo=1) OR (factura_proveedor='".$_GET["cte"]."' AND factura_tipo=2))";
-                                }
-                                if(!empty($_GET["respo"])){
-                                    $filtro.=" AND factura_creador='".$_GET["respo"]."'";
-                                }
-                                if(!empty($_GET["vende"])){
-                                    $filtro.=" AND factura_vendedor='".$_GET["vende"]."'";
-                                }
-                                $filtroID="factura_id=factura_id";
-                                if(!empty($_GET["q"])){
-                                    $filtroID="factura_id='".$_GET["q"]."'";
-                                }
-
                                 $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
                                 LEFT JOIN comercial_clientes ON cli_id=factura_cliente
                                 LEFT JOIN comercial_proveedores ON prov_id=factura_proveedor
@@ -221,6 +230,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td>
                                         <a href="facturacion.php?tipo=<?=$result['factura_tipo'];?>" target="_blank"><?= $tipoFactura[$result['factura_tipo']]; ?></a>
                                     </td>
+                                    <td><?= $result['factura_concepto']; ?></td>
                                     <td><?=$result['factura_fecha_propuesta'];?></td>
                                     <td>
                                         <a href="facturacion.php?cte=<?=$idClienteProveedor;?>" target="_blank"><?=$nombreClienteProveedor;?></a>
@@ -232,10 +242,17 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <a href="facturacion.php?vende=<?=$vendedor['usr_id'];?>" target="_blank"><?=$vendedor['usr_nombre'];?></a>
                                     </td>
                                     <td><?=$remision;?></td>
-                                    <td align="center">$<?= number_format($sumaTotalventas, 0, ".", "."); ?></td>
-                                    <td align="center">$<?= number_format($sumaTotalCompras, 0, ".", "."); ?></td>
-                                    <td align="center" style="background-color: <?=$colorRedimidoV;?>;">$<?= number_format($comision, 0, ".", "."); ?></td>
-                                    <td align="center" style="background-color: <?=$colorRedimido;?>;">$<?= number_format($aCliente, 0, ".", "."); ?></td>
+                                    <td>
+                                        <a href="facturacion.php?moneda=<?=$result['factura_moneda'];?>">
+                                            <?=$monedas[$result['factura_moneda']];?>
+                                        </a>
+                                    </td>
+                                    <td align="center"><?= $simbolosMonedas[$result['factura_moneda']].number_format($sumaTotalventas, 0, ".", "."); ?></td>
+                                    <td style="background-color: <?=$colorEstadoFactura[$result['factura_estado']];?>;">
+                                        <a href="facturacion.php?estado=<?=$result['factura_estado'];?>"style="text-decoration: underline; color: white; font-size: 16px; font-weight: bold;">
+                                            <?=$estadoFactura[$result['factura_estado']];?>
+                                        </a>
+                                    </td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
@@ -260,10 +277,13 @@ include(RUTA_PROYECTO."includes/head.php");
                                                 <a class="dropdown-item" href="../../reportes/formato-factura-2.php?id=<?= $result[0]; ?>" target="_blank">Imprimir</a>
                                                 <?php
                                                     }
+                                                    if($result['factura_estado'] != 1){
+                                                ?>
+                                                <a class="dropdown-item" href="../bd_update/facturacion-generar-pago.php?id=<?=$result[0];?>">Generar Pago</a>
+                                                <?php
+                                                    }
                                                 ?>
                                                 <a class="dropdown-item" href="../bd_delete/facturacion-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
-                                                <a class="dropdown-item" href="../bd_create/facturacion-redimir-saldo.php?id=<?=$result[0];?>">Redimir Saldo</a>
-                                                <a class="dropdown-item" href="../bd_create/facturacion-saldar-comision.php?id=<?=$result[0];?>">Saldar Comisión</a>
                                             </div>
                                         </div>
                                     </td>
@@ -272,11 +292,9 @@ include(RUTA_PROYECTO."includes/head.php");
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="8" style="text-align: right;">Total</th>
+                                    <th colspan="10" style="text-align: right;">Total</th>
                                     <th style="text-align: center;">$<?= number_format($sumaFacturasVentas, 0, ".", ".");?></th>
-                                    <th style="text-align: center;">$<?= number_format($sumaFacturasCompras, 0, ".", ".");?></th>
-                                    <th style="text-align: center;">$<?= number_format($sumaFacturasVendedor, 0, ".", ".");?></th>
-                                    <th style="text-align: center;">$<?= number_format($sumaFacturasCliente, 0, ".", ".");?></th>
+                                    <!-- <th style="text-align: center;">$<?= number_format($sumaFacturasCompras, 0, ".", ".");?></th> -->
                                     <th colspan="<?=$colspan;?>"></th>
                                 </tr>
                             </tfoot>
