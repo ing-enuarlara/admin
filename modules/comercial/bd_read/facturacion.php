@@ -228,28 +228,28 @@ if(!empty($_GET["q"])){
                                     <td style="background-color: <?= $fondoCotiz; ?>;" title="<?=$infoPedido;?>"><?=$result['factura_id'];?></td>
                                     <td><?= date("dmy", strtotime($result['factura_fecha_propuesta']))."-".$result['factura_id']; ?></td>
                                     <td>
-                                        <a href="facturacion.php?tipo=<?=$result['factura_tipo'];?>" target="_blank"><?= $tipoFactura[$result['factura_tipo']]; ?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?tipo=<?=$result['factura_tipo'];?>" target="_blank"><?= $tipoFactura[$result['factura_tipo']]; ?></a>
                                     </td>
                                     <td><?= $result['factura_concepto']; ?></td>
                                     <td><?=$result['factura_fecha_propuesta'];?></td>
                                     <td>
-                                        <a href="facturacion.php?cte=<?=$idClienteProveedor;?>" target="_blank"><?=$nombreClienteProveedor;?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cte=<?=$idClienteProveedor;?>" target="_blank"><?=$nombreClienteProveedor;?></a>
                                     </td>
                                     <td>
-                                        <a href="facturacion.php?respo=<?=$result['usr_id'];?>" target="_blank"><?=$result['usr_nombre'];?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?respo=<?=$result['usr_id'];?>" target="_blank"><?=$result['usr_nombre'];?></a>
                                     </td>
                                     <td>
-                                        <a href="facturacion.php?vende=<?=$vendedor['usr_id'];?>" target="_blank"><?=$vendedor['usr_nombre'];?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?vende=<?=$vendedor['usr_id'];?>" target="_blank"><?=$vendedor['usr_nombre'];?></a>
                                     </td>
                                     <td><?=$remision;?></td>
                                     <td>
-                                        <a href="facturacion.php?moneda=<?=$result['factura_moneda'];?>">
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?moneda=<?=$result['factura_moneda'];?>">
                                             <?=$monedas[$result['factura_moneda']];?>
                                         </a>
                                     </td>
                                     <td align="center"><?= $simbolosMonedas[$result['factura_moneda']].number_format($sumaTotalventas, 0, ".", "."); ?></td>
                                     <td style="background-color: <?=$colorEstadoFactura[$result['factura_estado']];?>;">
-                                        <a href="facturacion.php?estado=<?=$result['factura_estado'];?>"style="text-decoration: underline; color: white; font-size: 16px; font-weight: bold;">
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?estado=<?=$result['factura_estado'];?>"style="text-decoration: underline; color: white; font-size: 16px; font-weight: bold;">
                                             <?=$estadoFactura[$result['factura_estado']];?>
                                         </a>
                                     </td>
