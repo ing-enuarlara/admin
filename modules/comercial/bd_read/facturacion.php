@@ -24,7 +24,7 @@ if(!empty($_GET["vende"])){
 if(!empty($_GET["moneda"])){
     $filtro.=" AND factura_moneda='".$_GET["moneda"]."'";
 }
-if(!empty($_GET["estado"])){
+if(isset($_GET["estado"])){
     $filtro.=" AND factura_estado='".$_GET["estado"]."'";
 }
 $filtroID="factura_id=factura_id";
