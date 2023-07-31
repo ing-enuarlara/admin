@@ -30,5 +30,5 @@
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
-    echo '<script type="text/javascript">window.location.href="../bd_read/remisiones.php";</script>';
+    echo '<script type="text/javascript">window.location.href="../bd_read/remisiones.php?q=' . $idInsert . '";</script>';
     exit();
