@@ -177,32 +177,32 @@
                 <p>Sistema<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
-                <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Páginas</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Módulos</p>
-                    </a>
-                </li>
-                <?php }?>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion-sistema.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Configuración del Sistema</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Historial de acciones</p>
-                    </a>
-                </li>
+                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
+                    <li class="nav-item">
+                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Páginas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Módulos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Historial de acciones</p>
+                        </a>
+                    </li>
+                <?php }?>
             </ul>
         </li>
         <?php }?>
