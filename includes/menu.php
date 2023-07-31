@@ -103,12 +103,12 @@
                         <p>Clientes</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Proveedores</p>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
