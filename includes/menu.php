@@ -75,12 +75,14 @@
                 <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Roles</p>
-                    </a>
-                </li>
+                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
+                    <li class="nav-item">
+                        <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
+                <?php }?>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
