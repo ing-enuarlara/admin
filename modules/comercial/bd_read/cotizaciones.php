@@ -5,6 +5,24 @@ $idPagina = 75;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+
+$filtro="";
+if($datosUsuarioActual['usr_tipo']!=1 || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (cotiz_id_empresa='".$configuracion['conf_id_empresa']."' OR cotiz_id_empresa='".$_GET["cliAdmin"]."')";
+}
+if(!empty($_GET["cte"])){
+    $filtro.=" AND cotiz_cliente='".$_GET["cte"]."'";
+}
+if(!empty($_GET["respo"])){
+    $filtro.=" AND cotiz_creador='".$_GET["respo"]."'";
+}
+if(!empty($_GET["vende"])){
+    $filtro.=" AND cotiz_vendedor='".$_GET["vende"]."'";
+}
+$filtroID="cotiz_id=cotiz_id";
+if(!empty($_GET["q"])){
+    $filtroID="cotiz_id='".$_GET["q"]."'";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -62,6 +80,11 @@ include(RUTA_PROYECTO."includes/head.php");
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="cotizaciones-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Cotización</a>
+                        <?php
+                            if(!empty($filtro) || $filtroID!="cotiz_id=cotiz_id"){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -85,18 +108,11 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $filtro="";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $filtro="AND cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
-                                $fCliente='';
-                                if(!empty($_GET["cte"])){ $fCliente="AND cli_id='" . $_GET["cte"] . "'";}
-
-                                $consulta= $conexionBdComercial->query("SELECT cotiz_id, cotiz_fecha_propuesta, cotiz_creador, cotiz_vendedor, cotiz_vendida, cli_id, cli_nombre, usr_id, usr_nombre, cliAdmi_nombre FROM comercial_cotizaciones
-                                INNER JOIN comercial_clientes ON cli_id=cotiz_cliente $fCliente
+                                $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
+                                INNER JOIN comercial_clientes ON cli_id=cotiz_cliente 
                                 INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_creador 
                                 INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cotiz_id_empresa 
-                                WHERE cotiz_id=cotiz_id $filtro ORDER BY cotiz_id DESC");
+                                WHERE $filtroID $filtro ORDER BY cotiz_id DESC");
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                     $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['cotiz_vendedor'] . "'");
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
@@ -122,7 +138,9 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td style="background-color: <?= $fondoCotiz; ?>;" title="<?=$infoPedido;?>"><?=$result['cotiz_id'];?></td>
                                     <td><?= date("dmy", strtotime($result['cotiz_fecha_propuesta']))."-".$result['cotiz_id']; ?></td>
                                     <td><?=$result['cotiz_fecha_propuesta'];?></td>
-                                    <td><?=$result['cli_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cte=<?=$result['cli_id'];?>"><?=$result['cli_nombre'];?></a>
+                                    </td>
                                     <td>
                                         <?php
                                             $productos = $conexionBdComercial->query("SELECT cprod_nombre FROM comercial_relacion_productos
@@ -135,12 +153,20 @@ include(RUTA_PROYECTO."includes/head.php");
                                             }
                                         ?>
                                     </td>
-                                    <td><?=$result['usr_nombre'];?></td>
-                                    <td><?=$vendedor['usr_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?respo=<?=$result['usr_id'];?>"><?=$result['usr_nombre'];?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?vende=<?=$vendedor['usr_id'];?>"><?=$vendedor['usr_nombre'];?></a>
+                                    </td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$result['cliAdmi_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>">
+                                            <?=$result['cliAdmi_nombre'];?>
+                                        </a>
+                                    </td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

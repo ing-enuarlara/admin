@@ -91,7 +91,7 @@ if(!empty($_GET["q"])){
                         <?php
                             if(!empty($filtro) || $filtroID!="factura_id=factura_id"){
                         ?>
-					    <a href="facturacion.php" class="btn btn-warning"> Quitar Filtro</a>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
                         <?php }?>
                     </div>
                     <!-- /.card-header -->
@@ -228,18 +228,18 @@ if(!empty($_GET["q"])){
                                     <td style="background-color: <?= $fondoCotiz; ?>;" title="<?=$infoPedido;?>"><?=$result['factura_id'];?></td>
                                     <td><?= date("dmy", strtotime($result['factura_fecha_propuesta']))."-".$result['factura_id']; ?></td>
                                     <td>
-                                        <a href="<?=$_SERVER['PHP_SELF'];?>?tipo=<?=$result['factura_tipo'];?>" target="_blank"><?= $tipoFactura[$result['factura_tipo']]; ?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?tipo=<?=$result['factura_tipo'];?>"><?= $tipoFactura[$result['factura_tipo']]; ?></a>
                                     </td>
                                     <td><?= $result['factura_concepto']; ?></td>
                                     <td><?=$result['factura_fecha_propuesta'];?></td>
                                     <td>
-                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cte=<?=$idClienteProveedor;?>" target="_blank"><?=$nombreClienteProveedor;?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cte=<?=$idClienteProveedor;?>"><?=$nombreClienteProveedor;?></a>
                                     </td>
                                     <td>
-                                        <a href="<?=$_SERVER['PHP_SELF'];?>?respo=<?=$result['usr_id'];?>" target="_blank"><?=$result['usr_nombre'];?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?respo=<?=$result['usr_id'];?>"><?=$result['usr_nombre'];?></a>
                                     </td>
                                     <td>
-                                        <a href="<?=$_SERVER['PHP_SELF'];?>?vende=<?=$vendedor['usr_id'];?>" target="_blank"><?=$vendedor['usr_nombre'];?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?vende=<?=$vendedor['usr_id'];?>"><?=$vendedor['usr_nombre'];?></a>
                                     </td>
                                     <td><?=$remision;?></td>
                                     <td>

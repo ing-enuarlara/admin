@@ -5,6 +5,23 @@ $idPagina = 87;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$filtro="";
+if($datosUsuarioActual['usr_tipo']!=1 || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (pedid_id_empresa='".$configuracion['conf_id_empresa']."' OR pedid_id_empresa='".$_GET["cliAdmin"]."')";
+}
+if(!empty($_GET["cte"])){
+    $filtro.=" AND pedid_cliente='".$_GET["cte"]."'";
+}
+if(!empty($_GET["respo"])){
+    $filtro.=" AND pedid_creador='".$_GET["respo"]."'";
+}
+if(!empty($_GET["vende"])){
+    $filtro.=" AND pedid_vendedor='".$_GET["vende"]."'";
+}
+$filtroID="pedid_id=pedid_id";
+if(!empty($_GET["q"])){
+    $filtroID="pedid_id='".$_GET["q"]."'";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -61,6 +78,11 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
+                        <?php
+                            if(!empty($filtro) || $filtroID!="pedid_id=pedid_id"){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -85,18 +107,11 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $filtro="";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $filtro="AND pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
-                                $fCliente='';
-                                if(!empty($_GET["cte"])){ $fCliente="AND cli_id='" . $_GET["cte"] . "'";}
-
                                 $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
-                                INNER JOIN comercial_clientes ON cli_id=pedid_cliente $fCliente
+                                INNER JOIN comercial_clientes ON cli_id=pedid_cliente 
                                 INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_creador 
                                 INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=pedid_id_empresa 
-                                WHERE pedid_id=pedid_id $filtro ORDER BY pedid_id DESC");
+                                WHERE $filtroID $filtro ORDER BY pedid_id DESC");
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                     $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['pedid_vendedor'] . "'");
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
@@ -123,9 +138,15 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td style="background-color: <?= $fondoPedido; ?>;" title="<?=$infoRemi;?>"><?=$result['pedid_id'];?></td>
                                     <td><?= date("dmy", strtotime($result['pedid_fecha_propuesta']))."-".$result['pedid_id']; ?></td>
                                     <td><?=$result['pedid_fecha_propuesta'];?></td>
-                                    <td><?=$result['cli_nombre'];?></td>
-                                    <td><?=$result['usr_nombre'];?></td>
-                                    <td><?=$vendedor['usr_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cte=<?=$result['cli_id'];?>"><?=$result['cli_nombre'];?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?respo=<?=$result['usr_id'];?>"><?=$result['usr_nombre'];?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?vende=<?=$vendedor['usr_id'];?>"><?=$vendedor['usr_nombre'];?></a>
+                                    </td>
                                     <td style="background-color: <?=$colorEstadoPedidos[$result['pedid_estado']];?>;">
                                         <a href="pedidos-estado.php?id=<?=$result['pedid_id'];?>" style="text-decoration: underline; color: white; font-size: 16px; font-weight: bold;">
                                             <?=$estadoPedidos[$result['pedid_estado']];?>
@@ -135,7 +156,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$result['cliAdmi_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>">
+                                            <?=$result['cliAdmi_nombre'];?>
+                                        </a>
+                                    </td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">
