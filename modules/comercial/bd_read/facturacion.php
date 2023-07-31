@@ -6,8 +6,8 @@ $idPagina = 103;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 $filtro="";
-if($datosUsuarioActual['usr_tipo']!=1){
-    $filtro.=" AND factura_id_empresa='".$configuracion['conf_id_empresa']."'";
+if($datosUsuarioActual['usr_tipo']!=1 || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (factura_id_empresa='".$configuracion['conf_id_empresa']."' OR factura_id_empresa='".$_GET["cliAdmin"]."')";
 }
 if(!empty($_GET["tipo"])){
     $filtro.=" AND factura_tipo='".$_GET["tipo"]."'";
@@ -256,7 +256,11 @@ if(!empty($_GET["q"])){
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$result['cliAdmi_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>">
+                                            <?=$result['cliAdmi_nombre'];?>
+                                        </a>
+                                    </td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">
