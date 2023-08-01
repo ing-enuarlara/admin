@@ -13,6 +13,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'El registro fue eliminado correctamente.';
             break;
 
+            case 'SC_3':
+                $mensaje = 'El registro fue actualizado correctamente.';
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
@@ -25,7 +29,7 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
         $icono='<i class="icon fas fa-info"></i>';
         switch($_GET['info']){
             case 'INF_1':
-                $mensaje = 'El usuario no fue encontrado para esta institución en este año. Por favor verifique.';
+                $mensaje = 'El usuario no fue encontrado. Por favor verifique.';
             break;
 
 
@@ -57,13 +61,17 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
         $icono='<i class="icon fas fa-ban"></i>';
         switch($_GET['error']){
             case 'ER_1':
-                $mensaje = 'El usuario no fue encontrado para esta institución en este año. Por favor verifique.';
+                $mensaje = 'El usuario no fue encontrado. Por favor verifique.';
             break;
 
             case 'ER_2':
                 $mensaje = 'La clave no cumple con todos los requerimientos:<br>
                             - Debe tener entre 8 y 20 caracteres.<br>
                             - Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+            break;
+
+            case 'ER_3':
+                $mensaje = 'Este usuario ya se encuentra en uso, por favor use otro.';
             break;
 
 
