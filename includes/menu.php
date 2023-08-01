@@ -48,19 +48,34 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/perfil-editar.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Editar Perfil</p>
                     </a>
                 </li>
+                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
+                    <li class="nav-item">
+                        <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-ventas.php" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Mis Ventas</p>
+                        </a>
+                    </li>
+                <?php }else{?>
+                    <li class="nav-item">
+                        <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-pedidos.php" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Mis Pedidos</p>
+                        </a>
+                    </li>
+                <?php }?>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/cambiar-contraseña.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Mis Ventas</p>
+                        <p>Cambiar Contraseña</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mi-calendario.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mi calendario</p>
                     </a>
