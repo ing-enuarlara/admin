@@ -69,9 +69,9 @@
                     </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/cambiar-contraseña.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/clave-editar.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Cambiar Contraseña</p>
+                        <p>Cambiar Clave</p>
                     </a>
                 </li>
                 <li class="nav-item">
