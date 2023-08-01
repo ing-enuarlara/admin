@@ -17,6 +17,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'El registro fue actualizado correctamente.';
             break;
 
+            case 'SC_4':
+                $mensaje = 'La contraseña fue cambiada correctamente.';
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
@@ -72,6 +76,14 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
 
             case 'ER_3':
                 $mensaje = 'Este usuario ya se encuentra en uso, por favor use otro.';
+            break;
+
+            case 'ER_4':
+                $mensaje = 'La contraseña actual es incorrecta, por favor verifique y vuelva a intentar.';
+            break;
+
+            case 'ER_5':
+                $mensaje = 'Las Contraseñas Nuevas No Coinciden';
             break;
 
 
