@@ -2,10 +2,10 @@
 session_start();
 
 require_once($_SERVER['DOCUMENT_ROOT']."/ing-enuarlara.co/admin/constantes.php");
+$rutaSalidaS= REDIRECT_ROUTE."salir.php";
 
 if( $_SESSION["id"]=="" || !is_numeric($_SESSION["id"]) ){
-	header("Location:../salir.php");
-	exit();
+	header("Location:".$rutaSalidaS);
 }
 	
 $tiempo_inicial = microtime(true);
