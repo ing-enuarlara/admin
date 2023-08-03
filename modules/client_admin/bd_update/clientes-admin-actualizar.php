@@ -32,7 +32,10 @@
 
     $conexionBdGeneral->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . $_POST["email"] . "', conf_telefono='" . $_POST["telefono"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 
-    $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_login='" . $_POST["cedula"] . "', usr_nombre='" . $_POST["contacto"] . "', usr_email='" . $_POST["email"] . "', usr_telefono='" . $_POST["telefono"] . "' WHERE usr_id='" . $_POST["ussPrincipal"] . "'");
+    if($_POST["ussPrincipal"]!=1){
+
+        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_login='" . $_POST["cedula"] . "', usr_nombre='" . $_POST["contacto"] . "', usr_email='" . $_POST["email"] . "', usr_telefono='" . $_POST["telefono"] . "' WHERE usr_id='" . $_POST["ussPrincipal"] . "'");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
