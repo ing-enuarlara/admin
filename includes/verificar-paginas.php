@@ -1,44 +1,23 @@
 <?php
+$paso=true;
+if (!validarAccesoDirectoPaginas()) {
+	$rutaSalida= REDIRECT_ROUTE."modules";
+	$mensaje= "Estás intentando a acceder de manera incorrecta.";
+	$paso=false;
+}
 if (!isset($idPagina)) {
 	$rutaSalida= REDIRECT_ROUTE."modules";
-?>
-	<!DOCTYPE html>
-	<html lang="es">
-	<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="2;url=<?= $rutaSalida ?>">
-	<title>Redireccionando...</title>
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background-color: #FAFAFA;
-			/* font-family: Arial, sans-serif; */
-		}
-	
-		.mensaje {
-			text-align: center;
-		}
-	</style>
-	</head>
-	<body>
-	<div class="mensaje">
-		<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
-		<p><span style='font-family:Arial; font-weight:bold;'>Falta el ID de esta página.</samp></p>
-		<p>Redireccionando en 2 segundos...</p>
-	</div>
-	<script>
-		setTimeout(function() {
-			window.location.href = '<?= $rutaSalida ?>';
-		}, 2000);
-	</script>
-	</body>
-	</html>
-<?php
-	exit;
+	$mensaje= "Falta el ID de esta página.";
+	$paso=false;
+}else{
+	$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
+	$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
+
+	if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {
+		$rutaSalida= REDIRECT_ROUTE."modules";
+		$mensaje= "La empresa NO tiene permiso a este modulo.";
+		$paso=false;
+	}
 }
 /*
 PAGINAS A LAS QUE TIENE PERMISO EL ROL DEL USUARIO
@@ -60,47 +39,42 @@ if ($numPaginaUsuario == 0 and $datosUsuarioActual[3] != 1) {
 	<?php
 	exit();
 }*/
-
-$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
-$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
-
-if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {
-	$rutaSalida= REDIRECT_ROUTE."modules";
+if ($paso!=true) {
 ?>
 	<!DOCTYPE html>
 	<html lang="es">
-	<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="2;url=<?= $rutaSalida ?>">
-	<title>Redireccionando...</title>
-	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			background-color: #FAFAFA;
-			/* font-family: Arial, sans-serif; */
-		}
-	
-		.mensaje {
-			text-align: center;
-		}
-	</style>
-	</head>
-	<body>
-	<div class="mensaje">
-		<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
-		<p><span style='font-family:Arial; font-weight:bold;'>La empresa NO tiene permiso a este modulo.</samp></p>
-		<p>Redireccionando en 2 segundos...</p>
-	</div>
-	<script>
-		setTimeout(function() {
-			window.location.href = '<?= $rutaSalida ?>';
-		}, 2000);
-	</script>
-	</body>
+		<head>
+			<meta charset="UTF-8">
+			<meta http-equiv="refresh" content="2;url=<?= $rutaSalida ?>">
+			<title>Redireccionando...</title>
+			<style>
+				html, body {
+					height: 100%;
+					margin: 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					background-color: #FAFAFA;
+					/* font-family: Arial, sans-serif; */
+				}
+
+				.mensaje {
+					text-align: center;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="mensaje">
+				<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
+				<p><span style='font-family:Arial; font-weight:bold;'><?= $mensaje ?></samp></p>
+				<p>Redireccionando en 2 segundos...</p>
+			</div>
+			<script>
+				setTimeout(function() {
+					window.location.href = '<?= $rutaSalida ?>';
+				}, 2000);
+			</script>
+		</body>
 	</html>
 <?php
 	exit;
