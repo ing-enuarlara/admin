@@ -5,6 +5,10 @@ $idPagina = 76;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
+$vende='';
+if(!empty($_GET["vende"])){
+    $vende = $_GET["vende"];
+}
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -34,7 +38,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 <script type="text/javascript">
     function clientes(datoscliente){
         var id = datoscliente.value;
-        location.href = "cotizaciones-agregar.php?cte="+id;
+        location.href = "cotizaciones-agregar.php?cte="+id+"&vende=<?=$vende?>";
     }
 </script>
 </head>
@@ -140,8 +144,12 @@ include(RUTA_PROYECTO . "includes/head.php");
                                                         if($datosUsuarioActual['usr_tipo']==1){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
+                                                        $selected='';
+                                                        if(!empty($vende) and $vende==$result[0]){
+                                                            $selected = 'selected';
+                                                        }
                                                 ?>
-                                                    <option value="<?=$result[0];?>"><?=strtoupper($result['usr_nombre'])." (".$result['usr_email'].")".$empresa;?></option>
+                                                    <option value="<?=$result[0];?>" <?=$selected?>><?=strtoupper($result['usr_nombre'])." (".$result['usr_email'].")".$empresa;?></option>
                                                 <?php
                                                 }
                                                 ?>
