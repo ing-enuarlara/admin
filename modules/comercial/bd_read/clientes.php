@@ -190,6 +190,9 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-editar.php?id=<?=$result[0];?>">Editar</a>
+                                                <?php if($datosUsuarioActual['usr_tipo']==1 || $datosUsuarioActual['usr_tipo']==2){?>
+                                                <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['cli_id_usuario'];?>&tipe=5">Autologin</a>
+                                                <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->
                                                 <a class="dropdown-item" href="../bd_delete/clientes-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}">Eliminar</a>
                                             </div>
