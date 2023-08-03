@@ -35,3 +35,10 @@ function validarAccesoModulo($empresa, $modulo)
 
 	return false;
 }
+
+function validarAccesoDirectoPaginas(){
+	if(empty($_SERVER['HTTP_REFERER'])){
+		return false;
+	}
+	return true;
+}
