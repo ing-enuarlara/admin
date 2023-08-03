@@ -60,7 +60,9 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-					    <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
+                        <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
+		    			    <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -151,10 +153,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
-                                                <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
-                                                <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
+                                                    <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                    <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <?php }?>
+                                                    <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
                                             </div>
                                         </div>
                                     </td>

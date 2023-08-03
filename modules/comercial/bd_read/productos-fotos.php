@@ -68,9 +68,11 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                     <div class="card">
                         <div class="card-header">
                             <h2 class="m-0 float-sm-right"><?= $paginaActual['pag_nombre']." de ".$resultadoD['cprod_nombre'] ?></h2>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-                                <i class="fas fa-solid fa-plus"></i> Agregar Fotos
-                            </button>
+                            <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                                    <i class="fas fa-solid fa-plus"></i> Agregar Fotos
+                                </button>
+                            <?php }?>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -84,7 +86,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <img src="<?= REDIRECT_ROUTE."files/productos/".$resultadoFotos['cpf_fotos'] ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
                                     </a>
                                     <?php
-                                        if($resultadoFotos['cpf_principal']!=1){
+                                        if($resultadoFotos['cpf_principal']!=1 && $datosUsuarioActual['usr_tipo']!=5){
                                     ?>
                                         <div class="form-group" style="display: flex;">
                                             <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa-solid fa-trash"></i></a>
