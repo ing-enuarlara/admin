@@ -59,36 +59,38 @@ class EnviarEmail {
                 $validarDestinatario2 = false;
             }
 
-            if($validarDestinatario &&  $validarDestinatario2){
-
-                //Destinatarios
+            if($validarDestinatario){
                 $mail->addAddress($destinatario, $data['usuario_nombre']);
-                if(!is_null($destinatario2)){
-                    $mail->addAddress($destinatario2, $data['usuario2_nombre']);
-                }
-
-                // Content
-                $mail->isHTML(true);                                   // Set email format to HTML
-                $mail->Subject = $asunto;
-                $mail->Body = $body;
-                $mail->CharSet = 'UTF-8';
-
-                $mail->send();
-                self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
-                if(!is_null($destinatario2)){
-                    self::enviarReporte($data,$mail,EMAIL_USER,$destinatario2,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
-                }
             }else{
-
                 if(!$validarDestinatario){
                     self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ERROR,'Error destinatario'.$destinatario); 
                     self::mensajeError($destinatario);
                 }
-                if(!$validarDestinatario2){
-                    self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ERROR,'Error destinatario 2'.$destinatario2); 
-                    self::mensajeError($destinatario2);
+            }
+
+            if(!is_null($destinatario2)){
+                if($validarDestinatario2){
+                    $mail->addAddress($destinatario2, $data['usuario2_nombre']);
+                }else{
+                    if(!$validarDestinatario2){
+                        self::enviarReporte($data,$mail,EMAIL_USER,$destinatario2,$asunto,$body,ESTADO_EMAIL_ERROR,'Error destinatario 2'.$destinatario2); 
+                        self::mensajeError($destinatario2);
+                    }
                 }
             }
+
+            // Content
+            $mail->isHTML(true);                                   // Set email format to HTML
+            $mail->Subject = $asunto;
+            $mail->Body = $body;
+            $mail->CharSet = 'UTF-8';
+
+            $mail->send();
+            self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
+            if(!is_null($destinatario2)){
+                self::enviarReporte($data,$mail,EMAIL_USER,$destinatario2,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
+            }
+
         } catch (Exception $e) {
 
             self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ERROR,$e->getMessage());
@@ -107,7 +109,7 @@ class EnviarEmail {
 
     private static function mensajeError($email) 
     {
-        $msj=' el Correo '.$email.' no cumple con la estructura de un correo valido';
+        $msj=' El correo '.$email.' no cumple con la estructura de un correo valido';
         $url=$_SERVER["HTTP_REFERER"];
         $pos = strpos($url, "?");
         $simbolConcatenar=$pos===false?"?":"&";
