@@ -112,6 +112,10 @@ if (isset($_SESSION["id"])) {
                         <!-- /.col -->
                     </div>
                 </form>
+
+                <p class="mb-1">
+                    <a href="recuperar-password.php">Recuperar mi contraseña</a>
+                </p>
             </div>
             <!-- /.login-card-body -->
         </div>
