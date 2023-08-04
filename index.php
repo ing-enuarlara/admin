@@ -59,6 +59,10 @@ if (isset($_SESSION["id"])) {
                 case 1:
                     $msj = 'Hemos enviado un correo con los pasos para renovar su contraseña.';
                 break;
+            
+                case 2:
+                    $msj = 'La contraseña fue cambiada correctamente.';
+                break;
     
     
                 default:
