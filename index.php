@@ -33,25 +33,37 @@ if (isset($_SESSION["id"])) {
         if (isset($_GET['error'])) {
             switch ($_GET['error']) {
                 case 1:
-                    $msjError = 'El usuario no existe.';
+                    $msj = 'El usuario no existe.';
                     break;
 
                 case 2:
-                    $msjError = 'La clave no es correcta';
+                    $msj = 'La clave no es correcta';
                     break;
 
                 case 3:
-                    $msjError = 'Los intentos fallidos de acceso superan el límite';
+                    $msj = 'Los intentos fallidos de acceso superan el límite';
                     break;
 
                 case 4:
-                    $msjError = 'Su usuario se encuentra bloqueado';
+                    $msj = 'Su usuario se encuentra bloqueado';
                     break;
 
 
                 default:
-                    $msjError = 'No hay mensaje';
+                    $msj = 'No hay mensaje';
                     break;
+            }
+        }
+        if (!empty($_GET['RC'])) {
+            switch ($_GET['RC']) {
+                case 1:
+                    $msj = 'Hemos enviado un correo con los pasos para renovar su contraseña.';
+                break;
+    
+    
+                default:
+                    $msj = 'No hay mensaje';
+                break;
             }
         }
 
@@ -60,17 +72,17 @@ if (isset($_SESSION["id"])) {
             $idSeguimiento = $_GET["idseg"];
         }
 
-        if (isset($_GET['error'])) { ?>
-            <p style="color:black; font-size: 16px; background-color: gold; padding: 5px;"><?php echo $msjError; ?></p>
+        if (isset($_GET['error']) || !empty($_GET['RC'])) { ?>
+            <p style="color:black; font-size: 16px; background-color: gold; padding: 5px;"><?php echo $msj; ?></p>
         <?php } ?>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Ingresa tu usuario y contraseña</p>
+                <p class="login-box-msg">Ingresa tu usuario/email y contraseña</p>
 
                 <form action="autentico.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Usuario" name="Usuario">
+                        <input type="text" class="form-control" placeholder="Usuario o Email" name="Usuario">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
