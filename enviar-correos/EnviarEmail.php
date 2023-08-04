@@ -75,6 +75,9 @@ class EnviarEmail {
 
                 $mail->send();
                 self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
+                if(!is_null($destinatario2)){
+                    self::enviarReporte($data,$mail,EMAIL_USER,$destinatario2,$asunto,$body,ESTADO_EMAIL_ENVIADO,''); 
+                }
             }else{
 
                 if(!$validarDestinatario){
@@ -87,7 +90,7 @@ class EnviarEmail {
                 }
             }
         } catch (Exception $e) {
-            
+
             self::enviarReporte($data,$mail,EMAIL_USER,$destinatario,$asunto,$body,ESTADO_EMAIL_ERROR,$e->getMessage());
             echo "Error: {$mail->ErrorInfo}";
         }
