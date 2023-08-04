@@ -21,6 +21,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'La contraseña fue cambiada correctamente.';
             break;
 
+            case 'SC_5':
+                $mensaje = 'Correo enviado correctamente.';
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
@@ -84,6 +88,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
 
             case 'ER_5':
                 $mensaje = 'Las Contraseñas Nuevas No Coinciden';
+            break;
+            
+            case 'ER_6':
+                $mensaje = $_GET["msj"];
             break;
 
 
