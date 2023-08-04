@@ -6,7 +6,7 @@ include("conexion.php");
 $urlRed = REDIRECT_ROUTE;
 
 
-$rst_usrE = $conexionBdAdministrativo->query("SELECT usr_login, usr_id, usr_intentos_fallidos, usr_bloqueado FROM administrativo_usuarios WHERE usr_login='".trim(mysqli_real_escape_string($conexionBdAdministrativo, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL");
+$rst_usrE = $conexionBdAdministrativo->query("SELECT usr_login, usr_id, usr_intentos_fallidos, usr_bloqueado FROM administrativo_usuarios WHERE (usr_login='".trim(mysqli_real_escape_string($conexionBdAdministrativo, $_POST["Usuario"]))."' AND TRIM(usr_login)!='' AND usr_login IS NOT NULL) OR (usr_email='".trim(mysqli_real_escape_string($conexionBdAdministrativo, $_POST["Usuario"]))."' AND TRIM(usr_email)!='' AND usr_email IS NOT NULL)");
 
 $numE = $rst_usrE->num_rows;
 if($numE ==0 ){
@@ -24,7 +24,7 @@ if($usrE['usr_intentos_fallidos']>=3 and md5($_POST["suma"])<>$_POST["sumaReal"]
 	exit();
 }
 
-$rst_usr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_login='".trim($_POST["Usuario"])."' AND usr_clave=SHA1('".$_POST["Clave"]."')");
+$rst_usr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE (usr_login='".trim($_POST["Usuario"])."' OR usr_email='".trim($_POST["Usuario"])."') AND usr_clave=SHA1('".$_POST["Clave"]."')");
 $num = $rst_usr->num_rows;
 $fila = mysqli_fetch_array($rst_usr, MYSQLI_BOTH);
 if($num>0)
