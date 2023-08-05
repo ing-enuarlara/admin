@@ -16,9 +16,23 @@ function validarClave($clave)
 	return preg_match($regex, $clave);
 }
 
-function generarClaves()
+function generarCodigo($longitud = 10)
 {
-	return rand(10000, 99999);
+    // Caracteres permitidos para la clave
+    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-[]{}|:;"<>,.?/';
+
+    $clave = '';
+    $num_caracteres = strlen($caracteres);
+
+    for ($i = 0; $i < $longitud; $i++) {
+        // Generar un índice aleatorio dentro del rango de caracteres permitidos
+        $indice_aleatorio = rand(0, $num_caracteres - 1);
+
+        // Agregar el carácter seleccionado a la clave
+        $clave .= $caracteres[$indice_aleatorio];
+    }
+
+    return $clave;
 }
 
 function validarAccesoModulo($empresa, $modulo)
