@@ -3,6 +3,7 @@ switch($_SERVER['HTTP_HOST']){
 	case 'localhost':
         define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/ing-enuarlara.co/admin/');
         define('REDIRECT_ROUTE', 'http://localhost/ing-enuarlara.co/admin/');
+        error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 
 	// case 'dominio.com.co':
