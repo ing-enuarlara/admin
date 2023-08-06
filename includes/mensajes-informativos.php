@@ -25,6 +25,18 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'Correo enviado correctamente.';
             break;
 
+            case 'SC_6':
+                $mensaje = 'El evento se guardo correctamente.';
+            break;
+
+            case 'SC_7':
+                $mensaje = 'El evento fue actualizado correctamente.';
+            break;
+
+            case 'SC_8':
+                $mensaje = 'El evento fue eliminado correctamente.';
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
@@ -37,7 +49,7 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
         $icono='<i class="icon fas fa-info"></i>';
         switch($_GET['info']){
             case 'INF_1':
-                $mensaje = 'El usuario no fue encontrado. Por favor verifique.';
+                $mensaje = 'El evento fue actualizado correctamente.';
             break;
 
 
