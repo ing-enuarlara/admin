@@ -157,6 +157,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="usuarios-editar.php?id=<?=$result[0];?>">Editar</a>
+                                                <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mi-calendario.php?id=<?=$result[0];?>">Calendario</a>
                                                 <?php if($result['usr_tipo']!=1 AND $datosUsuarioActual['usr_tipo']==1){?>
                                                 <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['usr_id'];?>&tipe=<?=$result['usr_tipo'];?>">Autologin</a>
                                                 <?php }?>
