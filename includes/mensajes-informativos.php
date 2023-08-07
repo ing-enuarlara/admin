@@ -37,6 +37,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'El evento fue eliminado correctamente.';
             break;
 
+            case 'SC_9':
+                $mensaje = 'Los días festivos fueron agregados correctamente.';
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
