@@ -12,4 +12,27 @@ switch($_SERVER['HTTP_HOST']){
         // error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         // break;
 }
+
 include(RUTA_PROYECTO."sensitive.php");
+
+switch (ENVIROMENT) {
+        case 'LOCAL':
+	include(RUTA_PROYECTO."/conexion-datos.php");
+        // define('BD_PREFIX', 'odermangroup_');
+	break;
+
+	case 'TEST':
+	include(RUTA_PROYECTO."/conexion-datos-developer.php");
+        // define('BD_PREFIX', 'mobiliar_');
+	break;
+
+        case 'PROD':
+        include(RUTA_PROYECTO."/conexion-datos-production.php");
+        // define('BD_PREFIX', 'mobiliar_');
+        break;
+
+        default:
+        include(RUTA_PROYECTO."/conexion-datos.php");
+        // define('BD_PREFIX', 'odermangroup_');
+        break;
+}
