@@ -74,7 +74,11 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $modulos= $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                try{
+                                    $modulos= $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($page = mysqli_fetch_array($modulos, MYSQLI_BOTH)){
                                     if(validarAccesoModulo($configuracion['conf_id_empresa'], $page[0])){

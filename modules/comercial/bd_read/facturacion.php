@@ -123,23 +123,34 @@ if(!empty($_GET["q"])){
                             </thead>
                             <tbody>
                                 <?php
-                                $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
-                                LEFT JOIN comercial_clientes ON cli_id=factura_cliente
-                                LEFT JOIN comercial_proveedores ON prov_id=factura_proveedor
-                                INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=factura_id_empresa 
-                                WHERE $filtroID $filtro ORDER BY factura_id DESC");
+                                try{
+                                    $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
+                                    LEFT JOIN comercial_clientes ON cli_id=factura_cliente
+                                    LEFT JOIN comercial_proveedores ON prov_id=factura_proveedor
+                                    INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_creador 
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=factura_id_empresa 
+                                    WHERE $filtroID $filtro ORDER BY factura_id DESC");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 
                                 $sumaFacturasVentas = 0;
                                 $sumaFacturasCompras = 0;
                                 $sumaFacturasVendedor = 0;
                                 $sumaFacturasCliente = 0;
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
-                                    $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['factura_vendedor'] . "'");
+                                    try{
+                                        $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['factura_vendedor'] . "'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
 
-											
-                                    $consultaTotal = mysqli_query($conexionBdComercial, "SELECT * FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $result['factura_id'] . "' AND czpp_tipo=4 AND czpp_valor>0 AND czpp_cantidad>0 GROUP BY czpp_id ");
+                                    try{
+                                        $consultaTotal = mysqli_query($conexionBdComercial, "SELECT * FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $result['factura_id'] . "' AND czpp_tipo=4 AND czpp_valor>0 AND czpp_cantidad>0 GROUP BY czpp_id ");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
 
                                     $total = 0;
                                     $sumaTotal = 0;

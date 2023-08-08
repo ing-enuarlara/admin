@@ -40,7 +40,12 @@ function validarAccesoModulo($empresa, $modulo)
 
 	global $conexionBdAdmin, $datosUsuarioActual;
 
-	$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $empresa . "' AND mxca_id_modulo='" . $modulo . "'");
+	try{
+		$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $empresa . "' AND mxca_id_modulo='" . $modulo . "'");
+	} catch (Exception $e) {
+		echo "Excepción catpurada: ".$e->getMessage();
+		exit();
+	}
 	$numRegistros = $consulta->num_rows;
 
 	if ($numRegistros > 0) {

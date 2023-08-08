@@ -65,10 +65,12 @@ include(RUTA_PROYECTO."includes/head.php");
                             </div>
                             <!-- /.card-header -->
                             <?php
-
-                            $consultaConfigColor = $conexionBdPaginaWeb->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
+                            try{
+                              $consultaConfigColor = $conexionBdPaginaWeb->query("SELECT * FROM general_color_store WHERE gcs_id_empresa='".$configuracion['conf_id_empresa']."'");
+                            } catch (Exception $e) {
+                              include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                            }
                             $configuracionColor = mysqli_fetch_array($consultaConfigColor, MYSQLI_BOTH);
-
                             ?>
                             <!-- form start -->
                             <form class="form-horizontal" method="post" action="../bd_update/configuracion-color-actualizar.php" enctype="multipart/form-data">

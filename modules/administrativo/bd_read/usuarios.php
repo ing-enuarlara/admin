@@ -115,19 +115,19 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                             </thead>
                             <tbody>
                                 <?php
-                                $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios");
+                                $where = "";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where = "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                }
+                                try{
+                                    $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios
+                                    INNER JOIN administrativo_roles ON utipo_id=usr_tipo
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($usuarios, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==1){
-                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['usr_id_empresa']."'");
-                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                                    }
-                                                                       
-                                    $consultaTipoUsr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$result['usr_tipo']."'");
-                                    $tipoUSR = mysqli_fetch_array($consultaTipoUsr, MYSQLI_BOTH);
 
                                     $bgColor = '';
                                     $cheked = '';
@@ -143,11 +143,11 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <td><?=$result['usr_nombre'];?></td>
                                     <td><?=$result['usr_email'];?></td>
                                     <td><?=$result['usr_telefono'];?></td>
-                                    <td><?=$tipoUSR['utipo_nombre'];?></td>
+                                    <td><?=$result['utipo_nombre'];?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+                                    <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

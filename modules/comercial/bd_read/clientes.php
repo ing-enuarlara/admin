@@ -127,12 +127,16 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                 if($datosUsuarioActual['usr_tipo']!=1){
                                     $where="WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
-                                $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes 
-                                INNER JOIN comercial_categoria_clientes ON clicat_id=cli_categoria
-                                INNER JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=cli_ciudad
-                                INNER JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cli_id_empresa 
-                                INNER JOIN ".BDGENERAL.".opciones_generales ON ogen_id=cli_tipo_doc $where");
+                                try{
+                                    $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes 
+                                    INNER JOIN comercial_categoria_clientes ON clicat_id=cli_categoria
+                                    INNER JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=cli_ciudad
+                                    INNER JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cli_id_empresa 
+                                    INNER JOIN ".BDGENERAL.".opciones_generales ON ogen_id=cli_tipo_doc $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($clientes, MYSQLI_BOTH)){
                                     $bgColor = ''; $cheked = '';
@@ -140,11 +144,15 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     $ciudad = $result['ciu_nombre']."/".$result['dep_nombre'];
                                     if($result['cli_ciudad']==1122) {$ciudad = $result['cli_ciudad_extranjera'];}
 								
-                                    $consultaNumeros = $conexionBdComercial->query("SELECT
-                                    (SELECT count(cotiz_id) FROM comercial_cotizaciones WHERE cotiz_cliente='".$result['cli_id']."'),
-                                    (SELECT count(pedid_id) FROM comercial_pedidos WHERE pedid_cliente='".$result['cli_id']."'),
-                                    (SELECT count(remi_id) FROM comercial_remisiones WHERE remi_cliente='".$result['cli_id']."'),
-                                    (SELECT count(factura_id) FROM comercial_facturas WHERE factura_cliente='".$result['cli_id']."')");
+                                    try{
+                                        $consultaNumeros = $conexionBdComercial->query("SELECT
+                                        (SELECT count(cotiz_id) FROM comercial_cotizaciones WHERE cotiz_cliente='".$result['cli_id']."'),
+                                        (SELECT count(pedid_id) FROM comercial_pedidos WHERE pedid_cliente='".$result['cli_id']."'),
+                                        (SELECT count(remi_id) FROM comercial_remisiones WHERE remi_cliente='".$result['cli_id']."'),
+                                        (SELECT count(factura_id) FROM comercial_facturas WHERE factura_cliente='".$result['cli_id']."')");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $numeros = mysqli_fetch_array($consultaNumeros, MYSQLI_BOTH);
                                     
                                     $color1='#FFF';	$color2='#FFF';	$color3='#FFF';	$color4='#FFF';

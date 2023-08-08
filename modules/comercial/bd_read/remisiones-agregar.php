@@ -91,8 +91,12 @@ if(!empty($_GET["vende"])){
                                                 if($datosUsuarioActual['usr_tipo']!=1){
                                                     $where="WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                 }
-                                                $consulta = $conexionBdComercial->query("SELECT * FROM comercial_clientes 
-                                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cli_id_empresa $where");
+                                                try{
+                                                    $consulta = $conexionBdComercial->query("SELECT * FROM comercial_clientes 
+                                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cli_id_empresa $where");
+                                                } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                }
                                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                     $disabled = '';
                                                     $dealer = '';
@@ -124,7 +128,11 @@ if(!empty($_GET["vende"])){
                                         ?>
                                                 <a href="clientes-editar.php?id=<?=$_GET["cte"];?>" class="btn btn-info" target="_blank">Editar cliente</a>
                                         <?php
-                                                $consultaCli=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id='".$_GET['cte']."'");
+                                                try{
+                                                    $consultaCli=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id='".$_GET['cte']."'");
+                                                } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                }
                                                 $clienteInfo = mysqli_fetch_array($consultaCli, MYSQLI_BOTH);
                                         ?>
 
@@ -137,8 +145,12 @@ if(!empty($_GET["vende"])){
                                                     if($datosUsuarioActual['usr_tipo']!=1){
                                                         $where="AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                     }
-                                                    $consulta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios 
-                                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa WHERE usr_bloqueado!=1 $where ORDER BY usr_nombre");
+                                                    try{
+                                                        $consulta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios 
+                                                        INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa WHERE usr_bloqueado!=1 $where ORDER BY usr_nombre");
+                                                    } catch (Exception $e) {
+                                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                    }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
                                                         if($datosUsuarioActual['usr_tipo']==1){
@@ -207,10 +219,13 @@ if(!empty($_GET["vende"])){
                                                     if($datosUsuarioActual['usr_tipo']!=1){
                                                         $where="AND cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                     }
-
-                                                    $consulta = $conexionBdComercial->query("SELECT * FROM comercial_productos
-                                                    INNER JOIN comercial_categorias ON ccat_id=cprod_categoria 
-                                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa WHERE cprod_id=cprod_id $where ORDER BY cprod_nombre");
+                                                    try{
+                                                        $consulta = $conexionBdComercial->query("SELECT * FROM comercial_productos
+                                                        INNER JOIN comercial_categorias ON ccat_id=cprod_categoria 
+                                                        INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa WHERE cprod_id=cprod_id $where ORDER BY cprod_nombre");
+                                                    } catch (Exception $e) {
+                                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                    }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
                                                         if($datosUsuarioActual['usr_tipo']==1){

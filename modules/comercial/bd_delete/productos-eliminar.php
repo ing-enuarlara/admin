@@ -4,8 +4,12 @@
 	$idPagina = 25;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	$conexionBdComercial->query("DELETE FROM comercial_productos WHERE cprod_id='" . $_GET["id"] . "'");
-	$conexionBdComercial->query("DELETE FROM comercial_productos_fotos WHERE cpf_id_producto='" . $_GET["id"] . "'");
+    try{
+		$conexionBdComercial->query("DELETE FROM comercial_productos WHERE cprod_id='" . $_GET["id"] . "'");
+		$conexionBdComercial->query("DELETE FROM comercial_productos_fotos WHERE cpf_id_producto='" . $_GET["id"] . "'");
+	} catch (Exception $e) {
+	include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

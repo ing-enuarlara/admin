@@ -3,8 +3,12 @@
 
     $idPagina = 63;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdComercial->query("UPDATE comercial_tipo_productos SET ctipo_nombre='" . $_POST["nombre"] . "', ctipo_estado='" . $_POST["estado"] . "' WHERE ctipo_id='" . $_POST["id"] . "'");
+
+    try{
+        $conexionBdComercial->query("UPDATE comercial_tipo_productos SET ctipo_nombre='" . $_POST["nombre"] . "', ctipo_estado='" . $_POST["estado"] . "' WHERE ctipo_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

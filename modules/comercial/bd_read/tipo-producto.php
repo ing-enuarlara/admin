@@ -80,9 +80,14 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $tipoProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos");
+                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $tipoProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where= "WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                }
+                                try{
+                                    $tipoProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($tipoProd, MYSQLI_BOTH)){

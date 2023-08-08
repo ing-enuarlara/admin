@@ -6,9 +6,13 @@ $idPagina = 88;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-$consulta=mysqli_query($conexionBdComercial,"SELECT * FROM comercial_pedidos 
-INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_creador 
-WHERE pedid_id='".$_GET["id"]."'");
+try{
+    $consulta=mysqli_query($conexionBdComercial,"SELECT * FROM comercial_pedidos 
+    INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_creador 
+    WHERE pedid_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consulta, MYSQLI_BOTH);
 ?>	
 <!-- Google Font: Source Sans Pro -->
@@ -203,9 +207,13 @@ $resultadoD = mysqli_fetch_array($consulta, MYSQLI_BOTH);
                                     <!-- The time line -->
                                     <div class="timeline">
                                         <?php
-                                            $preparacionNov = mysqli_query($conexionBdComercial,"SELECT * FROM comercial_pedidos_novedades 
-                                            INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pednov_usuario 
-                                            WHERE pednov_pedido='".$_GET["id"]."' ORDER BY pednov_id DESC");
+                                            try{
+                                                $preparacionNov = mysqli_query($conexionBdComercial,"SELECT * FROM comercial_pedidos_novedades 
+                                                INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pednov_usuario 
+                                                WHERE pednov_pedido='".$_GET["id"]."' ORDER BY pednov_id DESC");
+                                            } catch (Exception $e) {
+                                                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                            }
                                             while($preparacion = mysqli_fetch_array($preparacionNov, MYSQLI_BOTH)){
                                                 $fechaDF=$preparacion['pednov_fecha_registro'];
                                                 include(RUTA_PROYECTO."includes/datos-fechas.php");

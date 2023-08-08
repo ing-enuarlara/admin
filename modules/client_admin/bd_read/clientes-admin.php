@@ -78,7 +78,11 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $consulta= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
+                                try{
+                                    $consulta= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($resp = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                 ?>

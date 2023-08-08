@@ -82,14 +82,23 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria");
+                                $where= "";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where= "WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                }
+                                try{
+                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
                                     if($datosUsuarioActual['usr_tipo']==1){
-                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cmar_id_empresa']."'");
+                                        try{
+                                            $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cmar_id_empresa']."'");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
                                     $menu="NO";

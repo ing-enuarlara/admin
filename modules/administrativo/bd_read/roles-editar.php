@@ -6,7 +6,11 @@ $idPagina = 45;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
-$consuluta= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$_GET["id"]."'");
+try{
+  $consuluta= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->

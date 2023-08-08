@@ -3,8 +3,12 @@
 
     $idPagina = 61;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdComercial->query("INSERT INTO comercial_tipo_productos(ctipo_nombre, ctipo_estado, ctipo_id_empresa)VALUES('" . $_POST["nombre"] . "', 1, '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+
+    try{
+        $conexionBdComercial->query("INSERT INTO comercial_tipo_productos(ctipo_nombre, ctipo_estado, ctipo_id_empresa)VALUES('" . $_POST["nombre"] . "', 1, '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 

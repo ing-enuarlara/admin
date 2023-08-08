@@ -1,8 +1,13 @@
 <?php
-$consultaConfig = $conexionBdGeneral->query("SELECT * FROM configuracion
-LEFT JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=conf_ciudad
-LEFT JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento 
-WHERE conf_id_empresa='".$datosUsuarioActual['usr_id_empresa']."'");
+try{
+    $consultaConfig = $conexionBdGeneral->query("SELECT * FROM configuracion
+    LEFT JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=conf_ciudad
+    LEFT JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento 
+    WHERE conf_id_empresa='".$datosUsuarioActual['usr_id_empresa']."'");
+} catch (Exception $e) {
+    echo "Excepción catpurada: ".$e->getMessage();
+    exit();
+}
 $configuracion = mysqli_fetch_array($consultaConfig, MYSQLI_BOTH);
 
 $tipoCrud= array("", "Create", "Read", "Update", "Delete");

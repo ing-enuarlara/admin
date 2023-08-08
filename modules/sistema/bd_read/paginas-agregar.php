@@ -89,7 +89,11 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="modulo">
 											                      <option value=""></option>
                                             <?php
-                                            $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                            try{
+                                              $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                            } catch (Exception $e) {
+                                              include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                            }
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
                                               if(validarAccesoModulo($configuracion['conf_id_empresa'], $resOp[0])){
                                             ?>

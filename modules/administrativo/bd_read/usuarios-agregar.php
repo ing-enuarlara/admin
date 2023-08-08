@@ -75,9 +75,14 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ussTipo">
                         <option value=""></option>
                         <?php
-                        $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles");
+                        $where = "";
                         if ($datosUsuarioActual['usr_tipo'] != 1) {
-                          $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id!=1");
+                          $where = "WHERE utipo_id!=1";
+                        }
+                        try{
+                          $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles $where");
+                        } catch (Exception $e) {
+                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                         }
                         while ($resOp = mysqli_fetch_array($ussTipo, MYSQLI_BOTH)) {
                         ?>
@@ -155,7 +160,11 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
                         <option value=""></option>
                         <?php
-                        $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                        try{
+                          $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                        } catch (Exception $e) {
+                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                        }
                         while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
                         ?>
                           <option value="<?= $ciudad[0]; ?>"><?=$ciudad['ciu_nombre'] . '/' . $ciudad['dep_nombre']?></option>

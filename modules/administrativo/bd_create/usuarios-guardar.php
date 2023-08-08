@@ -9,7 +9,11 @@
         exit();
     }
     
-    $conexionBdAdministrativo->query("INSERT INTO administrativo_usuarios(usr_login,usr_clave,usr_tipo,usr_nombre,usr_email,usr_ciudad,usr_telefono,usr_id_empresa,usr_estado,usr_documento)VALUES('" . $_POST["documento"] . "',SHA1('" . $_POST["clave"] . "'),'" . $_POST["ussTipo"] . "','" . $_POST["nombre"] . "','" . $_POST["email"] . "','" . $_POST["ciudad"] . "','" . $_POST["celular"] . "','" . $datosUsuarioActual['usr_id_empresa'] . "',0,'" . $_POST["documento"] . "')");
+    try{
+        $conexionBdAdministrativo->query("INSERT INTO administrativo_usuarios(usr_login,usr_clave,usr_tipo,usr_nombre,usr_email,usr_ciudad,usr_telefono,usr_id_empresa,usr_estado,usr_documento)VALUES('" . $_POST["documento"] . "',SHA1('" . $_POST["clave"] . "'),'" . $_POST["ussTipo"] . "','" . $_POST["nombre"] . "','" . $_POST["email"] . "','" . $_POST["ciudad"] . "','" . $_POST["celular"] . "','" . $datosUsuarioActual['usr_id_empresa'] . "',0,'" . $_POST["documento"] . "')");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     $idInsertU = mysqli_insert_id($conexionBdAdministrativo);
 

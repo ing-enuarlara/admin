@@ -15,28 +15,36 @@
         $ciudad=1122;
         $city=$_POST["ciuExtra"];
     }
-    
-    $conexionBdComercial->query("UPDATE comercial_clientes SET 
-    cli_nombre='" . $_POST["nombre"] . "',
-    cli_tipo_doc='" . $_POST["tipoDoc"] . "',
-    cli_documento='" . $_POST["documento"] . "',
-    cli_categoria='" . $_POST["cliTipo"] . "',
-    cli_email='" . $_POST["email"] . "',
-    cli_telefono='" . $_POST["celular"] . "',
-    cli_ciudad='" . $ciudad . "',
-    cli_usuario='" . $_POST["documento"] . "',
-    cli_direccion='" . $_POST["direccion"] . "',
-    cli_estado_cliente='" . $_POST["cliEstado"] . "',
-    cli_pais='" . $pais . "',
-    cli_ciudad_extranjera='" . $city . "'
-    
-    WHERE cli_id='" . $_POST["id"] . "'");
-    
+
+    try{
+        $conexionBdComercial->query("UPDATE comercial_clientes SET 
+        cli_nombre='" . $_POST["nombre"] . "',
+        cli_tipo_doc='" . $_POST["tipoDoc"] . "',
+        cli_documento='" . $_POST["documento"] . "',
+        cli_categoria='" . $_POST["cliTipo"] . "',
+        cli_email='" . $_POST["email"] . "',
+        cli_telefono='" . $_POST["celular"] . "',
+        cli_ciudad='" . $ciudad . "',
+        cli_usuario='" . $_POST["documento"] . "',
+        cli_direccion='" . $_POST["direccion"] . "',
+        cli_estado_cliente='" . $_POST["cliEstado"] . "',
+        cli_pais='" . $pais . "',
+        cli_ciudad_extranjera='" . $city . "'
+        
+        WHERE cli_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
+
 	if ($_FILES['ftClientes']['name'] != "") {
 		$destino = RUTA_PROYECTO."files/clientes";
 		$fileName = subirArchivosAlServidor($_FILES['ftClientes'], 'ftc', $destino);
 
-        $conexionBdComercial->query("UPDATE comercial_clientes SET cli_logo= '" . $fileName . "' WHERE cli_id='" . $_POST["id"] . "'");
+        try{
+            $conexionBdComercial->query("UPDATE comercial_clientes SET cli_logo= '" . $fileName . "' WHERE cli_id='" . $_POST["id"] . "'");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
 	}
 
     if (!empty($_POST["clave"]) && $_POST["cambiarClave"] == 1) {
@@ -47,8 +55,12 @@
             exit();
         }
 
-        $conexionBdComercial->query("UPDATE comercial_clientes SET cli_clave= SHA1('" . $_POST["clave"] . "') WHERE cli_id='" . $_POST["id"] . "'");
-    
+        try{
+            $conexionBdComercial->query("UPDATE comercial_clientes SET cli_clave= SHA1('" . $_POST["clave"] . "') WHERE cli_id='" . $_POST["id"] . "'");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
+
     }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");

@@ -6,7 +6,11 @@ $idPagina = 29;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
-$consuluta= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$_GET["id"]."'");
+try{
+  $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->

@@ -76,12 +76,20 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas");
+                                try{
+                                    $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){
                                     if(validarAccesoModulo($configuracion['conf_id_empresa'], $page['pag_id_modulo'])){
 
-                                        $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");
+                                        try{
+                                            $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         $NombreModulo = mysqli_fetch_array($consultaNombreMod, MYSQLI_BOTH);
                                 ?>
                                 <tr>

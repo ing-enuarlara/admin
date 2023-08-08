@@ -6,7 +6,11 @@ $idPagina = 10;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
-$consuluta= $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$_GET["id"]."'");
+try{
+  $consuluta= $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->

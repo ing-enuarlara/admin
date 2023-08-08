@@ -6,7 +6,11 @@ $idPagina = 67;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-$consuluta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios INNER JOIN " . BDADMIN . ".clientes_admin ON cliAdmi_id=usr_id_empresa WHERE usr_id='" . $_GET["id"] . "'");
+try{
+  $consuluta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios INNER JOIN " . BDADMIN . ".clientes_admin ON cliAdmi_id=usr_id_empresa WHERE usr_id='" . $_GET["id"] . "'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
 <!-- Google Font: Source Sans Pro -->
@@ -112,9 +116,14 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ussTipo">
                         <option value=""></option>
                         <?php
-                        $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles");
+                        $where = "";
                         if ($datosUsuarioActual['usr_tipo'] != 1) {
-                          $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id!=1");
+                          $where = "WHERE utipo_id!=1";
+                        }
+                        try{
+                          $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles $where");
+                        } catch (Exception $e) {
+                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                         }
                         while ($resOp = mysqli_fetch_array($ussTipo, MYSQLI_BOTH)) {
                           $selected = "";

@@ -1,11 +1,14 @@
 <?php if( $datosUsuarioActual[3]==1 || isset($_SESSION['admin']) ){
 
-  
-  $TipoUsr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$datosUsuarioActual[3]."'");
+  try{
+    $TipoUsr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$datosUsuarioActual[3]."'");
+  } catch (Exception $e) {
+      include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+  }
   $nombreUSR = mysqli_fetch_array($TipoUsr, MYSQLI_BOTH);
-  
-  $paginas= $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='".$idPagina."'");
-  $rutaPagina = mysqli_fetch_array($paginas, MYSQLI_BOTH);
+
+  $archivo = explode("/", $_SERVER['PHP_SELF']);
+  $nombre_fichero = $archivo[4];
 
   $lines = file(REDIRECT_ROUTE.'.git/HEAD');
   foreach ($lines as $line_num => $line) {
@@ -27,14 +30,16 @@
         font-family:Arial;
         font-size:16px;
     ">
-    <b>Rama actual GIT:</b>&nbsp;<?php echo $ramaActual;?>&nbsp;|&nbsp;
-    <b>Id pagina:</b>&nbsp;<?php echo $idPagina;?>&nbsp;|&nbsp;
-    <b>Ruta de pagina:</b>&nbsp;<?php echo $rutaPagina['pag_ruta'];?>&nbsp;|&nbsp;
-    <b>Id usuario actual:</b>&nbsp;<?php echo $datosUsuarioActual[0];?>&nbsp;|&nbsp;
-    <b>Tipo de Usuario:</b>&nbsp;<?php echo $nombreUSR['utipo_nombre'];?>&nbsp;|&nbsp;
-		<b>Versión PHP:&nbsp;</b> <?=phpversion(); ?>&nbsp;|&nbsp; 
+    <b>Rama Actual GIT:</b>&nbsp;<?=$ramaActual;?>&nbsp;|&nbsp;
+    <b>Id Pagina:</b>&nbsp;<?=$idPagina;?>&nbsp;|&nbsp;
+    <b>Usuario Actual:</b>&nbsp;<?=$datosUsuarioActual[0];?>&nbsp;|&nbsp;
+    <b>T. Usuario:</b>&nbsp;<?=$nombreUSR['utipo_nombre'];?>&nbsp;|&nbsp;
+		<b>V PHP:&nbsp;</b> <?=phpversion(); ?>&nbsp;|&nbsp; 
 		<b>IP:&nbsp;</b> <?=$_SERVER['REMOTE_ADDR'];?>&nbsp;|&nbsp; 
-		<b>Server:&nbsp;</b> <?=$_SERVER['SERVER_NAME']; ?>&nbsp;|&nbsp;
+		<!-- <b>Server:&nbsp;</b> <?=$_SERVER['SERVER_NAME']; ?>&nbsp;|&nbsp; -->
+		<b>Host:&nbsp;</b> <?=$_SERVER['HTTP_HOST']." (".http_response_code().")"; ?>&nbsp;|&nbsp;
+    <b>Peso Página:&nbsp;</b> <?=number_format(filesize($nombre_fichero)) . ' bytes'; ?>&nbsp;|&nbsp;
+    <b>ENV:&nbsp;</b> <?=ENVIROMENT;?>&nbsp;|&nbsp;
 
     <?php if( isset($_SESSION['admin']) ){?>
 			<b>User Admin:&nbsp;</b> <?=$_SESSION['admin']; ?>&nbsp;|&nbsp;

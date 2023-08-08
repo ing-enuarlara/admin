@@ -92,27 +92,25 @@ include(RUTA_PROYECTO."includes/head.php");
                                 if($datosUsuarioActual['usr_tipo']!=1){
                                     $where="WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
-                                $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
-                                INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 $where");
+                                try{
+                                    $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
+                                    LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
+                                    LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
+                                    INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==1){
-                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cprod_id_empresa']."'");
-                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                                    }
-
                                     $categoria="";
-                                    if($result['cprod_categoria']!=0){
-                                        $consultaCategorias = $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id='".$result['cprod_categoria']."'");
-                                        $datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH);
-                                        $categoria=$datosCategorias['ccat_nombre'];
+                                    if(!empty($result['ccat_nombre'])){
+                                        $categoria=$result['ccat_nombre'];
                                     }
 
                                     $subCategoria="";
-                                    if($result['cprod_marca']!=0){
-                                        $consultaSubCategorias = $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_id='".$result['cprod_marca']."'");
-                                        $datosSubCategorias = mysqli_fetch_array($consultaSubCategorias, MYSQLI_BOTH);
-                                        $subCategoria=$datosSubCategorias['cmar_nombre'];
+                                    if(!empty($result['cmar_nombre'])){
+                                        $subCategoria=$result['cmar_nombre'];
                                     }
 
                                     $estado="Activo";
@@ -144,7 +142,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+                                    <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

@@ -3,8 +3,12 @@
 
     $idPagina = 5;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdSistema->query("INSERT INTO sistema_paginas(pag_nombre, pag_tipo_crud, pag_id_modulo, pag_ruta)VALUES('" . $_POST["nombre"] . "','" . $_POST["crud"] . "','" . $_POST["modulo"] . "','". $_POST["ruta"] . "')");
+
+    try{
+        $conexionBdSistema->query("INSERT INTO sistema_paginas(pag_nombre, pag_tipo_crud, pag_id_modulo, pag_ruta)VALUES('" . $_POST["nombre"] . "','" . $_POST["crud"] . "','" . $_POST["modulo"] . "','". $_POST["ruta"] . "')");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     $idInsertU = mysqli_insert_id($conexionBdSistema);
 

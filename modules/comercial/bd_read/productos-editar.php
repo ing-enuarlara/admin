@@ -6,10 +6,18 @@ $idPagina = 23;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
-$consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
+try{
+  $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 
-$consulutaFoto= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."' AND cpf_principal=1");
+try{
+  $consulutaFoto= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."' AND cpf_principal=1");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->
@@ -109,14 +117,23 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
                                                 <option value=""></option>
                                                 <?php
-                                                $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_estado=1");
+                                                $where= "";
                                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                                    $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."' AND ctipo_estado=1");
+                                                    $where= "AND ctipo_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                                }
+                                                try{
+                                                  $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_estado=1 $where");
+                                                } catch (Exception $e) {
+                                                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
                                                 while($datosTiposProd = mysqli_fetch_array($consultaTiposProd, MYSQLI_BOTH)){
                                                   $nombreEmpresa='';
                                                   if($datosUsuarioActual['usr_tipo']==1){
-                                                      $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosTiposProd['ctipo_id_empresa']."'");
+                                                      try{
+                                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosTiposProd['ctipo_id_empresa']."'");
+                                                      } catch (Exception $e) {
+                                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                      }
                                                       $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                                       $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
                                                   }
@@ -132,14 +149,23 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria" onchange="traerSubCategorias()">
                                                 <option value=""></option>
                                                 <?php
-                                                $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
+                                                $where="";
                                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                                    $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                                  $where= "WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                                }
+                                                try{
+                                                  $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias $where");
+                                                } catch (Exception $e) {
+                                                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
                                                 while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
                                                     $nombreEmpresa='';
                                                     if($datosUsuarioActual['usr_tipo']==1){
-                                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['ccat_id_empresa']."'");
+                                                        try{
+                                                          $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['ccat_id_empresa']."'");
+                                                        } catch (Exception $e) {
+                                                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                        }
                                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                                         $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
                                                     }

@@ -133,7 +133,11 @@ $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener ent
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipoDoc">
                                                 <option value=""></option>
                                                 <?php
-                                                $consulta = $conexionBdGeneral->query("SELECT * FROM opciones_generales WHERE ogen_grupo=1");
+                                                try{
+                                                    $consulta = $conexionBdGeneral->query("SELECT * FROM opciones_generales WHERE ogen_grupo=1");
+                                                } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                }
                                                 while ($resOp = mysqli_fetch_array($consulta, MYSQLI_BOTH)) {
                                                 ?>
                                                     <option value="<?= $resOp[0]; ?>"><?= $resOp['ogen_nombre'] ?></option>
@@ -200,7 +204,11 @@ $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener ent
                                                 <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
                                                     <option value=""></option>
                                                     <?php
-                                                    $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                                                    try{
+                                                        $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                                                    } catch (Exception $e) {
+                                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                    }
                                                     while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
                                                     ?>
                                                         <option value="<?= $ciudad[0]; ?>"><?= $ciudad['ciu_nombre'] . '/' . $ciudad['dep_nombre'] ?></option>
@@ -226,9 +234,14 @@ $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener ent
                                             <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="cliTipo">
                                                 <option value=""></option>
                                                 <?php
-                                                $cliTipo = $conexionBdComercial->query("SELECT * FROM comercial_categoria_clientes");
-                                                if ($datosUsuarioActual['usr_tipo'] != 1) {
-                                                    $cliTipo = $conexionBdComercial->query("SELECT * FROM comercial_categoria_clientes WHERE clicat_id_empresa='" . $configuracion['conf_id_empresa'] . "'");
+                                                $where="";
+                                                if($datosUsuarioActual['usr_tipo']!=1){
+                                                    $where= "WHERE clicat_id_empresa='" . $configuracion['conf_id_empresa'] . "'";
+                                                }
+                                                try{
+                                                    $cliTipo = $conexionBdComercial->query("SELECT * FROM comercial_categoria_clientes $where");
+                                                } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
                                                 while ($resOp = mysqli_fetch_array($cliTipo, MYSQLI_BOTH)) {
                                                 ?>

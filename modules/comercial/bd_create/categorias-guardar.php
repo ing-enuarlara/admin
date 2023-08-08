@@ -3,8 +3,12 @@
 
     $idPagina = 28;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdComercial->query("INSERT INTO comercial_categorias(ccat_nombre, ccat_menu, ccat_footer, ccat_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["menu"] . "', '" . $_POST["footer"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+
+    try{
+        $conexionBdComercial->query("INSERT INTO comercial_categorias(ccat_nombre, ccat_menu, ccat_footer, ccat_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["menu"] . "', '" . $_POST["footer"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 

@@ -10,7 +10,11 @@ if (!isset($idPagina)) {
 	$mensaje= "Falta el ID de esta página.";
 	$paso=false;
 }else{
-	$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
+    try{
+		$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
 
 	if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {

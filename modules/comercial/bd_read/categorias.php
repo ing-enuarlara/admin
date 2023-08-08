@@ -81,16 +81,14 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
+                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where= "WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
+                                $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias 
+                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=ccat_id_empresa $where");
                                 $num=1;
                                 while($result = mysqli_fetch_array($categorias, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==1){
-                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['ccat_id_empresa']."'");
-                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                                    }
                                     $menu="NO";
                                     if($result['ccat_menu']==1){
                                         $menu="SI";
@@ -108,7 +106,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+                                    <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

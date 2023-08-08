@@ -16,10 +16,14 @@ if(!empty($_GET['cte'])){
 	include(RUTA_PROYECTO."includes/verificar-paginas.php");
 }
 
-$resultado = mysqli_fetch_array($conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
-INNER JOIN comercial_clientes ON cli_id=cotiz_cliente
-INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor
-WHERE cotiz_id='" . $_GET["id"] . "'"), MYSQLI_BOTH);
+try{
+	$resultado = mysqli_fetch_array($conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
+	INNER JOIN comercial_clientes ON cli_id=cotiz_cliente
+	INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor
+	WHERE cotiz_id='" . $_GET["id"] . "'"), MYSQLI_BOTH);
+} catch (Exception $e) {
+	include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 
 $envio=0;
 if(!empty($resultado['cotiz_envio'])){
@@ -114,13 +118,17 @@ if(!empty($resultado['cotiz_envio'])){
 					<tbody>
 						<!-- PRODUCTOS -->
 						<?php
-						$productos = $conexionBdComercial->query("SELECT * FROM comercial_productos 
-						INNER JOIN comercial_marcas ON cmar_id=cprod_marca
-						INNER JOIN comercial_categorias ON ccat_id=cmar_categoria
-						INNER JOIN comercial_tipo_productos ON ctipo_id=cprod_tipo
-						INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1
-						INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_tipo=1 AND czpp_cotizacion='" . $_GET["id"] . "'
-						ORDER BY czpp_orden");
+						try{
+							$productos = $conexionBdComercial->query("SELECT * FROM comercial_productos 
+							INNER JOIN comercial_marcas ON cmar_id=cprod_marca
+							INNER JOIN comercial_categorias ON ccat_id=cmar_categoria
+							INNER JOIN comercial_tipo_productos ON ctipo_id=cprod_tipo
+							INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1
+							INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_tipo=1 AND czpp_cotizacion='" . $_GET["id"] . "'
+							ORDER BY czpp_orden");
+						} catch (Exception $e) {
+							include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+						}
 						$no=1;
 						$totalIva = 0;
 						$subtotal=0;

@@ -2,7 +2,11 @@
 include("../modules/sesion.php");
 //PRODUCTOS DE LA COTIZACIÓN
 if($_POST["proceso"]==1){
-	$consultaProducto=mysqli_query($conexionBdComercial,"SELECT * FROM comercial_relacion_productos INNER JOIN comercial_productos ON cprod_id=czpp_producto WHERE czpp_id='".$_POST["producto"]."' ");
+	try{
+		$consultaProducto=mysqli_query($conexionBdComercial,"SELECT * FROM comercial_relacion_productos INNER JOIN comercial_productos ON cprod_id=czpp_producto WHERE czpp_id='".$_POST["producto"]."' ");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$datosProducto = mysqli_fetch_array($consultaProducto, MYSQLI_BOTH);
 
 	if($_POST["campo"]=='czpp_valor'){
@@ -13,9 +17,12 @@ if($_POST["proceso"]==1){
 		}
 	}
 
-	mysqli_query($conexionBdComercial,"UPDATE comercial_relacion_productos SET ".$_POST["campo"]."='".mysqli_real_escape_string($conexionBdComercial,$_POST["valor"])."' WHERE czpp_id='".$_POST["producto"]."'");
-	
-	//echo '<script type="text/javascript">location.reload();</script>';
+	try{
+		mysqli_query($conexionBdComercial,"UPDATE comercial_relacion_productos SET ".$_POST["campo"]."='".mysqli_real_escape_string($conexionBdComercial,$_POST["valor"])."' WHERE czpp_id='".$_POST["producto"]."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
+
 }
 ?>
 

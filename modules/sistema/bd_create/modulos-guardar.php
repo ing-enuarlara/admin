@@ -3,8 +3,12 @@
 
     $idPagina = 11;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdSistema->query("INSERT INTO sistema_modulos(mod_nombre)VALUES('" . $_POST["nombre"] . "')");
+
+    try{
+        $conexionBdSistema->query("INSERT INTO sistema_modulos(mod_nombre)VALUES('" . $_POST["nombre"] . "')");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     $idInsertU = mysqli_insert_id($conexionBdSistema);
 

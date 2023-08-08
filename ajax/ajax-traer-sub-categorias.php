@@ -1,6 +1,10 @@
 <?php
 include("../modules/sesion.php");
-$consultaSubCategorias= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_categoria='".$_POST["categoria"]."'");
+try{
+    $consultaSubCategorias= $conexionBdComercial->query("SELECT * FROM comercial_marcas WHERE cmar_categoria='".$_POST["categoria"]."'");
+} catch (Exception $e) {
+    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $numSubCategorias=mysqli_num_rows($consultaSubCategorias);
 
 if($numSubCategorias>0){
@@ -14,7 +18,11 @@ if($numSubCategorias>0){
 
         $nombreEmpresa='';
         if($datosUsuarioActual['usr_tipo']==1){
-            $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosSubCategorias['cmar_id_empresa']."'");
+            try{
+                $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosSubCategorias['cmar_id_empresa']."'");
+            } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+            }
             $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
             $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
         }

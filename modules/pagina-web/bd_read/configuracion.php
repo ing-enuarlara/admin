@@ -65,7 +65,11 @@ include(RUTA_PROYECTO . "includes/head.php");
                   <h5 class="float-sm-right"><?= $paginaActual['pag_nombre'] ?></h5>
                 </div>
                 <?php
-                $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='" . $datosUsuarioActual['usr_id_empresa'] . "'");
+                try{
+                  $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='" . $datosUsuarioActual['usr_id_empresa'] . "'");
+                } catch (Exception $e) {
+                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                }
                 $configuracionPaginaWeb = mysqli_fetch_array($consultaConfigPaginaWeb, MYSQLI_BOTH);
 
                 $default = 'files/default.png';

@@ -4,7 +4,11 @@
 	$idPagina = 55;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	$conexionBdPaginaWeb->query("DELETE FROM pagina_legales WHERE pal_id='" . $_GET["id"] . "'");
+    try{
+		$conexionBdPaginaWeb->query("DELETE FROM pagina_legales WHERE pal_id='" . $_GET["id"] . "'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

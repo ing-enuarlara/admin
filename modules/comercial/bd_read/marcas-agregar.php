@@ -89,14 +89,23 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria">
 											                      <option value=""></option>
                                             <?php
-                                            $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias");
+                                            $where= "";
                                             if($datosUsuarioActual['usr_tipo']!=1){
-                                                $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                                $where= "WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                            }
+                                            try{
+                                              $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias $where");
+                                            } catch (Exception $e) {
+                                              include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                             }
                                             while($resOp = mysqli_fetch_array($categorias, MYSQLI_BOTH)){
                                               $nombreEmpresa='';
                                               if($datosUsuarioActual['usr_tipo']==1){
-                                                  $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$resOp['ccat_id_empresa']."'");
+                                                  try{
+                                                    $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$resOp['ccat_id_empresa']."'");
+                                                  } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                  }
                                                   $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                                   $nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
                                               }

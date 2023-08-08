@@ -4,25 +4,33 @@
     $idPagina = 68;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
     
-    $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET 
-    usr_tipo='" . $_POST["ussTipo"] . "', 
-    usr_nombre='" . $_POST["nombre"] . "', 
-    usr_documento='" . $_POST["documento"] . "', 
-    usr_email='" . $_POST["email"] . "', 
-    usr_telefono='" . $_POST["celular"] . "', 
-    usr_direccion='" . $_POST["direccion"] . "', 
-    usr_ciudad='" . $_POST["ciudad"] . "', 
-    usr_ocupacion='" . $_POST["ocupacion"] . "', 
-    usr_genero='" . $_POST["genero"] . "', 
-    usr_intentos_fallidos='" . $_POST["fallidos"] . "'
-    
-    WHERE usr_id='" . $_POST["id"] . "'");
+    try{
+        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET 
+        usr_tipo='" . $_POST["ussTipo"] . "', 
+        usr_nombre='" . $_POST["nombre"] . "', 
+        usr_documento='" . $_POST["documento"] . "', 
+        usr_email='" . $_POST["email"] . "', 
+        usr_telefono='" . $_POST["celular"] . "', 
+        usr_direccion='" . $_POST["direccion"] . "', 
+        usr_ciudad='" . $_POST["ciudad"] . "', 
+        usr_ocupacion='" . $_POST["ocupacion"] . "', 
+        usr_genero='" . $_POST["genero"] . "', 
+        usr_intentos_fallidos='" . $_POST["fallidos"] . "'
+        
+        WHERE usr_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
     
 	if ($_FILES['ftPerfil']['name'] != "") {
 		$destino = RUTA_PROYECTO."files/perfil";
 		$fileName = subirArchivosAlServidor($_FILES['ftPerfil'], 'ftp', $destino);
 
-        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_foto= '" . $fileName . "' WHERE usr_id='" . $_POST["id"] . "'");
+        try{
+            $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_foto= '" . $fileName . "' WHERE usr_id='" . $_POST["id"] . "'");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
 	}
 
     if (!empty($_POST["clave"]) && $_POST["cambiarClave"] == 1) {
@@ -33,7 +41,11 @@
             exit();
         }
 
-        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_clave= SHA1('" . $_POST["clave"] . "') WHERE usr_id='" . $_POST["id"] . "'");
+        try{
+            $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_clave= SHA1('" . $_POST["clave"] . "') WHERE usr_id='" . $_POST["id"] . "'");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
     
     }
 

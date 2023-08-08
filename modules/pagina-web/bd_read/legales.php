@@ -80,14 +80,23 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $legales= $conexionBdPaginaWeb->query("SELECT * FROM pagina_legales");
+                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $legales= $conexionBdPaginaWeb->query("SELECT * FROM pagina_legales WHERE pal_id_empresa='".$configuracion['conf_id_empresa']."'");
+                                    $where= "WHERE pal_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                }
+                                try{
+                                    $legales= $conexionBdPaginaWeb->query("SELECT * FROM pagina_legales $where");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($legales, MYSQLI_BOTH)){
                                     if($datosUsuarioActual['usr_tipo']==1){
-                                        $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['pal_id_empresa']."'");
+                                        try{
+                                            $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['pal_id_empresa']."'");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
 

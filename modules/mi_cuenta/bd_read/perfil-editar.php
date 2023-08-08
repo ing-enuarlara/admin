@@ -175,7 +175,11 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
                         <option value=""></option>
                         <?php
-                        $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                        try{
+                          $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
+                        } catch (Exception $e) {
+                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                        }
                         while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
                           $selected = "";
                           if ($datosUsuarioActual['usr_ciudad'] == $ciudad[0]) {
@@ -197,7 +201,11 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="genero">
                         <option value=""></option>
                         <?php
-                        $consultaGenero = $conexionBdGeneral->query("SELECT * FROM opciones_generales WHERE ogen_grupo=4");
+                        try{
+                          $consultaGenero = $conexionBdGeneral->query("SELECT * FROM opciones_generales WHERE ogen_grupo=4");
+                        } catch (Exception $e) {
+                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                        }
                         while ($genero = mysqli_fetch_array($consultaGenero, MYSQLI_BOTH)) {
                           $selected = "";
                           if ($datosUsuarioActual['usr_genero'] == $genero[0]) {

@@ -4,12 +4,20 @@ include("../modules/sesion.php");
 $mensajeNot = 'Hubo un error al guardar las cambios';
 //Bloquear y desbloquear usuarios
 if($_POST["operacion"]==1){
-	$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_bloqueado='".$_POST["valor"]."' WHERE usr_id='".$_POST["idR"]."'");
+	try{
+		$conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_bloqueado='".$_POST["valor"]."' WHERE usr_id='".$_POST["idR"]."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$mensajeNot = 'El usuario ha cambiado de estado correctamente.';
 }
 //Bloquear y desbloquear clientes
 if($_POST["operacion"]==2){
-	$conexionBdComercial->query("UPDATE comercial_clientes SET cli_bloqueado='".$_POST["valor"]."' WHERE cli_id='".$_POST["idR"]."'");
+	try{
+		$conexionBdComercial->query("UPDATE comercial_clientes SET cli_bloqueado='".$_POST["valor"]."' WHERE cli_id='".$_POST["idR"]."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$mensajeNot = 'El cliente ha cambiado de estado correctamente.';
 }
 ?>

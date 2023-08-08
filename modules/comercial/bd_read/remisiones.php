@@ -108,17 +108,28 @@ if(!empty($_GET["q"])){
                             </thead>
                             <tbody>
                                 <?php
-                                $filtro="";
-                                $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
-                                INNER JOIN comercial_clientes ON cli_id=remi_cliente 
-                                INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=remi_id_empresa 
-                                WHERE $filtroID $filtro ORDER BY remi_id DESC");
+                                try{
+                                    $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
+                                    INNER JOIN comercial_clientes ON cli_id=remi_cliente 
+                                    INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_creador 
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=remi_id_empresa 
+                                    WHERE $filtroID $filtro ORDER BY remi_id DESC");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
-                                    $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['remi_vendedor'] . "'");
+                                    try{
+                                        $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['remi_vendedor'] . "'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
 
-                                    $consultaGpedido=$conexionBdComercial->query("SELECT factura_id, factura_fecha_creacion FROM comercial_facturas WHERE factura_remision='" . $result['remi_id'] . "'");
+                                    try{
+                                        $consultaGpedido=$conexionBdComercial->query("SELECT factura_id, factura_fecha_creacion FROM comercial_facturas WHERE factura_remision='" . $result['remi_id'] . "'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $generoFactura = mysqli_fetch_array($consultaGpedido, MYSQLI_BOTH);
 
                                     $fondoRemi = '';

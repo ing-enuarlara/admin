@@ -5,7 +5,12 @@ require_once(RUTA_PROYECTO."enviar-correos/EnviarEmail.php");
 $idPagina = 82;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-$consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones INNER JOIN comercial_clientes ON cli_id=cotiz_cliente INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor WHERE cotiz_id='" . $_POST["id"] . "'");
+try{
+	$consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones INNER JOIN comercial_clientes ON cli_id=cotiz_cliente INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor WHERE cotiz_id='" . $_POST["id"] . "'");
+} catch (Exception $e) {
+	include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
+
 $resultado = mysqli_fetch_array($consulta, MYSQLI_BOTH);
 
 if(!empty($resultado)){

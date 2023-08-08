@@ -6,7 +6,11 @@ $idPagina = 52;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-$consulta = $conexionBdPaginaWeb->query("SELECT * FROM pagina_legales WHERE pal_id='" . $_GET["id"] . "'");
+try{
+  $consulta = $conexionBdPaginaWeb->query("SELECT * FROM pagina_legales WHERE pal_id='" . $_GET["id"] . "'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consulta, MYSQLI_BOTH);
 ?>
 <!-- Google Font: Source Sans Pro -->

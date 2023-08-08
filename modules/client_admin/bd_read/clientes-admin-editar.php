@@ -6,7 +6,11 @@ $idPagina = 16;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
-$consuluta= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$_GET["id"]."'");
+try{
+  $consuluta= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
     <!-- Google Font: Source Sans Pro -->
@@ -111,9 +115,17 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         <select class="select2" multiple="multiple" data-placeholder="Escoge los modulos" style="width: 100%;" name="modulo[]">
                                             <option value=""></option>
                                                 <?php
-                                                $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                                try{
+                                                  $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                                } catch (Exception $e) {
+                                                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                }
                                                 while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
-                                                    $consultaModulos=$conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='".$resultadoD['cliAdmi_id']."' AND mxca_id_modulo='".$resOp['mod_id']."'");
+                                                    try{
+                                                      $consultaModulos=$conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='".$resultadoD['cliAdmi_id']."' AND mxca_id_modulo='".$resOp['mod_id']."'");
+                                                    } catch (Exception $e) {
+                                                      include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                    }
                                                     $numZ = $consultaModulos->num_rows;
                                                 ?>
                                                     <option value="<?=$resOp[0];?>"<?php if($numZ>0){echo "selected";}?> ><?=$resOp['mod_nombre'];?></option>

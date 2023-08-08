@@ -74,7 +74,11 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $roles= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles");
+                                try{
+                                    $roles= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 $num=1;
                                 while($result = mysqli_fetch_array($roles, MYSQLI_BOTH)){
 

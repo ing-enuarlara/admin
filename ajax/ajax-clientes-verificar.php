@@ -2,7 +2,11 @@
 include("../modules/sesion.php");
 
 if($_POST["opcion"]==1){
-	$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."'");
+	try{
+		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$numCliente=mysqli_num_rows($consulta);
 	if($numCliente>0){
 ?>
@@ -25,7 +29,11 @@ if($_POST["opcion"]==1){
 }
 
 if($_POST["opcion"]==2){
-	$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id!='".$_POST["idCliente"]."' AND (cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."')");
+	try{
+		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id!='".$_POST["idCliente"]."' AND (cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."')");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$numCliente=mysqli_num_rows($consulta);
 	if($numCliente>0){
 ?>
@@ -48,7 +56,11 @@ if($_POST["opcion"]==2){
 }
 
 if($_POST["opcion"]==3){
-	$consulta=$conexionBdPrincipal->query("SELECT * FROM productos WHERE prod_referencia='".trim($_POST["idUnico"])."'");
+	try{
+		$consulta=$conexionBdPrincipal->query("SELECT * FROM productos WHERE prod_referencia='".trim($_POST["idUnico"])."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 	$datos = mysqli_fetch_array($consulta, MYSQLI_BOTH);
 	if(!empty($datos[0])){
 		echo "<span style='font-family:arial; text-align:center; color:red;'>Ya existe un registro con esta Referencia: <b><a href='productos-editar.php?id=".$datos[0]."'>".$datos['prod_nombre']."</a></b></div>";

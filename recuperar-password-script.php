@@ -2,7 +2,12 @@
 include("conexion.php");
 require_once(RUTA_PROYECTO."enviar-correos/EnviarEmail.php");
 
-$consulta= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE (usr_email='".$_POST["usuario"]."' || usr_login='".$_POST["usuario"]."' || usr_documento='".$_POST["usuario"]."')");
+try{
+	$consulta= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE (usr_email='".$_POST["usuario"]."' || usr_login='".$_POST["usuario"]."' || usr_documento='".$_POST["usuario"]."')");
+} catch (Exception $e) {
+    echo "Excepción catpurada: ".$e->getMessage();
+    exit();
+}
 $resultado = mysqli_fetch_array($consulta, MYSQLI_BOTH);
 
 if(!empty($resultado)){

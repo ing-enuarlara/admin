@@ -90,9 +90,13 @@ if(!empty($_GET["vende"])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
-                                        INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor 
-                                        WHERE cotiz_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroC ORDER BY cotiz_id DESC");
+                                        try{
+                                            $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
+                                            INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor 
+                                            WHERE cotiz_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroC ORDER BY cotiz_id DESC");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                         ?>
                                         <tr>
@@ -136,9 +140,13 @@ if(!empty($_GET["vende"])){
                                     <tbody>
                                         <?php
                                         $filtro="";
-                                        $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
-                                        INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_vendedor 
-                                        WHERE remi_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroR ORDER BY remi_id DESC");
+                                        try{
+                                            $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
+                                            INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_vendedor 
+                                            WHERE remi_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroR ORDER BY remi_id DESC");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                             $pedido='';
                                             if(!empty($result['remi_pedido'])){
@@ -191,9 +199,13 @@ if(!empty($_GET["vende"])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
-                                        INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_vendedor 
-                                        WHERE pedid_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroP ORDER BY pedid_id DESC");
+                                        try{
+                                            $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
+                                            INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_vendedor 
+                                            WHERE pedid_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroP ORDER BY pedid_id DESC");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                             $cotiz='';
                                             if(!empty($result['pedid_cotizacion'])){
@@ -246,15 +258,22 @@ if(!empty($_GET["vende"])){
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
-                                        INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_vendedor 
-                                        WHERE factura_cliente='".$datosUsuarioActual['usr_id_cliente']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
+                                        try{
+                                            $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
+                                            INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_vendedor 
+                                            WHERE factura_cliente='".$datosUsuarioActual['usr_id_cliente']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
+                                        } catch (Exception $e) {
+                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                        }
                                         
                                         $sumaFacturasVentas = 0;
                                         while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
 
-                                                    
-                                            $consultaTotal = mysqli_query($conexionBdComercial, "SELECT * FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $result['factura_id'] . "' AND czpp_tipo=4 AND czpp_valor>0 AND czpp_cantidad>0 GROUP BY czpp_id ");
+                                            try{
+                                                $consultaTotal = mysqli_query($conexionBdComercial, "SELECT * FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $result['factura_id'] . "' AND czpp_tipo=4 AND czpp_valor>0 AND czpp_cantidad>0 GROUP BY czpp_id ");
+                                            } catch (Exception $e) {
+                                                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                            }
 
                                             $total = 0;
                                             $sumaTotal = 0;

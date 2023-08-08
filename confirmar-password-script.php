@@ -12,7 +12,12 @@
         exit();
     }
 
-    $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_clave=SHA1('" . $_POST["claveNueva"] . "') WHERE usr_id='" . $_POST["idUsuario"] . "' AND usr_id_empresa='" . $_POST["idEmpresa"] . "'");
+    try{
+        $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_clave=SHA1('" . $_POST["claveNueva"] . "') WHERE usr_id='" . $_POST["idUsuario"] . "' AND usr_id_empresa='" . $_POST["idEmpresa"] . "'");
+    } catch (Exception $e) {
+        echo "Excepción catpurada: ".$e->getMessage();
+        exit();
+    }
 
     echo '<script type="text/javascript">window.location.href="index.php?RC=2";</script>';
     exit();

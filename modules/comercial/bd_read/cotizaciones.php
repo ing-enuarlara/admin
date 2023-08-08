@@ -108,13 +108,21 @@ if(!empty($_GET["q"])){
                             </thead>
                             <tbody>
                                 <?php
-                                $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
-                                INNER JOIN comercial_clientes ON cli_id=cotiz_cliente 
-                                INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_creador 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cotiz_id_empresa 
-                                WHERE $filtroID $filtro ORDER BY cotiz_id DESC");
+                                try{
+                                    $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
+                                    INNER JOIN comercial_clientes ON cli_id=cotiz_cliente 
+                                    INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_creador 
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cotiz_id_empresa 
+                                    WHERE $filtroID $filtro ORDER BY cotiz_id DESC");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                }
                                 while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
-                                    $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['cotiz_vendedor'] . "'");
+                                    try{
+                                        $consultaVendedor=$conexionBdAdministrativo->query("SELECT usr_id, usr_nombre FROM administrativo_usuarios WHERE usr_id='" . $result['cotiz_vendedor'] . "'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $vendedor = mysqli_fetch_array($consultaVendedor, MYSQLI_BOTH);
 
                                     $fondoCotiz = '';
@@ -122,7 +130,11 @@ if(!empty($_GET["q"])){
                                         $fondoCotiz = 'aquamarine';
                                     }
 
-                                    $consultaGpedido=$conexionBdComercial->query("SELECT pedid_id, pedid_fecha_creacion FROM comercial_pedidos WHERE pedid_cotizacion='" . $result['cotiz_id'] . "'");
+                                    try{
+                                        $consultaGpedido=$conexionBdComercial->query("SELECT pedid_id, pedid_fecha_creacion FROM comercial_pedidos WHERE pedid_cotizacion='" . $result['cotiz_id'] . "'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     $generoPedido = mysqli_fetch_array($consultaGpedido, MYSQLI_BOTH);
 
                                     $IdGeneroPedido = '';
@@ -143,8 +155,12 @@ if(!empty($_GET["q"])){
                                     </td>
                                     <td>
                                         <?php
-                                            $productos = $conexionBdComercial->query("SELECT cprod_nombre FROM comercial_relacion_productos
+                                            try{
+                                                $productos = $conexionBdComercial->query("SELECT cprod_nombre FROM comercial_relacion_productos
                                             INNER JOIN comercial_productos ON cprod_id=czpp_producto WHERE czpp_cotizacion='" . $result['cotiz_id'] . "' AND czpp_tipo=1");
+                                            } catch (Exception $e) {
+                                                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                            }
                                             $i = 1;
                                             while ($prod = mysqli_fetch_array($productos, MYSQLI_BOTH)) {
                                                 if($i==1){echo "<b>Productos:</b><br>";}

@@ -8,11 +8,19 @@
 
         $dia=date("d");
         $mes=date("M");
-        mysqli_query($conexionBdComercial,"INSERT INTO comercial_pedidos_novedades(pednov_dia, pednov_mes, pednov_estado, pednov_novedad, pednov_pedido, pednov_usuario)VALUES('" . $dia . "', '" . $mes . "', 3, 'Su pedido fue entregado', '" . $_POST["id"] . "', '" . $_SESSION["id"] . "')");
+        try{
+            mysqli_query($conexionBdComercial,"INSERT INTO comercial_pedidos_novedades(pednov_dia, pednov_mes, pednov_estado, pednov_novedad, pednov_pedido, pednov_usuario)VALUES('" . $dia . "', '" . $mes . "', 3, 'Su pedido fue entregado', '" . $_POST["id"] . "', '" . $_SESSION["id"] . "')");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
 
     }
 
-    mysqli_query($conexionBdComercial,"UPDATE comercial_pedidos SET pedid_fecha_propuesta='" . $_POST["fecha"] . "', pedid_estado='" . $_POST["estado"] . "', pedid_empresa_envio='" . $_POST["empresaEnvio"] . "', pedid_codigo_seguimiento='" . $_POST["codigoSeguimiento"] . "', pedid_ultima_modificacion=now(), pedid_usuario_modificacion='" . $_SESSION["id"] . "' WHERE pedid_id='" . $_POST["id"] . "'");
+    try{
+        mysqli_query($conexionBdComercial,"UPDATE comercial_pedidos SET pedid_fecha_propuesta='" . $_POST["fecha"] . "', pedid_estado='" . $_POST["estado"] . "', pedid_empresa_envio='" . $_POST["empresaEnvio"] . "', pedid_codigo_seguimiento='" . $_POST["codigoSeguimiento"] . "', pedid_ultima_modificacion=now(), pedid_usuario_modificacion='" . $_SESSION["id"] . "' WHERE pedid_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
         

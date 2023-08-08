@@ -123,29 +123,33 @@ class EnviarEmail {
         
         $adjunto=$mail->attachmentExists();
 
-        mysqli_query($conexionBdAdmin, "INSERT INTO historial_correos_enviados(
-                hisco_fecha,
-                hisco_remitente,
-                hisco_destinatario,
-                hisco_asunto,
-                hisco_contenido,
-                hisco_adjunto,
-                hisco_archivo_salida,
-                hisco_estado,
-                hisco_descripcion_error,
-                hisco_id_empresa
-                )VALUES(
-                now(),
-                '".$remitente."',
-                '".$destinatario."',
-                '".$asunto."',
-                '".$body."',
-                '".$adjunto."',
-                '".$_SERVER["HTTP_REFERER"]."',
-                '".$estado."',
-                '".$descripcion."',
-                '".$data['id_empresa']."')
-            ");
+        try{
+            mysqli_query($conexionBdAdmin, "INSERT INTO historial_correos_enviados(
+                    hisco_fecha,
+                    hisco_remitente,
+                    hisco_destinatario,
+                    hisco_asunto,
+                    hisco_contenido,
+                    hisco_adjunto,
+                    hisco_archivo_salida,
+                    hisco_estado,
+                    hisco_descripcion_error,
+                    hisco_id_empresa
+                    )VALUES(
+                    now(),
+                    '".$remitente."',
+                    '".$destinatario."',
+                    '".$asunto."',
+                    '".$body."',
+                    '".$adjunto."',
+                    '".$_SERVER["HTTP_REFERER"]."',
+                    '".$estado."',
+                    '".$descripcion."',
+                    '".$data['id_empresa']."')
+                ");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
     }
 
 }

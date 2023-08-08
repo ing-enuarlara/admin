@@ -4,8 +4,12 @@
 	$idPagina = 80;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	$conexionBdComercial->query("DELETE FROM comercial_cotizaciones WHERE cotiz_id='" . $_GET["id"] . "'");
-	$conexionBdComercial->query("DELETE FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $_GET["id"] . "' AND czpp_tipo=1");
+    try{
+		$conexionBdComercial->query("DELETE FROM comercial_cotizaciones WHERE cotiz_id='" . $_GET["id"] . "'");
+		$conexionBdComercial->query("DELETE FROM comercial_relacion_productos WHERE czpp_cotizacion='" . $_GET["id"] . "' AND czpp_tipo=1");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

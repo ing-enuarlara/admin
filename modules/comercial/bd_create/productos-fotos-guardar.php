@@ -8,7 +8,11 @@
 		$destino = RUTA_PROYECTO."files/productos";
 		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
     
-        $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion)VALUES('" . $_POST['id'] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "', now())");
+        try{
+            $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion)VALUES('" . $_POST['id'] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "', now())");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
 
         $idInsertU = mysqli_insert_id($conexionBdComercial);
 	}else{

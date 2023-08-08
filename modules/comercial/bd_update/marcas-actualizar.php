@@ -3,8 +3,12 @@
 
     $idPagina = 36;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdComercial->query("UPDATE comercial_marcas SET cmar_nombre='" . $_POST["nombre"] . "', cmar_categoria='" . $_POST["categoria"] . "', cmar_menu='" . $_POST["menu"] . "', cmar_mas_joyas='" . $_POST["masJoyas"] . "' WHERE cmar_id='" . $_POST["id"] . "'");
+
+    try{
+        $conexionBdComercial->query("UPDATE comercial_marcas SET cmar_nombre='" . $_POST["nombre"] . "', cmar_categoria='" . $_POST["categoria"] . "', cmar_menu='" . $_POST["menu"] . "', cmar_mas_joyas='" . $_POST["masJoyas"] . "' WHERE cmar_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

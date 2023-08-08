@@ -4,7 +4,11 @@
     $idPagina = 12;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-    $conexionBdSistema->query("UPDATE sistema_modulos SET mod_nombre='" . $_POST["nombre"] . "'  WHERE mod_id='" . $_POST["id"] . "'");
+    try{
+        $conexionBdSistema->query("UPDATE sistema_modulos SET mod_nombre='" . $_POST["nombre"] . "'  WHERE mod_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

@@ -3,8 +3,12 @@
 
     $idPagina = 30;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
-    
-    $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "', ccat_menu='" . $_POST["menu"] . "', ccat_footer='" . $_POST["footer"] . "' WHERE ccat_id='" . $_POST["id"] . "'");
+
+    try{
+        $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "', ccat_menu='" . $_POST["menu"] . "', ccat_footer='" . $_POST["footer"] . "' WHERE ccat_id='" . $_POST["id"] . "'");
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

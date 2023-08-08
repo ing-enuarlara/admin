@@ -6,7 +6,11 @@ $idPagina = 56;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-$consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
+try{
+    $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
+} catch (Exception $e) {
+    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+}
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
 
@@ -78,7 +82,11 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                         <div class="card-body">
                             <div class="row">
                                 <?php
-                                    $consultaFotos= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."'");
+                                    try{
+                                        $consultaFotos= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
                                     while($resultadoFotos = mysqli_fetch_array($consultaFotos, MYSQLI_BOTH)){
                                 ?>
                                 <div class="col-sm-2">
