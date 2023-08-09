@@ -5,6 +5,24 @@ $idPagina = 48;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$busqueda='';
+$filtro='';
+if($datosUsuarioActual['usr_tipo']!=1){
+    $filtro .= " AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+}
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    usr_id LIKE '%".$busqueda."%' 
+    OR usr_login LIKE '%".$busqueda."%' 
+    OR usr_nombre LIKE '%".$busqueda."%' 
+    OR usr_email LIKE '%".$busqueda."%' 
+    OR usr_telefono LIKE '%".$busqueda."%' 
+    OR utipo_nombre LIKE '%".$busqueda."%' 
+    OR usr_documento LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -91,6 +109,11 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="usuarios-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Usuarios</a>
+                        <?php
+                            if(!empty($filtro)){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -115,14 +138,11 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                             </thead>
                             <tbody>
                                 <?php
-                                $where = "";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where = "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
                                 try{
                                     $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios
                                     INNER JOIN administrativo_roles ON utipo_id=usr_tipo
-                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa $where");
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa 
+                                    WHERE usr_id=usr_id $filtro");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }

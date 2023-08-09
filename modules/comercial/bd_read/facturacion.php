@@ -27,6 +27,16 @@ if(!empty($_GET["moneda"])){
 if(isset($_GET["estado"])){
     $filtro.=" AND factura_estado='".$_GET["estado"]."'";
 }
+$busqueda='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    factura_id LIKE '%".$busqueda."%' 
+    OR cli_nombre LIKE '%".$busqueda."%' 
+    OR usr_nombre LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 $filtroID="factura_id=factura_id";
 if(!empty($_GET["q"])){
     $filtroID="factura_id='".$_GET["q"]."'";

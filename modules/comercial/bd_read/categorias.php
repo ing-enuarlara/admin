@@ -5,6 +5,16 @@ $idPagina = 26;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$busqueda='';
+$filtro='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro = "AND (
+    ccat_id LIKE '%".$busqueda."%' 
+    OR ccat_nombre LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -61,6 +71,11 @@ include(RUTA_PROYECTO."includes/head.php");
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="categorias-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Categoria</a>
+                        <?php
+                            if(!empty($filtro)){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -81,12 +96,12 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where= "WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                    $filtro.= " AND ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
                                 $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias 
-                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=ccat_id_empresa $where");
+                                INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=ccat_id_empresa 
+                                WHERE ccat_id=ccat_id $filtro");
                                 $num=1;
                                 while($result = mysqli_fetch_array($categorias, MYSQLI_BOTH)){
                                     $menu="NO";

@@ -5,6 +5,31 @@ $idPagina = 20;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+
+$filtro="";
+if($datosUsuarioActual['usr_tipo']!=1 || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (cprod_id_empresa='".$configuracion['conf_id_empresa']."' OR cprod_id_empresa='".$_GET["cliAdmin"]."')";
+}
+if(!empty($_GET["cat"])){
+    $filtro.=" AND cprod_categoria='".$_GET["cat"]."'";
+}
+if(!empty($_GET["subCat"])){
+    $filtro.=" AND cprod_marca='".$_GET["subCat"]."'";
+}
+if(!empty($_GET["estado"])){
+    $filtro.=" AND cprod_estado='".$_GET["estado"]."'";
+}
+$busqueda='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    cprod_id LIKE '%".$busqueda."%' 
+    OR cprod_nombre LIKE '%".$busqueda."%' 
+    OR ccat_nombre LIKE '%".$busqueda."%' 
+    OR cmar_nombre LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -43,15 +68,15 @@ include(RUTA_PROYECTO."includes/head.php");
     
     <div class="content-wrapper">
         <div class="content-header">
-          <div class="container-fluid">
-              <div class="row mb-2">
-                  <div class="col-sm-12">
-                  <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
-                  </ol>
-                  </div><!-- /.col -->
-              </div><!-- /.row -->
+            <div class="container-fluid">
+                <div class="row mb-2">
+                        <div class="col-sm-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
+                                <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
+                            </ol>
+                        </div><!-- /.col -->
+                </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
         <!-- Main content -->
@@ -62,6 +87,11 @@ include(RUTA_PROYECTO."includes/head.php");
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
                         <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
 		    			    <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
+                        <?php 
+                            }
+                            if(!empty($filtro)){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
                         <?php }?>
                     </div>
                     <!-- /.card-header -->
@@ -88,16 +118,13 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where="WHERE cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
                                 try{
                                     $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
                                     LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
                                     LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
                                     INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
-                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa $where");
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa 
+                                    WHERE cprod_id=cprod_id $filtro");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
@@ -136,13 +163,21 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td><?=$result['cprod_nombre'];?></td>
                                     <td><?=number_format($result['cprod_costo'],0,",",".");?></td>
                                     <td style="color: <?=$colorExistencia;?>;"><?=$result['cprod_exitencia'];?></td>
-                                    <td><?=$categoria;?></td>
-                                    <td><?=$subCategoria;?></td>
-                                    <td style="color: <?=$color;?>;"><?=$estado;?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cat=<?=$result['cprod_categoria'];?>"><?=$categoria;?></a>
+                                    </td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?subCat=<?=$result['cprod_marca'];?>"><?=$subCategoria;?></a>
+                                    </td>
+                                    <td>
+                                        <a style="color: <?=$color;?>;" href="<?=$_SERVER['PHP_SELF'];?>?estado=<?=$result['cprod_estado'];?>"><?=$estado;?></a>
+                                    </td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$result['cliAdmi_nombre'];?></td>
+                                    <td>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>"><?=$result['cliAdmi_nombre'];?></a>
+                                    </td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

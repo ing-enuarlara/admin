@@ -5,6 +5,24 @@ $idPagina = 69;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$busqueda='';
+$filtro='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    cli_id LIKE '%".$busqueda."%' 
+    OR cli_nombre LIKE '%".$busqueda."%' 
+    OR cli_email LIKE '%".$busqueda."%' 
+    OR cli_documento LIKE '%".$busqueda."%' 
+    OR cli_pais LIKE '%".$busqueda."%' 
+    OR cli_telefono LIKE '%".$busqueda."%' 
+    OR clicat_nombre LIKE '%".$busqueda."%' 
+    OR ciu_nombre LIKE '%".$busqueda."%' 
+    OR dep_nombre LIKE '%".$busqueda."%' 
+    OR cli_ciudad_extranjera LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 $tiposDocumento = [
     '108'=>'RC', '105'=>'CC', '109'=>'CE', '107'=>'TI', '110'=>'PP', '139'=>'PE', '106'=>'NUIP'
 ];
@@ -94,6 +112,11 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="clientes-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Clientes</a>
+                        <?php
+                            if(!empty($filtro)){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -123,9 +146,8 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                             </thead>
                             <tbody>
                                 <?php
-                                $where="";
                                 if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where="WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                    $filtro.=" AND cli_id_empresa='".$configuracion['conf_id_empresa']."' ";
                                 }
                                 try{
                                     $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes 
@@ -133,7 +155,8 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     INNER JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=cli_ciudad
                                     INNER JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cli_id_empresa 
-                                    INNER JOIN ".BDGENERAL.".opciones_generales ON ogen_id=cli_tipo_doc $where");
+                                    INNER JOIN ".BDGENERAL.".opciones_generales ON ogen_id=cli_tipo_doc 
+                                    WHERE cli_id=cli_id $filtro");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }

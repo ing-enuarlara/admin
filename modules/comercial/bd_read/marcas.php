@@ -5,6 +5,19 @@ $idPagina = 32;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$filtro='';
+if($datosUsuarioActual['usr_tipo']!=1){
+    $filtro.= " AND cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
+}
+$busqueda='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    ccat_nombre LIKE '%".$busqueda."%' 
+    OR cmar_nombre LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%'
+    )";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -61,6 +74,11 @@ include(RUTA_PROYECTO."includes/head.php");
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
 					    <a href="marcas-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Sub-Categorias</a>
+                        <?php
+                            if(!empty($filtro)){
+                        ?>
+					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                        <?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -82,25 +100,16 @@ include(RUTA_PROYECTO."includes/head.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $where= "";
-                                if($datosUsuarioActual['usr_tipo']!=1){
-                                    $where= "WHERE cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
-                                }
                                 try{
-                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas INNER JOIN comercial_categorias ON ccat_id=cmar_categoria $where");
+                                    $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas 
+                                    INNER JOIN comercial_categorias ON ccat_id=cmar_categoria 
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cmar_id_empresa 
+                                    WHERE cmar_id=cmar_id $filtro");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($marcas, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==1){
-                                        try{
-                                            $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['cmar_id_empresa']."'");
-                                        } catch (Exception $e) {
-                                            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-                                        }
-                                        $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                                    }
                                     $menu="NO";
                                     if($result['cmar_menu']==1){
                                         $menu="SI";
@@ -119,7 +128,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==1){
                                     ?>
-                                    <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
+                                    <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
                                     <td>
                                         <div class="btn-group">

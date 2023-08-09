@@ -18,6 +18,16 @@ if(!empty($_GET["respo"])){
 if(!empty($_GET["vende"])){
     $filtro.=" AND pedid_vendedor='".$_GET["vende"]."'";
 }
+$busqueda='';
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+    $filtro .= " AND (
+    pedid_id LIKE '%".$busqueda."%' 
+    OR cli_nombre LIKE '%".$busqueda."%' 
+    OR usr_nombre LIKE '%".$busqueda."%' 
+    OR cliAdmi_nombre LIKE '%".$busqueda."%' 
+    )";
+}
 $filtroID="pedid_id=pedid_id";
 if(!empty($_GET["q"])){
     $filtroID="pedid_id='".$_GET["q"]."'";
