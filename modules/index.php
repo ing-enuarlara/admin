@@ -1,5 +1,10 @@
 <?php
   include("sesion.php"); 
+  if(!empty($_GET['search'])){
+    $urlRed = REDIRECT_ROUTE;
+    header("Location:".$urlRed."modules/buscador.php?search=".$_GET['search']);
+    exit();
+  }
   $idPagina = 1;
   include(RUTA_PROYECTO."includes/verificar-paginas.php");
   include(RUTA_PROYECTO."includes/head.php");
