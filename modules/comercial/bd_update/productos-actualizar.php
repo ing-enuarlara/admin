@@ -20,7 +20,7 @@
         cprod_tipo='" . $_POST["tipo"] . "', 
         cprod_palabras_claves='" . $_POST["paClave"] . "', 
         cprod_estado='" . $_POST["estado"] . "', 
-        cprod_fecha_creacion=new()
+        cprod_fecha_creacion=now()
         WHERE cprod_id='" . $_POST["id"] . "'");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
