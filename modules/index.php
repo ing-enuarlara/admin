@@ -56,37 +56,118 @@
         <section class="content">
           <div class="container-fluid">
             <div class="row">
-
+              
+              <?php
+              $where="";
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $where= "WHERE factura_id_empresa='".$configuracion['conf_id_empresa']."'";
+              }
+              $facturas= $conexionBdComercial->query("SELECT * FROM comercial_facturas $where");
+              $numFact = $facturas->num_rows;
+              ?>
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    <h3><?=$numFact;?></h3>
+                    <p>Facturas</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-bag"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
+              <?php
+              $where="";
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $where= "WHERE cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
+              }
+              $cotizaciones= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones $where");
+              $numCotiz = $cotizaciones->num_rows;
+              ?>
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3><?=$numCotiz;?></h3>
+                    <p>Cotizaciones</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="ion ion-bag"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+
               <?php
-              $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios");
+              $where="";
               if($datosUsuarioActual['usr_tipo']!=1){
-                  $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'");
+                  $where= "WHERE pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
+              $pedidos= $conexionBdComercial->query("SELECT * FROM comercial_pedidos $where");
+              $numPedid = $pedidos->num_rows;
+              ?>
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                  <div class="inner">
+                    <h3><?=$numPedid;?></h3>
+                    <p>Pedidos</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-bag"></i>
+                  </div>
+                  <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+              <?php
+              $where="";
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $where= "WHERE remi_id_empresa='".$configuracion['conf_id_empresa']."'";
+              }
+              $remisiones= $conexionBdComercial->query("SELECT * FROM comercial_remisiones $where");
+              $numRemi = $remisiones->num_rows;
+              ?>
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><?=$numRemi;?></h3>
+                    <p>Remisiones</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-bag"></i>
+                  </div>
+                  <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+              
+              <?php
+              $where="";
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $where= "WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
+              }
+              $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes $where");
+              $numCli = $clientes->num_rows;
+              ?>
+              <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                  <div class="inner">
+                    <h3><?=$numCli;?></h3>
+                    <p>Clientes Registrados</p>
+                  </div>
+                  <div class="icon">
+                    <i class="ion ion-briefcase"></i>
+                  </div>
+                  <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+              </div>
+
+              <?php
+              $where="";
+              if($datosUsuarioActual['usr_tipo']!=1){
+                  $where= "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+              }
+              $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios $where");
               $numUser = $usuarios->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -101,27 +182,50 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              
+
+              <?php
+              //CONSULTA PARA VISITAS A LA PAGINA
+              ?>
               <div class="col-lg-3 col-6">
-                <div class="small-box bg-danger">
+                <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>65</h3>
-                    <p>Unique Visitors</p>
+                    <h3>10</h3>
+                    <p>Visitas a la pagina</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-earth"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="<?=REDIRECT_ROUTE?>modules/" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
+              
+              <?php
+              if($datosUsuarioActual['usr_tipo']==1){
+                $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
+                $cliAdmin = $clientesAdmin->num_rows;
+              ?>
+                <div class="col-lg-3 col-6">
+                  <div class="small-box bg-info">
+                    <div class="inner">
+                      <h3><?=$cliAdmin;?></h3>
+                      <p>Clientes adminZEFE</p>
+                    </div>
+                    <div class="icon">
+                    <i class="ion ion-person-stalker"></i>
+                    </div>
+                    <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                  </div>
+                </div>
+              <?php
+                }
+              ?>
             </div>
 
             <div class="row">
               <section class="col-lg-7 connectedSortable">
-
               </section>
-              <section class="col-lg-5 connectedSortable">
 
+              <section class="col-lg-5 connectedSortable">
               </section>
             </div>
           </div>
