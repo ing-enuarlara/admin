@@ -22,7 +22,8 @@ if($operacion==1){
 			'evento_duracion'	=> $duracion,
 			'evento_nota'		=> $_POST["observacion"],
 			'evento_enlace'		=> $_POST["enlaceEvento"],
-			'evento_estado'		=> $estado
+			'evento_estado'		=> $estado,
+			'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
 		];
 		$asunto = $asuntoEvento;
 		$bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-eventos.php';
@@ -80,7 +81,8 @@ if($operacion==2){
 					'evento_duracion'	=> $duracion,
 					'evento_nota'		=> $resultadoAgenda["age_notas"],
 					'evento_enlace'		=> $resultadoAgenda["age_enlace"],
-					'evento_estado'		=> $estado
+					'evento_estado'		=> $estado,
+					'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
 				];
 				$asunto = $asuntoEvento;
 				$bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-eventos.php';
