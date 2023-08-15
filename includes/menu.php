@@ -80,6 +80,12 @@
                         <p>Mi calendario</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mailbox.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mensajes</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <?php }?>
