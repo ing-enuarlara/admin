@@ -8,7 +8,10 @@
   $nombreUSR = mysqli_fetch_array($TipoUsr, MYSQLI_BOTH);
 
   $archivo = explode("/", $_SERVER['PHP_SELF']);
-  $nombre_fichero = $archivo[6];
+  $nombre_fichero = $archivo[4];
+  if(!empty($archivo[6])){
+    $nombre_fichero = $archivo[6];
+  }
 
   $lines = file(REDIRECT_ROUTE.'.git/HEAD');
   foreach ($lines as $line_num => $line) {
