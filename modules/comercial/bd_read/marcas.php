@@ -5,11 +5,12 @@ $idPagina = 32;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
-$filtro='';
+$filtroEmpresa='';
 if($datosUsuarioActual['usr_tipo']!=1){
-    $filtro.= " AND cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
+    $filtroEmpresa= " AND cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
 }
 $busqueda='';
+$filtro='';
 if (!empty($_GET['search'])) {
     $busqueda = $_GET['search'];
     $filtro .= " AND (
@@ -104,7 +105,7 @@ if (!empty($_GET['search'])) {
                                     $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas 
                                     INNER JOIN comercial_categorias ON ccat_id=cmar_categoria 
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cmar_id_empresa 
-                                    WHERE cmar_id=cmar_id $filtro");
+                                    WHERE cmar_id=cmar_id $filtro $filtroEmpresa");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }

@@ -17,6 +17,7 @@ if (isset($_SESSION["id"])) {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <script src="https://kit.fontawesome.com/e84fa1cf78.js" crossorigin="anonymous"></script>
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
@@ -96,11 +97,16 @@ if (isset($_SESSION["id"])) {
                     <script>
                         function cambiarTipoInput() {
                             var campo = document.getElementById("passwordInput");
+                            var icoVer = document.getElementById("icoVer");
 
                             if (campo.type === "password") {
                                 campo.type = "text";
+                                icoVer.classList.remove("fa-eye");
+                                icoVer.classList.add("fa-eye-slash");
                             } else {
                                 campo.type = "password";
+                                icoVer.classList.remove("fa-eye-slash");
+                                icoVer.classList.add("fa-eye");
                             }
                         }
                     </script>
@@ -108,7 +114,7 @@ if (isset($_SESSION["id"])) {
                         <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" name="Clave">
                         <div class="input-group-append">
                             <div class="input-group-text" onclick="cambiarTipoInput()">
-                                <span class="fas fa-eye"></span>
+                                <i class="fa-solid fa-eye" id="icoVer"></i>
                             </div>
                         </div>
                     </div>

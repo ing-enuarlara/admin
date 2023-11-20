@@ -5,8 +5,7 @@ try{
     LEFT JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento 
     WHERE conf_id_empresa='".$datosUsuarioActual['usr_id_empresa']."'");
 } catch (Exception $e) {
-    echo "Excepción catpurada: ".$e->getMessage();
-    exit();
+    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 }
 $configuracion = mysqli_fetch_array($consultaConfig, MYSQLI_BOTH);
 

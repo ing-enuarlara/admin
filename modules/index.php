@@ -62,7 +62,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE factura_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $facturas= $conexionBdComercial->query("SELECT * FROM comercial_facturas $where");
+              try{
+                $facturas= $conexionBdComercial->query("SELECT * FROM comercial_facturas $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numFact = $facturas->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -83,7 +87,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $cotizaciones= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones $where");
+              try{
+                $cotizaciones= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numCotiz = $cotizaciones->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -104,7 +112,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $pedidos= $conexionBdComercial->query("SELECT * FROM comercial_pedidos $where");
+              try{
+                $pedidos= $conexionBdComercial->query("SELECT * FROM comercial_pedidos $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numPedid = $pedidos->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -125,7 +137,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE remi_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $remisiones= $conexionBdComercial->query("SELECT * FROM comercial_remisiones $where");
+              try{
+                $remisiones= $conexionBdComercial->query("SELECT * FROM comercial_remisiones $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numRemi = $remisiones->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -146,7 +162,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes $where");
+              try{
+                $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numCli = $clientes->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -167,7 +187,11 @@
               if($datosUsuarioActual['usr_tipo']!=1){
                   $where= "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
-              $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios $where");
+              try{
+                $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios $where");
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               $numUser = $usuarios->num_rows;
               ?>
               <div class="col-lg-3 col-6">
@@ -201,7 +225,11 @@
               
               <?php
               if($datosUsuarioActual['usr_tipo']==1){
-                $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
+                try{
+                  $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
+                } catch (Exception $e) {
+                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                }
                 $cliAdmin = $clientesAdmin->num_rows;
               ?>
                 <div class="col-lg-3 col-6">

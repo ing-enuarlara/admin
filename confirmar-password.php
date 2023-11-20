@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <script src="https://kit.fontawesome.com/e84fa1cf78.js" crossorigin="anonymous"></script>
   <!-- icheck bootstrap -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
@@ -51,17 +52,17 @@
         <input type="hidden" name="idEmpresa" value="<?=base64_decode($_GET["idE"]);?>">
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Nueva Contraseña" id="claveNueva" name="claveNueva" oninput="validarClaveNueva(this)">
-          <div class="input-group-append" onclick="cambiarTipoInput('claveNueva')">
+          <div class="input-group-append" onclick="cambiarTipoInput('claveNueva','icoVer')">
             <div class="input-group-text">
-              <span class="fas fa-eye"></span>
+              <i class="fa-solid fa-eye" id="icoVer"></i>
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirmarClaveNueva" name="confirmarClaveNueva" oninput="claveNuevaConfirmar(this)">
-          <div class="input-group-append" onclick="cambiarTipoInput('confirmarClaveNueva')">
+          <div class="input-group-append" onclick="cambiarTipoInput('confirmarClaveNueva','icoVer2')">
             <div class="input-group-text">
-              <span class="fas fa-eye"></span>
+              <i class="fa-solid fa-eye" id="icoVer2"></i>
             </div>
           </div>
         </div>
@@ -92,13 +93,18 @@
   $mensajeClaveNueva = 'La clave no cumple con todos los requerimientos:<br>- Debe tener entre 8 y 20 caracteres.<br>- Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
 ?>
 <script>
-  function cambiarTipoInput(id) {
+  function cambiarTipoInput(id,icoVer) {
     var campo = document.getElementById(id);
+    var icoVer = document.getElementById(icoVer);
 
     if (campo.type === "password") {
-      campo.type = "text";
+        campo.type = "text";
+        icoVer.classList.remove("fa-eye");
+        icoVer.classList.add("fa-eye-slash");
     } else {
-      campo.type = "password";
+        campo.type = "password";
+        icoVer.classList.remove("fa-eye-slash");
+        icoVer.classList.add("fa-eye");
     }
   }
 
