@@ -7,7 +7,7 @@ include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
 $filtro="";
-if($datosUsuarioActual['usr_tipo']!=1 || !empty($_GET["cliAdmin"])){
+if($datosUsuarioActual['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
     $filtro.=" AND (cprod_id_empresa='".$configuracion['conf_id_empresa']."' OR cprod_id_empresa='".$_GET["cliAdmin"]."')";
 }
 if(!empty($_GET["cat"])){
@@ -85,10 +85,8 @@ if (!empty($_GET['search'])) {
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-                        <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
 		    			    <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
                         <?php 
-                            }
                             if(!empty($filtro)){
                         ?>
 					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
@@ -109,7 +107,7 @@ if (!empty($_GET['search'])) {
                                     <th>Sub-Categoria</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -173,7 +171,7 @@ if (!empty($_GET['search'])) {
                                         <a style="color: <?=$color;?>;" href="<?=$_SERVER['PHP_SELF'];?>?estado=<?=$result['cprod_estado'];?>"><?=$estado;?></a>
                                     </td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>"><?=$result['cliAdmi_nombre'];?></a>
@@ -186,11 +184,9 @@ if (!empty($_GET['search'])) {
                                             <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
-                                                    <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
-                                                    <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
-                                                <?php }?>
-                                                    <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
+                                                <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
                                             </div>
                                         </div>
                                     </td>
@@ -209,7 +205,7 @@ if (!empty($_GET['search'])) {
                                     <th>Sub-Categoria</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

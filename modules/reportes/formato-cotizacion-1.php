@@ -56,7 +56,7 @@ if(!empty($resultado['cotiz_envio'])){
 						<div class="card-body">
 							<h5 class="card-title" style="color: green; font-weight:bold;"><?= strtoupper($configuracion['conf_empresa']); ?></h5>
 							<p class="card-text">
-								<strong>DIRECCIÓN:</strong> <?= $configuracion['conf_direcion']; ?><br>
+								<strong>DIRECCIÓN:</strong> <?= $configuracion['conf_direccion']; ?><br>
 								<strong>CIUDAD:</strong> <?= $configuracion['ciu_nombre'].", ".$configuracion['dep_nombre']; ?><br>
 								<strong>SITIO WEB:</strong> <a href="$configuracion['conf_web']" target="_target"><?= $configuracion['conf_web']; ?></a><br>
 								<strong>CELULAR:</strong> <?= strtoupper($configuracion['conf_telefono']); ?><br>

@@ -189,7 +189,7 @@ $usuarioCalendario = mysqli_fetch_array($consultaCalendario, MYSQLI_BOTH);
                                     <!-- /.card-body -->
                                     <div class="card-footer" id="btnEnviar">
                                         <button type="submit" class="btn btn-success">Agregar</button>
-                                        <?php if($datosUsuarioActual['usr_id']==1){ ?>
+                                        <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
                                             <a class="btn btn-info" href="../bd_create/mi-calendario-guardar-festivos.php">Agregar Festivos al Calendario</a>
                                         <?php } ?>
                                     </div>

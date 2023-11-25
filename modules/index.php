@@ -59,7 +59,7 @@
               
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE factura_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -84,7 +84,7 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -109,7 +109,7 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -134,7 +134,7 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE remi_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -159,7 +159,7 @@
               
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -184,7 +184,7 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=1){
+              if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
               }
               try{
@@ -224,7 +224,7 @@
               </div>
               
               <?php
-              if($datosUsuarioActual['usr_tipo']==1){
+              if($datosUsuarioActual['usr_tipo']==DEV){
                 try{
                   $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
                 } catch (Exception $e) {

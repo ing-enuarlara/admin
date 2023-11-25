@@ -104,7 +104,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                                                 <option value=""></option>
                                                 <?php
                                                     $where="";
-                                                    if($datosUsuarioActual['usr_tipo']!=1){
+                                                    if($datosUsuarioActual['usr_tipo']!=DEV){
                                                         $where="AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                     }
                                                     try{
@@ -115,7 +115,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                                                     }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
-                                                        if($datosUsuarioActual['usr_tipo']==1){
+                                                        if($datosUsuarioActual['usr_tipo']==DEV){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
                                                         $selected='';

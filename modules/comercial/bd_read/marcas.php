@@ -6,7 +6,7 @@ $idPagina = 32;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 $filtroEmpresa='';
-if($datosUsuarioActual['usr_tipo']!=1){
+if($datosUsuarioActual['usr_tipo']!=DEV){
     $filtroEmpresa= " AND cmar_id_empresa='".$configuracion['conf_id_empresa']."'";
 }
 $busqueda='';
@@ -92,7 +92,7 @@ if (!empty($_GET['search'])) {
                                     <th>Exclusiva</th>
                                     <th>Mas Productos</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -127,7 +127,7 @@ if (!empty($_GET['search'])) {
                                     <td><?=$menu;?></td>
                                     <td><?=$masJoyas;?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
@@ -155,7 +155,7 @@ if (!empty($_GET['search'])) {
                                     <th>Exclusiva</th>
                                     <th>Mas Productos</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

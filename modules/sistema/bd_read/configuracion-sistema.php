@@ -155,7 +155,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                         <div class="form-group col-md-6">
                           <label for="direccion">Dirección:</label>
-                          <textarea name="direccion" id="direccion"><?= $configuracion['conf_direcion'] ?></textarea>
+                          <textarea name="direccion" id="direccion"><?= $configuracion['conf_direccion'] ?></textarea>
                         </div>
 
                         <div class="form-group col-md-6">

@@ -17,7 +17,7 @@ if($numSubCategorias>0){
     while($datosSubCategorias = mysqli_fetch_array($consultaSubCategorias, MYSQLI_BOTH)){
 
         $nombreEmpresa='';
-        if($datosUsuarioActual['usr_tipo']==1){
+        if($datosUsuarioActual['usr_tipo']==DEV){
             try{
                 $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosSubCategorias['cmar_id_empresa']."'");
             } catch (Exception $e) {

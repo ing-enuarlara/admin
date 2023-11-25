@@ -117,7 +117,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                         <option value=""></option>
                         <?php
                         $where = "";
-                        if ($datosUsuarioActual['usr_tipo'] != 1) {
+                        if ($datosUsuarioActual['usr_tipo']!=DEV) {
                           $where = "WHERE utipo_id!=1";
                         }
                         try{

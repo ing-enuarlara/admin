@@ -53,21 +53,18 @@
                         <p>Editar Perfil</p>
                     </a>
                 </li>
-                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-ventas.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Mis Ventas</p>
-                        </a>
-                    </li>
-                <?php }else{?>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-pedidos.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Mis Pedidos</p>
-                        </a>
-                    </li>
-                <?php }?>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-ventas.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mis Ventas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-pedidos.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Mis Pedidos</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/clave-editar.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
@@ -89,14 +86,14 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2) && $datosUsuarioActual['usr_tipo']!=5){?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==2){echo "active";}?>">
                 <i class="nav-icon fas fa-regular fa-toolbox"></i>
                 <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
+                <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
                         <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -120,46 +117,42 @@
                 <p>Comercial<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Clientes</p>
-                        </a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Proveedores</p>
-                        </a>
-                    </li> -->
-                <?php }?>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Clientes</p>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Proveedores</p>
+                    </a>
+                </li> -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Producto<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
-                            <li class="nav-item">
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" class="nav-link">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>Categorias</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" class="nav-link">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>Sub-Categorias</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-producto.php" class="nav-link">
-                                    <i class="far fa-dot-circle nav-icon"></i>
-                                    <p>Tipo de Productos</p>
-                                </a>
-                            </li>
-                        <?php }?>
+                        <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Categorias</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Sub-Categorias</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-producto.php" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Tipo de Productos</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
@@ -168,36 +161,34 @@
                         </li>
                     </ul>
                 </li>
-                <?php if($datosUsuarioActual['usr_tipo']!=5){ ?>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Cotizaciones</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Pedidos</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Remisiones</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Facturación</p>
-                        </a>
-                    </li>
-                <?php }?>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Cotizaciones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pedidos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Remisiones</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Facturación</p>
+                    </a>
+                </li>
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 5) && $datosUsuarioActual['usr_tipo']!=5){?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 5)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==5){echo "active";}?>">
                 <i class="nav-icon fas fa-cogs"></i>
@@ -210,7 +201,7 @@
                         <p>Configuración del Sistema</p>
                     </a>
                 </li>
-                <?php if($datosUsuarioActual['usr_tipo']==1){ ?>
+                <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
                         <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -233,7 +224,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 7) && $datosUsuarioActual['usr_tipo']!=5){?>
+        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==7){echo "active";}?>">
                 <i class="nav-icon fas fa-regular fa-earth-americas"></i>
@@ -261,7 +252,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if($datosUsuarioActual['usr_tipo']==1){?>
+        <?php if($datosUsuarioActual['usr_tipo']==DEV){?>
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
                 <i class="nav-icon fas fa-business-time"></i>

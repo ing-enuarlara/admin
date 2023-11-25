@@ -21,7 +21,7 @@
         conf_email='" . $_POST["email"] . "', 
         conf_telefono='" . $_POST["telefono"] . "', 
         conf_ciudad='" . $_POST["ciudad"] . "', 
-        conf_direcion='" . $_POST["direccion"] . "', 
+        conf_direccion='" . $_POST["direccion"] . "', 
         conf_observaciones_cotizaciones='" . $_POST["notaCotiz"] . "', 
         conf_observaciones_pedidos='" . $_POST["notaPedid"] . "', 
         conf_observaciones_remisiones='" . $_POST["notaRemi"] . "', 

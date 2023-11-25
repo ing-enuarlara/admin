@@ -88,7 +88,7 @@ if(!empty($_GET["vende"])){
                                                 <option value=""></option>
                                                 <?php
                                                 $where="";
-                                                if($datosUsuarioActual['usr_tipo']!=1){
+                                                if($datosUsuarioActual['usr_tipo']!=DEV){
                                                     $where="WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                 }
                                                 try{
@@ -103,7 +103,7 @@ if(!empty($_GET["vende"])){
                                                     if($result['cli_categoria']==3){
                                                         $dealer = '(DEALER)';
 
-                                                        if($datosUsuarioActual['usr_tipo']!=1){
+                                                        if($datosUsuarioActual['usr_tipo']!=DEV){
                                                             $disabled = 'disabled';
                                                         }	
                                                     }
@@ -112,7 +112,7 @@ if(!empty($_GET["vende"])){
                                                         $selected = 'selected';
                                                     }
                                                     $empresa='';
-                                                    if($datosUsuarioActual['usr_tipo']==1){
+                                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                                         $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                     }
                                                 ?>
@@ -142,7 +142,7 @@ if(!empty($_GET["vende"])){
                                                 <option value=""></option>
                                                 <?php
                                                     $where="";
-                                                    if($datosUsuarioActual['usr_tipo']!=1){
+                                                    if($datosUsuarioActual['usr_tipo']!=DEV){
                                                         $where="AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                     }
                                                     try{
@@ -153,7 +153,7 @@ if(!empty($_GET["vende"])){
                                                     }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
-                                                        if($datosUsuarioActual['usr_tipo']==1){
+                                                        if($datosUsuarioActual['usr_tipo']==DEV){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
                                                         $selected='';
@@ -216,7 +216,7 @@ if(!empty($_GET["vende"])){
                                                 <option value=""></option>
 												<?php
                                                     $where="";
-                                                    if($datosUsuarioActual['usr_tipo']!=1){
+                                                    if($datosUsuarioActual['usr_tipo']!=DEV){
                                                         $where="AND cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
                                                     }
                                                     try{
@@ -228,7 +228,7 @@ if(!empty($_GET["vende"])){
                                                     }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
-                                                        if($datosUsuarioActual['usr_tipo']==1){
+                                                        if($datosUsuarioActual['usr_tipo']==DEV){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
 												?>

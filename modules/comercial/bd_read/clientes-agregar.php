@@ -235,7 +235,7 @@ $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener ent
                                                 <option value=""></option>
                                                 <?php
                                                 $where="";
-                                                if($datosUsuarioActual['usr_tipo']!=1){
+                                                if($datosUsuarioActual['usr_tipo']!=DEV){
                                                     $where= "WHERE clicat_id_empresa='" . $configuracion['conf_id_empresa'] . "'";
                                                 }
                                                 try{

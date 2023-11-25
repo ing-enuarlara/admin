@@ -71,7 +71,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nombre Tipo de Productos</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -81,7 +81,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tbody>
                                 <?php
                                 $where="";
-                                if($datosUsuarioActual['usr_tipo']!=1){
+                                if($datosUsuarioActual['usr_tipo']!=DEV){
                                     $where= "WHERE ctipo_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
                                 try{
@@ -91,7 +91,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($tipoProd, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                         $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['ctipo_id_empresa']."'");
                                         $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
                                     }
@@ -108,7 +108,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td><?=$result['ctipo_nombre'];?></td>
                                     <td style="color: <?=$color;?>;"><?=$estado;?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
 								    <?php }?>
@@ -134,7 +134,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nombre Tipo de Productos</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==1){
+                                    if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

@@ -40,6 +40,10 @@ function validarAccesoModulo($empresa, $modulo)
 
 	global $conexionBdAdmin, $datosUsuarioActual;
 
+	if ($datosUsuarioActual['usr_tipo']==DEV) {
+		return true;
+	}
+
 	try{
 		$consulta = $conexionBdAdmin->query("SELECT * FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $empresa . "' AND mxca_id_modulo='" . $modulo . "'");
 	} catch (Exception $e) {

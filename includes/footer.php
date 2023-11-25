@@ -6,7 +6,7 @@
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> ENU-1.0.0<br>
         <?php
-            if($datosUsuarioActual['usr_tipo']==1){
+            if($datosUsuarioActual['usr_tipo']==DEV){
         ?>
         Tiempo de carga: <b><?=$tiempoMostrar;?></b>
         <?php }?>
