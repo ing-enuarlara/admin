@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT']."/ing-enuarlara.co/admin/constantes.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/admin/constantes.php");
 
 require RUTA_PROYECTO.'dist/librerias/correos/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;

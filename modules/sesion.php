@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once($_SERVER['DOCUMENT_ROOT']."/ing-enuarlara.co/admin/constantes.php");
+require_once($_SERVER['DOCUMENT_ROOT']."/admin/constantes.php");
 $rutaSalidaS= REDIRECT_ROUTE."salir.php";
 
 if( $_SESSION["id"]=="" || !is_numeric($_SESSION["id"]) ){

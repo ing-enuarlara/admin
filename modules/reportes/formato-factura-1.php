@@ -7,7 +7,7 @@ if(!empty($_GET['cte'])){
 	}
 
 	session_start();
-	require_once($_SERVER['DOCUMENT_ROOT']."/ing-enuarlara.co/admin/constantes.php");
+	require_once($_SERVER['DOCUMENT_ROOT']."/admin/constantes.php");
 
 	require_once(RUTA_PROYECTO."conexion.php");
 	require_once(RUTA_PROYECTO."config/config.php");

@@ -1,14 +1,14 @@
 <?php
 switch($_SERVER['HTTP_HOST']){
 	case 'localhost':
-        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/ing-enuarlara.co/admin/');
-        define('REDIRECT_ROUTE', 'http://localhost/ing-enuarlara.co/admin/');
+        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/admin/');
+        define('REDIRECT_ROUTE', 'http://localhost/admin/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 
         case 'adminzefe.ing-enuarlara.com';
-        define('RUTA_PROYECTO', '/home3/ingenuar/adminzefe.ing-enuarlara.com/');
-        define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/');
+        define('RUTA_PROYECTO', '/home3/ingenuar/adminzefe.ing-enuarlara.com/admin/');
+        define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/admin/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 }

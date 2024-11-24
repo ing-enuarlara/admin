@@ -4,6 +4,4 @@ conexion-datos-production.php
 files
 .vscode
 sensitive.php
-**/index.php
-!/index.php
 **/error_log
