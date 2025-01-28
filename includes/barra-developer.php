@@ -36,8 +36,15 @@
 
 		@media (max-width: 900px) {
 			.items-barra-developer{
-			display: none;
+				display: none;
 			}
+			
+
+			<?php if( !isset($_SESSION['admin']) ){?>
+				.barra-developer{
+					display: none;
+				}
+			<?php } ?>
 		}
 	</style>
 
