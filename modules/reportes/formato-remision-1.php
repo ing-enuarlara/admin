@@ -1,5 +1,5 @@
 <?php
-$idPagina = 101;
+$idPagina = 129;
 if(!empty($_GET['cte'])){
 	if ($_GET["cte"] == 1) {
 		$_GET["id"] = base64_decode($_GET["id"]);
