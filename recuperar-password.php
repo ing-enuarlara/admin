@@ -26,7 +26,7 @@ if (isset($_SESSION["id"])) {
     <?php include("includes/carga.php"); ?>
 <div class="login-box">
   <div class="login-logo">
-    <a href="index.php"><b>Admin</b>ZEFE</a>
+    <a href="index.php"><b>Admin</b>OB</a>
   </div>
   <?php
     if (!empty($_GET['RC']) || !empty($_GET['error'])) {

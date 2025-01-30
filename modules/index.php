@@ -58,6 +58,7 @@
             <div class="row">
               
               <?php
+              if(validarAccesoModulo($configuracion['conf_id_empresa'], 3)){
               $where="";
               if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE factura_id_empresa='".$configuracion['conf_id_empresa']."'";
@@ -183,6 +184,8 @@
               </div>
 
               <?php
+              }
+              if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){
               $where="";
               if($datosUsuarioActual['usr_tipo']!=DEV){
                   $where= "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
@@ -208,6 +211,7 @@
               </div>
 
               <?php
+              }
               //CONSULTA PARA VISITAS A LA PAGINA
               ?>
               <div class="col-lg-3 col-6">
@@ -236,7 +240,7 @@
                   <div class="small-box bg-info">
                     <div class="inner">
                       <h3><?=$cliAdmin;?></h3>
-                      <p>Clientes adminZEFE</p>
+                      <p>Clientes adminOB</p>
                     </div>
                     <div class="icon">
                     <i class="ion ion-person-stalker"></i>

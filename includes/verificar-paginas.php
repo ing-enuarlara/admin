@@ -69,7 +69,7 @@ if ($paso!=true) {
 		</head>
 		<body>
 			<div class="mensaje">
-				<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
+				<img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOBLogo" width="100">
 				<p><span style='font-family:Arial; font-weight:bold;'><?= $mensaje ?></samp></p>
 				<p>Redireccionando en 2 segundos...</p>
 			</div>

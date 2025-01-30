@@ -53,7 +53,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                   <div class="col-sm-12">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php">Ver Clientes AdminZEFE</a></li>
+                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php">Ver Clientes AdminOB</a></li>
                       <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
                   </ol>
                   </div><!-- /.col -->

@@ -12,7 +12,7 @@ if (isset($_SESSION["id"])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminZEFE 1.0 | Login</title>
+    <title>AdminOB 1.0 | Login</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -28,7 +28,7 @@ if (isset($_SESSION["id"])) {
     <?php include("includes/carga.php"); ?>
     <div class="login-box">
         <div class="login-logo">
-            <a href="index.php"><b>Admin</b>ZEFE</a>
+            <a href="index.php"><b>Admin</b>OB</a>
         </div>
         <?php
         if (isset($_GET['error'])) {
