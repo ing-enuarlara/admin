@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["bd"] = $_POST["bd"];
 include("conexion.php");
 
 $urlRed = REDIRECT_ROUTE;
@@ -14,7 +13,7 @@ try{
 
 $numE = $rst_usrE->num_rows;
 if($numE ==0 ){
-	header("Location:".$urlRed."index.php?error=1&bd=".$_SESSION["bd"]."&u=".$_POST["Usuario"]."&bd2=".$_POST["bd"]);
+	header("Location:".$urlRed."index.php?error=1&u=".$_POST["Usuario"]);
 	exit();
 }
 $usrE = mysqli_fetch_array($rst_usrE, MYSQLI_BOTH);
