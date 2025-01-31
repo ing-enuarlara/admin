@@ -232,6 +232,18 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/blogs.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Blogs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/feedback.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ver Reseñas</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Configurar Pagina</p>
