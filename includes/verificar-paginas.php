@@ -1,28 +1,28 @@
 <?php
 $paso=true;
-// if (!validarAccesoDirectoPaginas()) {
-// 	$rutaSalida= REDIRECT_ROUTE."modules";
-// 	$mensaje= "Estás intentando a acceder de manera incorrecta.";
-// 	$paso=false;
-// }
-// if (!isset($idPagina)) {
-// 	$rutaSalida= REDIRECT_ROUTE."modules";
-// 	$mensaje= "Falta el ID de esta página.";
-// 	$paso=false;
-// }else{
-//     try{
-// 		$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
-// 	} catch (Exception $e) {
-// 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-// 	}
-// 	$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
+if (!validarAccesoDirectoPaginas()) {
+	$rutaSalida= REDIRECT_ROUTE."modules";
+	$mensaje= "Estás intentando a acceder de manera incorrecta.";
+	$paso=false;
+}
+if (!isset($idPagina)) {
+	$rutaSalida= REDIRECT_ROUTE."modules";
+	$mensaje= "Falta el ID de esta página.";
+	$paso=false;
+}else{
+    try{
+		$consultaPaginaActual = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id='" . $idPagina . "'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
+	$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
 
-// 	if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {
-// 		$rutaSalida= REDIRECT_ROUTE."modules";
-// 		$mensaje= "La empresa NO tiene permiso a este modulo.";
-// 		$paso=false;
-// 	}
-// }
+	if (!validarAccesoModulo($configuracion['conf_id_empresa'], $paginaActual['pag_id_modulo'])) {
+		$rutaSalida= REDIRECT_ROUTE."modules";
+		$mensaje= "La empresa NO tiene permiso a este modulo.";
+		$paso=false;
+	}
+}
 /*
 PAGINAS A LAS QUE TIENE PERMISO EL ROL DEL USUARIO
 $consultaPaginaUsuario = $conexionBdGeneral->query("SELECT * FROM paginas_perfiles WHERE pper_tipo_usuario='" . $datosUsuarioActual[3] . "' AND pper_pagina='" . $idPagina . "'");
