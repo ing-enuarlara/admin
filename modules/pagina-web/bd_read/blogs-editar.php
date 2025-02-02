@@ -57,7 +57,7 @@ $rutaFoto = !empty($resultadoD['blogs_imagen']) ? REDIRECT_ROUTE . "files/blogs/
             <div class="col-sm-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?= REDIRECT_ROUTE ?>modules/index.php">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/legales.php">Ver Paginas Legales</a></li>
+                <li class="breadcrumb-item"><a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/blogs.php">Ver Blogs</a></li>
                 <li class="breadcrumb-item active"><?= $paginaActual['pag_nombre'] ?></li>
               </ol>
             </div><!-- /.col -->
