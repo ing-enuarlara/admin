@@ -85,12 +85,12 @@ include(RUTA_PROYECTO."includes/head.php");
                                     $where= "WHERE feed_id_empresa='".$configuracion['conf_id_empresa']."'";
                                 }
                                 try{
-                                    $legales= $conexionBdPaginaWeb->query("SELECT * FROM feedback $where ORDER BY feed_id DESC");
+                                    $feedback= $conexionBdPaginaWeb->query("SELECT * FROM feedback $where ORDER BY feed_id DESC");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
                                 $num=1;
-                                while($result = mysqli_fetch_array($legales, MYSQLI_BOTH)){
+                                while($result = mysqli_fetch_array($feedback, MYSQLI_BOTH)){
                                     if($datosUsuarioActual['usr_tipo']==DEV){
                                         try{
                                             $empresa= $conexionBdAdmin->query("SELECT cliAdmi_nombre FROM clientes_admin WHERE cliAdmi_id='".$result['feed_id_empresa']."'");
