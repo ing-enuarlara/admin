@@ -238,6 +238,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/categorias-blogs.php" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Categorias Blogs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/feedback.php" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Reseñas</p>
