@@ -70,6 +70,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Titulo</th>
                                     <th>Contenido</th>
+                                    <th>Categoria</th>
                                     <th>Palabras Claves</th>
                                     <th>Responsable</th>
                                     <th>Fecha Creación</th>
@@ -96,7 +97,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 while($result = mysqli_fetch_array($blogs, MYSQLI_BOTH)){
                                     if($datosUsuarioActual['usr_tipo']==DEV){
                                         try{
-                                            $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$result['blogs_id_empresa']."'");
+                                            $empresa= $conexionBdAdmin->query("SELECT cliAdmi_nombre FROM clientes_admin WHERE cliAdmi_id='".$result['blogs_id_empresa']."'");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -104,11 +105,18 @@ include(RUTA_PROYECTO."includes/head.php");
                                     }
 
                                     try{
-                                        $responsable= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios WHERE usr_id='".$result['blogs_responsable']."'");
+                                        $responsable= $conexionBdAdministrativo->query("SELECT usr_nombre FROM administrativo_usuarios WHERE usr_id='".$result['blogs_responsable']."'");
                                     } catch (Exception $e) {
                                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                     }
                                     $nomResponsable = mysqli_fetch_array($responsable, MYSQLI_BOTH);
+
+                                    try{
+                                        $categoria= $conexionBdPaginaWeb->query("SELECT catblo_nombre FROM categorias_blogs WHERE catblo_id='".$result['blogs_id_categoria']."'");
+                                    } catch (Exception $e) {
+                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                    }
+                                    $nomCategoria = mysqli_fetch_array($categoria, MYSQLI_BOTH);
 
                                     $texto = htmlspecialchars(strip_tags($result['blogs_contenido']));
                                 ?>
@@ -121,6 +129,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                         style="cursor: pointer;">
                                         <?=substr($texto, 0, 100)?>...
                                     </td>
+                                    <td><?=$nomCategoria['catblo_nombre'];?></td>
                                     <td><?=$result['blogs_palabras_claves'];?></td>
                                     <td><?=$nomResponsable['usr_nombre'];?></td>
                                     <td><?=$result['blogs_fecha_creacion'];?></td>
@@ -137,7 +146,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="blogs-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
-                                                <a class="dropdown-item" href="comentarios.php?id=<?=$result[0];?>" data-toggle="tooltip">Comentarios</a>
+                                                <a class="dropdown-item" href="comentarios-blogs.php?id=<?=$result[0];?>" data-toggle="tooltip">Comentarios</a>
                                                 <!--<div class="dropdown-divider"></div>-->
                                                 <a class="dropdown-item" href="../bd_delete/blogs-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                             </div>
@@ -151,6 +160,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Nº</th>
                                     <th>Titulo</th>
                                     <th>Contenido</th>
+                                    <th>Categoria</th>
                                     <th>Palabras Claves</th>
                                     <th>Responsable</th>
                                     <th>Fecha Creación</th>

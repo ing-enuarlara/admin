@@ -108,6 +108,37 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <textarea name="contenido" id="contenido"></textarea>
                     </div>
 
+					<div class="form-group col-md-6">
+						<label>Categoria:</label>
+						<select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria">
+							<option value=""></option>
+							<?php
+							$where="";
+							if($datosUsuarioActual['usr_tipo']!=DEV){
+								$where= "WHERE catblo_id_empresa='".$configuracion['conf_id_empresa']."'";
+							}
+							try{
+								$consultaCategorias= $conexionBdPaginaWeb->query("SELECT * FROM categorias_blogs $where");
+							} catch (Exception $e) {
+								include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+							}
+							while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
+								$nombreEmpresa='';
+								if($datosUsuarioActual['usr_tipo']==DEV){
+									try{
+									$empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['catblo_id_empresa']."'");
+									} catch (Exception $e) {
+									include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+									}
+									$nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
+									$nombreEmpresa="[".$nomEmpresa['cliAdmi_nombre']."]";
+								}
+							?>
+								<option value="<?=$datosCategorias[0];?>"><?=$datosCategorias['catblo_nombre'].$nombreEmpresa;?></option>
+							<?php }?>
+						</select>
+					</div>
+
                     <div class="form-group col-md-6">
                       <label for="pClaves">Palabras Claves:</label><br>
                       <textarea name="pClaves" id="pClaves" rows="5" cols="90"></textarea>
