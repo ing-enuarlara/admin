@@ -212,12 +212,18 @@
 
               <?php
               }
-              //CONSULTA PARA VISITAS A LA PAGINA
+              if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){
+              try{
+                $visitas= $conexionBdPaginaWeb->query("SELECT SUM(vis_visitas) AS vis_visitas FROM visitas_paginas WHERE vis_id_empresa='".$configuracion['conf_id_empresa']."'");
+                $numVisitas = mysqli_fetch_array($visitas, MYSQLI_BOTH);
+              } catch (Exception $e) {
+                include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+              }
               ?>
               <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>10</h3>
+                    <h3><?=$numVisitas["vis_visitas"]?></h3>
                     <p>Visitas a la pagina</p>
                   </div>
                   <div class="icon">
@@ -228,6 +234,7 @@
               </div>
               
               <?php
+              }
               if($datosUsuarioActual['usr_tipo']==DEV){
                 try{
                   $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
