@@ -7,8 +7,9 @@ include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 $busqueda='';
 $filtro='';
+$filtroAdmin='';
 if($datosUsuarioActual['usr_tipo']!=DEV){
-    $filtro .= " AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+    $filtroAdmin .= " AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
 }
 if (!empty($_GET['search'])) {
     $busqueda = $_GET['search'];
@@ -142,7 +143,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios
                                     INNER JOIN administrativo_roles ON utipo_id=usr_tipo
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=usr_id_empresa 
-                                    WHERE usr_id=usr_id $filtro");
+                                    WHERE usr_id=usr_id {$filtroAdmin} {$filtro}");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
