@@ -60,7 +60,7 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-					    <a href="clientes-admin-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Cliente AdminOB</a>
+					    <a href="clientes-admin-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Cliente AdminOCB</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">

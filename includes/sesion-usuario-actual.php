@@ -34,7 +34,7 @@
     </head>
     <body>
         <div class="mensaje">
-            <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOBLogo" width="100">
+            <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOCBLogo" width="100">
             <p><span style='font-family:Arial; color:red; font-weight:bold;'>El usuario con ID <b><?=$_SESSION["id"]?></b> no existe..</samp></p>
             <p>Redireccionando en 2 segundos...</p>
         </div>
@@ -80,7 +80,7 @@
     </head>
     <body>
         <div class="mensaje">
-            <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOBLogo" width="100">
+            <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOCBLogo" width="100">
             <p><span style='font-family:Arial; color:red; font-weight:bold;'>Su usuario ha sido bloqueado. Por tanto no tiene permisos para acceder al Sistema.</samp></p>
             <p>Redireccionando en 2 segundos...</p>
         </div>

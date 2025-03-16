@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminOB 1.0 | <?=$paginaActual['pag_nombre']?></title>
+    <title>AdminOCB 1.0 | <?=$paginaActual['pag_nombre']?></title>
     <!-- Favicon -->
     <link rel="shortcut icon" href="<?=REDIRECT_ROUTE?>files/logo/AdminZEFELogo.png">
     <script src="https://kit.fontawesome.com/e84fa1cf78.js" crossorigin="anonymous"></script>

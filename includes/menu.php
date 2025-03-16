@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 <!-- Brand Logo -->
 <a href="index.php" class="brand-link">
-    <img src="<?=REDIRECT_ROUTE?>files/logo/AdminZEFELogo.png" alt="AdminOBLogo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminOB</span>
+    <img src="<?=REDIRECT_ROUTE?>files/logo/AdminZEFELogo.png" alt="AdminOCBLogo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">AdminOCB</span>
 </a>
 
 <!-- Sidebar -->
@@ -274,7 +274,7 @@
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
                 <i class="nav-icon fas fa-business-time"></i>
-                <p>Clientes AdminOB</p>
+                <p>Clientes AdminOCB</p>
             </a>
         </li>
         <?php } ?>
