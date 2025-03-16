@@ -7,8 +7,8 @@ include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
 $filtro="";
-if($datosUsuarioActual['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
-    $filtro.=" AND (cprod_id_empresa='".$configuracion['conf_id_empresa']."' OR cprod_id_empresa='".$_GET["cliAdmin"]."')";
+if(!empty($_GET["cliAdmin"])){
+    $filtro.=" AND cprod_id_empresa='".$_GET["cliAdmin"]."'";
 }
 if(!empty($_GET["cat"])){
     $filtro.=" AND cprod_categoria='".$_GET["cat"]."'";
@@ -85,11 +85,11 @@ if (!empty($_GET['search'])) {
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-		    			    <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
+                            <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
                         <?php 
                             if(!empty($filtro)){
                         ?>
-					    <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
+                            <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
                         <?php }?>
                     </div>
                     <!-- /.card-header -->
@@ -116,13 +116,17 @@ if (!empty($_GET['search'])) {
                             </thead>
                             <tbody>
                                 <?php
+                                $filtroAdmin="";
+                                if($datosUsuarioActual['usr_tipo']!=DEV){
+                                    $filtroAdmin.=" AND cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                }
                                 try{
                                     $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
                                     LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
                                     LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
                                     INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa 
-                                    WHERE cprod_id=cprod_id $filtro");
+                                    WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
