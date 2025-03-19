@@ -7,8 +7,8 @@ switch($_SERVER['HTTP_HOST']){
         break;
 
         case 'adminocb.oceanblue.es';
-        define('RUTA_PROYECTO', '/var/www/vhosts/oceanblue.es/adminocb.oceanblue.es/admin/');
-        define('REDIRECT_ROUTE', 'https://adminocb.oceanblue.es/admin/');
+        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/');
+        define('REDIRECT_ROUTE', 'https://adminocb.oceanblue.es/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 }

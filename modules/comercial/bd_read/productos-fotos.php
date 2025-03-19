@@ -95,7 +95,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         if($resultadoFotos['cpf_principal']!=1){
                                     ?>
                                         <div class="form-group" style="display: flex;">
-                                            <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
                                         </div>
                                     <?php
                                         }

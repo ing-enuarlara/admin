@@ -8,15 +8,13 @@
   $nombreUSR = mysqli_fetch_array($TipoUsr, MYSQLI_BOTH);
 
   $archivo = explode("/", $_SERVER['PHP_SELF']);
-  $nombre_fichero = $archivo[3];
-  if(!empty($archivo[5])){
-    $nombre_fichero = $archivo[5];
-  }
+  $numArchivo = (count($archivo) - 1);
+  $nombre_fichero = $archivo[$numArchivo];
 
-  $lines = file(REDIRECT_ROUTE.'.git/HEAD');
-  foreach ($lines as $line_num => $line) {
-  }
-  $ramaActual = substr($line, 16);
+//   $lines = file(REDIRECT_ROUTE.'.git/HEAD');
+//   foreach ($lines as $line_num => $line) {
+//   }
+//   $ramaActual = !is_null($line) ? substr($line, 16) : '';
 ?>
 	<style>
 		.barra-developer{
@@ -40,8 +38,8 @@
 			}
 			
 
-			<?php if( !isset($_SESSION['admin']) ){?>
-				.barra-developer{
+			<?php if( !isset($_SESSION['admin']) ){ ?>
+				.barra-developer {
 					display: none;
 				}
 			<?php } ?>

@@ -227,7 +227,7 @@
         <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==7){echo "active";}?>">
-                <i class="nav-icon fas fa-regular fa-earth-americas"></i>
+            <i class="fa fa-globe nav-icon"></i>
                 <p>Pagina Web<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">

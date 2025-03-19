@@ -17,3 +17,4 @@
           document.title=docTitle;
         });
     </script>
+    <link rel="stylesheet" href="<?= REDIRECT_ROUTE ?>plugins/font-awesome/css/font-awesome.min.css">
