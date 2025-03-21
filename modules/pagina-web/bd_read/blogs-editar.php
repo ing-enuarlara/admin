@@ -108,8 +108,13 @@ $rutaFoto = !empty($resultadoD['blogs_imagen']) ? REDIRECT_ROUTE . "files/blogs/
                     <hr>
 
                     <div class="form-group col-md-6">
+                        <label for="fechaEvento">Fecha de Creación:</label>
+                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="Fecha de Creación" value="<?= date('Y-m-d\TH:i', strtotime($resultadoD['blogs_fecha_creacion'])); ?>">
+                    </div>
+
+                    <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Titulo:</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo del blog" name="titulo" value="<?= $resultadoD['blogs_titulo']; ?>">
+                      <textarea name="titulo" id="titulo"><?= $resultadoD['blogs_titulo']; ?></textarea>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -210,6 +215,7 @@ $rutaFoto = !empty($resultadoD['blogs_imagen']) ? REDIRECT_ROUTE . "files/blogs/
     $(function() {
       // Summernote
       $('#contenido').summernote();
+      $('#titulo').summernote();
       bsCustomFileInput.init();
     });
   </script>

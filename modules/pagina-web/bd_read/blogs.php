@@ -122,7 +122,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
-                                    <td><?=$result['blogs_titulo'];?></td>
+                                    <td><?=strip_tags($result['blogs_titulo']);?></td>
                                     <td title="<?=$texto;?>"
                                         data-observacion="<?=$texto;?>"
                                         onclick="toggleFullText(this)"
@@ -132,7 +132,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <td><?=$nomCategoria['catblo_nombre'];?></td>
                                     <td><?=$result['blogs_palabras_claves'];?></td>
                                     <td><?=$nomResponsable['usr_nombre'];?></td>
-                                    <td><?=$result['blogs_fecha_creacion'];?></td>
+                                    <td><?= date('d/m/Y H:i', strtotime($result['blogs_fecha_creacion'])); ?></td>
                                     <?php
                                     if($datosUsuarioActual['usr_tipo']==DEV){
                                     ?>

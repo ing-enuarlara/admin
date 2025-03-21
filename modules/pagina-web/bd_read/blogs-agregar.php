@@ -99,8 +99,14 @@ include(RUTA_PROYECTO . "includes/head.php");
                     <hr>
 
                     <div class="form-group col-md-6">
+                        <label for="fechaEvento">Fecha de Creación:</label>
+                        <input type="datetime-local" class="form-control" id="fecha" name="fecha" placeholder="Fecha de Creación" value="<?= date('Y-m-d\TH:i'); ?>">
+                    </div>
+
+                    <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Titulo Blog:</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo Blog" name="titulo">
+                      <textarea name="titulo" id="titulo"></textarea>
+                      <!-- <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Titulo Blog" name="titulo"> -->
                     </div>
 
                     <div class="form-group col-md-6">
@@ -200,6 +206,7 @@ include(RUTA_PROYECTO . "includes/head.php");
     $(function() {
       // Summernote
       $('#contenido').summernote();
+      $('#titulo').summernote();
       bsCustomFileInput.init();
     });
   </script>
