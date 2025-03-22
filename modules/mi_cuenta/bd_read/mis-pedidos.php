@@ -93,7 +93,7 @@ if(!empty($_GET["vende"])){
                                         try{
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_vendedor 
-                                            WHERE cotiz_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroC ORDER BY cotiz_id DESC");
+                                            WHERE cotiz_cliente='".$_SESSION["datosUsuarioActual"]['usr_id_cliente']."' $filtroC ORDER BY cotiz_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -143,7 +143,7 @@ if(!empty($_GET["vende"])){
                                         try{
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_vendedor 
-                                            WHERE remi_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroR ORDER BY remi_id DESC");
+                                            WHERE remi_cliente='".$_SESSION["datosUsuarioActual"]['usr_id_cliente']."' $filtroR ORDER BY remi_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -202,7 +202,7 @@ if(!empty($_GET["vende"])){
                                         try{
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_vendedor 
-                                            WHERE pedid_cliente='".$datosUsuarioActual['usr_id_cliente']."' $filtroP ORDER BY pedid_id DESC");
+                                            WHERE pedid_cliente='".$_SESSION["datosUsuarioActual"]['usr_id_cliente']."' $filtroP ORDER BY pedid_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -261,7 +261,7 @@ if(!empty($_GET["vende"])){
                                         try{
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_vendedor 
-                                            WHERE factura_cliente='".$datosUsuarioActual['usr_id_cliente']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
+                                            WHERE factura_cliente='".$_SESSION["datosUsuarioActual"]['usr_id_cliente']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }

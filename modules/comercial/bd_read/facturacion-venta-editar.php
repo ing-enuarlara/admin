@@ -139,8 +139,8 @@ if(!empty($_GET["fact"])){
                                                 <option value=""></option>
                                                 <?php
                                                 $where="";
-                                                if($datosUsuarioActual['usr_tipo']!=DEV){
-                                                    $where="WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                                if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                                    $where="WHERE cli_id_empresa='".$_SESSION["idEmpresa"]."'";
                                                 }
                                                 try{
                                                     $consulta = $conexionBdComercial->query("SELECT * FROM comercial_clientes 
@@ -154,7 +154,7 @@ if(!empty($_GET["fact"])){
                                                     if($result['cli_categoria']==3){
                                                         $dealer = '(DEALER)';
 
-                                                        if($datosUsuarioActual['usr_tipo']!=DEV){
+                                                        if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                                                             $disabledC = 'disabled';
                                                         }	
                                                     }
@@ -163,7 +163,7 @@ if(!empty($_GET["fact"])){
                                                         $selected = 'selected';
                                                     }
                                                     $empresa='';
-                                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                                         $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                     }
                                                 ?>
@@ -189,8 +189,8 @@ if(!empty($_GET["fact"])){
                                                 <option value=""></option>
                                                 <?php
                                                     $where="";
-                                                    if($datosUsuarioActual['usr_tipo']!=DEV){
-                                                        $where="AND usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                                        $where="AND usr_id_empresa='".$_SESSION["idEmpresa"]."'";
                                                     }
                                                     try{
                                                         $consulta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios 
@@ -200,7 +200,7 @@ if(!empty($_GET["fact"])){
                                                     }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
-                                                        if($datosUsuarioActual['usr_tipo']==DEV){
+                                                        if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
                                                         $selected='';
@@ -262,8 +262,8 @@ if(!empty($_GET["fact"])){
                                                 <option value=""></option>
 												<?php
                                                     $where="";
-                                                    if($datosUsuarioActual['usr_tipo']!=DEV){
-                                                        $where="AND cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                                        $where="AND cprod_id_empresa='".$_SESSION["idEmpresa"]."'";
                                                     }
                                                     try{
                                                         $consulta = $conexionBdComercial->query("SELECT * FROM comercial_productos
@@ -274,7 +274,7 @@ if(!empty($_GET["fact"])){
                                                     }
                                                     while($result = mysqli_fetch_array($consulta, MYSQLI_BOTH)){
                                                         $empresa='';
-                                                        if($datosUsuarioActual['usr_tipo']==DEV){
+                                                        if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                                             $empresa=' ['.$result['cliAdmi_nombre'].']';
                                                         }
                                                         try{

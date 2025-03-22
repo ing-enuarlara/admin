@@ -107,7 +107,7 @@ if (!empty($_GET['search'])) {
                                     <th>Sub-Categoria</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -117,8 +117,8 @@ if (!empty($_GET['search'])) {
                             <tbody>
                                 <?php
                                 $filtroAdmin="";
-                                if($datosUsuarioActual['usr_tipo']!=DEV){
-                                    $filtroAdmin.=" AND cprod_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                    $filtroAdmin.=" AND cprod_id_empresa='".$_SESSION["idEmpresa"]."'";
                                 }
                                 try{
                                     $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
@@ -175,7 +175,7 @@ if (!empty($_GET['search'])) {
                                         <a style="color: <?=$color;?>;" href="<?=$_SERVER['PHP_SELF'];?>?estado=<?=$result['cprod_estado'];?>"><?=$estado;?></a>
                                     </td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>"><?=$result['cliAdmi_nombre'];?></a>
@@ -209,7 +209,7 @@ if (!empty($_GET['search'])) {
                                     <th>Sub-Categoria</th>
                                     <th>Estado</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

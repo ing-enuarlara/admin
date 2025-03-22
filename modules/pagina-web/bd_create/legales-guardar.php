@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdPaginaWeb->query("INSERT INTO pagina_legales(pal_nombre, pal_contenido, pal_modificacion, pal_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["contenido"] . "', now(), '".$configuracion['conf_id_empresa']."')");
+        $conexionBdPaginaWeb->query("INSERT INTO pagina_legales(pal_nombre, pal_contenido, pal_modificacion, pal_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["contenido"] . "', now(), '".$_SESSION["idEmpresa"]."')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }

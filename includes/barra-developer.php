@@ -1,7 +1,7 @@
-<?php if( $datosUsuarioActual[3]==1 || isset($_SESSION['admin']) ){
+<?php if( $_SESSION["datosUsuarioActual"][3]==1 || isset($_SESSION['admin']) ){
 
   try{
-    $TipoUsr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$datosUsuarioActual[3]."'");
+    $TipoUsr = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles WHERE utipo_id='".$_SESSION["datosUsuarioActual"][3]."'");
   } catch (Exception $e) {
       include(RUTA_PROYECTO."includes/error-catch-to-report.php");
   }
@@ -50,7 +50,7 @@
 		<div class="items-barra-developer">
 			<!-- <b>Rama Actual GIT:</b>&nbsp;<?=$ramaActual;?>&nbsp;|&nbsp; -->
 			<b>Id Pagina:</b>&nbsp;<?=$idPagina;?>&nbsp;|&nbsp;
-			<b>Usuario Actual:</b>&nbsp;<?=$datosUsuarioActual["usr_id"];?>&nbsp;|&nbsp;
+			<b>Usuario Actual:</b>&nbsp;<?=$_SESSION["datosUsuarioActual"]["usr_id"];?>&nbsp;|&nbsp;
 			<b>T. Usuario:</b>&nbsp;<?=$nombreUSR['utipo_nombre'];?>&nbsp;|&nbsp;
 			<b>V PHP:&nbsp;</b> <?=phpversion(); ?>&nbsp;|&nbsp; 
 			<b>IP:&nbsp;</b> <?=$_SERVER['REMOTE_ADDR'];?>&nbsp;|&nbsp; 

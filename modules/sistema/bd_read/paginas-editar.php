@@ -103,7 +103,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                               include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                             }
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
-                                              if(validarAccesoModulo($configuracion['conf_id_empresa'], $resOp[0])){
+                                              if(validarAccesoModulo($_SESSION["idEmpresa"], $resOp[0])){
                                             ?>
                                             <option value="<?=$resOp[0];?>" <?php if($resultadoD['pag_id_modulo']==$resOp[0]) echo "selected";?>><?=$resOp[1];?></option>
                                             <?php }}?>

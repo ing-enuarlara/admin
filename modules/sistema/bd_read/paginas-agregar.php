@@ -95,7 +95,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                               include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                             }
                                             while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
-                                              if(validarAccesoModulo($configuracion['conf_id_empresa'], $resOp[0])){
+                                              if(validarAccesoModulo($_SESSION["idEmpresa"], $resOp[0])){
                                             ?>
                                             	<option value="<?=$resOp[0];?>"><?=$resOp['mod_nombre'];?></option>
                                             <?php }}?>

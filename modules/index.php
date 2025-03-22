@@ -58,10 +58,10 @@
             <div class="row">
               
               <?php
-              if(validarAccesoModulo($configuracion['conf_id_empresa'], 3)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE factura_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE factura_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $facturas= $conexionBdComercial->query("SELECT * FROM comercial_facturas $where");
@@ -85,8 +85,8 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE cotiz_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE cotiz_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $cotizaciones= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones $where");
@@ -110,8 +110,8 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE pedid_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE pedid_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $pedidos= $conexionBdComercial->query("SELECT * FROM comercial_pedidos $where");
@@ -135,8 +135,8 @@
 
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE remi_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE remi_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $remisiones= $conexionBdComercial->query("SELECT * FROM comercial_remisiones $where");
@@ -160,8 +160,8 @@
               
               <?php
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE cli_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE cli_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes $where");
@@ -185,10 +185,10 @@
 
               <?php
               }
-              if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){
               $where="";
-              if($datosUsuarioActual['usr_tipo']!=DEV){
-                  $where= "WHERE usr_id_empresa='".$configuracion['conf_id_empresa']."'";
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                  $where= "WHERE usr_id_empresa='".$_SESSION["idEmpresa"]."'";
               }
               try{
                 $usuarios= $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios $where");
@@ -212,9 +212,9 @@
 
               <?php
               }
-              if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){
               try{
-                $visitas= $conexionBdPaginaWeb->query("SELECT SUM(vis_visitas) AS vis_visitas FROM visitas_paginas WHERE vis_id_empresa='".$configuracion['conf_id_empresa']."'");
+                $visitas= $conexionBdPaginaWeb->query("SELECT SUM(vis_visitas) AS vis_visitas FROM visitas_paginas WHERE vis_id_empresa='".$_SESSION["idEmpresa"]."'");
                 $numVisitas = mysqli_fetch_array($visitas, MYSQLI_BOTH);
               } catch (Exception $e) {
                 include(RUTA_PROYECTO."includes/error-catch-to-report.php");
@@ -235,7 +235,7 @@
               
               <?php
               }
-              if($datosUsuarioActual['usr_tipo']==DEV){
+              if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                 try{
                   $clientesAdmin= $conexionBdAdmin->query("SELECT * FROM clientes_admin");
                 } catch (Exception $e) {

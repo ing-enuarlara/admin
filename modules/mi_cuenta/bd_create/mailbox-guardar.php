@@ -17,7 +17,7 @@
         $contador = 0;
         while ($contador < $numero):
             try{
-                mysqli_query($conexionBdMicuenta, "INSERT INTO micuenta_mensajes(men_de, men_para, men_asunto, men_contenido, men_id_empresa, men_adjunto) VALUE ('" . $_SESSION['id'] . "','" . $_POST["para"][$contador] . "','" . $_POST["asunto"] . "','" . $_POST["contenido"] . "','" . $datosUsuarioActual['usr_id_empresa'] . "','" . $adjunto . "')");
+                mysqli_query($conexionBdMicuenta, "INSERT INTO micuenta_mensajes(men_de, men_para, men_asunto, men_contenido, men_id_empresa, men_adjunto) VALUE ('" . $_SESSION['id'] . "','" . $_POST["para"][$contador] . "','" . $_POST["asunto"] . "','" . $_POST["contenido"] . "','" . $_SESSION["idEmpresa"] . "','" . $adjunto . "')");
             } catch (Exception $e) {
                 include(RUTA_PROYECTO."includes/error-catch-to-report.php");
             }
@@ -36,10 +36,10 @@
                     $data = [
                         'usuario_email'         => $resultado['usr_email'],
                         'usuario_nombre'        => $resultado['usr_nombre'],
-                        'remitente_nombre'      => $datosUsuarioActual['usr_nombre'],
+                        'remitente_nombre'      => $_SESSION["datosUsuarioActual"]['usr_nombre'],
                         'mensaje_contenido'     => $_POST['contenido'],
                         'mensaje_adjunto'       => $adjunto,
-                        'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
+                        'id_empresa'            => $_SESSION["datosUsuarioActual"]["usr_id_empresa"]
                     ];
                     $asunto = $_POST['asunto'];
                     $bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-mensajes.php';

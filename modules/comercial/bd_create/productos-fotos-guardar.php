@@ -9,7 +9,7 @@
 		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
     
         try{
-            $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion)VALUES('" . $_POST['id'] . "', '" . $fileName . "', '" . $datosUsuarioActual['usr_id_empresa'] . "', now())");
+            $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion)VALUES('" . $_POST['id'] . "', '" . $fileName . "', '" . $_SESSION["idEmpresa"] . "', now())");
         } catch (Exception $e) {
             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
         }

@@ -77,7 +77,7 @@ if(!empty($_GET["cte"])){
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="m-0 float-sm-right">Cotizaciones</h2>
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones-agregar.php?vende=<?=$datosUsuarioActual['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Cotización</a>
+                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones-agregar.php?vende=<?=$_SESSION["datosUsuarioActual"]['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Cotización</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -96,7 +96,7 @@ if(!empty($_GET["cte"])){
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_cotizaciones
                                             INNER JOIN comercial_clientes ON cli_id=cotiz_cliente 
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=cotiz_creador 
-                                            WHERE cotiz_vendedor='".$datosUsuarioActual['usr_id']."' $filtroC ORDER BY cotiz_id DESC");
+                                            WHERE cotiz_vendedor='".$_SESSION["datosUsuarioActual"]['usr_id']."' $filtroC ORDER BY cotiz_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -130,7 +130,7 @@ if(!empty($_GET["cte"])){
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="m-0 float-sm-right">Remisiones</h2>
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones-agregar.php?vende=<?=$datosUsuarioActual['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Remisión</a>
+                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones-agregar.php?vende=<?=$_SESSION["datosUsuarioActual"]['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Remisión</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -151,7 +151,7 @@ if(!empty($_GET["cte"])){
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_remisiones
                                             INNER JOIN comercial_clientes ON cli_id=remi_cliente 
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=remi_creador 
-                                            WHERE remi_vendedor='".$datosUsuarioActual['usr_id']."' $filtroR ORDER BY remi_id DESC");
+                                            WHERE remi_vendedor='".$_SESSION["datosUsuarioActual"]['usr_id']."' $filtroR ORDER BY remi_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -216,7 +216,7 @@ if(!empty($_GET["cte"])){
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_pedidos
                                             INNER JOIN comercial_clientes ON cli_id=pedid_cliente 
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=pedid_creador 
-                                            WHERE pedid_vendedor='".$datosUsuarioActual['usr_id']."' $filtroP ORDER BY pedid_id DESC");
+                                            WHERE pedid_vendedor='".$_SESSION["datosUsuarioActual"]['usr_id']."' $filtroP ORDER BY pedid_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }
@@ -260,7 +260,7 @@ if(!empty($_GET["cte"])){
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion-venta-agregar.php?vende=<?=$datosUsuarioActual['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Factura de Venta</a>
+                                <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion-venta-agregar.php?vende=<?=$_SESSION["datosUsuarioActual"]['usr_id']?>" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Factura de Venta</a>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -282,7 +282,7 @@ if(!empty($_GET["cte"])){
                                             $consulta= $conexionBdComercial->query("SELECT * FROM comercial_facturas
                                             LEFT JOIN comercial_clientes ON cli_id=factura_cliente
                                             INNER JOIN ".BDMODADMINISTRATIVO.".administrativo_usuarios ON usr_id=factura_creador 
-                                            WHERE factura_vendedor='".$datosUsuarioActual['usr_id']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
+                                            WHERE factura_vendedor='".$_SESSION["datosUsuarioActual"]['usr_id']."' AND factura_tipo=1 $filtroF ORDER BY factura_id DESC");
                                         } catch (Exception $e) {
                                             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                         }

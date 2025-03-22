@@ -101,7 +101,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-admin-editar.php?id=<?=$resp[0];?>" data-toggle="tooltip">Editar</a>
-                                                <?php if($resp['cliAdmi_id']!=1 && !empty($resp['cliAdmi_id_uss_principal']) AND $datosUsuarioActual['usr_tipo']==DEV){?>
+                                                <?php if($resp['cliAdmi_id']!=1 && !empty($resp['cliAdmi_id_uss_principal']) AND $_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){?>
                                                     <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$resp['cliAdmi_id_uss_principal'];?>&tipe=2">Autologin</a>
                                                 <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->

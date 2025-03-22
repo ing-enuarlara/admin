@@ -6,7 +6,7 @@ $idPagina = 111;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 $rutaFoto="http://via.placeholder.com/150x150/000000/AAAAAA&amp;text=Ninguna%20Imagen";
-if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/perfil/" . $datosUsuarioActual['usr_foto'];}
+if(!empty($_SESSION["datosUsuarioActual"]['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/perfil/" . $_SESSION["datosUsuarioActual"]['usr_foto'];}
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -98,7 +98,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form class="form-horizontal" method="post" action="../bd_update/clave-actualizar.php" enctype="multipart/form-data">
-                  <input type="hidden" name="id" value="<?= $datosUsuarioActual['usr_id'] ?>">
+                  <input type="hidden" name="id" value="<?= $_SESSION["datosUsuarioActual"]['usr_id'] ?>">
                   <div class="card-body">
                     <?php
                     $mensajeClaveNueva = 'La clave no cumple con todos los requerimientos:<br>- Debe tener entre 8 y 20 caracteres.<br>- Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
@@ -117,7 +117,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                       function validarClaveActual(enviada){
                           var clave = CryptoJS.SHA1(enviada.value);
 
-                          if (clave == '<?=$datosUsuarioActual['usr_clave']?>') {
+                          if (clave == '<?=$_SESSION["datosUsuarioActual"]['usr_clave']?>') {
                             document.getElementById("respuestaClaveActual").style.color = 'green';
                             document.getElementById("respuestaClaveActual").style.display = 'block';
                             document.getElementById("btnEnviar").style.display = 'block';

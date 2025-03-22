@@ -72,7 +72,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Star</th>
                                     <th>Fecha</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
                                     <?php }?>
@@ -81,8 +81,8 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tbody>
                                 <?php
                                 $where="";
-                                if($datosUsuarioActual['usr_tipo']!=DEV){
-                                    $where= "WHERE feed_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                    $where= "WHERE feed_id_empresa='".$_SESSION["idEmpresa"]."'";
                                 }
                                 try{
                                     $feedback= $conexionBdPaginaWeb->query("SELECT * FROM feedback $where ORDER BY feed_id DESC");
@@ -91,7 +91,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($feedback, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                         try{
                                             $empresa= $conexionBdAdmin->query("SELECT cliAdmi_nombre FROM clientes_admin WHERE cliAdmi_id='".$result['feed_id_empresa']."'");
                                         } catch (Exception $e) {
@@ -120,7 +120,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     </td>
                                     <td><?=$result['feed_fecha'];?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
                                     <?php }?>
@@ -135,7 +135,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Star</th>
                                     <th>Fecha</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
                                     <?php }?>

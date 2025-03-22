@@ -1,11 +1,5 @@
 <?php
-    //USUARIO ACTUAL
-    try{
-        $consultaUsuarioActual = $conexionBdAdministrativo->query("SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id='".$_SESSION["id"]."'");
-    } catch (Exception $e) {
-        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-    }
-	$numUsuarioActual = $consultaUsuarioActual->num_rows;
+	$numUsuarioActual = COUNT($_SESSION["datosUsuarioActual"]);
 
 	if($numUsuarioActual == 0){
 		$rutaSalida= REDIRECT_ROUTE."salir.php";
@@ -49,10 +43,8 @@
         exit();	
 	}
 
-	$datosUsuarioActual = mysqli_fetch_array($consultaUsuarioActual, MYSQLI_BOTH);
-
 	//SABER SI ESTA BLOQUEADO
-	if($datosUsuarioActual['usr_bloqueado']==1)
+	if($_SESSION["datosUsuarioActual"]['usr_bloqueado']==1)
 	{
 		$rutaSalida= REDIRECT_ROUTE."salir.php";
 ?>

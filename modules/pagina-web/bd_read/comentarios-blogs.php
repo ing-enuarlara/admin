@@ -72,7 +72,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Comentario</th>
                                     <th>Fecha</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
                                     <?php }?>
@@ -88,7 +88,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($result = mysqli_fetch_array($comentarios, MYSQLI_BOTH)){
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                         try{
                                             $empresa= $conexionBdAdmin->query("SELECT cliAdmi_nombre FROM clientes_admin WHERE cliAdmi_id='".$result['com_id_empresa']."'");
                                         } catch (Exception $e) {
@@ -110,7 +110,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     </td>
                                     <td><?=$result['com_fecha'];?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$nomEmpresa['cliAdmi_nombre'];?></td>
                                     <?php }?>
@@ -135,7 +135,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     <th>Comentario</th>
                                     <th>Fecha</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
                                     <?php }?>

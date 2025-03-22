@@ -10,11 +10,11 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
     <div class="image">
-        <img src="<?=REDIRECT_ROUTE?>files/perfil/<?=$datosUsuarioActual['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
+        <img src="<?=REDIRECT_ROUTE?>files/perfil/<?=$_SESSION["datosUsuarioActual"]['usr_foto']?>" class="img-circle elevation-2" alt="User Image" style="margin-top: 14px;">
     </div>
     <div class="info">
-        <a href="#" class="d-block"><?=$datosUsuarioActual['usr_nombre']?></br>
-        <i><?=$datosUsuarioActual['utipo_nombre']?></i></a>
+        <a href="#" class="d-block"><?=$_SESSION["datosUsuarioActual"]['usr_nombre']?></br>
+        <i><?=$_SESSION["datosUsuarioActual"]['utipo_nombre']?></i></a>
     </div>
     </div>
 
@@ -32,7 +32,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 1)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 1)){?>
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==1){echo "active";}?>">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -40,7 +40,7 @@
             </a>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 4)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 4)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==4){echo "active";}?>">
                 <i class="nav-icon fas fa-user"></i>
@@ -86,14 +86,14 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 2)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==2){echo "active";}?>">
                 <i class="nav-icon fas fa-regular fa-toolbox"></i>
                 <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
+                <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
                         <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -110,7 +110,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 3)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==3){echo "active";}?>">
                 <i class="nav-icon fas fa-solid fa-money-bill"></i>
@@ -188,7 +188,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 5)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 5)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==5){echo "active";}?>">
                 <i class="nav-icon fas fa-cogs"></i>
@@ -201,7 +201,7 @@
                         <p>Configuración del Sistema</p>
                     </a>
                 </li>
-                <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
+                <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
                         <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -224,7 +224,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($configuracion['conf_id_empresa'], 7)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){?>
         <li class="nav-item">
             <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==7){echo "active";}?>">
             <i class="fa fa-globe nav-icon"></i>
@@ -270,7 +270,7 @@
             </ul>
         </li>
         <?php }?>
-        <?php if($datosUsuarioActual['usr_tipo']==DEV){?>
+        <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){?>
         <li class="nav-item">
             <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
                 <i class="nav-icon fas fa-business-time"></i>

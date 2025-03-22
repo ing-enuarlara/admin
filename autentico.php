@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("conexion.php");
 
 $urlRed = REDIRECT_ROUTE;
@@ -45,9 +44,20 @@ if($num>0)
 	//VERIFICAR SI EL USUARIO ESTÁ BLOQUEADO
 	if($fila[6]==1){header("Location:".$urlRed."index.php?error=4");exit();}
 	//INICIO SESION
-	//session_start();
-	$_SESSION["id"] = $fila[0];
-	//$_SESSION["idUsuario"] = $fila[0];
+	session_start();
+	$_SESSION["id"] = $fila['usr_id'];
+	$_SESSION["idEmpresa"] = $fila['usr_id_empresa'];
+	$_SESSION["datosUsuarioActual"] = $fila;
+	
+	try{
+		$consultaConfig = $conexionBdGeneral->query("SELECT * FROM configuracion
+		LEFT JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=conf_ciudad
+		LEFT JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento 
+		WHERE conf_id_empresa='".$_SESSION["idEmpresa"]."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
+	$_SESSION["configuracion"] = mysqli_fetch_array($consultaConfig, MYSQLI_BOTH);
 	if(!isset($_POST["idseg"]) or !is_numeric($_POST["idseg"])){$url = 'modules/';}
 	else{$url = $urlRed.'index.php';}
 

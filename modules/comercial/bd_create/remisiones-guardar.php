@@ -6,7 +6,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdComercial->query("INSERT INTO comercial_remisiones(remi_fecha_propuesta, remi_cliente, remi_fecha_vencimiento, remi_vendedor, remi_creador, remi_forma_pago, remi_fecha_creacion, remi_moneda, remi_observaciones, remi_id_empresa)VALUES('" . $_POST["fechaPropuesta"] . "','" . $_POST["cliente"] . "','" . $_POST["fechaVencimiento"] . "','" . $_POST["vendedor"] . "','" . $_SESSION["id"] . "','" . $_POST["formaPago"] . "',now(),'" . $_POST["moneda"] . "','" . $_POST["notas"] . "', '" . $datosUsuarioActual['usr_id_empresa'] . "')");
+        $conexionBdComercial->query("INSERT INTO comercial_remisiones(remi_fecha_propuesta, remi_cliente, remi_fecha_vencimiento, remi_vendedor, remi_creador, remi_forma_pago, remi_fecha_creacion, remi_moneda, remi_observaciones, remi_id_empresa)VALUES('" . $_POST["fechaPropuesta"] . "','" . $_POST["cliente"] . "','" . $_POST["fechaVencimiento"] . "','" . $_POST["vendedor"] . "','" . $_SESSION["id"] . "','" . $_POST["formaPago"] . "',now(),'" . $_POST["moneda"] . "','" . $_POST["notas"] . "', '" . $_SESSION["idEmpresa"] . "')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }

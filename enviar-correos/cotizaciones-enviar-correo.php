@@ -24,7 +24,7 @@ if(!empty($resultado)){
 		'id_cotizacion'         => $_POST["id"],
 		'mensaje_cotizacion'    => $_POST['mensaje'],
 		'numero_cotizacion'     => date("dmy", strtotime($resultado['cotiz_fecha_propuesta']))."-".$resultado['cotiz_id'],
-		'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
+		'id_empresa'            => $_SESSION["datosUsuarioActual"]["usr_id_empresa"]
 	];
 	$asunto = $_POST['asunto'];
 	$bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-cotizaciones.php';

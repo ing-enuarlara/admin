@@ -87,7 +87,7 @@ if (!empty($_GET['search'])) {
                                     <th>Destacada</th>
                                     <th>Pie de Pagina</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -96,8 +96,8 @@ if (!empty($_GET['search'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                if($datosUsuarioActual['usr_tipo']!=DEV){
-                                    $filtro.= " AND ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                    $filtro.= " AND ccat_id_empresa='".$_SESSION["idEmpresa"]."'";
                                 }
                                 $categorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias 
                                 INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=ccat_id_empresa 
@@ -119,7 +119,7 @@ if (!empty($_GET['search'])) {
                                     <td><?=$menu;?></td>
                                     <td><?=$footer;?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
@@ -146,7 +146,7 @@ if (!empty($_GET['search'])) {
                                     <th>Destacada</th>
                                     <th>Pie de Pagina</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

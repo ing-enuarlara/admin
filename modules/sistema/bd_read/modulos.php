@@ -81,7 +81,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($page = mysqli_fetch_array($modulos, MYSQLI_BOTH)){
-                                    if(validarAccesoModulo($configuracion['conf_id_empresa'], $page[0])){
+                                    if(validarAccesoModulo($_SESSION["idEmpresa"], $page[0])){
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>

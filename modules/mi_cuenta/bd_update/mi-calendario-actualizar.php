@@ -36,7 +36,7 @@
 		if($resultadoNotificar){
 
             $operacion=1;
-            $texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> a modificado un evento al que estas invitado. A continuación los nuevos detalles:";
+            $texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> a modificado un evento al que estas invitado. A continuación los nuevos detalles:";
             $duracion="<b>Hora inicio:</b>".$_POST['horaInicio']."<br><b>Hora fin:</b>".$_POST["horaFin"]."<br>";
             if($_POST["todoDia"]==1){
                 $duracion="<b>Duración:</b> Todo el dia<br>";
@@ -54,7 +54,7 @@
 		if($resultadoAgregar){
 
             $operacion=1;
-            $texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> te está haciendo una invitación para un evento. A continuación los detalles:";
+            $texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> te está haciendo una invitación para un evento. A continuación los detalles:";
             $duracion="<b>Hora inicio:</b>".$_POST['horaInicio']."<br><b>Hora fin:</b>".$_POST["horaFin"]."<br>";
             if($_POST["todoDia"]==1){
                 $duracion="<b>Duración:</b> Todo el dia<br>";
@@ -78,7 +78,7 @@
 		if($resultadoEliminar){
 
             $operacion=1;
-            $texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> a cancelado tu invitación al evento <b>".$_POST["asunto"]."</b>";
+            $texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> a cancelado tu invitación al evento <b>".$_POST["asunto"]."</b>";
             $duracion="";
             $asuntoEvento="CANCELACIÓN DE EVENTO";
             $estado=0;

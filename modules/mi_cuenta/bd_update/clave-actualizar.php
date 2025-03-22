@@ -4,7 +4,7 @@
     $idPagina = 112;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-    if ($datosUsuarioActual['usr_clave'] != SHA1($_POST['claveActual'])) {
+    if ($_SESSION["datosUsuarioActual"]['usr_clave'] != SHA1($_POST['claveActual'])) {
         echo '<script type="text/javascript">window.location.href="../bd_read/clave-editar.php?error=ER_4";</script>';
         exit();
     }

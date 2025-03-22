@@ -76,7 +76,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                         <option value=""></option>
                         <?php
                         $where = "";
-                        if ($datosUsuarioActual['usr_tipo']!=DEV) {
+                        if ($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV) {
                           $where = "WHERE utipo_id!=1";
                         }
                         try{

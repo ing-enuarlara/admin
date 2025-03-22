@@ -60,7 +60,7 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-                        <?php if($datosUsuarioActual['usr_id_empresa']==1){ ?><a href="roles-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Rol</a><?php }?>
+                        <?php if($_SESSION["idEmpresa"]==1){ ?><a href="roles-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Rol</a><?php }?>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -69,7 +69,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Rol</th>
-                                    <?php if($datosUsuarioActual['usr_id_empresa']==1){ ?><th></th><?php }?>
+                                    <?php if($_SESSION["idEmpresa"]==1){ ?><th></th><?php }?>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,7 +86,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['utipo_nombre'];?></td>
-                                    <?php if($datosUsuarioActual['usr_id_empresa']==1){ ?>
+                                    <?php if($_SESSION["idEmpresa"]==1){ ?>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-info">Acciones</button>
@@ -108,7 +108,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Rol</th>
-                                    <?php if($datosUsuarioActual['usr_id_empresa']==1){ ?><th></th><?php }?>
+                                    <?php if($_SESSION["idEmpresa"]==1){ ?><th></th><?php }?>
                                 </tr>
                             </tfoot>
                         </table>

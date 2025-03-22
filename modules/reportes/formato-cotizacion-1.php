@@ -3,7 +3,7 @@ $idPagina = 81;
 if(!empty($_GET['cte'])){
 	if ($_GET["cte"] == 1) {
 		$_GET["id"] = base64_decode($_GET["id"]);
-		$datosUsuarioActual["usr_id_empresa"] = base64_decode($_GET["idE"]);
+		$_SESSION["datosUsuarioActual"]["usr_id_empresa"] = base64_decode($_GET["idE"]);
 	}
 
 	session_start();
@@ -54,13 +54,13 @@ if(!empty($resultado['cotiz_envio'])){
 				<div class="row mb-2">
 					<div class="col-5">
 						<div class="card-body">
-							<h5 class="card-title" style="color: green; font-weight:bold;"><?= strtoupper($configuracion['conf_empresa']); ?></h5>
+							<h5 class="card-title" style="color: green; font-weight:bold;"><?= strtoupper($_SESSION["configuracion"]['conf_empresa']); ?></h5>
 							<p class="card-text">
-								<strong>DIRECCIÓN:</strong> <?= $configuracion['conf_direccion']; ?><br>
-								<strong>CIUDAD:</strong> <?= $configuracion['ciu_nombre'].", ".$configuracion['dep_nombre']; ?><br>
-								<strong>SITIO WEB:</strong> <a href="$configuracion['conf_web']" target="_target"><?= $configuracion['conf_web']; ?></a><br>
-								<strong>CELULAR:</strong> <?= strtoupper($configuracion['conf_telefono']); ?><br>
-								<strong>EMAIL:</strong> <?= strtoupper($configuracion['conf_email']); ?>
+								<strong>DIRECCIÓN:</strong> <?= $_SESSION["configuracion"]['conf_direccion']; ?><br>
+								<strong>CIUDAD:</strong> <?= $_SESSION["configuracion"]['ciu_nombre'].", ".$_SESSION["configuracion"]['dep_nombre']; ?><br>
+								<strong>SITIO WEB:</strong> <a href="$_SESSION["configuracion"]['conf_web']" target="_target"><?= $_SESSION["configuracion"]['conf_web']; ?></a><br>
+								<strong>CELULAR:</strong> <?= strtoupper($_SESSION["configuracion"]['conf_telefono']); ?><br>
+								<strong>EMAIL:</strong> <?= strtoupper($_SESSION["configuracion"]['conf_email']); ?>
 							</p>
 						</div>
 						<div class="card-body">
@@ -83,7 +83,7 @@ if(!empty($resultado['cotiz_envio'])){
 
 					<div class="col-2">
 						<div class="card-body">
-							<img src="<?=REDIRECT_ROUTE.'files/logo/'.$configuracion['conf_logo']?>" width="100%">
+							<img src="<?=REDIRECT_ROUTE.'files/logo/'.$_SESSION["configuracion"]['conf_logo']?>" width="100%">
 						</div>
 					</div>
 
@@ -201,18 +201,18 @@ if(!empty($resultado['cotiz_envio'])){
 				</table>
 			</div>
 			<div class="m-2" style="font-size: 13px;" id="pie">
-				<?php if(!empty($configuracion['conf_observaciones_cotizaciones'])){ ?>
+				<?php if(!empty($_SESSION["configuracion"]['conf_observaciones_cotizaciones'])){ ?>
 					<div class="border border-dark rounded">
 						<h5 class="card-title p-2" style="background-color: green; color:white; font-weight:bold;">TÉRMINOS Y CONDICIONES</h5>
 						<p class="card-text p-2">
-							<?= $configuracion['conf_observaciones_cotizaciones']; ?>
+							<?= $_SESSION["configuracion"]['conf_observaciones_cotizaciones']; ?>
 						</p>
 					</div>
 				<?php } ?>
 				<div class="mt-5 text-center">
 					<p>
 						Si usted tiene alguna pregunta sobre esta cotización, por favor, póngase en contacto con nosotros<br>
-						<?=$configuracion['conf_empresa'].", ".$configuracion['conf_telefono'].", ".$configuracion['conf_email'];?><br>
+						<?=$_SESSION["configuracion"]['conf_empresa'].", ".$_SESSION["configuracion"]['conf_telefono'].", ".$_SESSION["configuracion"]['conf_email'];?><br>
 						<span style="font-weight:bold; font-size: 20px;">Gracias por hacer negocios con nosotros!</span>
 					</p>
 				</div>

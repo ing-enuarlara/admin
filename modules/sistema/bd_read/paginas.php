@@ -83,7 +83,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                 }
                                 $num=1;
                                 while($page = mysqli_fetch_array($paginas, MYSQLI_BOTH)){
-                                    if(validarAccesoModulo($configuracion['conf_id_empresa'], $page['pag_id_modulo'])){
+                                    if(validarAccesoModulo($_SESSION["idEmpresa"], $page['pag_id_modulo'])){
 
                                         try{
                                             $consultaNombreMod = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id='".$page['pag_id_modulo']."'");

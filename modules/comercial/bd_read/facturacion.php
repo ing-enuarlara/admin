@@ -6,8 +6,8 @@ $idPagina = 103;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 $filtro="";
-if($datosUsuarioActual['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
-    $filtro.=" AND (factura_id_empresa='".$configuracion['conf_id_empresa']."' OR factura_id_empresa='".$_GET["cliAdmin"]."')";
+if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (factura_id_empresa='".$_SESSION["idEmpresa"]."' OR factura_id_empresa='".$_GET["cliAdmin"]."')";
 }
 if(!empty($_GET["tipo"])){
     $filtro.=" AND factura_tipo='".$_GET["tipo"]."'";
@@ -123,7 +123,7 @@ if(!empty($_GET["q"])){
                                     <th>Estado</th>
                                     <?php
                                     $colspan=2;
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                         $colspan=3;
                                     ?>
                                     <th>Nombre Empresa</th>
@@ -207,9 +207,9 @@ if(!empty($_GET["q"])){
                                         $sumaTotalFinal += $sumaTotalCompras;
                                     }
                                     
-                                    $pCom = $configuracion['conf_comision_vendedores'] / 100;
+                                    $pCom = $_SESSION["configuracion"]['conf_comision_vendedores'] / 100;
                                     $comision = ($sumaTotalFinal * $pCom);
-                                    $pCliente = $configuracion['conf_porcentaje_clientes'] / 100;
+                                    $pCliente = $_SESSION["configuracion"]['conf_porcentaje_clientes'] / 100;
                                     $aCliente = ($sumaTotalFinal * $pCliente);
 
                                     //Para el total al pie de pagina
@@ -275,7 +275,7 @@ if(!empty($_GET["q"])){
                                         </a>
                                     </td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>">

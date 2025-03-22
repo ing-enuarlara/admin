@@ -128,8 +128,8 @@ $rutaFoto = !empty($resultadoD['blogs_imagen']) ? REDIRECT_ROUTE . "files/blogs/
                         <option value=""></option>
                         <?php
                         $where="";
-                        if($datosUsuarioActual['usr_tipo']!=DEV){
-                          $where= "WHERE catblo_id_empresa='".$configuracion['conf_id_empresa']."'";
+                        if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                          $where= "WHERE catblo_id_empresa='".$_SESSION["idEmpresa"]."'";
                         }
                         try{
                           $consultaCategorias= $conexionBdPaginaWeb->query("SELECT * FROM categorias_blogs $where");
@@ -138,7 +138,7 @@ $rutaFoto = !empty($resultadoD['blogs_imagen']) ? REDIRECT_ROUTE . "files/blogs/
                         }
                         while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
                           $nombreEmpresa='';
-                          if($datosUsuarioActual['usr_tipo']==DEV){
+                          if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                             try{
                             $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['catblo_id_empresa']."'");
                             } catch (Exception $e) {

@@ -66,7 +66,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                 </div>
                 <?php
                 try{
-                  $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='" . $datosUsuarioActual['usr_id_empresa'] . "'");
+                  $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='" . $_SESSION["idEmpresa"] . "'");
                 } catch (Exception $e) {
                   include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }

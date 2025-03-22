@@ -6,7 +6,7 @@ $idPagina = 109;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 $rutaFoto="http://via.placeholder.com/150x150/000000/AAAAAA&amp;text=Ninguna%20Imagen";
-if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/perfil/" . $datosUsuarioActual['usr_foto'];}
+if(!empty($_SESSION["datosUsuarioActual"]['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/perfil/" . $_SESSION["datosUsuarioActual"]['usr_foto'];}
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -75,7 +75,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form class="form-horizontal" method="post" action="../bd_update/perfil-actualizar.php" enctype="multipart/form-data">
-                  <input type="hidden" name="id" value="<?= $datosUsuarioActual['usr_id'] ?>">
+                  <input type="hidden" name="id" value="<?= $_SESSION["datosUsuarioActual"]['usr_id'] ?>">
                   <div class="card-body">
                     <div class="col-md-6" style="margin-top: 10px;">
                       <div class="filtr-item col-md-12" data-category="1" data-sort="Foto de perfil">
@@ -106,12 +106,12 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
 
                     <div class="form-group col-md-2">
                       <label for="idInput">ID:</label>
-                      <input type="text" class="form-control" value="<?= $datosUsuarioActual['usr_id'] ?>" disabled>
+                      <input type="text" class="form-control" value="<?= $_SESSION["datosUsuarioActual"]['usr_id'] ?>" disabled>
                     </div>
 
                     <div class="form-group col-md-2">
                       <label for="tipoUssInput">Tipo Usuario:</label>
-                      <input type="text" id="tipoUssInput" class="form-control" value="<?=$datosUsuarioActual['utipo_nombre']?>" disabled>
+                      <input type="text" id="tipoUssInput" class="form-control" value="<?=$_SESSION["datosUsuarioActual"]['utipo_nombre']?>" disabled>
                     </div>
 
                     <script>
@@ -134,7 +134,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                     <div class="form-group col-md-11">
                       <label for="userInput">Usuario:</label>
                       <div class="input-group">
-                        <input type="text" class="form-control col-md-4" id="userInput" placeholder="Ingrese su usuario" value="<?=$datosUsuarioActual['usr_login']?>">
+                        <input type="text" class="form-control col-md-4" id="userInput" placeholder="Ingrese su usuario" value="<?=$_SESSION["datosUsuarioActual"]['usr_login']?>">
                         <label class="switchToggle">
                           <input type="checkbox" name="cambiarUser" id="cambiarUser" value="1" onchange="habilitarUss()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
                           <span class="slider red round"></span>
@@ -147,27 +147,27 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
 
                     <div class="form-group col-md-4">
                       <label for="nombreInput">Nombre:</label>
-                      <input type="text" class="form-control" id="nombreInput" placeholder="Nombre del Usuario" value="<?= $datosUsuarioActual['usr_nombre'] ?>" name="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚ\s]+" title="Ingrese solo letras">
+                      <input type="text" class="form-control" id="nombreInput" placeholder="Nombre del Usuario" value="<?= $_SESSION["datosUsuarioActual"]['usr_nombre'] ?>" name="nombre" pattern="[A-Za-zñÑáÁéÉíÍóÓúÚ\s]+" title="Ingrese solo letras">
                     </div>
 
                     <div class="form-group col-md-4">
                       <label for="documentoInput">Documento:</label>
-                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" value="<?= $datosUsuarioActual['usr_documento'] ?>" name="documento" pattern="[0-9]+" title="Ingrese solo numeros sin espacios">
+                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" value="<?= $_SESSION["datosUsuarioActual"]['usr_documento'] ?>" name="documento" pattern="[0-9]+" title="Ingrese solo numeros sin espacios">
                     </div>
 
                     <div class="form-group col-md-4">
                       <label for="emailInput">Email:</label>
-                      <input type="email" class="form-control" id="emailInput" placeholder="Email del Usuario" name="email" value="<?= $datosUsuarioActual['usr_email'] ?>">
+                      <input type="email" class="form-control" id="emailInput" placeholder="Email del Usuario" name="email" value="<?= $_SESSION["datosUsuarioActual"]['usr_email'] ?>">
                     </div>
 
                     <div class="form-group col-md-4">
                       <label for="cellInput">Celular:</label>
-                      <input type="tel" class="form-control" id="cellInput" placeholder="Celular del Usuario" name="celular" value="<?= $datosUsuarioActual['usr_telefono'] ?>">
+                      <input type="tel" class="form-control" id="cellInput" placeholder="Celular del Usuario" name="celular" value="<?= $_SESSION["datosUsuarioActual"]['usr_telefono'] ?>">
                     </div>
 
                     <div class="form-group col-md-4">
                       <label for="direccionInput">Direccion:</label>
-                      <input type="text" class="form-control" id="direccionInput" placeholder="Direccion del Usuario" value="<?= $datosUsuarioActual['usr_direccion'] ?>" name="direccion">
+                      <input type="text" class="form-control" id="direccionInput" placeholder="Direccion del Usuario" value="<?= $_SESSION["datosUsuarioActual"]['usr_direccion'] ?>" name="direccion">
                     </div>
 
                     <div class="form-group col-md-4">
@@ -182,7 +182,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                         }
                         while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
                           $selected = "";
-                          if ($datosUsuarioActual['usr_ciudad'] == $ciudad[0]) {
+                          if ($_SESSION["datosUsuarioActual"]['usr_ciudad'] == $ciudad[0]) {
                             $selected = "selected";
                           }
                         ?>
@@ -193,7 +193,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
 
                     <div class="form-group col-md-4">
                       <label for="ocupacionInput">Ocupación:</label>
-                      <input type="text" class="form-control" id="ocupacionInput" placeholder="Ocupación del Usuario" value="<?= $datosUsuarioActual['usr_ocupacion'] ?>" name="ocupacion">
+                      <input type="text" class="form-control" id="ocupacionInput" placeholder="Ocupación del Usuario" value="<?= $_SESSION["datosUsuarioActual"]['usr_ocupacion'] ?>" name="ocupacion">
                     </div>
 
                     <div class="form-group col-md-4">
@@ -208,7 +208,7 @@ if(!empty($datosUsuarioActual['usr_foto'])){$rutaFoto=REDIRECT_ROUTE . "files/pe
                         }
                         while ($genero = mysqli_fetch_array($consultaGenero, MYSQLI_BOTH)) {
                           $selected = "";
-                          if ($datosUsuarioActual['usr_genero'] == $genero[0]) {
+                          if ($_SESSION["datosUsuarioActual"]['usr_genero'] == $genero[0]) {
                             $selected = "selected";
                           }
                         ?>

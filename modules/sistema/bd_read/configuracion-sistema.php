@@ -66,14 +66,14 @@ include(RUTA_PROYECTO . "includes/head.php");
                 </div>
                 <?php
                 $rutaLogo = 'files/default.png';
-                if (!empty($configuracion['conf_logo'])) {
-                  $rutaLogo = 'files/logo/' . $configuracion['conf_logo'];
+                if (!empty($_SESSION["configuracion"]['conf_logo'])) {
+                  $rutaLogo = 'files/logo/' . $_SESSION["configuracion"]['conf_logo'];
                 }
                 ?>
 
                 <!-- form start -->
                 <form class="form-horizontal" method="post" action="../bd_update/configuracion-sistema-actualizar.php" enctype="multipart/form-data">
-                  <input type="hidden" name="id" value="<?= $configuracion['conf_id_empresa'] ?>">
+                  <input type="hidden" name="id" value="<?= $_SESSION["idEmpresa"] ?>">
                   <div class="card-body p-0">
                     <div class="bs-stepper">
                       <div class="bs-stepper-content">
@@ -95,7 +95,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                         <div class="form-group col-md-6">
                           <label for="exampleInputEmail1">Nombre de la Empresa:</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Empresa" name="nombre" value="<?= $configuracion['conf_empresa'] ?>">
+                          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Empresa" name="nombre" value="<?= $_SESSION["configuracion"]['conf_empresa'] ?>">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -104,7 +104,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                             </div>
-                            <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $configuracion['conf_email'] ?>">
+                            <input type="email" class="form-control" placeholder="Email" name="email" value="<?= $_SESSION["configuracion"]['conf_email'] ?>">
                           </div>
                         </div>
                         <!-- phone mask -->
@@ -115,7 +115,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-phone"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Telefono" name="telefono" value="<?= $configuracion['conf_telefono'] ?>">
+                            <input type="text" class="form-control" placeholder="Telefono" name="telefono" value="<?= $_SESSION["configuracion"]['conf_telefono'] ?>">
                           </div>
                           <!-- /.input group -->
                         </div>
@@ -132,7 +132,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             }
                             while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
                               $selected = "";
-                              if ($configuracion['conf_ciudad'] == $ciudad[0]) {
+                              if ($_SESSION["configuracion"]['conf_ciudad'] == $ciudad[0]) {
                                 $selected = "selected";
                               }
                             ?>
@@ -145,37 +145,37 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                         <div class="form-group col-md-6">
                           <label for="ComisionVendedores">Comisión Vendedores:</label>
-                          <input type="text" class="form-control col-md-2" id="ComisionVendedores" name="ComisionVendedores" value="<?= $configuracion['conf_comision_vendedores'] ?>">
+                          <input type="text" class="form-control col-md-2" id="ComisionVendedores" name="ComisionVendedores" value="<?= $_SESSION["configuracion"]['conf_comision_vendedores'] ?>">
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="comisionCliente">Porcentaje para clientes por Compras:</label>
-                          <input type="text" class="form-control col-md-2" id="comisionCliente" name="comisionCliente" value="<?= $configuracion['conf_porcentaje_clientes'] ?>">
+                          <input type="text" class="form-control col-md-2" id="comisionCliente" name="comisionCliente" value="<?= $_SESSION["configuracion"]['conf_porcentaje_clientes'] ?>">
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="direccion">Dirección:</label>
-                          <textarea name="direccion" id="direccion"><?= $configuracion['conf_direccion'] ?></textarea>
+                          <textarea name="direccion" id="direccion"><?= $_SESSION["configuracion"]['conf_direccion'] ?></textarea>
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="notaCotiz">Términos y Condiciones Para las Cotizaciones:</label>
-                          <textarea name="notaCotiz" id="notaCotiz"><?= $configuracion['conf_observaciones_cotizaciones'] ?></textarea>
+                          <textarea name="notaCotiz" id="notaCotiz"><?= $_SESSION["configuracion"]['conf_observaciones_cotizaciones'] ?></textarea>
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="notaPedid">Términos y Condiciones Para los Pedidos:</label>
-                          <textarea name="notaPedid" id="notaPedid"><?= $configuracion['conf_observaciones_pedidos'] ?></textarea>
+                          <textarea name="notaPedid" id="notaPedid"><?= $_SESSION["configuracion"]['conf_observaciones_pedidos'] ?></textarea>
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="notaRemi">Términos y Condiciones Para las Remisones:</label>
-                          <textarea name="notaRemi" id="notaRemi"><?= $configuracion['conf_observaciones_remisiones'] ?></textarea>
+                          <textarea name="notaRemi" id="notaRemi"><?= $_SESSION["configuracion"]['conf_observaciones_remisiones'] ?></textarea>
                         </div>
 
                         <div class="form-group col-md-6">
                           <label for="notaFacturas">Términos y Condiciones Para las Facturas:</label>
-                          <textarea name="notaFacturas" id="notaFacturas"><?= $configuracion['conf_observaciones_facturas'] ?></textarea>
+                          <textarea name="notaFacturas" id="notaFacturas"><?= $_SESSION["configuracion"]['conf_observaciones_facturas'] ?></textarea>
                         </div>
                       </div>
                     </div>

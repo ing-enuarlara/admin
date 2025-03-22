@@ -6,8 +6,8 @@ $idPagina = 87;
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 $filtro="";
-if($datosUsuarioActual['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
-    $filtro.=" AND (pedid_id_empresa='".$configuracion['conf_id_empresa']."' OR pedid_id_empresa='".$_GET["cliAdmin"]."')";
+if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV || !empty($_GET["cliAdmin"])){
+    $filtro.=" AND (pedid_id_empresa='".$_SESSION["idEmpresa"]."' OR pedid_id_empresa='".$_GET["cliAdmin"]."')";
 }
 if(!empty($_GET["cte"])){
     $filtro.=" AND pedid_cliente='".$_GET["cte"]."'";
@@ -108,7 +108,7 @@ if(!empty($_GET["q"])){
                                     <th>Estado</th>
                                     <th>Nº Cotización</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -176,7 +176,7 @@ if(!empty($_GET["q"])){
                                     </td>
                                     <td><?= $cotiz; ?></td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>">
@@ -224,7 +224,7 @@ if(!empty($_GET["q"])){
                                     <th>Estado</th>
                                     <th>Nº Cotización</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

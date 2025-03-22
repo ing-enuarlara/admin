@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        mysqli_query($conexionBdMicuenta, "INSERT INTO micuenta_agenda(age_evento, age_fecha, age_inicio, age_fin, age_lugar, age_notas, age_color, age_id_empresa, age_todo_dia, age_enlace) VALUE ('" . $_POST["asunto"] . "','" . $_POST["fechaEvento"] . "','" . $_POST["horaInicio"] . "','" . $_POST["horaFin"] . "','" . $_POST["lugarEvento"] . "','" . $_POST["observacion"] . "','" . $_POST["colorEvento"] . "','" . $datosUsuarioActual['usr_id_empresa'] . "','" . $_POST["todoDia"] . "','" . $_POST["enlaceEvento"] . "')");
+        mysqli_query($conexionBdMicuenta, "INSERT INTO micuenta_agenda(age_evento, age_fecha, age_inicio, age_fin, age_lugar, age_notas, age_color, age_id_empresa, age_todo_dia, age_enlace) VALUE ('" . $_POST["asunto"] . "','" . $_POST["fechaEvento"] . "','" . $_POST["horaInicio"] . "','" . $_POST["horaFin"] . "','" . $_POST["lugarEvento"] . "','" . $_POST["observacion"] . "','" . $_POST["colorEvento"] . "','" . $_SESSION["idEmpresa"] . "','" . $_POST["todoDia"] . "','" . $_POST["enlaceEvento"] . "')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
@@ -17,7 +17,7 @@
         $numero = (count($_POST["usuarios"]));
 
         $operacion=1;
-        $texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> te está haciendo una invitación para un evento. A continuación los detalles:";
+        $texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> te está haciendo una invitación para un evento. A continuación los detalles:";
         $duracion="<b>Hora inicio:</b>".$_POST['horaInicio']."<br><b>Hora fin:</b>".$_POST["horaFin"]."<br>";
         if($_POST["todoDia"]==1){
             $duracion="<b>Duración:</b> Todo el dia<br>";

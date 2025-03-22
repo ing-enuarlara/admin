@@ -23,7 +23,7 @@ if($operacion==1){
 			'evento_nota'		=> $_POST["observacion"],
 			'evento_enlace'		=> $_POST["enlaceEvento"],
 			'evento_estado'		=> $estado,
-			'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
+			'id_empresa'            => $_SESSION["datosUsuarioActual"]["usr_id_empresa"]
 		];
 		$asunto = $asuntoEvento;
 		$bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-eventos.php';
@@ -54,11 +54,11 @@ if($operacion==2){
             }
 			switch($tipoOpcion){
 				case 0:
-					$texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> a cancelado tu invitación al evento <b>".$resultadoAgenda["age_evento"]."</b>";
+					$texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> a cancelado tu invitación al evento <b>".$resultadoAgenda["age_evento"]."</b>";
 				break;
 				
 				case 1:
-					$texto="Te notificamos que <b>".$datosUsuarioActual['usr_nombre']."</b> a cancelado el evento <b>".$resultadoAgenda["age_evento"]."</b> al que estabas invitado.";
+					$texto="Te notificamos que <b>".$_SESSION["datosUsuarioActual"]['usr_nombre']."</b> a cancelado el evento <b>".$resultadoAgenda["age_evento"]."</b> al que estabas invitado.";
 				break;
 			}
 
@@ -82,7 +82,7 @@ if($operacion==2){
 					'evento_nota'		=> $resultadoAgenda["age_notas"],
 					'evento_enlace'		=> $resultadoAgenda["age_enlace"],
 					'evento_estado'		=> $estado,
-					'id_empresa'            => $datosUsuarioActual["usr_id_empresa"]
+					'id_empresa'            => $_SESSION["datosUsuarioActual"]["usr_id_empresa"]
 				];
 				$asunto = $asuntoEvento;
 				$bodyTemplateRoute = RUTA_PROYECTO.'enviar-correos/template-enviar-eventos.php';

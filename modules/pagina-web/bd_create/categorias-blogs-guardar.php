@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdPaginaWeb->query("INSERT INTO categorias_blogs(catblo_nombre, catblo_id_empresa)VALUES('" . $_POST["nomCategoria"] . "', '".$configuracion['conf_id_empresa']."')");
+        $conexionBdPaginaWeb->query("INSERT INTO categorias_blogs(catblo_nombre, catblo_id_empresa)VALUES('" . $_POST["nomCategoria"] . "', '".$_SESSION["idEmpresa"]."')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }

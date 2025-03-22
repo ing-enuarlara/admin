@@ -166,7 +166,7 @@ $resultadoD = mysqli_fetch_array($consulta, MYSQLI_BOTH);
                                                 <option value=""></option>
                                                 <?php
                                                     try{
-                                                        $consultaUsuario=mysqli_query($conexionBdAdministrativo, "SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id_empresa='".$datosUsuarioActual['usr_id_empresa']."' AND usr_id!='".$datosUsuarioActual['usr_id']."'");
+                                                        $consultaUsuario=mysqli_query($conexionBdAdministrativo, "SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id_empresa='".$_SESSION["idEmpresa"]."' AND usr_id!='".$_SESSION["datosUsuarioActual"]['usr_id']."'");
                                                     } catch (Exception $e) {
                                                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                     }

@@ -137,7 +137,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>RM</th>
                                     <th>FC</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>
@@ -146,8 +146,8 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                             </thead>
                             <tbody>
                                 <?php
-                                if($datosUsuarioActual['usr_tipo']!=DEV){
-                                    $filtro.=" AND cli_id_empresa='".$configuracion['conf_id_empresa']."' ";
+                                if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                    $filtro.=" AND cli_id_empresa='".$_SESSION["idEmpresa"]."' ";
                                 }
                                 try{
                                     $clientes= $conexionBdComercial->query("SELECT * FROM comercial_clientes 
@@ -209,7 +209,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                         <a href="facturacion.php?cte=<?=$result['cli_id'];?>" target="_blank"><?=$numeros[3];?></a>
                                     </td>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td><?=$result['cliAdmi_nombre'];?></td>
 								    <?php }?>
@@ -221,7 +221,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-editar.php?id=<?=$result[0];?>">Editar</a>
-                                                <?php if($datosUsuarioActual['usr_tipo']==DEV || $datosUsuarioActual['usr_tipo']==ADMIN){?>
+                                                <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV || $_SESSION["datosUsuarioActual"]['usr_tipo']==ADMIN){?>
                                                     <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['cli_id_usuario'];?>&tipe=5">Autologin</a>
                                                 <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->
@@ -248,7 +248,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                     <th>RM</th>
                                     <th>FC</th>
                                     <?php
-                                    if($datosUsuarioActual['usr_tipo']==DEV){
+                                    if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <th>Nombre Empresa</th>
 								    <?php }?>

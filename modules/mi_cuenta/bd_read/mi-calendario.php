@@ -175,7 +175,7 @@ $usuarioCalendario = mysqli_fetch_array($consultaCalendario, MYSQLI_BOTH);
                                                 <option value=""></option>
                                                 <?php
                                                     try{
-                                                        $consultaUsuario=mysqli_query($conexionBdAdministrativo, "SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id_empresa='".$datosUsuarioActual['usr_id_empresa']."' AND usr_id!='".$datosUsuarioActual['usr_id']."'");
+                                                        $consultaUsuario=mysqli_query($conexionBdAdministrativo, "SELECT * FROM administrativo_usuarios INNER JOIN administrativo_roles ON utipo_id=usr_tipo WHERE usr_id_empresa='".$_SESSION["idEmpresa"]."' AND usr_id!='".$_SESSION["datosUsuarioActual"]['usr_id']."'");
                                                     } catch (Exception $e) {
                                                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                     }
@@ -189,7 +189,7 @@ $usuarioCalendario = mysqli_fetch_array($consultaCalendario, MYSQLI_BOTH);
                                     <!-- /.card-body -->
                                     <div class="card-footer" id="btnEnviar">
                                         <button type="submit" class="btn btn-success">Agregar</button>
-                                        <?php if($datosUsuarioActual['usr_tipo']==DEV){ ?>
+                                        <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
                                             <a class="btn btn-info" href="../bd_create/mi-calendario-guardar-festivos.php">Agregar Festivos al Calendario</a>
                                         <?php } ?>
                                     </div>
@@ -316,7 +316,7 @@ $usuarioCalendario = mysqli_fetch_array($consultaCalendario, MYSQLI_BOTH);
 
                 try{
                     $agenda = mysqli_query($conexionBdMicuenta, "SELECT age_id, age_evento, age_todo_dia, age_fecha, age_inicio, age_fin, age_color, age_enlace, agus_creador, HOUR(age_inicio) AS hoIni, MINUTE(age_inicio) AS mIni, HOUR(age_fin) AS hoFin, MINUTE(age_fin) AS mFin, DAY(age_fecha) AS dia, MONTH(age_fecha) AS mes, YEAR(age_fecha) AS agno FROM micuenta_agenda_usuarios
-                    INNER JOIN micuenta_agenda ON age_id=agus_id_agenda AND age_id_empresa='".$datosUsuarioActual['usr_id_empresa']."' AND YEAR(age_fecha)>='".date("Y")."' AND MONTH(age_fecha)>='".date("m")."' WHERE agus_id_usuario='".$usuarioID."'");
+                    INNER JOIN micuenta_agenda ON age_id=agus_id_agenda AND age_id_empresa='".$_SESSION["idEmpresa"]."' AND YEAR(age_fecha)>='".date("Y")."' AND MONTH(age_fecha)>='".date("m")."' WHERE agus_id_usuario='".$usuarioID."'");
                 } catch (Exception $e) {
                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }

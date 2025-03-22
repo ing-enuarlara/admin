@@ -93,8 +93,8 @@ include(RUTA_PROYECTO."includes/head.php");
 											                      <option value=""></option>
                                             <?php
                                             $where= "";
-                                            if($datosUsuarioActual['usr_tipo']!=DEV){
-                                                $where= "AND ctipo_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                            if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                                $where= "AND ctipo_id_empresa='".$_SESSION["idEmpresa"]."'";
                                             }
                                             try{
                                               $consultaTiposProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_estado=1 $where");
@@ -103,7 +103,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             }
                                             while($datosTiposProd = mysqli_fetch_array($consultaTiposProd, MYSQLI_BOTH)){
                                               $nombreEmpresa='';
-                                              if($datosUsuarioActual['usr_tipo']==DEV){
+                                              if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                                   try{
                                                     $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosTiposProd['ctipo_id_empresa']."'");
                                                   } catch (Exception $e) {
@@ -123,8 +123,8 @@ include(RUTA_PROYECTO."includes/head.php");
 											                      <option value=""></option>
                                             <?php
                                             $where="";
-                                            if($datosUsuarioActual['usr_tipo']!=DEV){
-                                              $where= "WHERE ccat_id_empresa='".$configuracion['conf_id_empresa']."'";
+                                            if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+                                              $where= "WHERE ccat_id_empresa='".$_SESSION["idEmpresa"]."'";
                                             }
                                             try{
                                               $consultaCategorias= $conexionBdComercial->query("SELECT * FROM comercial_categorias $where");
@@ -133,7 +133,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             }
                                             while($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)){
                                               $nombreEmpresa='';
-                                              if($datosUsuarioActual['usr_tipo']==DEV){
+                                              if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                                   try{
                                                     $empresa= $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='".$datosCategorias['ccat_id_empresa']."'");
                                                   } catch (Exception $e) {
