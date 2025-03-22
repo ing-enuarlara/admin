@@ -277,13 +277,21 @@
                 <p>Clientes AdminOCB</p>
             </a>
         </li>
+        <?php } if( !isset($_SESSION['admin']) ){?>
+            <li class="nav-item cerrar-sesion">
+                <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
+                    <i class="nav-icon far fa-circle text-danger"></i>
+                    <p class="text text-sesion">Cerrar Sesión</p>
+                </a>
+            </li>
+        <?php } else { ?>
+            <li class="nav-item cerrar-sesion">
+                <a href="<?=REDIRECT_ROUTE?>includes/return-admin-panel.php" class="nav-link">
+                    <i class="nav-icon far fa-circle text-danger"></i>
+                    <p class="text text-sesion">RETORNAR</p>
+                </a>
+            </li>
         <?php } ?>
-        <li class="nav-item cerrar-sesion">
-            <a href="<?=REDIRECT_ROUTE?>salir.php" class="nav-link">
-                <i class="nav-icon far fa-circle text-danger"></i>
-                <p class="text text-sesion">Cerrar Sesión</p>
-            </a>
-        </li>
     </ul>
     </nav>
     <!-- /.sidebar-menu -->
