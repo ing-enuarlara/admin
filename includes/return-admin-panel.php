@@ -1,5 +1,6 @@
 <?php
-session_start();
+include("../modules/sesion.php");
+
 $_SESSION['id'] = $_SESSION['admin'];
 $_SESSION['admin'] = '';
 unset( $_SESSION["admin"] );
