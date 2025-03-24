@@ -82,10 +82,12 @@ if (!empty($_GET['search'])) {
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+                <?php include(RUTA_PROYECTO."includes/mensajes-informativos.php"); ?>
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
                             <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
+                            <a href="productos-importar.php" class="btn btn-warning"><i class="fas fa-solid fa-plus"></i> Importar Productos</a>
                         <?php 
                             if(!empty($filtro)){
                         ?>
@@ -98,7 +100,7 @@ if (!empty($_GET['search'])) {
                             <thead>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>ID</th>
+                                    <th>ID/Cod/Ref</th>
                                     <th></th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>
@@ -124,7 +126,7 @@ if (!empty($_GET['search'])) {
                                     $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
                                     LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
                                     LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
-                                    INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
+                                    LEFT JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa 
                                     WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}");
                                 } catch (Exception $e) {
@@ -156,14 +158,14 @@ if (!empty($_GET['search'])) {
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
-                                    <td><?=$result['cprod_id'];?></td>
+                                    <td style="text-align: right;"><?=!empty($result['cprod_cod_ref']) ? $result['cprod_cod_ref'] : $result['cprod_id'];?></td>
                                     <td align="center">
-                                        <?php if (!empty($result['cpf_fotos'])) { ?>
+                                        <?php if (!empty($result['cpf_fotos']) && file_exists(REDIRECT_ROUTE."files/productos/".$result['cpf_fotos'])) { ?>
                                             <img src="<?= REDIRECT_ROUTE."files/productos/".$result['cpf_fotos'] ?>" width="40">
                                         <?php } ?>
                                     </td>
                                     <td><?=$result['cprod_nombre'];?></td>
-                                    <td><?=number_format($result['cprod_costo'],0,",",".");?></td>
+                                    <td style="text-align: right;"><?=number_format($result['cprod_costo'],0,",",".");?> €</td>
                                     <td style="color: <?=$colorExistencia;?>;"><?=$result['cprod_exitencia'];?></td>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cat=<?=$result['cprod_categoria'];?>"><?=$categoria;?></a>
@@ -200,7 +202,7 @@ if (!empty($_GET['search'])) {
                             <tfoot>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>ID</th>
+                                    <th>ID/Cod/Ref</th>
                                     <th></th>
                                     <th>Nombre Producto</th>
                                     <th>Precio</th>

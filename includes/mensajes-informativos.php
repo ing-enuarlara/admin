@@ -45,6 +45,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
                 $mensaje = 'Correo enviado correctamente.';
             break;
 
+            case 'SC_11':
+                $mensaje = urldecode($_GET['summary']);
+            break;
+
             default:
                 $mensaje = 'Error desconocido: '.$_GET['success'];
             break;
@@ -112,6 +116,10 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
             
             case 'ER_6':
                 $mensaje = $_GET["msj"];
+            break;
+
+            case 'ER_7':
+                $mensaje = 'Hubo un error al importar los productos, por favor intente nuevamente.';
             break;
 
 

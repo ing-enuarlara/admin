@@ -1,0 +1,5 @@
+[2025-03-23 01:37:20] Error en D:\xampp\tmp\php77DA.tmp: File "D:\xampp\tmp\php77DA.tmp" does not exist.
+[2025-03-23 01:57:10] Error en ../files/excel/importado_67df5c669f866.xlsx: Unknown column 'nombre' in 'field list'
+[2025-03-23 02:04:27] Error en ../files/excel/importado_67df5e1bd4312.xlsx: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' id_empresa) VALUES ('100', '3')' at line 1
+[2025-03-23 02:40:29] Error en ../files/excel/importado_67df668d254ef.xlsx: Unknown column 'nombre' in 'field list'
+[2025-03-23 02:47:32] Error en ../files/excel/importado_67df6834062ba.xlsx: Unknown column 'nombre' in 'field list'
