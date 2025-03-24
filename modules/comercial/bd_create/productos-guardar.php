@@ -17,7 +17,7 @@
 
     $idInsertU = mysqli_insert_id($conexionBdComercial);
 
-	if ($_FILES['ftProducto']['name'] != "") {
+	if (!empty($_FILES['ftProducto']['name'])) {
 		$destino = RUTA_PROYECTO."files/productos";
 		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
 
