@@ -26,7 +26,7 @@
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
     
-	if ($_FILES['ftProducto']['name'] != "") {
+	if (!empty($_FILES['ftProducto']['name'])) {
 		$destino = RUTA_PROYECTO."files/productos";
 		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
 
