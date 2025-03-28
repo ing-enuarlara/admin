@@ -29,6 +29,8 @@ include(RUTA_PROYECTO."includes/head.php");
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>dist/css/adminlte.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -177,9 +179,13 @@ include(RUTA_PROYECTO."includes/head.php");
                                       <!-- textarea -->
                                       <div class="form-group">
                                           <label>Detalles</label>
-                                          <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles"></textarea>
+                                          <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles"></textarea>
                                       </div>
                                     </div>
+									<div class="form-group col-md-6">
+										<label>Especificaciones</label>
+										<textarea class="form-control" rows="3" placeholder="especificaciones del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
+									</div>
                                     <div class="col-sm-6">
                                       <!-- textarea -->
                                       <div class="form-group">
@@ -237,11 +243,16 @@ include(RUTA_PROYECTO."includes/head.php");
 <script src="<?=REDIRECT_ROUTE?>dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?=REDIRECT_ROUTE?>dist/js/demo.js"></script>
+<!-- Summernote -->
+<script src="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Page specific script -->
 <script>
-$(function () {
-  bsCustomFileInput.init();
-});
+    $(function() {
+    	// Summernote
+		$('#detalles').summernote();
+		$('#especificaciones').summernote();
+		bsCustomFileInput.init();
+    });
 </script>
 <script>
   $(function () {

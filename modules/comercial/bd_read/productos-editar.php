@@ -43,6 +43,8 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>plugins/dropzone/min/dropzone.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=REDIRECT_ROUTE?>dist/css/adminlte.min.css">
+<!-- summernote -->
+<link rel="stylesheet" href="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
@@ -208,7 +210,11 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
                                         <!-- textarea -->
                                         <div class="form-group col-md-6">
                                             <label>Detalles</label>
-                                            <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" value=""><?=$resultadoD['cprod_detalles'];?></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles" value=""><?=$resultadoD['cprod_detalles'];?></textarea>
+                                        </div>
+										 <div class="form-group col-md-6">
+                                            <label>Especificaciones</label>
+                                            <textarea class="form-control" rows="3" placeholder="especificaciones del producto ..." name="especificaciones" id="especificaciones" value=""><?=$resultadoD['cprod_especificaciones'];?></textarea>
                                         </div>
                                         <!-- textarea -->
                                         <div class="form-group col-md-6">
@@ -278,11 +284,16 @@ $resultadoFoto = mysqli_fetch_array($consulutaFoto, MYSQLI_BOTH);
 <script src="<?=REDIRECT_ROUTE?>plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
 <!-- Filterizr-->
 <script src="<?=REDIRECT_ROUTE?>plugins/filterizr/jquery.filterizr.min.js"></script>
+  <!-- Summernote -->
+  <script src="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Page specific script -->
-<script>
-$(function () {
-  bsCustomFileInput.init();
-});
+  <script>
+    $(function() {
+      // Summernote
+      $('#detalles').summernote();
+		      $('#especificaciones').summernote();
+      bsCustomFileInput.init();
+    });
 </script>
 <script>
   $(function () {

@@ -14,6 +14,7 @@
         cprod_nombre='" . $_POST["nombre"] . "', 
         cprod_costo='" . $_POST["costo"] . "', 
         cprod_detalles='" . $_POST["detalles"] . "', 
+		 cprod_especificaciones='" . $_POST["especificaciones"] . "',
         cprod_exitencia='" . $_POST["existencia"] . "', 
         cprod_marca='" . $subCategoria . "', 
         cprod_categoria='" . $_POST["categoria"] . "', 
@@ -26,7 +27,7 @@
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
     
-	if (!empty($_FILES['ftProducto']['name'])) {
+	if ($_FILES['ftProducto']['name'] != "") {
 		$destino = RUTA_PROYECTO."files/productos";
 		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
 
