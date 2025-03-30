@@ -114,7 +114,7 @@ if (isset($_SESSION["id"])) {
                         <input type="password" class="form-control" id="passwordInput" placeholder="Contraseña" name="Clave">
                         <div class="input-group-append">
                             <div class="input-group-text" onclick="cambiarTipoInput()">
-                                <i class="fa-solid fa-eye" id="icoVer"></i>
+                                <i class="fas fa-eye" id="icoVer"></i>
                             </div>
                         </div>
                     </div>
