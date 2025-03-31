@@ -95,7 +95,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 								</div>
 								<!-- /.card-header -->
 								<!-- form start -->
-								<form class="form-horizontal" method="post" action="../../../import-export/excel-importar-productos2.php" enctype="multipart/form-data">
+								<form class="form-horizontal" method="post" action="../../../import-export/excel-importar-productos.php" enctype="multipart/form-data">
 									<div class="card-body">
 										<div class="form-group col-md-8">
 											<label for="customFile">Subir la plantilla lista</label>
