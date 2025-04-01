@@ -87,7 +87,8 @@ if (!empty($_GET['search'])) {
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
                             <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
-                            <a href="productos-importar.php" class="btn btn-warning"><i class="fas fa-solid fa-plus"></i> Importar Productos</a>
+                            <a href="productos-importar.php" class="btn btn-warning"><i class="fas fa-download"></i> Importar Productos</a>
+                            <a href="productos-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a>
                         <?php 
                             if(!empty($filtro)){
                         ?>
@@ -155,17 +156,31 @@ if (!empty($_GET['search'])) {
                                     if($result['cprod_exitencia']<=5){
                                         $colorExistencia="red";
                                     }
+
+                                    $rutaFoto = "";
+                                    if (!empty($result['cpf_fotos'])) {
+                                        switch ($result['cpf_tipo']) {
+                                            case TIPO_IMG:
+                                                if (file_exists(RUTA_PROYECTO . "files/productos/".$result['cpf_fotos'])) {
+                                                    $rutaFoto = REDIRECT_ROUTE . "files/productos/".$result['cpf_fotos'];
+                                                }
+                                                break;
+                                            case TIPO_URL:
+                                                $rutaFoto = $result['cpf_fotos'];
+                                                break;
+                                        }
+                                    }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td style="text-align: right;"><?=!empty($result['cprod_cod_ref']) ? $result['cprod_cod_ref'] : $result['cprod_id'];?></td>
                                     <td align="center">
-                                        <?php if (!empty($result['cpf_fotos']) && file_exists(REDIRECT_ROUTE."files/productos/".$result['cpf_fotos'])) { ?>
-                                            <img src="<?= REDIRECT_ROUTE."files/productos/".$result['cpf_fotos'] ?>" width="40">
+                                        <?php if (!empty($rutaFoto)) { ?>
+                                            <img src="<?= $rutaFoto ?>" width="40">
                                         <?php } ?>
                                     </td>
                                     <td><?=$result['cprod_nombre'];?></td>
-                                    <td style="text-align: right;"><?=number_format($result['cprod_costo'],0,",",".");?> €</td>
+                                    <td style="text-align: right;"><?=number_format($result['cprod_costo'],2,",",".");?> €</td>
                                     <td style="color: <?=$colorExistencia;?>;"><?=$result['cprod_exitencia'];?></td>
                                     <td>
                                         <a href="<?=$_SERVER['PHP_SELF'];?>?cat=<?=$result['cprod_categoria'];?>"><?=$categoria;?></a>
