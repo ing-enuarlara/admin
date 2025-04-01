@@ -32,3 +32,11 @@ switch (ENVIROMENT) {
         include(RUTA_PROYECTO."/conexion-datos.php");
         break;
 }
+
+define('TIPO_IMG', 'IMG');
+define('TIPO_URL', 'URL');
+
+define('SI', 'SI');
+define('NO', 'NO');
+define('SI_N', 1);
+define('NO_N', 0);
