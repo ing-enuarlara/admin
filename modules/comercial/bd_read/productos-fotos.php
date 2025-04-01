@@ -86,10 +86,12 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                     }
                                     while($resultadoFotos = mysqli_fetch_array($consultaFotos, MYSQLI_BOTH)){
+
+                                        $rutaFoto = !empty($resultadoFotos['cpf_tipo']) ? ($resultadoFotos['cpf_tipo'] == TIPO_IMG ? REDIRECT_ROUTE . "files/productos/" . $resultadoFotos['cpf_fotos'] : $resultadoFotos['cpf_fotos']) : "";
                                 ?>
                                 <div class="col-sm-2">
-                                    <a href="<?= REDIRECT_ROUTE."files/productos/".$resultadoFotos['cpf_fotos'] ?>" data-toggle="lightbox" data-title="<?= $resultadoD['cprod_nombre'] ?>" data-gallery="gallery">
-                                        <img src="<?= REDIRECT_ROUTE."files/productos/".$resultadoFotos['cpf_fotos'] ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
+                                    <a href="<?= $rutaFoto ?>" data-toggle="lightbox" data-title="<?= $resultadoD['cprod_nombre'] ?>" data-gallery="gallery">
+                                        <img src="<?= $rutaFoto ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
                                     </a>
                                     <?php
                                         if($resultadoFotos['cpf_principal']!=1){
@@ -124,10 +126,44 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
-                                <label class="custom-file-label" for="customFile">Escoger imagen...</label>
+                                <div class="form-group col-md-12">
+                                    <label for="exampleInputEmail1">Tipo de Imagen:</label>
+                                    <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
+                                    <option value=""></option>
+                                    <option value="<?= TIPO_IMG ?>" <?=$resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : "";?> >Imagen</option>
+                                    <option value="<?= TIPO_URL ?>" <?=$resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : "";?> >Url</option>
+                                    </select>
                                 </div>
+                                <div class="form-group col-md-12" id="tipoFile" style="display:none;">
+                                    <label for="customFile">Foto Principal</label>
+                                    <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
+                                    <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12" id="tipoUrl" style="display:none;">
+                                    <label for="exampleInputEmail1">Url de la Imagen:</label>
+                                    <input type="text" class="form-control" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
+                                </div>
+                                <script>
+                                    function cargarImagen(tipo){
+                                    if(tipo.value == '<?=TIPO_IMG?>'){
+                                        var urlImg = document.getElementById('urlImg');
+                                        if (urlImg) { urlImg.value = ''; }
+                                        document.getElementById('tipoFile').style.display='block';
+                                        document.getElementById('tipoUrl').style.display='none';
+                                    }
+                                    
+                                    if(tipo.value == '<?=TIPO_URL?>'){
+                                        document.getElementById('tipoFile').style.display='none';
+                                        document.getElementById('tipoUrl').style.display='block';
+                                    }
+                                    }
+                                    
+                                    $(document).ready(function() {
+                                    cargarImagen(document.getElementById('tipoImg'));
+                                    });
+                                </script>
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

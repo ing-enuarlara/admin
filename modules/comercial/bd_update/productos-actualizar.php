@@ -26,13 +26,19 @@
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
-    
-	if ($_FILES['ftProducto']['name'] != "") {
-		$destino = RUTA_PROYECTO."files/productos";
-		$fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
+
+	if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empty($_POST['urlProducto']))) {
+        if (!empty($_FILES['ftProducto']['name'])) {
+            $destino = RUTA_PROYECTO."files/productos";
+            $fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
+        }
+        
+	    if (!empty($_POST['urlProducto'])) {
+            $fileName = $_POST['urlProducto'];
+        }
 
         try{
-            $conexionBdComercial->query("UPDATE comercial_productos_fotos SET cpf_fotos='" . $fileName . "' WHERE cpf_id_producto='" . $_POST["id"] . "' AND cpf_principal=1");
+            $conexionBdComercial->query("UPDATE comercial_productos_fotos SET cpf_fotos='" . $fileName . "', cpf_tipo = '" . $_POST['tipoImg'] . "' WHERE cpf_id_producto='" . $_POST["id"] . "' AND cpf_principal=1");
         } catch (Exception $e) {
             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
         }

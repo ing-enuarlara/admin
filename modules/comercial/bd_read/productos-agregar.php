@@ -71,13 +71,25 @@ include(RUTA_PROYECTO."includes/head.php");
                             <form class="form-horizontal" method="post" action="../bd_create/productos-guardar.php" enctype="multipart/form-data">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
-                                      <label for="customFile">Foto Principal</label>
-                                      <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
-                                        <label class="custom-file-label" for="customFile">Escoger Foto...</label>
-                                      </div>
+										<label for="exampleInputEmail1">Tipo de Imagen:</label>
+										<select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
+											<option value=""></option>
+											<option value="<?=TIPO_IMG?>" selected>Imagen</option>
+											<option value="<?=TIPO_URL?>">Url</option>
+										</select>
+									</div>
+									<div class="form-group col-md-6" id="tipoFile" style="display:none;">
+										<label for="customFile">Foto Principal</label>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="customFile" name="ftProducto">
+											<label class="custom-file-label" for="customFile">Escoger Foto...</label>
+										</div>
+									</div>
+									<div class="form-group col-md-6" id="tipoUrl" style="display:none;">
+                                        <label for="exampleInputEmail1">Url de la Imagen:</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
                                     </div>
-                                    <div class="form-group col-md-6">
+									<div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre">
                                     </div>
@@ -247,15 +259,31 @@ include(RUTA_PROYECTO."includes/head.php");
 <script src="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Page specific script -->
 <script>
+	function cargarImagen(tipo){
+		if(tipo.value == '<?=TIPO_IMG?>'){
+			document.getElementById('tipoFile').style.display='block';
+			document.getElementById('tipoUrl').style.display='none';
+    
+			// Limpiar el input de URL
+			document.getElementById('urlImg').value = '';
+		}
+		
+		if(tipo.value == '<?=TIPO_URL?>'){
+			document.getElementById('tipoFile').style.display='none';
+			document.getElementById('tipoUrl').style.display='block';
+		}
+	}
+	
+	$(document).ready(function() {
+		cargarImagen(document.getElementById('tipoImg'));
+	});
+
     $(function() {
     	// Summernote
 		$('#detalles').summernote();
 		$('#especificaciones').summernote();
 		bsCustomFileInput.init();
-    });
-</script>
-<script>
-  $(function () {
+
     //Initialize Select2 Elements
     $('.select2').select2()
 
