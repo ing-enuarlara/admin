@@ -221,7 +221,7 @@ $('#respuestaGuardar').empty().hide().html("").show(1);
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="clientes-editar.php?id=<?=$result[0];?>">Editar</a>
-                                                <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV || $_SESSION["datosUsuarioActual"]['usr_tipo']==ADMIN){?>
+                                                <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV || $_SESSION["datosUsuarioActual"]['usr_tipo']==ADMIN_PRINCIPAL){?>
                                                     <a class="dropdown-item" href="<?=REDIRECT_ROUTE?>includes/auto-login.php?user=<?=$result['cli_id_usuario'];?>&tipe=5">Autologin</a>
                                                 <?php }?>
                                                 <!--<div class="dropdown-divider"></div>-->
