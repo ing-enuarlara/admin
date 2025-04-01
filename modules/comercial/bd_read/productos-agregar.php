@@ -261,11 +261,10 @@ include(RUTA_PROYECTO."includes/head.php");
 <script>
 	function cargarImagen(tipo){
 		if(tipo.value == '<?=TIPO_IMG?>'){
+      var urlImg = document.getElementById('urlImg');
+      if (urlImg) { urlImg.value = ''; }
 			document.getElementById('tipoFile').style.display='block';
 			document.getElementById('tipoUrl').style.display='none';
-    
-			// Limpiar el input de URL
-			document.getElementById('urlImg').value = '';
 		}
 		
 		if(tipo.value == '<?=TIPO_URL?>'){
