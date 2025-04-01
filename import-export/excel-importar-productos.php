@@ -25,124 +25,31 @@ if($extension == 'xlsx'){
 			$numFilas = $_POST["filaFinal"] > 0 ? $_POST["filaFinal"] : $hojaActual->getHighestDataRow();
 			$idEmpresa = $_POST['idEmpresa'] ?? $_SESSION['idEmpresa'];
 			$letraColumnas= $hojaActual->getHighestDataColumn();
-			$f=3;
+			$f = $_POST["filaInicial"] > 0 ? $_POST["filaInicial"] : 3;
 			$arrayTodos = [];
-			$claves_validar = array('cprod_cod_ref');
-			$sql = "INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_categoria, cprod_tipo, cprod_palabras_claves, cprod_cod_ref, cprod_id_empresa) VALUES";
+			$claves_validar = array('cprod_cod_ref', 'cprod_nombre');
+			$sql = "INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_categoria, cprod_tipo, cprod_palabras_claves, cprod_cod_ref, cprod_ean_code, cprod_id_empresa) VALUES";
 			
 			$productosCreados      = array();
 			$productosActualizados = array();
 			$productosNoCreados    = array();
 
+			$validarCategorias       = array();
 			$categoriasCreados       = array();
 			$categoriasExistentes    = array();
 			$categoriasNoCreados     = array();
 
+			$validarMarcas       = array();
 			$marcasCreados       = array();
 			$marcasExistentes    = array();
 			$marcasNoCreados     = array();
 
+			$validarTipos       = array();
 			$tiposCreados       = array();
 			$tiposExistentes    = array();
 			$tiposNoCreados     = array();
 
 			while($f<=$numFilas){
-				
-				/*
-				***************CATEGORIAS********************
-				*/
-				$idCategoria = '0000';
-				$categoriaNombre = $hojaActual->getCell('F' . $f)->getValue();
-
-				if (!empty($categoriaNombre)) {
-					// Buscar si la categoría ya existe
-					$stmt = $conexionBdComercial->prepare("SELECT ccat_id, ccat_nombre FROM comercial_categorias WHERE ccat_nombre = ? AND ccat_id_empresa = ?");
-					$stmt->bind_param("si", $categoriaNombre, $idEmpresa);
-					$stmt->execute();
-					$resultado = $stmt->get_result();
-
-					if ($resultado->num_rows > 0) {
-						$datosCategoriaExistente = $resultado->fetch_assoc();
-						$idCategoria = $datosCategoriaExistente['ccat_id'];
-						$categoriasExistentes["FILA_" . $f] = $datosCategoriaExistente['ccat_nombre'];
-					} else {
-						// Insertar la nueva categoría
-						$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_categorias (ccat_nombre, ccat_id_empresa) VALUES (?, ?)");
-						$stmtInsert->bind_param("si", $categoriaNombre, $idEmpresa);
-						$stmtInsert->execute();
-						$idCategoria = $stmtInsert->insert_id;
-
-						$categoriasCreados["FILA_" . $f] = $categoriaNombre;
-					}
-
-					$stmt->close();
-				} else {
-					$categoriasNoCreados[] = "FILA " . $f;
-				}
-				
-				/*
-				***************MARCAS********************
-				*/
-				$idMarca = '0000';
-				$marcaNombre = $hojaActual->getCell('G' . $f)->getValue();
-
-				if (!empty($marcaNombre)) {
-					// Buscar si la marca ya existe
-					$stmt = $conexionBdComercial->prepare("SELECT cmar_id, cmar_nombre FROM comercial_marcas WHERE cmar_nombre = ? AND cmar_id_empresa = ?");
-					$stmt->bind_param("si", $marcaNombre, $idEmpresa);
-					$stmt->execute();
-					$resultado = $stmt->get_result();
-
-					if ($resultado->num_rows > 0) {
-						$datosMarcaExistente = $resultado->fetch_assoc();
-						$idMarca = $datosMarcaExistente['cmar_id'];
-						$marcasExistentes["FILA_" . $f] = $datosMarcaExistente['cmar_nombre'];
-					} else {
-						// Insertar la nueva marca
-						$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_marcas (cmar_nombre, cmar_id_empresa) VALUES (?, ?)");
-						$stmtInsert->bind_param("si", $marcaNombre, $idEmpresa);
-						$stmtInsert->execute();
-						$idMarca = $stmtInsert->insert_id;
-
-						$marcasCreados["FILA_" . $f] = $marcaNombre;
-					}
-
-					$stmt->close();
-				} else {
-					$marcasNoCreados[] = "FILA " . $f;
-				}
-				
-				/*
-				***************TIPO********************
-				*/
-				$idTipo = '0000';
-				$tipoNombre = $hojaActual->getCell('H' . $f)->getValue();
-
-				if (!empty($tipoNombre)) {
-					// Buscar si el tipo ya existe
-					$stmt = $conexionBdComercial->prepare("SELECT ctipo_id, ctipo_nombre FROM comercial_tipo_productos WHERE ctipo_nombre = ? AND ctipo_id_empresa = ?");
-					$stmt->bind_param("si", $tipoNombre, $idEmpresa);
-					$stmt->execute();
-					$resultado = $stmt->get_result();
-
-					if ($resultado->num_rows > 0) {
-						$datosTipoExistente = $resultado->fetch_assoc();
-						$idTipo = $datosTipoExistente['ctipo_id'];
-						$tiposExistentes["FILA_" . $f] = $datosTipoExistente['ctipo_nombre'];
-					} else {
-						// Insertar el nuevo tipo
-						$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_tipo_productos (ctipo_nombre, ctipo_id_empresa) VALUES (?, ?)");
-						$stmtInsert->bind_param("si", $tipoNombre, $idEmpresa);
-						$stmtInsert->execute();
-						$idTipo = $stmtInsert->insert_id;
-
-						$tiposCreados["FILA_" . $f] = $tipoNombre;
-					}
-
-					$stmt->close();
-				} else {
-					$tiposNoCreados[] = "FILA " . $f;
-				}
 
 				/*
 				***************PRODUCTO********************
@@ -155,10 +62,11 @@ if($extension == 'xlsx'){
 					'cprod_costo'			=> $hojaActual->getCell('C'.$f)->getValue(),
 					'cprod_detalles'		=> $hojaActual->getCell('D'.$f)->getValue(),
 					'cprod_exitencia'		=> $hojaActual->getCell('E'.$f)->getValue(),
-					'cprod_categoria'		=> $idCategoria,
-					'cprod_marca'			=> $idMarca,
-					'cprod_tipo'			=> $idTipo,
+					'cprod_categoria'		=> NULL,
+					'cprod_marca'			=> NULL,
+					'cprod_tipo'			=> NULL,
 					'cprod_palabras_claves'	=> $hojaActual->getCell('I'.$f)->getValue(),
+					'cprod_ean_code'		=> $hojaActual->getCell('J'.$f)->getValue(),
 					
 				];
 
@@ -171,6 +79,132 @@ if($extension == 'xlsx'){
 
 				//Si los campos están completos entonces ordenamos los datos del producto
 				if($todoBien) {
+
+					/*
+					**************CATEGORIAS*******************
+					*/
+					$categoriaNombre = $hojaActual->getCell('F' . $f)->getValue();
+					if (!empty($categoriaNombre)) {
+						// Verificar si la categoría ya existe en el array $validarCategorias
+						$categoriaExistenteKey = array_search($categoriaNombre, $validarCategorias);
+
+						if ($categoriaExistenteKey !== false) {
+							// Si ya existe en el array, asignar el ID correspondiente
+							$arrayIndividual['cprod_categoria'] = $categoriaExistenteKey;
+							$categoriasExistentes["FILA_" . $f] = $categoriaNombre;
+						} else {
+							// Buscar si la categoría ya existe en la base de datos
+							$stmt = $conexionBdComercial->prepare("SELECT ccat_id, ccat_nombre FROM comercial_categorias WHERE ccat_nombre = ? AND ccat_id_empresa = ?");
+							$stmt->bind_param("si", $categoriaNombre, $idEmpresa);
+							$stmt->execute();
+							$resultado = $stmt->get_result();
+
+							if ($resultado->num_rows > 0) {
+								$datosCategoriaExistente = $resultado->fetch_assoc();
+								$arrayIndividual['cprod_categoria'] = $datosCategoriaExistente['ccat_id'];
+								$categoriasExistentes["FILA_" . $f] = $datosCategoriaExistente['ccat_nombre'];
+							} else {
+								// Insertar la nueva categoría
+								$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_categorias (ccat_nombre, ccat_id_empresa) VALUES (?, ?)");
+								$stmtInsert->bind_param("si", $categoriaNombre, $idEmpresa);
+								$stmtInsert->execute();
+								$arrayIndividual['cprod_categoria'] = $stmtInsert->insert_id;
+
+								$categoriasCreados["FILA_" . $f] = $categoriaNombre;
+							}
+
+							$stmt->close();
+
+							// Agregar la categoría al array para futuras referencias
+							$validarCategorias[$arrayIndividual['cprod_categoria']] = $categoriaNombre;
+						}
+					} else {
+						$categoriasNoCreados[] = "FILA " . $f;
+					}
+					
+					/*
+					***************MARCAS********************
+					*/
+					$marcaNombre = $hojaActual->getCell('G' . $f)->getValue();
+					if (!empty($marcaNombre)) {
+						// Verificar si la marca ya existe en el array $validarMarcas
+						$marcaExistenteKey = array_search($marcaNombre, $validarMarcas);
+
+						if ($marcaExistenteKey !== false) {
+							// Si ya existe en el array, asignar el ID correspondiente
+							$arrayIndividual['cprod_marca'] = $marcaExistenteKey;
+							$marcasExistentes["FILA_" . $f] = $marcaNombre;
+						} else {
+							// Buscar si la marca ya existe
+							$stmt = $conexionBdComercial->prepare("SELECT cmar_id, cmar_nombre FROM comercial_marcas WHERE cmar_nombre = ? AND cmar_id_empresa = ?");
+							$stmt->bind_param("si", $marcaNombre, $idEmpresa);
+							$stmt->execute();
+							$resultado = $stmt->get_result();
+		
+							if ($resultado->num_rows > 0) {
+								$datosMarcaExistente = $resultado->fetch_assoc();
+								$arrayIndividual['cprod_marca'] = $datosMarcaExistente['cmar_id'];
+								$marcasExistentes["FILA_" . $f] = $datosMarcaExistente['cmar_nombre'];
+							} else {
+								// Insertar la nueva marca
+								$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_marcas (cmar_nombre, cmar_id_empresa) VALUES (?, ?)");
+								$stmtInsert->bind_param("si", $marcaNombre, $idEmpresa);
+								$stmtInsert->execute();
+								$arrayIndividual['cprod_marca'] = $stmtInsert->insert_id;
+		
+								$marcasCreados["FILA_" . $f] = $marcaNombre;
+							}
+		
+							$stmt->close();
+
+							// Agregar la marca al array para futuras referencias
+							$validarMarcas[$arrayIndividual['cprod_marca']] = $marcaNombre;
+						}
+					} else {
+						$marcasNoCreados[] = "FILA " . $f;
+					}
+					
+					/*
+					***************TIPO********************
+					*/
+					$tipoNombre = $hojaActual->getCell('H' . $f)->getValue();
+					if (!empty($tipoNombre)) {
+						// Verificar si el tipo ya existe en el array $validarTipos
+						$tipoExistenteKey = array_search($tipoNombre, $validarTipos);
+
+						if ($tipoExistenteKey !== false) {
+							// Si ya existe en el array, asignar el ID correspondiente
+							$arrayIndividual['cprod_tipo'] = $tipoExistenteKey;
+							$tiposExistentes["FILA_" . $f] = $tipoNombre;
+						} else {
+							// Buscar si el tipo ya existe
+							$stmt = $conexionBdComercial->prepare("SELECT ctipo_id, ctipo_nombre FROM comercial_tipo_productos WHERE ctipo_nombre = ? AND ctipo_id_empresa = ?");
+							$stmt->bind_param("si", $tipoNombre, $idEmpresa);
+							$stmt->execute();
+							$resultado = $stmt->get_result();
+		
+							if ($resultado->num_rows > 0) {
+								$datosTipoExistente = $resultado->fetch_assoc();
+								$arrayIndividual['cprod_tipo'] = $datosTipoExistente['ctipo_id'];
+								$tiposExistentes["FILA_" . $f] = $datosTipoExistente['ctipo_nombre'];
+							} else {
+								// Insertar el nuevo tipo
+								$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_tipo_productos (ctipo_nombre, ctipo_id_empresa) VALUES (?, ?)");
+								$stmtInsert->bind_param("si", $tipoNombre, $idEmpresa);
+								$stmtInsert->execute();
+								$arrayIndividual['cprod_tipo'] = $stmtInsert->insert_id;
+		
+								$tiposCreados["FILA_" . $f] = $tipoNombre;
+							}
+		
+							$stmt->close();
+
+							// Agregar el tipo al array para futuras referencias
+							$validarTipos[$arrayIndividual['cprod_tipo']] = $tipoNombre;
+						}
+					} else {
+						$tiposNoCreados[] = "FILA " . $f;
+					}
 
 					// Buscar si el producto ya existe
 					$stmt = $conexionBdComercial->prepare("SELECT cprod_id, cprod_cod_ref FROM comercial_productos WHERE cprod_id_empresa = ? AND (cprod_id = ? OR cprod_cod_ref = ?)");
@@ -248,7 +282,9 @@ if($extension == 'xlsx'){
 
 						$arrayTodos[$f] = $arrayIndividual;
 
-						$sql .= "('".$arrayIndividual['cprod_nombre']."', '".$arrayIndividual['cprod_costo']."', '".$arrayIndividual['cprod_detalles']."', '".$arrayIndividual['cprod_exitencia']."', '".$arrayIndividual['cprod_marca']."', '".$arrayIndividual['cprod_categoria']."', '".$arrayIndividual['cprod_tipo']."', '".$arrayIndividual['cprod_palabras_claves']."', '".$arrayIndividual['cprod_cod_ref']."', {$idEmpresa}),";
+						$existencia = !empty($arrayIndividual['cprod_exitencia']) && $arrayIndividual['cprod_exitencia'] > 0 ? $arrayIndividual['cprod_exitencia'] : 1;
+
+						$sql .= "('".mysqli_real_escape_string($conexionBdComercial, $arrayIndividual['cprod_nombre'])."', '".$arrayIndividual['cprod_costo']."', '".$arrayIndividual['cprod_detalles']."', '".$existencia."', '".$arrayIndividual['cprod_marca']."', '".$arrayIndividual['cprod_categoria']."', '".$arrayIndividual['cprod_tipo']."', '".$arrayIndividual['cprod_palabras_claves']."', '".$arrayIndividual['cprod_cod_ref']."', '".$arrayIndividual['cprod_ean_code']."', {$idEmpresa}),";
 
 						$productosCreados["FILA_".$f] = $arrayIndividual['cprod_cod_ref'];
 

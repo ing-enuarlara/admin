@@ -106,9 +106,15 @@ include(RUTA_PROYECTO . "includes/head.php");
 										</div>
 
 										<div class="form-group col-md-8">
+											<label for="exampleInputEmail1">Coloque el número de la fila desde donde quiere que el archivo sea leido:</label>
+											<input type="number" class="form-control" id="exampleInputEmail1" placeholder="Coloque el número de la fila desde donde quiere que el archivo sea leido" name="filaInicial" value="3">
+											<small class="form-text text-muted text-red">Primera fila desde donde hay información de los productos.<br>Esto se usa para evitar que se lean filas que no tienen información.</small>
+										</div>
+
+										<div class="form-group col-md-8">
 											<label for="exampleInputEmail1">Coloque el número de la última fila hasta donde quiere que el archivo sea leido:</label>
 											<input type="number" class="form-control" id="exampleInputEmail1" placeholder="Coloque el número de la última fila hasta donde quiere que el archivo sea leido" name="filaFinal" value="200">
-											<small class="form-text text-muted text-red">Fila hasta donde hay información de los estudiantes y acudientes.<br>Esto se usa para evitar que se lean filas que no tienen información.</small>
+											<small class="form-text text-muted text-red">Fila hasta donde hay información de los productos.<br>Esto se usa para evitar que se lean filas que no tienen información.</small>
 										</div>
 
 										<div class="form-group col-md-8">
