@@ -62,7 +62,7 @@ if (!empty($_GET['search'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     
-    <?php //include(RUTA_PROYECTO."includes/carga.php"); ?>
+    <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
 
     <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
     
@@ -124,13 +124,14 @@ if (!empty($_GET['search'])) {
                                 
                                 include(RUTA_PROYECTO."includes/consulta-paginacion-productos.php");
                                 try{
-                                    $productos= $conexionBdComercial->query("SELECT cprod.*, ccat_nombre, cmar_nombre, cpf_fotos, cpf_tipo, cliAdmi_id, cliAdmi_nombre FROM comercial_productos cprod 
-                                    LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
-                                    LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
-                                    LEFT JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
-                                    INNER JOIN " . BDADMIN . ".clientes_admin ON cliAdmi_id=cprod_id_empresa 
-                                    WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}
-                                    LIMIT $inicio, $registros");
+                                    $productos= $conexionBdComercial->query("SELECT cprod.cprod_id, cprod.cprod_cod_ref, cprod.cprod_nombre, cprod.cprod_costo, cprod.cprod_exitencia, cprod.cprod_estado, cprod.cprod_categoria, cprod.cprod_marca, ccat.ccat_nombre, cmar.cmar_nombre, cpf.cpf_fotos, cpf.cpf_tipo, cli.cliAdmi_id, cli.cliAdmi_nombre
+                                    FROM comercial_productos cprod
+                                    LEFT JOIN comercial_categorias ccat ON ccat.ccat_id = cprod.cprod_categoria
+                                    LEFT JOIN comercial_marcas cmar ON cmar.cmar_id = cprod.cprod_marca
+                                    LEFT JOIN comercial_productos_fotos cpf ON cpf.cpf_id_producto = cprod.cprod_id AND cpf.cpf_principal = 1
+                                    INNER JOIN " . BDADMIN . ".clientes_admin cli ON cli.cliAdmi_id = cprod.cprod_id_empresa
+                                    WHERE 1=1 {$filtroAdmin} {$filtro}
+                                    LIMIT $inicio, $registros;");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
