@@ -25,6 +25,8 @@ if (!empty($_GET['search'])) {
     $filtro .= " AND (
     cprod_id LIKE '%".$busqueda."%' 
     OR cprod_nombre LIKE '%".$busqueda."%' 
+    OR cprod_cod_ref LIKE '%".$busqueda."%' 
+    OR cprod_ean_code LIKE '%".$busqueda."%' 
     OR ccat_nombre LIKE '%".$busqueda."%' 
     OR cmar_nombre LIKE '%".$busqueda."%' 
     OR cliAdmi_nombre LIKE '%".$busqueda."%' 
@@ -60,7 +62,7 @@ if (!empty($_GET['search'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     
-    <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
+    <?php //include(RUTA_PROYECTO."includes/carga.php"); ?>
 
     <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
     
@@ -89,15 +91,11 @@ if (!empty($_GET['search'])) {
                             <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
                             <a href="productos-importar.php" class="btn btn-warning"><i class="fas fa-download"></i> Importar Productos</a>
                             <a href="productos-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a>
-                        <?php 
-                            if(!empty($filtro)){
-                        ?>
-                            <a href="<?=$_SERVER['PHP_SELF'];?>" class="btn btn-warning"> Quitar Filtro</a>
-                        <?php }?>
                     </div>
                     <!-- /.card-header -->
+                    <?php include(RUTA_PROYECTO."includes/mod-buscador.php");?>
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example2" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Nº</th>
@@ -123,27 +121,24 @@ if (!empty($_GET['search'])) {
                                 if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                                     $filtroAdmin.=" AND cprod_id_empresa='".$_SESSION["idEmpresa"]."'";
                                 }
+                                
+                                include(RUTA_PROYECTO."includes/consulta-paginacion-productos.php");
                                 try{
-                                    $productos= $conexionBdComercial->query("SELECT * FROM comercial_productos 
+                                    $productos= $conexionBdComercial->query("SELECT cprod.*, ccat_nombre, cmar_nombre, cpf_fotos, cpf_tipo, cliAdmi_id, cliAdmi_nombre FROM comercial_productos cprod 
                                     LEFT JOIN comercial_categorias ON ccat_id=cprod_categoria 
                                     LEFT JOIN comercial_marcas ON cmar_id=cprod_marca 
                                     LEFT JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1 
-                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cprod_id_empresa 
-                                    WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}");
+                                    INNER JOIN " . BDADMIN . ".clientes_admin ON cliAdmi_id=cprod_id_empresa 
+                                    WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}
+                                    LIMIT $inicio, $registros");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
-                                $num=1;
+                                $num = $inicio + 1;
                                 while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
-                                    $categoria="";
-                                    if(!empty($result['ccat_nombre'])){
-                                        $categoria=$result['ccat_nombre'];
-                                    }
+                                    $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
-                                    $subCategoria="";
-                                    if(!empty($result['cmar_nombre'])){
-                                        $subCategoria=$result['cmar_nombre'];
-                                    }
+                                    $subCategoria = !empty($result['cmar_nombre']) ? $result['cmar_nombre'] : "";
 
                                     $estado="Activo";
                                     $color="green";
@@ -152,10 +147,7 @@ if (!empty($_GET['search'])) {
                                         $color="red";
                                     }
 
-                                    $colorExistencia="green";
-                                    if($result['cprod_exitencia']<=5){
-                                        $colorExistencia="red";
-                                    }
+                                    $colorExistencia = $result['cprod_exitencia']<=5 ? "red" : "green";
 
                                     $rutaFoto = "";
                                     if (!empty($result['cpf_fotos'])) {
@@ -235,6 +227,7 @@ if (!empty($_GET['search'])) {
                             </tfoot>
                         </table>
                     </div>
+                    <?php include(RUTA_PROYECTO."includes/enlaces-paginacion.php");?>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -300,11 +293,11 @@ if (!empty($_GET['search'])) {
                 "responsive": true, "lengthChange": false, "autoWidth": false,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": false,
                 "searching": false,
                 "ordering": true,
-                "info": true,
+                "info": false,
                 "autoWidth": false,
                 "responsive": true,
             });

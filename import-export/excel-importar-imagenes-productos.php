@@ -34,6 +34,7 @@ if($extension == 'xlsx'){
 			$fotosCreadas      = array();
 			$fotosNoCreadas    = array();
 
+			$contFilas = 1;
 			while($f<=$numFilas){
 
 				/*
@@ -77,17 +78,20 @@ if($extension == 'xlsx'){
 						$validarProducto[$datosProductoExistente['cprod_id']] = $arrayIndividual['cpf_id_producto'];
 					}
 
-					$arrayTodos[$f] = $arrayIndividual;
-
-					$sql .= "('".$idProducto."', '".$arrayIndividual['cpf_fotos']."', '".$arrayIndividual['cpf_tipo']."', '".$principal."', {$idEmpresa}),";
-
-					$fotosCreadas["FILA_".$f] = $arrayIndividual['cpf_id_producto'];
+					if(!empty($idProducto)){
+						$arrayTodos[$f] = $arrayIndividual;
+						$sql .= "('".$idProducto."', '".$arrayIndividual['cpf_fotos']."', '".$arrayIndividual['cpf_tipo']."', '".$principal."', {$idEmpresa}),";
+						$fotosCreadas["FILA_".$f] = $arrayIndividual['cpf_id_producto'];
+					} else {
+						$fotosNoCreadas[] = "FILA ".$f;
+					}
 
 				} else {
 					$fotosNoCreadas[] = "FILA ".$f;
 				}
 
 				$f++;
+				$contFilas++;
 			}
 			
 			$numeroFotosCreadas = 0;
@@ -102,10 +106,10 @@ if($extension == 'xlsx'){
 
 			$respuesta = [
 				"summary" => "Resumen del proceso:<br>
-					- Total filas leidas: {$numFilas}<br><br>
+					- Total filas leidas: {$contFilas}<br><br>
 					
 					- Fotos creadas nuevas: {$numeroFotosCreadas}<br>
-					- Fotos que les faltó algun campo obligatorio: {$numeroFotosNoCreadas}
+					- Fotos que les faltó algun campo obligatorio o no se encontro su producto: {$numeroFotosNoCreadas}
 				"
 			];
 

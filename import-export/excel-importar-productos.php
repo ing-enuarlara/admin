@@ -49,6 +49,7 @@ if($extension == 'xlsx'){
 			$tiposExistentes    = array();
 			$tiposNoCreados     = array();
 
+			$contFilas = 1;
 			while($f<=$numFilas){
 
 				/*
@@ -294,6 +295,7 @@ if($extension == 'xlsx'){
 				}
 
 				$f++;
+				$contFilas++;
 			}
 			
 			$numeroProductosCreados = 0;
@@ -358,7 +360,7 @@ if($extension == 'xlsx'){
 
 			$respuesta = [
 				"summary" => "Resumen del proceso:<br>
-					- Total filas leidas: {$numFilas}<br><br>
+					- Total filas leidas: {$contFilas}<br><br>
 					
 					- Productos creados nuevos: {$numeroProductosCreados}<br>
 					- Productos que ya estaban creados y se les actualizó alguna información seleccionada: {$numeroProductosActualizados}<br>
