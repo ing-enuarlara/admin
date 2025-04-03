@@ -103,7 +103,7 @@ if (!empty($_GET['search'])) {
                                 <?php
                                 try{
                                     $marcas= $conexionBdComercial->query("SELECT * FROM comercial_marcas 
-                                    INNER JOIN comercial_categorias ON ccat_id=cmar_categoria 
+                                    LEFT JOIN comercial_categorias ON ccat_id=cmar_categoria 
                                     INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=cmar_id_empresa 
                                     WHERE cmar_id=cmar_id $filtro $filtroEmpresa");
                                 } catch (Exception $e) {

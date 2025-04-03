@@ -81,7 +81,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 								<!-- /.card-header -->
 								<div class="card-body">
 									<p><b>-></b> Tenga en cuenta, para importar los productos, el campo Cod/Referencia, es obligatorios.</p>
-									<p><b>-></b> Para los campos de <mark>categoria, marca y tipo</mark>, debe tener encuenta que si ya alguna <mark>categoria, marca o tipo</mark> existe en la plataforma, debe escribirlo tal cual esta creado ya, si no el sitema generara un nuevo registro.</p>
+									<p><b>-></b> Para los campos de <mark>categoria, sub-categoria y tipo</mark>, debe tener encuenta que si ya alguna <mark>categoria, sub-categoria o tipo</mark> existe en la plataforma, debe escribirlo tal cual esta creado ya, si no el sitema generara un nuevo registro.</p>
 									<p><b>-></b> Si el producto ya existe en la plataforma, solo debes escribir el ID/Cod/Ref con el que ya esta creado y usted puede seleccionar los campos que desea actualizar en el campo que dice <mark>Campos a actualizar</mark>. Si no selecciona ningun campo entonces los productos ya existentes se omitirán y solo se ingresarán los que no existan en la plataforma.</p>
 								</div>
 							</div>
@@ -125,7 +125,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 												<option value="2">Costo</option>
 												<option value="3">Existencia</option>
 												<option value="4">Categoria</option>
-												<option value="5">Marca</option>
+												<option value="5">Sub-categoria</option>
 												<option value="6">Tipo Producto</option>
 												<option value="7">Palabras Claves</option>
 												<option value="8">Detalles del Producto</option>
