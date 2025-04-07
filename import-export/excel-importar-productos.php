@@ -49,7 +49,7 @@ if($extension == 'xlsx'){
 			$tiposExistentes    = array();
 			$tiposNoCreados     = array();
 
-			$contFilas = 1;
+			$contFilas = 0;
 			while($f<=$numFilas){
 
 				/*

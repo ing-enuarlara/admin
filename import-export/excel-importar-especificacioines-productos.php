@@ -27,12 +27,12 @@ if($extension == 'xlsx'){
 			$letraColumnas= $hojaActual->getHighestDataColumn();
 			$f = $_POST["filaInicial"] > 0 ? $_POST["filaInicial"] : 2;
 			$arrayTodos = [];
-			$claves_validar = array('cpf_id_producto', 'cpf_fotos');
-			$sql = "INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_tipo, cpf_principal, cpf_id_empresa) VALUES";
+			$claves_validar = array('cpt_id_producto', 'cpt_value');
+			$sql = "INSERT INTO comercial_productos_techspecs(cpt_id_producto, cpt_lebel, cpt_value, cpt_id_empresa) VALUES";
 
 			$validarProducto       = array();
-			$fotosCreadas      = array();
-			$fotosNoCreadas    = array();
+			$especificacionCreadas      = array();
+			$especificacionNoCreadas    = array();
 
 			$contFilas = 0;
 			while($f<=$numFilas){
@@ -43,9 +43,9 @@ if($extension == 'xlsx'){
 				$todoBien = true;
 
 				$arrayIndividual = [
-					'cpf_id_producto'	=> $hojaActual->getCell('A'.$f)->getValue(),
-					'cpf_fotos'			=> $hojaActual->getCell('B'.$f)->getValue(),
-					'cpf_tipo'			=> $hojaActual->getCell('C'.$f)->getValue(),
+					'cpt_id_producto'	=> $hojaActual->getCell('A'.$f)->getValue(),
+					'cpt_lebel'			=> $hojaActual->getCell('B'.$f)->getValue(),
+					'cpt_value'			=> $hojaActual->getCell('C'.$f)->getValue(),
 				];
 
 				//Validamos que los campos más importantes no vengan vacios
@@ -57,16 +57,15 @@ if($extension == 'xlsx'){
 
 				//Si los campos están completos entonces ordenamos los datos del producto
 				if($todoBien) {
-					$productoExistenteKey = array_search($arrayIndividual['cpf_id_producto'], $validarProducto);
+					$productoExistenteKey = array_search($arrayIndividual['cpt_id_producto'], $validarProducto);
 
 					
 					if ($productoExistenteKey !== false) {
-						$principal = 0;
 						$idProducto = $productoExistenteKey;
 					} else {
 						// Buscar si el producto ya existe
 						$stmt = $conexionBdComercial->prepare("SELECT cprod_id FROM comercial_productos WHERE cprod_id_empresa = ? AND (cprod_id = ? OR cprod_cod_ref = ?)");
-						$stmt->bind_param("iss", $idEmpresa, $arrayIndividual['cpf_id_producto'], $arrayIndividual['cpf_id_producto']);
+						$stmt->bind_param("iss", $idEmpresa, $arrayIndividual['cpt_id_producto'], $arrayIndividual['cpt_id_producto']);
 						$stmt->execute();
 						$resultado = $stmt->get_result();
 						$datosProductoExistente = $resultado->fetch_assoc();
@@ -75,47 +74,47 @@ if($extension == 'xlsx'){
 						$stmt->close();
 
 						$principal = 1;
-						$validarProducto[$datosProductoExistente['cprod_id']] = $arrayIndividual['cpf_id_producto'];
+						$validarProducto[$datosProductoExistente['cprod_id']] = $arrayIndividual['cpt_id_producto'];
 					}
 
 					if(!empty($idProducto)){
 						$arrayTodos[$f] = $arrayIndividual;
-						$sql .= "('".$idProducto."', '".$arrayIndividual['cpf_fotos']."', '".$arrayIndividual['cpf_tipo']."', '".$principal."', {$idEmpresa}),";
-						$fotosCreadas["FILA_".$f] = $arrayIndividual['cpf_id_producto'];
+						$sql .= "('".$idProducto."', '".$arrayIndividual['cpt_lebel']."', '".$arrayIndividual['cpt_value']."', {$idEmpresa}),";
+						$especificacionCreadas["FILA_".$f] = $arrayIndividual['cpt_id_producto'];
 					} else {
-						$fotosNoCreadas[] = "FILA ".$f;
+						$especificacionNoCreadas[] = "FILA ".$f;
 					}
 
 				} else {
-					$fotosNoCreadas[] = "FILA ".$f;
+					$especificacionNoCreadas[] = "FILA ".$f;
 				}
 
 				$f++;
 				$contFilas++;
 			}
 			
-			$numeroFotosCreadas = 0;
-			if(!empty($fotosCreadas)){
-				$numeroFotosCreadas = count($fotosCreadas);
+			$numeroEspecificacionCreadas = 0;
+			if(!empty($especificacionCreadas)){
+				$numeroEspecificacionCreadas = count($especificacionCreadas);
 			}
 
-			$numeroFotosNoCreadas = 0;
-			if(!empty($fotosNoCreadas)){
-				$numeroFotosNoCreadas = count($fotosNoCreadas);
+			$numeroEspecificacionNoCreadas = 0;
+			if(!empty($especificacionNoCreadas)){
+				$numeroEspecificacionNoCreadas = count($especificacionNoCreadas);
 			}
 
 			$respuesta = [
 				"summary" => "Resumen del proceso:<br>
 					- Total filas leidas: {$contFilas}<br><br>
 					
-					- Fotos creadas nuevas: {$numeroFotosCreadas}<br>
-					- Fotos que les faltó algun campo obligatorio o no se encontro su producto: {$numeroFotosNoCreadas}
+					- Especificaciones creadas nuevas: {$numeroEspecificacionCreadas}<br>
+					- Especificaciones que les faltó algun campo obligatorio o no se encontro su producto: {$numeroEspecificacionNoCreadas}
 				"
 			];
 
 			$summary = http_build_query($respuesta);
 
-			if(!empty($fotosCreadas) && $numeroFotosCreadas > 0) {
+			if(!empty($especificacionCreadas) && $numeroEspecificacionCreadas > 0) {
 				$sql = substr($sql, 0, -1);
 				try {
 					mysqli_query($conexionBdComercial, $sql);
@@ -130,7 +129,7 @@ if($extension == 'xlsx'){
 				unlink($nombreArchivo);
 			}
 			
-			echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-fotos.php?success=SC_11&'.$summary.'";</script>';
+			echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-especificacioines.php?success=SC_11&'.$summary.'";</script>';
 			exit();
 
 		}else{
@@ -161,16 +160,16 @@ if($extension == 'xlsx'){
 					$message = "Una extensión de PHP detuvo la subida de ficheros. PHP no proporciona una forma de determinar la extensión que causó la parada de la subida de ficheros; el examen de la lista de extensiones cargadas con phpinfo() puede ayudar.";
 					break;
 			}
-			echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-fotos.php?error=ER_6&msj='.$message.'";</script>';
+			echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-especificacioines.php?error=ER_6&msj='.$message.'";</script>';
 			exit();
 		}
 	}else{
 		$message = "Hubo un error al cargar el archivo, porfavor intente nuevamente.";
-		echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-fotos.php?error=ER_6&msj=' . $message . '";</script>';
+		echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-especificacioines.php?error=ER_6&msj=' . $message . '";</script>';
 		exit();
 	}	
 }else{
 	$message = "Este archivo no es admitido, por favor verifique que el archivo a importar sea un excel (.xlsx)";
-	echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-fotos.php?error=ER_6&msj='.$message.'";</script>';
+	echo '<script type="text/javascript">window.location.href="../modules/comercial/bd_read/productos-importar-especificacioines.php?error=ER_6&msj='.$message.'";</script>';
 	exit();
 }
