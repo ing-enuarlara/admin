@@ -77,46 +77,6 @@ include(RUTA_PROYECTO . "includes/head.php");
                 if (!empty($configuracionPaginaWeb['conf_logo'])) {
                   $rutaLogo = 'files/logo/' . $configuracionPaginaWeb['conf_logo'];
                 }
-                $rutaImgMenu = $default;
-                if (!empty($configuracionPaginaWeb['conf_imgMenu'])) {
-                  $rutaImgMenu = 'files/' . $configuracionPaginaWeb['conf_imgMenu'];
-                }
-                $bannerP1 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p1'])) {
-                  $bannerP1 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p1'];
-                }
-                $bannerP2 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p2'])) {
-                  $bannerP2 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p2'];
-                }
-                $bannerP3 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p3'])) {
-                  $bannerP3 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p3'];
-                }
-                $bannerP4 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p4'])) {
-                  $bannerP4 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p4'];
-                }
-                $bannerP5 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p5'])) {
-                  $bannerP5 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p5'];
-                }
-                $bannerP6 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_p6'])) {
-                  $bannerP6 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_p6'];
-                }
-                $bannerG1 = $default;
-                if (!empty($configuracionPaginaWeb['conf_banner_g1'])) {
-                  $bannerG1 = 'files/banner/' . $configuracionPaginaWeb['conf_banner_g1'];
-                }
-                $slider1 = $default;
-                if (!empty($configuracionPaginaWeb['conf_slider1'])) {
-                  $slider1 = 'files/slider/' . $configuracionPaginaWeb['conf_slider1'];
-                }
-                $slider2 = $default;
-                if (!empty($configuracionPaginaWeb['conf_slider2'])) {
-                  $slider2 = 'files/slider/' . $configuracionPaginaWeb['conf_slider2'];
-                }
 
                 $numeroWhatsapp = '';
                 if (!empty($configuracionPaginaWeb['conf_whatsapp'])) {
@@ -143,20 +103,6 @@ include(RUTA_PROYECTO . "includes/head.php");
                           <button type="button" class="step-trigger" role="tab" aria-controls="redSocial-part" id="redSocial-part-trigger">
                             <span class="bs-stepper-circle">2</span>
                             <span class="bs-stepper-label">Redes Sociales</span>
-                          </button>
-                        </div>
-                        <div class="line"></div>
-                        <div class="step" data-target="#imgInicio-part">
-                          <button type="button" class="step-trigger" role="tab" aria-controls="imgInicio-part" id="imgInicio-part-trigger">
-                            <span class="bs-stepper-circle">3</span>
-                            <span class="bs-stepper-label">Imagenes de Inicio</span>
-                          </button>
-                        </div>
-                        <div class="line"></div>
-                        <div class="step" data-target="#slider-part">
-                          <button type="button" class="step-trigger" role="tab" aria-controls="slider-part" id="slider-part-trigger">
-                            <span class="bs-stepper-circle">4</span>
-                            <span class="bs-stepper-label">Imagenes de Slider</span>
                           </button>
                         </div>
                       </div>
@@ -186,7 +132,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                           </div>
 
                           <div class="form-group col-md-6">
-                            <label>Descripción Corta Para el Titulo:</label>
+                            <label>Descripción Corta Para el Titulo de la pagina:</label>
                             <input type="text" class="form-control" rows="1" name="descripcionCorta" placeholder="Descripción Corta..." value="<?= $configuracionPaginaWeb['conf_descripcion_corta'] ?>" />
                           </div>
 
@@ -288,185 +234,6 @@ include(RUTA_PROYECTO . "includes/head.php");
                               </div>
                               <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Whatsapp" name="whatsapp" value="<?= $numeroWhatsapp ?>">
                             </div>
-                          </div>
-
-                          <a class="btn btn-secondary" onclick="stepper.previous()">Anterior</a>
-                          <a class="btn btn-secondary" onclick="stepper.next()">Siguiente</a>
-                        </div>
-                        <div id="imgInicio-part" class="content" role="tabpanel" aria-labelledby="imgInicio-part-trigger">
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $rutaImgMenu ?>" data-toggle="lightbox" data-title="Imagen del menu">
-                                <img src="<?= REDIRECT_ROUTE . $rutaImgMenu ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Imagen para Menu</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="imgMenu">
-                              <label class="custom-file-label" for="customFile">Escoger imagen...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP1 ?>" data-toggle="lightbox" data-title="Banner Pequeño #1">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP1 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #1</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP1">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #1...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP2 ?>" data-toggle="lightbox" data-title="Banner Pequeño #2">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP2 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #2</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP2">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #2...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP3 ?>" data-toggle="lightbox" data-title="Banner Pequeño #3">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP3 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #3</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP3">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #3...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP4 ?>" data-toggle="lightbox" data-title="Banner Pequeño #4">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP4 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #4</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP4">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #4...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP5 ?>" data-toggle="lightbox" data-title="Banner Pequeño #5">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP5 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #5</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP5">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #5...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerP6 ?>" data-toggle="lightbox" data-title="Banner Pequeño #6">
-                                <img src="<?= REDIRECT_ROUTE . $bannerP6 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Pequeño #6</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerP6">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Pequeño #6...</label>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $bannerG1 ?>" data-toggle="lightbox" data-title="Banner Grande #1">
-                                <img src="<?= REDIRECT_ROUTE . $bannerG1 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Banner Grande #1</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="bannerG1">
-                              <label class="custom-file-label" for="customFile">Escoger Banner Grande #1...</label>
-                            </div>
-                          </div>
-                          <a class="btn btn-secondary" onclick="stepper.previous()">Anterior</a>
-                          <a class="btn btn-secondary" onclick="stepper.next()">Siguiente</a>
-                        </div>
-                        <div id="slider-part" class="content" role="tabpanel" aria-labelledby="slider-part-trigger">
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $slider1 ?>" data-toggle="lightbox" data-title="Slider #1">
-                                <img src="<?= REDIRECT_ROUTE . $slider1 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Slider #1</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="slider1">
-                              <label class="custom-file-label" for="customFile">Escoger Slider #1...</label>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="textSlider1">Texto para Slider #1:</label>
-                            <textarea name="textSlider1" id="textSlider1"><?= $configuracionPaginaWeb['conf_textSlider1'] ?></textarea>
-                          </div>
-
-                          <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                              <a href="<?= REDIRECT_ROUTE . $slider2 ?>" data-toggle="lightbox" data-title="Slider #2">
-                                <img src="<?= REDIRECT_ROUTE . $slider2 ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                              </a>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="customFile">Slider #2</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" name="slider2">
-                              <label class="custom-file-label" for="customFile">Escoger Slider #2...</label>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-md-6">
-                            <label for="textSlider2">Texto para Slider #2:</label>
-                            <textarea name="textSlider2" id="textSlider2"><?= $configuracionPaginaWeb['conf_textSlider2'] ?></textarea>
                           </div>
                           <a class="btn btn-secondary" onclick="stepper.previous()">Anterior</a>
                         </div>
