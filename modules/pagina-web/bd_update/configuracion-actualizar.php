@@ -4,7 +4,7 @@
     $idPagina = 39;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
-	if ($_FILES['foto']['name'] != "") {
+	if (!empty($_FILES['foto']['name'])) {
 		$destino = RUTA_PROYECTO."files/logo";
 		$fileName = subirArchivosAlServidor($_FILES['foto'], 'lg', $destino);
 
@@ -31,6 +31,16 @@
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}
+	
+	try{
+		$consultaConfig = $conexionBdGeneral->query("SELECT * FROM configuracion
+		LEFT JOIN ".BDADMIN.".localidad_ciudades ON ciu_id=conf_ciudad
+		LEFT JOIN ".BDADMIN.".localidad_departamentos ON dep_id=ciu_departamento 
+		WHERE conf_id_empresa='".$_SESSION["idEmpresa"]."'");
+	} catch (Exception $e) {
+		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+	}
+	$_SESSION["configuracion"] = mysqli_fetch_array($consultaConfig, MYSQLI_BOTH);
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
