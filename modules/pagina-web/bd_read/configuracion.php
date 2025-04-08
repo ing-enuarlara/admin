@@ -65,10 +65,10 @@ include(RUTA_PROYECTO . "includes/head.php");
                   <h5 class="float-sm-right"><?= $paginaActual['pag_nombre'] ?></h5>
                 </div>
                 <?php
-                try{
+                try {
                   $consultaConfigPaginaWeb = $conexionBdPaginaWeb->query("SELECT * FROM configuracion WHERE conf_id_empresa='" . $_SESSION["idEmpresa"] . "'");
                 } catch (Exception $e) {
-                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                  include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
                 }
                 $configuracionPaginaWeb = mysqli_fetch_array($consultaConfigPaginaWeb, MYSQLI_BOTH);
 
@@ -76,6 +76,10 @@ include(RUTA_PROYECTO . "includes/head.php");
                 $rutaLogo = $default;
                 if (!empty($configuracionPaginaWeb['conf_logo'])) {
                   $rutaLogo = 'files/logo/' . $configuracionPaginaWeb['conf_logo'];
+                }
+                $rutaFavicon = $default;
+                if (!empty($configuracionPaginaWeb['conf_favicon'])) {
+                  $rutaFavicon = 'files/favicons/' . $configuracionPaginaWeb['conf_favicon'];
                 }
 
                 $numeroWhatsapp = '';
@@ -111,9 +115,9 @@ include(RUTA_PROYECTO . "includes/head.php");
                         <div id="inforPagina-part" class="content" role="tabpanel" aria-labelledby="inforPagina-part-trigger">
 
                           <div class="col-md-6" style="margin-top: 10px;">
-                            <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
+                            <div class="filtr-item col-md-12" data-category="1" data-sort="Logo de la empresa">
                               <a href="<?= REDIRECT_ROUTE . $rutaLogo ?>" data-toggle="lightbox" data-title="Logo de la empresa">
-                                <img src="<?= REDIRECT_ROUTE . $rutaLogo ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
+                                <img src="<?= REDIRECT_ROUTE . $rutaLogo ?>" class="img-fluid mb-2" alt="Logo de la empresa" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
                               </a>
                             </div>
                           </div>
@@ -125,6 +129,26 @@ include(RUTA_PROYECTO . "includes/head.php");
                               <label class="custom-file-label" for="customFile">Escoger Logo...</label>
                             </div>
                           </div>
+
+                          <hr>
+
+                          <div class="col-md-6" style="margin-top: 10px;">
+                            <div class="filtr-item col-md-12" data-category="1" data-sort="Favicons">
+                              <a href="<?= REDIRECT_ROUTE . $rutaFavicon ?>" data-toggle="lightbox" data-title="Favicons">
+                                <img src="<?= REDIRECT_ROUTE . $rutaFavicon ?>" class="img-fluid mb-2" alt="Favicons" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
+                              </a>
+                            </div>
+                          </div>
+
+                          <div class="form-group col-md-6">
+                            <label for="customFile">Favicons</label>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="customFile" name="favicon">
+                              <label class="custom-file-label" for="customFile">Escoger Logo...</label>
+                            </div>
+                          </div>
+
+                          <hr>
 
                           <div class="form-group col-md-6">
                             <label for="exampleInputEmail1">Nombre de la Tienda:</label>

@@ -21,6 +21,17 @@
         }
 	}
 
+	if (!empty($_FILES['favicon']['name'])) {
+		$destino = RUTA_PROYECTO."files/favicons";
+		$fileFavicon = subirArchivosAlServidor($_FILES['favicon'], 'ico', $destino);
+
+		try{
+			$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_favicon='" . $fileFavicon . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+		} catch (Exception $e) {
+			include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+		}
+	}
+
 	$whatsapp='';
 	if (!empty($_POST["whatsapp"])) {
 		$whatsapp='https://api.whatsapp.com/send?phone=34'.$_POST["whatsapp"];
