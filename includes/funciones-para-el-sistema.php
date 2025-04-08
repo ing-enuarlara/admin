@@ -65,3 +65,39 @@ function validarAccesoDirectoPaginas(){
 	}
 	return true;
 }
+
+function validarPaginaActual(array $paginas = []): bool
+{
+	global $idPagina;
+	foreach ($paginas as $pagina) {
+		if ($idPagina === $pagina) {
+			return true;
+		}
+	}
+	return false;
+};
+
+function agregarClass(string $tipoMenu, array $paginas = [])
+{
+	switch ($tipoMenu) {
+		case MENU:
+			if (validarPaginaActual($paginas)) {
+				echo 'class="nav-link active"';
+			} else {
+				echo 'class="nav-link"';
+			}
+			break;
+		case MENU_PADRE:
+			if (validarPaginaActual($paginas)) {
+				echo 'class="nav-item menu-is-opening menu-open"';
+			} else {
+				echo 'class="nav-item"';
+			}
+			break;
+		case SUB_MENU:
+			if (validarPaginaActual($paginas)) {
+				echo 'style="display: block;"';
+			}
+			break;
+	}
+};

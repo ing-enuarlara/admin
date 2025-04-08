@@ -40,3 +40,7 @@ define('SI', 'SI');
 define('NO', 'NO');
 define('SI_N', 1);
 define('NO_N', 0);
+
+define('MENU_PADRE', 'menu-padre');
+define('SUB_MENU', 'sub-menu');
+define('MENU', 'menu');

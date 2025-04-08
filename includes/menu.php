@@ -33,52 +33,55 @@
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 1)){?>
-        <li class="nav-item">
-            <a href="<?=REDIRECT_ROUTE?>modules/index.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==1){echo "active";}?>">
+        <li <?= agregarClass(MENU_PADRE,[1]) ?> >
+            <a href="<?=REDIRECT_ROUTE?>modules/index.php" <?= agregarClass(MENU,[1]) ?> >
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
             </a>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 4)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==4){echo "active";}?>">
+        <?php
+            if(validarAccesoModulo($_SESSION["idEmpresa"], 4)){
+                $arrayPaginas = [109, 111, 113, 114, 115, 117, 122, 123, 124, 125];
+        ?>
+        <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
+            <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
                 <i class="nav-icon fas fa-user"></i>
                 <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/perfil-editar.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/perfil-editar.php" <?= agregarClass(MENU,[109]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Editar Perfil</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-ventas.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-ventas.php" <?= agregarClass(MENU,[113]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mis Ventas</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-pedidos.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mis-pedidos.php" <?= agregarClass(MENU,[114]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mis Pedidos</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/clave-editar.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/clave-editar.php" <?= agregarClass(MENU,[111]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Cambiar Clave</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mi-calendario.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mi-calendario.php" <?= agregarClass(MENU,[115, 117]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mi calendario</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mailbox.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/mi_cuenta/bd_read/mailbox.php" <?= agregarClass(MENU,[122, 123, 124, 125]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mensajes</p>
                     </a>
@@ -86,23 +89,26 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==2){echo "active";}?>">
+        <?php
+            if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){
+                $arrayPaginas = [42, 43, 45, 48, 49, 67];
+        ?>
+        <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
+            <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
                 <i class="nav-icon fas fa-regular fa-toolbox"></i>
                 <p>Administrativo<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" class="nav-link">
+                        <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/roles.php" <?= agregarClass(MENU,[42, 43, 45]) ?> >
                             <i class="far fa-circle nav-icon"></i>
                             <p>Roles</p>
                         </a>
                     </li>
                 <?php }?>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" <?= agregarClass(MENU,[48, 49, 67]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Usuarios</p>
                     </a>
@@ -110,51 +116,56 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==3){echo "active";}?>">
+        <?php
+            if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
+                $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147];
+
+                $arrayPaginas2 = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 145, 146, 147];
+        ?>
+        <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
+            <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
                 <i class="nav-icon fas fa-solid fa-money-bill"></i>
                 <p>Comercial<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" <?= agregarClass(MENU,[69, 70, 71]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Clientes</p>
                     </a>
                 </li>
                 <!-- <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/proveedores.php" <?= agregarClass(MENU,[]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Proveedores</p>
                     </a>
                 </li> -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li <?= agregarClass(MENU_PADRE,$arrayPaginas2) ?> >
+                    <a href="#" <?= agregarClass(MENU,$arrayPaginas2) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Producto<i class="right fas fa-angle-left"></i></p>
                     </a>
-                    <ul class="nav nav-treeview">
+                    <ul class="nav nav-treeview" <?= agregarClass(SUB_MENU,$arrayPaginas2) ?> >
                         <li class="nav-item">
-                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" <?= agregarClass(MENU,[26, 27, 29]) ?> >
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Categorias</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas.php" <?= agregarClass(MENU,[32, 33, 35]) ?> >
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Sub-Categorias</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-producto.php" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-producto.php" <?= agregarClass(MENU,[59, 60, 62]) ?> >
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Tipo de Productos</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" class="nav-link">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/productos.php" <?= agregarClass(MENU,[20, 21, 23, 56, 145, 146, 147]) ?> >
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Productos</p>
                             </a>
@@ -162,25 +173,25 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" <?= agregarClass(MENU,[75, 76, 77]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Cotizaciones</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" <?= agregarClass(MENU,[87, 88]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Pedidos</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" <?= agregarClass(MENU,[95, 96, 98]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Remisiones</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" <?= agregarClass(MENU,[103, 105, 107]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Facturación</p>
                     </a>
@@ -188,34 +199,37 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 5)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==5){echo "active";}?>">
+        <?php
+            if(validarAccesoModulo($_SESSION["idEmpresa"], 5)){
+                $arrayPaginas = [2, 3, 4, 8, 9, 10, 83];
+        ?>
+        <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
+            <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
                 <i class="nav-icon fas fa-cogs"></i>
                 <p>Sistema<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion-sistema.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/configuracion-sistema.php" <?= agregarClass(MENU,[83]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Configuración del Sistema</p>
                     </a>
                 </li>
                 <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
                     <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" class="nav-link">
+                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/paginas.php" <?= agregarClass(MENU,[2, 3, 4]) ?> >
                             <i class="far fa-circle nav-icon"></i>
                             <p>Páginas</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" class="nav-link">
+                        <a href="<?=REDIRECT_ROUTE?>modules/sistema/bd_read/modulos.php" <?= agregarClass(MENU,[8, 9, 10]) ?> >
                             <i class="far fa-circle nav-icon"></i>
                             <p>Módulos</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="#" <?= agregarClass(MENU,[]) ?> >
                             <i class="far fa-circle nav-icon"></i>
                             <p>Historial de acciones</p>
                         </a>
@@ -224,51 +238,54 @@
             </ul>
         </li>
         <?php }?>
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){?>
-        <li class="nav-item">
-            <a href="#" class="nav-link <?php if($paginaActual['pag_id_modulo']==7){echo "active";}?>">
+        <?php
+            if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){
+                $arrayPaginas = [38, 40, 50, 51, 52, 130, 131, 133, 136, 137, 138, 139, 140, 142, 148, 149, 151];
+        ?>
+        <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
+            <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
             <i class="fa fa-globe nav-icon"></i>
                 <p>Pagina Web<i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/blogs.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/blogs.php" <?= agregarClass(MENU,[130, 131, 133, 137, 138]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Blogs</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/categorias-blogs.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/categorias-blogs.php" <?= agregarClass(MENU,[139, 140, 142]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Categorias Blogs</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/sliders.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/sliders.php" <?= agregarClass(MENU,[148, 149, 151]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Sliders & Banners</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/feedback.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/feedback.php" <?= agregarClass(MENU,[136]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ver Reseñas</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion.php" <?= agregarClass(MENU,[38]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Configurar Pagina</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion-color-store.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/configuracion-color-store.php" <?= agregarClass(MENU,[40]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Cambiar Colores</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/legales.php" class="nav-link">
+                    <a href="<?=REDIRECT_ROUTE?>modules/pagina-web/bd_read/legales.php" <?= agregarClass(MENU,[50, 51, 52]) ?> >
                         <i class="far fa-circle nav-icon"></i>
                         <p>Paginas Legales</p>
                     </a>
@@ -277,8 +294,8 @@
         </li>
         <?php }?>
         <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){?>
-        <li class="nav-item">
-            <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" class="nav-link <?php if($paginaActual['pag_id_modulo']==6){echo "active";}?>">
+        <li <?= agregarClass(MENU_PADRE, [14, 15, 16]) ?> >
+            <a href="<?=REDIRECT_ROUTE?>modules/client_admin/bd_read/clientes-admin.php" <?= agregarClass(MENU,[14, 15, 16]) ?> >
                 <i class="nav-icon fas fa-business-time"></i>
                 <p>Clientes AdminOCB</p>
             </a>
