@@ -44,3 +44,9 @@ define('NO_N', 0);
 define('MENU_PADRE', 'menu-padre');
 define('SUB_MENU', 'sub-menu');
 define('MENU', 'menu');
+
+define('TODA', 'TODA');
+define('PROD', 'PROD');
+define('CATE', 'CATE');
+define('SUB_CATE', 'SUB_CATE');
+define('TIPO', 'TIPO');

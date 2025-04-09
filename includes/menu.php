@@ -118,7 +118,7 @@
         <?php }?>
         <?php
             if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
-                $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147];
+                $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157];
 
                 $arrayPaginas2 = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 145, 146, 147];
         ?>
@@ -171,6 +171,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/ofertas.php" <?= agregarClass(MENU,[154, 155, 157]) ?> >
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ofertas</p>
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" <?= agregarClass(MENU,[75, 76, 77]) ?> >

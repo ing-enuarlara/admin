@@ -28,7 +28,7 @@
         }
 
         try{
-            $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion, cpf_principal, cpf_tipo) VALUES ('" . $idInsertU . "', '" . $fileName . "', '" . $_SESSION["idEmpresa"] . "', now(), 1, '" . $_POST['urlProducto'] . "')");
+            $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion, cpf_principal, cpf_tipo) VALUES ('" . $idInsertU . "', '" . $fileName . "', '" . $_SESSION["idEmpresa"] . "', now(), 1, '" . $_POST['tipoImg'] . "')");
         } catch (Exception $e) {
             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
         }
