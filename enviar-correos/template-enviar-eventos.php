@@ -3,7 +3,7 @@
 
 		<div style="width: 100%; display: grid; place-content: center;">
 
-			<div style="font-family:arial; background: green; width:600px; color:#FFF; text-align:center; padding:15px;">
+			<div style="font-family:arial; background: blue; width:600px; color:#FFF; text-align:center; padding:15px;">
 				<h3>NOVEDAD EVENTOS</h3>
 			</div>
 
