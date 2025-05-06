@@ -38,8 +38,8 @@ class EnviarEmail {
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $mail->Username   = EMAIL_USER;                             // SMTP username
             $mail->Password   = EMAIL_PASSWORD;                         // SMTP password
-            $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
-            $mail->Port       = 465;                                    // TCP port to connect to 465 or 587
+            $mail->SMTPSecure = EMAIL_ENCRIPTION;                       // Enable TLS encryption, `ssl` also accepted
+            $mail->Port       = EMAIL_PORT;                             // TCP port to connect to 465 or 587
 
             //Remitente
             $mail->setFrom(EMAIL_USER, NAME_SENDER);
