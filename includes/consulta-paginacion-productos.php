@@ -3,21 +3,47 @@ $nombrePagina = "productos.php";
 if (empty($_REQUEST["nume"])) {
     $_REQUEST["nume"] = 1;
 }
-$sql = !empty($filtro) ? "SELECT cprod.cprod_id
-    FROM comercial_productos cprod
-    LEFT JOIN comercial_categorias ccat ON ccat.ccat_id = cprod.cprod_categoria
-    LEFT JOIN comercial_marcas cmar ON cmar.cmar_id = cprod.cprod_marca
-    LEFT JOIN comercial_productos_fotos cpf ON cpf.cpf_id_producto = cprod.cprod_id AND cpf.cpf_principal = 1
-    INNER JOIN " . BDADMIN . ".clientes_admin cli ON cli.cliAdmi_id = cprod.cprod_id_empresa
-    WHERE 1=1 {$filtroAdmin} {$filtro}" : "SELECT * FROM comercial_productos 
-    INNER JOIN " . BDADMIN . ".clientes_admin ON cliAdmi_id=cprod_id_empresa 
-    WHERE cprod_id=cprod_id {$filtroAdmin} {$filtro}";
-try {
-    $consulta = $conexionBdComercial->query($sql);
-} catch (Exception $e) {
-    include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
+
+$productosBD = Productos::SelectJoin(
+    $predicado,
+    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, ccat_nombre, cmar_nombre, cpf_fotos, cpf_tipo, cliAdmi_id, cliAdmi_nombre",
+    [
+        Categorias::class,
+        SubCategorias::class,
+        Productos_Fotos::class,
+        Clientes_Admin::class,
+    ]
+);
+
+$productosSiniwin = [];
+if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
+    $productosApiSiniwin = Api_Siniwin::Productos();
+    if (!empty($productosApiSiniwin)) {
+        foreach ($productosApiSiniwin as $productoApiSiniwin) {
+            $existencia = !empty($productoApiSiniwin['Stock']) ? $productoApiSiniwin['Stock'] : 0;
+
+            $productosSiniwin[] = [
+                'cprod_id' => $productoApiSiniwin['ref'],
+                'cprod_nombre' => $productoApiSiniwin['denomination'],
+                'cprod_exitencia' => $productoApiSiniwin['Stock'] ?? 0,
+                'cprod_costo' => $productoApiSiniwin['pvp_iva'] ?? 0,
+                'cprod_detalles' => $productoApiSiniwin['observations'] ?? '',
+                'cprod_descuento' => 0,
+                'cprod_id_empresa' => 3,
+                'cprod_estado' => 1,
+                'cpf_fotos' => "",
+                'cpf_tipo' => TIPO_IMG,
+                'feed_star' => 0,
+                'fuente' => 'apiSiniwin',
+                'store' => $productoApiSiniwin['store'] ?? ''
+            ];
+        }
+    }
 }
-$numRegistros = !empty($consulta) ? mysqli_num_rows($consulta) : 0;
+
+$productosSinPaginar = array_merge($productosBD, $productosSiniwin);
+
+$numRegistros = !empty($productosSinPaginar) ? count($productosSinPaginar) : 0;
 $registros = 10;
 $pagina = !empty($_REQUEST['nume']) ? intval($_REQUEST["nume"]) : 1;
 if (is_numeric($pagina)) {
@@ -25,3 +51,5 @@ if (is_numeric($pagina)) {
 } else {
     $inicio = 1;
 }
+
+$productos = array_slice($productosSinPaginar, $inicio, $registros);

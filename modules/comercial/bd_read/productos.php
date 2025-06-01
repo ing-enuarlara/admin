@@ -62,7 +62,7 @@ if (!empty($_GET['search'])) {
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
     
-    <?php include(RUTA_PROYECTO."includes/carga.php"); ?>
+    <?php //include(RUTA_PROYECTO."includes/carga.php"); ?>
 
     <?php include(RUTA_PROYECTO."includes/encabezado.php"); ?>
     
@@ -118,52 +118,68 @@ if (!empty($_GET['search'])) {
                             </thead>
                             <tbody>
                                 <?php
-                                $filtroAdmin="";
+                                $predicado = [];
                                 if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
-                                    $filtroAdmin.=" AND cprod_id_empresa='".$_SESSION["idEmpresa"]."'";
-                                }
+                                    $predicado = [ 'cprod_id_empresa' => $_SESSION["idEmpresa"] ];
+								}
+								require_once(RUTA_PROYECTO.'class/Productos.php');
+								require_once(RUTA_PROYECTO.'class/Productos_Fotos.php');
+								require_once(RUTA_PROYECTO.'class/Categorias.php');
+								require_once(RUTA_PROYECTO.'class/SubCategorias.php');
+								require_once(RUTA_PROYECTO.'class/Clientes_Admin.php');
+								require_once(RUTA_PROYECTO.'class/ApiSiniwin.php');
+
+								Categorias::foreignKey(Categorias::LEFT, [
+									"ccat_id" => 'cprod_categoria'
+								]);
+								SubCategorias::foreignKey(SubCategorias::LEFT, [
+									"cmar_id" => 'cprod_marca'
+								]);
+								Productos_Fotos::foreignKey(Productos_Fotos::LEFT, [
+									"cpf_id_producto"	=> 'cprod_id',
+									"cpf_principal"		=> 1
+								]);
+								Clientes_Admin::foreignKey(Clientes_Admin::INNER, [
+									"cliAdmi_id" => 'cprod_id_empresa'
+								]);
+
+								if (!empty($filtro)) {
+									$filtro = preg_replace('/\sAND$/', '', $filtro);
+
+                                    $predicado = !empty($predicado) ? array_merge($predicado, [ Productos::OTHER_PREDICATE => $filtro ]) : [ Productos::OTHER_PREDICATE => $filtro ];
+								}
                                 
                                 include(RUTA_PROYECTO."includes/consulta-paginacion-productos.php");
-                                try{
-                                    $productos= $conexionBdComercial->query("SELECT cprod.cprod_id, cprod.cprod_cod_ref, cprod.cprod_nombre, cprod.cprod_costo, cprod.cprod_exitencia, cprod.cprod_estado, cprod.cprod_categoria, cprod.cprod_marca, ccat.ccat_nombre, cmar.cmar_nombre, cpf.cpf_fotos, cpf.cpf_tipo, cli.cliAdmi_id, cli.cliAdmi_nombre
-                                    FROM comercial_productos cprod
-                                    LEFT JOIN comercial_categorias ccat ON ccat.ccat_id = cprod.cprod_categoria
-                                    LEFT JOIN comercial_marcas cmar ON cmar.cmar_id = cprod.cprod_marca
-                                    LEFT JOIN comercial_productos_fotos cpf ON cpf.cpf_id_producto = cprod.cprod_id AND cpf.cpf_principal = 1
-                                    INNER JOIN " . BDADMIN . ".clientes_admin cli ON cli.cliAdmi_id = cprod.cprod_id_empresa
-                                    WHERE 1=1 {$filtroAdmin} {$filtro}
-                                    LIMIT $inicio, $registros;");
-                                } catch (Exception $e) {
-                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-                                }
-                                $num = $inicio + 1;
-                                while($result = mysqli_fetch_array($productos, MYSQLI_BOTH)){
-                                    $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
-                                    $subCategoria = !empty($result['cmar_nombre']) ? $result['cmar_nombre'] : "";
+								if ($numRegistros > 0) {
+                                    $num = $inicio + 1;
+									foreach ($productos as $result) {
+                                        $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
-                                    $estado="Activo";
-                                    $color="green";
-                                    if($result['cprod_estado']!=1){
-                                        $estado="Inactivo";
-                                        $color="red";
-                                    }
+                                        $subCategoria = !empty($result['cmar_nombre']) ? $result['cmar_nombre'] : "";
 
-                                    $colorExistencia = $result['cprod_exitencia']<=5 ? "red" : "green";
-
-                                    $rutaFoto = "";
-                                    if (!empty($result['cpf_fotos'])) {
-                                        switch ($result['cpf_tipo']) {
-                                            case TIPO_IMG:
-                                                if (file_exists(RUTA_PROYECTO . "files/productos/".$result['cpf_fotos'])) {
-                                                    $rutaFoto = REDIRECT_ROUTE . "files/productos/".$result['cpf_fotos'];
-                                                }
-                                                break;
-                                            case TIPO_URL:
-                                                $rutaFoto = $result['cpf_fotos'];
-                                                break;
+                                        $estado="Activo";
+                                        $color="green";
+                                        if($result['cprod_estado']!=1){
+                                            $estado="Inactivo";
+                                            $color="red";
                                         }
-                                    }
+
+                                        $colorExistencia = $result['cprod_exitencia']<=5 ? "red" : "green";
+
+                                        $rutaFoto = "";
+                                        if (!empty($result['cpf_fotos'])) {
+                                            switch ($result['cpf_tipo']) {
+                                                case TIPO_IMG:
+                                                    if (file_exists(RUTA_PROYECTO . "files/productos/".$result['cpf_fotos'])) {
+                                                        $rutaFoto = REDIRECT_ROUTE . "files/productos/".$result['cpf_fotos'];
+                                                    }
+                                                    break;
+                                                case TIPO_URL:
+                                                    $rutaFoto = $result['cpf_fotos'];
+                                                    break;
+                                            }
+                                        }
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
@@ -199,14 +215,16 @@ if (!empty($_GET['search'])) {
                                             <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
-                                                <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <?php if(empty($result['fuente'])){ ?>
+                                                    <a class="dropdown-item" href="productos-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                    <a class="dropdown-item" href="../bd_delete/productos-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                <?php } ?>
                                                 <a class="dropdown-item" href="productos-fotos.php?id=<?=$result[0];?>" data-toggle="tooltip">Fotos del Producto</a>
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
-								<?php $num++;}?>
+								<?php $num++; } }?>
                             </tbody>
                             <tfoot>
                                 <tr>
