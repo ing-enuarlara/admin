@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdComercial->query("INSERT INTO comercial_categorias(ccat_nombre, ccat_menu, ccat_footer, ccat_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["menu"] . "', '" . $_POST["footer"] . "', '" . $_SESSION["idEmpresa"] . "')");
+        $conexionBdComercial->query("INSERT INTO comercial_categorias(ccat_nombre, ccat_menu, ccat_otros, ccat_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["menu"] . "', '" . $_POST["footer"] . "', '" . $_SESSION["idEmpresa"] . "')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }

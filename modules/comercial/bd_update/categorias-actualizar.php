@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "', ccat_menu='" . $_POST["menu"] . "', ccat_footer='" . $_POST["footer"] . "' WHERE ccat_id='" . $_POST["id"] . "'");
+        $conexionBdComercial->query("UPDATE comercial_categorias SET ccat_nombre='" . $_POST["nombre"] . "', ccat_menu='" . $_POST["menu"] . "', ccat_otros='" . $_POST["footer"] . "' WHERE ccat_id='" . $_POST["id"] . "'");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
