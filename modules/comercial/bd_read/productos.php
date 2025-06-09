@@ -135,13 +135,6 @@ if (!empty($_GET['search'])) {
 								SubCategorias::foreignKey(SubCategorias::LEFT, [
 									"cmar_id" => 'cprod_marca'
 								]);
-								Productos_Fotos::foreignKey(Productos_Fotos::LEFT, [
-									"cpf_id_producto"	=> 'cprod_id',
-									"cpf_principal"		=> 1
-								]);
-								Clientes_Admin::foreignKey(Clientes_Admin::INNER, [
-									"cliAdmi_id" => 'cprod_id_empresa'
-								]);
 
 								if (!empty($filtro)) {
 									$filtro = preg_replace('/\sAND$/', '', $filtro);
@@ -167,19 +160,28 @@ if (!empty($_GET['search'])) {
 
                                         $colorExistencia = $result['cprod_exitencia']<=5 ? "red" : "green";
 
+                                        $resultF = Productos_Fotos::Select([
+                                            "cpf_id_producto"	=> $result['cprod_id'],
+                                            "cpf_principal"		=> 1,
+                                            "cpf_fotos_prin"    => NO
+                                        ])->fetch(PDO::FETCH_ASSOC);
                                         $rutaFoto = "";
-                                        if (!empty($result['cpf_fotos'])) {
-                                            switch ($result['cpf_tipo']) {
+                                        if (!empty($resultF['cpf_fotos'])) {
+                                            switch ($resultF['cpf_tipo']) {
                                                 case TIPO_IMG:
-                                                    if (file_exists(RUTA_PROYECTO . "files/productos/".$result['cpf_fotos'])) {
-                                                        $rutaFoto = REDIRECT_ROUTE . "files/productos/".$result['cpf_fotos'];
+                                                    if (file_exists(RUTA_PROYECTO . "files/productos/".$resultF['cpf_fotos'])) {
+                                                        $rutaFoto = REDIRECT_ROUTE . "files/productos/".$resultF['cpf_fotos'];
                                                     }
                                                     break;
                                                 case TIPO_URL:
-                                                    $rutaFoto = $result['cpf_fotos'];
+                                                    $rutaFoto = $resultF['cpf_fotos'];
                                                     break;
                                             }
                                         }
+
+                                        $resultC = Clientes_Admin::Select([
+                                            "cliAdmi_id" => $result['cprod_id_empresa']
+                                        ])->fetch(PDO::FETCH_ASSOC);
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
@@ -205,7 +207,7 @@ if (!empty($_GET['search'])) {
                                     if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
                                     ?>
                                     <td>
-                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$result['cliAdmi_id'];?>"><?=$result['cliAdmi_nombre'];?></a>
+                                        <a href="<?=$_SERVER['PHP_SELF'];?>?cliAdmin=<?=$resultC['cliAdmi_id'];?>"><?=$resultC['cliAdmi_nombre'];?></a>
                                     </td>
 								    <?php }?>
                                     <td>

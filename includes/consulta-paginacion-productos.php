@@ -6,12 +6,10 @@ if (empty($_REQUEST["nume"])) {
 
 $productosBD = Productos::SelectJoin(
     $predicado,
-    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, ccat_nombre, cmar_nombre, cpf_fotos, cpf_tipo, cliAdmi_id, cliAdmi_nombre",
+    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre",
     [
         Categorias::class,
-        SubCategorias::class,
-        Productos_Fotos::class,
-        Clientes_Admin::class,
+        SubCategorias::class
     ]
 );
 
@@ -20,7 +18,6 @@ if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"]
     $productosApiSiniwin = Api_Siniwin::Productos();
     if (!empty($productosApiSiniwin)) {
         foreach ($productosApiSiniwin as $productoApiSiniwin) {
-            $existencia = !empty($productoApiSiniwin['Stock']) ? $productoApiSiniwin['Stock'] : 0;
 
             $productosSiniwin[] = [
                 'cprod_id' => $productoApiSiniwin['ref'],
@@ -31,9 +28,8 @@ if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"]
                 'cprod_descuento' => 0,
                 'cprod_id_empresa' => 3,
                 'cprod_estado' => 1,
-                'cpf_fotos' => "",
-                'cpf_tipo' => TIPO_IMG,
-                'feed_star' => 0,
+                'ccat_nombre' => $productoApiSiniwin['family'] ?? '',
+                'cmar_nombre' => '',
                 'fuente' => 'apiSiniwin',
                 'store' => $productoApiSiniwin['store'] ?? ''
             ];
