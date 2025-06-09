@@ -118,9 +118,11 @@
         <?php }?>
         <?php
             if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
-                $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157];
+                $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171];
 
-                $arrayPaginas2 = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 145, 146, 147];
+                $arrayPaginas2 = [160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171];
+
+                $arrayPaginas3 = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 145, 146, 147];
         ?>
         <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
             <a href="#" <?= agregarClass(MENU,$arrayPaginas) ?> >
@@ -143,9 +145,41 @@
                 <li <?= agregarClass(MENU_PADRE,$arrayPaginas2) ?> >
                     <a href="#" <?= agregarClass(MENU,$arrayPaginas2) ?> >
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Producto<i class="right fas fa-angle-left"></i></p>
+                        <p>Catalogo Principal<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview" <?= agregarClass(SUB_MENU,$arrayPaginas2) ?> >
+                        <li class="nav-item">
+                            <a href="#<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias-catalogo.php" <?= agregarClass(MENU,[26, 27, 29]) ?> >
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Categorias Del Catalogo</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#<?=REDIRECT_ROUTE?>modules/comercial/bd_read/marcas-catalogo.php" <?= agregarClass(MENU,[32, 33, 35]) ?> >
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Sub-Categorias Del Catalogo</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-articulos.php" <?= agregarClass(MENU,[59, 60, 62]) ?> >
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Tipo de Articulos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/catalogo-principal.php" <?= agregarClass(MENU,[160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171]) ?> >
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Articulos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li <?= agregarClass(MENU_PADRE,$arrayPaginas3) ?> >
+                    <a href="#" <?= agregarClass(MENU,$arrayPaginas3) ?> >
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Producto<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview" <?= agregarClass(SUB_MENU,$arrayPaginas3) ?> >
                         <li class="nav-item">
                             <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/categorias.php" <?= agregarClass(MENU,[26, 27, 29]) ?> >
                                 <i class="far fa-dot-circle nav-icon"></i>
