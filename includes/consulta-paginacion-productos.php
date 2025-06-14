@@ -37,7 +37,45 @@ if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"]
     }
 }
 
+if (!is_array($productosBD)) {
+    $productosBD = [];
+}
+if (!is_array($productosSiniwin)) {
+    $productosSiniwin = [];
+}
+
 $productosSinPaginar = array_merge($productosBD, $productosSiniwin);
+
+// APLICAR FILTROS
+$productosFiltrados = array_filter($productosSinPaginar, function ($producto) {
+    if (!empty($_REQUEST['cate']) && ($producto['ccat_nombre'] ?? '') != $_REQUEST['cate']) {
+        return false;
+    }
+    if (!empty($_REQUEST['subCate']) && ($producto['cmar_nombre'] ?? '') != $_REQUEST['subCate']) {
+        return false;
+    }
+    if (!empty($_REQUEST['tipo']) && ($producto['cmar_nombre'] ?? '') != $_REQUEST['tipo']) {
+        return false;
+    }
+    if (!empty($_REQUEST['pClave'])) {
+        $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
+        if (stripos($palabras, $_REQUEST['pClave']) === false) {
+            return false;
+        }
+    }
+    if (!empty($_REQUEST['search'])) {
+        $nombre = (string)($producto['cprod_nombre'] ?? '');
+        $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
+        $search = $_REQUEST['search'];
+        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false) {
+            return false;
+        }
+    }
+    return true;
+});
+
+// PAGINACIÓN
+$productosSinPaginar = array_values($productosFiltrados);
 
 $numRegistros = !empty($productosSinPaginar) ? count($productosSinPaginar) : 0;
 $registros = 10;
