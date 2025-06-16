@@ -55,7 +55,7 @@
     if($_POST["ussPrincipal"]!=1){
 
         try{
-            $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_login='" . $_POST["cedula"] . "', usr_nombre='" . $_POST["contacto"] . "', usr_email='" . $_POST["email"] . "', usr_telefono='" . $_POST["telefono"] . "' WHERE usr_id='" . $_POST["ussPrincipal"] . "'");
+            $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_nombre='" . $_POST["contacto"] . "', usr_email='" . $_POST["email"] . "', usr_telefono='" . $_POST["telefono"] . "' WHERE usr_id='" . $_POST["ussPrincipal"] . "'");
         } catch (Exception $e) {
             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
         }
