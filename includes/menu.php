@@ -32,7 +32,7 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], 1)){?>
+        <?php if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::DASHBOARD)){?>
         <li <?= agregarClass(MENU_PADRE,[1]) ?> >
             <a href="<?=REDIRECT_ROUTE?>modules/index.php" <?= agregarClass(MENU,[1]) ?> >
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -41,7 +41,7 @@
         </li>
         <?php }?>
         <?php
-            if(validarAccesoModulo($_SESSION["idEmpresa"], 4)){
+            if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CUENTA)){
                 $arrayPaginas = [109, 111, 113, 114, 115, 117, 122, 123, 124, 125];
         ?>
         <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
@@ -90,7 +90,7 @@
         </li>
         <?php }?>
         <?php
-            if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){
+            if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ADMINISTRATIVO)){
                 $arrayPaginas = [42, 43, 45, 48, 49, 67];
         ?>
         <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
@@ -117,7 +117,7 @@
         </li>
         <?php }?>
         <?php
-            if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
+            if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COMERCIAL)){
                 $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189];
 
                 $arrayPaginas2 = [160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188,189];
@@ -240,7 +240,7 @@
         </li>
         <?php }?>
         <?php
-            if(validarAccesoModulo($_SESSION["idEmpresa"], 5)){
+            if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SISTEMA)){
                 $arrayPaginas = [2, 3, 4, 8, 9, 10, 83];
         ?>
         <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
@@ -279,7 +279,7 @@
         </li>
         <?php }?>
         <?php
-            if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){
+            if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINA_WEB)){
                 $arrayPaginas = [38, 40, 50, 51, 52, 130, 131, 133, 136, 137, 138, 139, 140, 142, 148, 149, 151];
         ?>
         <li <?= agregarClass(MENU_PADRE,$arrayPaginas) ?> >
