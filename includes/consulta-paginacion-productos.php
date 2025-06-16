@@ -15,11 +15,7 @@ $productosBD = Productos::SelectJoin(
 
 $productosSiniwin = [];
 if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
-    try {
-        $productosApiSiniwin = Api_Siniwin::Productos();
-    } catch (Exception $e) {
-        echo "Error al conectar con la API: " . $e->getMessage();
-    }
+    $productosApiSiniwin = Api_Siniwin::Productos();
     if (!empty($productosApiSiniwin)) {
         foreach ($productosApiSiniwin as $productoApiSiniwin) {
 
