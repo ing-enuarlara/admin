@@ -1,4 +1,8 @@
 <?php
+require_once(RUTA_PROYECTO."class/Modulos.php");
+require_once(RUTA_PROYECTO."class/Paginas.php");
+require_once(RUTA_PROYECTO."class/Clientes_Modulos.php");
+
 $tipoCrud= array("", "Create", "Read", "Update", "Delete");
 
 $formaPago = array("", "CONTADO", "CRÉDITO");
