@@ -106,9 +106,33 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                       <input type="text" class="form-control" value="<?= $resultadoD['usr_id'] ?>" disabled>
                     </div>
 
-                    <div class="form-group col-md-2">
+                    <script>
+                      function habilitarUser() {
+                        var cambiarUser = document.getElementById("cambiarUser");
+                        var user = document.getElementById("userInput");
+
+                        if (cambiarUser.checked) {
+                          user.disabled = false;
+                          user.required = 'required';
+                        } else {
+                          user.disabled = true;
+                          user.required = '';
+                        }
+                      }
+                    </script>
+
+                    <div class="form-group col-md-11">
                       <label for="ussInput">Usuario:</label>
-                      <input type="text" class="form-control" value="<?= $resultadoD['usr_login'] ?>" disabled>
+                      <div class="input-group">
+                        <input type="text" class="form-control col-md-4" id="userInput" name="usuario" value="<?= $resultadoD['usr_login'] ?>" disabled>
+                        <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
+                          <label class="switchToggle">
+                            <input type="checkbox" name="cambiarUser" id="cambiarUser" value="1" onchange="habilitarUser()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <span class="slider red round"></span>
+                          </label>
+                          <label class="col-sm-2 control-label">Cambiar Usuario</label>
+                        <?php } ?>
+                      </div>
                     </div>
 
                     <div class="form-group col-md-4">
@@ -185,7 +209,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                     <div class="form-group col-md-11">
                       <label for="passwordInput">Contraseña:</label>
                       <div class="input-group">
-                        <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave" pattern="[A-Za-z0-9]+">
+                        <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave" pattern="[A-Za-z0-9.$*]{8,20}">
                         <div class="input-group-prepend" onclick="cambiarTipoInput()">
                           <span class="input-group-text"><i class="fas fa-eye"></i></span>
                         </div>
@@ -207,7 +231,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 
                     <div class="form-group col-md-4">
                       <label for="documentoInput">Documento:</label>
-                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" value="<?= $resultadoD['usr_documento'] ?>" name="documento" pattern="[0-9]+" title="Ingrese solo numeros sin espacios">
+                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" value="<?= $resultadoD['usr_documento'] ?>" name="documento" pattern="[A-Za-z0-9]+" title="Ingrese solo numeros sin espacios">
                     </div>
 
                     <div class="form-group col-md-4">
@@ -226,20 +250,8 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label>Ciudad:</label>
-                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
-                        <option value=""></option>
-                        <?php
-                        $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
-                        while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
-                          $selected = "";
-                          if ($resultadoD['usr_ciudad'] == $ciudad[0]) {
-                            $selected = "selected";
-                          }
-                        ?>
-                          <option value="<?= $ciudad[0]; ?>" <?= $selected ?>><?= $ciudad['ciu_nombre'] . '/' . $ciudad['dep_nombre'] ?></option>
-                        <?php } ?>
-                      </select>
+                      <label for="ciudadInput">Ciudad:</label>
+                      <input type="text" class="form-control" id="ciudadInput" placeholder="Ciudad" name="ciudad" value="<?= $resultadoD['usr_ciudad'] ?>">
                     </div>
 
                     <div class="form-group col-md-4">

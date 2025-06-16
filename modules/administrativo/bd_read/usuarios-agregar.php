@@ -127,7 +127,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                     <div class="form-group col-md-11">
                       <label for="passwordInput">Contraseña:</label>
                       <div class="input-group">
-                        <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave" pattern="[A-Za-z0-9]+">
+                        <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave" pattern="[A-Za-z0-9.$*]{8,20}">
                         <div class="input-group-prepend" onclick="cambiarTipoInput()">
                           <span class="input-group-text"><i class="fas fa-eye"></i></span>
                         </div>
@@ -142,7 +142,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                     <div class="form-group col-md-4">
                       <label for="documentoInput">Documento:</label>
-                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" name="documento" pattern="[0-9]+" title="Ingrese solo numeros sin espacios">
+                      <input type="text" class="form-control" id="documentoInput" placeholder="Documento del Usuario" name="documento" pattern="[A-Za-z0-9]+" title="Ingrese solo numeros sin espacios">
                     </div>
 
                     <div class="form-group col-md-4">
@@ -156,20 +156,8 @@ include(RUTA_PROYECTO . "includes/head.php");
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label>Ciudad:</label>
-                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
-                        <option value=""></option>
-                        <?php
-                        try{
-                          $consultaCiudad = $conexionBdAdmin->query("SELECT * FROM localidad_ciudades INNER JOIN localidad_departamentos ON dep_id=ciu_departamento ORDER BY ciu_departamento");
-                        } catch (Exception $e) {
-                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-                        }
-                        while ($ciudad = mysqli_fetch_array($consultaCiudad, MYSQLI_BOTH)) {
-                        ?>
-                          <option value="<?= $ciudad[0]; ?>"><?=$ciudad['ciu_nombre'] . '/' . $ciudad['dep_nombre']?></option>
-                        <?php } ?>
-                      </select>
+                      <label for="ciudadInput">Ciudad:</label>
+                      <input type="text" class="form-control" id="ciudadInput" placeholder="Celular del Usuario" name="ciudad">
                     </div>
                   </div>
                   <!-- /.card-body -->

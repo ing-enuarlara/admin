@@ -33,6 +33,16 @@
         }
 	}
 
+    if (!empty($_POST["usuario"]) && $_POST["cambiarUser"] == 1) {
+
+        try{
+            $conexionBdAdministrativo->query("UPDATE administrativo_usuarios SET usr_login='" . $_POST["usuario"] . "' WHERE usr_id='" . $_POST["id"] . "'");
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+        }
+    
+    }
+
     if (!empty($_POST["clave"]) && $_POST["cambiarClave"] == 1) {
     
         $validarClave=validarClave($_POST["clave"]);
