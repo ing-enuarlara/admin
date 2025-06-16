@@ -42,7 +42,7 @@ class Api_Siniwin
 
         $response = json_decode($response, true);
 
-        if ($response['success'] == false) { throw new Exception("API error: " . $response['message']); }
+        if ($response['success'] == false) { throw new Exception("API error: " . $response['error']['description']); }
 
         if (!empty($response['data'])) { $response = $response['data']; return $response; } 
         else { throw new Exception("API error: No data found in response"); }
