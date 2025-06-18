@@ -3,14 +3,24 @@
 
     $idPagina = 34;
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
+    require_once(RUTA_PROYECTO . 'class/SubCategorias.php');
+    require_once(RUTA_PROYECTO . 'class/Sub_Categorias.php');
     
-    try{
-        $conexionBdComercial->query("INSERT INTO comercial_marcas(cmar_nombre, cmar_categoria, cmar_menu, cmar_mas_productos, cmar_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["categoria"] . "', '" . $_POST["menu"] . "', '" . $_POST["masJoyas"] . "', '" . $_SESSION["idEmpresa"] . "')");
-    } catch (Exception $e) {
-        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-    }
+    $idInsertU = SubCategorias::Insert([
+        "cmar_nombre" => $_POST["nombre"],
+        "cmar_menu" => $_POST["menu"],
+        "cmar_mas_productos" => $_POST["masJoyas"],
+        "cmar_id_empresa" => $_SESSION["idEmpresa"]
+    ]);
 
-    $idInsertU = mysqli_insert_id($conexionBdComercial);
+    if(!empty($_POST["categorias"])){
+        foreach ($_POST["categorias"] as $categoria) {
+            Sub_Categorias::Insert([
+                "subca_marca" => $idInsertU,
+                "subca_cate" => $categoria
+            ]);
+        }
+    }
 
     include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 

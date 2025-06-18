@@ -60,7 +60,7 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-					    <a href="tipo-producto-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Tipo de Productos</a>
+					    <a href="tipo-producto-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Marcas</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -68,7 +68,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <thead>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Nombre Tipo de Productos</th>
+                                    <th>Nombre de la Marca</th>
                                     <th>Estado</th>
                                     <?php
                                     if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
@@ -131,7 +131,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tfoot>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Nombre Tipo de Productos</th>
+                                    <th>Nombre de la Marca</th>
                                     <th>Estado</th>
                                     <?php
                                     if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){

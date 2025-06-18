@@ -92,8 +92,8 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                       <label>Ver en el pie de la pagina:</label>
                                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="footer">
                                         <option value=""></option>
-                                        <option value="1" <?php if ($resultadoD['ccat_footer'] == 1) { echo "selected";} ?>>SI</option>
-                                        <option value="0" <?php if ($resultadoD['ccat_footer'] == 0) { echo "selected";} ?>>NO</option>
+                                        <option value="1" <?php if ($resultadoD['ccat_otros'] == 1) { echo "selected";} ?>>SI</option>
+                                        <option value="0" <?php if ($resultadoD['ccat_otros'] == 0) { echo "selected";} ?>>NO</option>
                                       </select>
                                     </div>
                                     </div>

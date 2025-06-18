@@ -227,7 +227,7 @@
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/tipo-producto.php" <?= agregarClass(MENU, [59, 60, 62]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>Tipo de Productos</p>
+                                                    <p>Marcas</p>
                                                 </a>
                                             </li>
                                         <?php } ?>
