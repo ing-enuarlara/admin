@@ -318,7 +318,7 @@ abstract class BDT_Tablas implements BDT_Interface
                         }
                     }
                     $On = "ON " . implode("\n AND ", $conditionsJoin);
-                    $joinClauses .= "\n {$clase::getTypeJoin()} JOIN {$clase::$schema}.{$clase::$tableName} {$On} \n";
+                    $joinClauses .= "\n {$clase::getTypeJoin()} JOIN {$clase::$schema}.{$clase::$tableName} AS {$clase::$tableAs}  {$On} \n";
                 }
             }
 
