@@ -104,11 +104,11 @@ $filtro = implode(" AND ", $filtros);
                                 <tbody>
                                     <?php
 
-                                    Sub_Categorias::foreignKey(Sub_Categorias::INNER, [
+                                    Sub_Categorias::foreignKey(Sub_Categorias::LEFT, [
                                         "subca_marca" => 'cmar_id',
                                         "subca_prin" => "'" . NO . "'"
                                     ]);
-                                    Categorias::foreignKey(Categorias::INNER, [
+                                    Categorias::foreignKey(Categorias::LEFT, [
                                         "ccat_id" => 'subca_cate'
                                     ]);
                                     $predicado = [];
