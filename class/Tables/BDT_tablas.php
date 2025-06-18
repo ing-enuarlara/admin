@@ -318,7 +318,7 @@ abstract class BDT_Tablas implements BDT_Interface
                         }
                     }
                     $On = "ON " . implode("\n AND ", $conditionsJoin);
-                    $joinClauses .= "\n {$clase::getTypeJoin()} JOIN {$clase::$schema}.{$clase::$tableName} AS {$clase::$tableAs}  {$On} \n";
+                    $joinClauses .= "\n {$clase::getTypeJoin()} JOIN {$clase::$schema}.{$clase::$tableName} AS {$clase::$tableAs} {$On} \n";
                 }
             }
 
@@ -343,7 +343,7 @@ abstract class BDT_Tablas implements BDT_Interface
             }
 
 
-            $consulta = "SELECT $campos FROM " . static::$schema . "." . static::$tableName . "  \n            
+            $consulta = "SELECT $campos FROM " . static::$schema . "." . static::$tableName . " AS " . static::$tableAs . " \n            
             {$joinClauses} \n
             {$joinString} \n
             {$where} \n
