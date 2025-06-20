@@ -2,6 +2,7 @@
 require_once("../../sesion.php");
 require_once(RUTA_PROYECTO . 'class/Catalogo_Principal.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 
 $idPagina = 162;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
@@ -27,6 +28,50 @@ try {
     ]);
 } catch (Exception $e) {
     include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
+}
+
+// 1. Colores
+if (!empty($_POST['especificaciones_colores'])) {
+    foreach ($_POST['especificaciones_colores'] as $color) {
+        Productos_Especificaciones::Insert([
+            'cpt_value' => $color,
+            'cpt_id_producto' => $idInsertU,
+            'cpt_id_empresa' => $_SESSION["idEmpresa"],
+            'cpt_tech_prin' => 'SI',
+            'cpt_tipo' => 'COLOR'
+        ]);
+    }
+}
+
+// 2. Tallas
+if (!empty($_POST['especificaciones_tallas'])) {
+    foreach ($_POST['especificaciones_tallas'] as $talla) {
+        Productos_Especificaciones::Insert([
+            'cpt_value' => $talla,
+            'cpt_id_producto' => $idInsertU,
+            'cpt_id_empresa' => $_SESSION["idEmpresa"],
+            'cpt_tech_prin' => 'SI',
+            'cpt_tipo' => 'TALLA'
+        ]);
+    }
+}
+
+// 3. Otras
+if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
+    for ($i = 0; $i < count($_POST['otras_labels']); $i++) {
+        $label = trim($_POST['otras_labels'][$i]);
+        $value = trim($_POST['otras_values'][$i]);
+        if ($label && $value) {
+            Productos_Especificaciones::Insert([
+                'cpt_lebel' => $label,
+                'cpt_value' => $value,
+                'cpt_id_producto' => $idInsertU,
+                'cpt_id_empresa' => $_SESSION["idEmpresa"],
+                'cpt_tech_prin' => 'SI',
+                'cpt_tipo' => 'OTRO'
+            ]);
+        }
+    }
 }
 
 if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empty($_POST['urlProducto']))) {

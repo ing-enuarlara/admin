@@ -206,10 +206,79 @@ require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
                       <textarea class="form-control" rows="3" placeholder="especificaciones del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
                     </div>
                     <div class="col-sm-6">
-                      <!-- textarea -->
                       <div class="form-group">
                         <label>Palabras Claves</label>
                         <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"></textarea>
+                      </div>
+                    </div>
+
+                    <hr>
+                    <h5>Especificaciones del Producto</h5>
+
+                    <script type="application/javascript">
+                      function agregarColor() {
+                        const container = document.getElementById("color-picker-container");
+                        const div = document.createElement("div");
+                        div.classList.add("form-group", "row", "mt-2");
+                        div.innerHTML = `
+                          <div class="col-md-6"><input type="color" class="form-control" name="especificaciones_colores[]" value="#000000"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                        container.appendChild(div);
+                      }
+
+                      function agregarTalla() {
+                        const container = document.getElementById("tallas-container");
+                        const div = document.createElement("div");
+                        div.classList.add("form-group", "row", "mt-2");
+                        div.innerHTML = `
+                          <div class="col-md-6"><input type="text" class="form-control" placeholder="Talla" name="especificaciones_tallas[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                        container.appendChild(div);
+                      }
+
+                      function agregarOtraEspecificacion() {
+                        const contenedor = document.getElementById("otras-especificaciones-container");
+                        const nuevaFila = document.createElement("div");
+                        nuevaFila.classList.add("row", "mb-2");
+                        nuevaFila.innerHTML = `
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                        contenedor.appendChild(nuevaFila);
+                      }
+                    </script>
+
+                    <div class="form-group col-md-6">
+                      <label>Selecciona colores:</label>
+                      <div id="color-picker-container">
+                        <div class="row mb-2">
+                          <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarColor()">+</button></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label>Tallas disponibles:</label>
+                      <div id="tallas-container">
+                        <div class="row mb-2">
+                          <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" placeholder="Talla" class="form-control"></div>
+                          <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label>Otras especificaciones:</label>
+                      <div id="otras-especificaciones-container">
+                        <div class="row mb-2">
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button></div>
+                        </div>
                       </div>
                     </div>
                   </div>
