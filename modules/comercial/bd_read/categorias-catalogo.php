@@ -127,7 +127,7 @@ if (!empty($_GET['search'])) {
                                         $menu="SI";
                                     }
                                     $footer="NO";
-                                    if($result['ccatp_footer']==1){
+                                    if($result['ccatp_otros']==1){
                                         $footer="SI";
                                     }
                                 ?>

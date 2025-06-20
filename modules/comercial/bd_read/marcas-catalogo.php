@@ -2,22 +2,24 @@
 include("../../sesion.php");
 require_once(RUTA_PROYECTO . 'class/SubCategorias_Catalogo_Principal.php');
 require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
+require_once(RUTA_PROYECTO . 'class/Sub_Categorias.php');
 require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
 
 $idPagina = 178;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
-$busqueda = '';
-$filtro = '';
+
+$filtros = [];
 if (!empty($_GET['search'])) {
     $busqueda = $_GET['search'];
-    $filtro .= " AND (
-    ccat_nombre LIKE '%" . $busqueda . "%' 
-    OR cmarp_nombre LIKE '%" . $busqueda . "%' 
-    OR cliAdmi_nombre LIKE '%" . $busqueda . "%'
+    $filtros[] = "(
+        ccatp_nombre LIKE '%$busqueda%' OR 
+        cmarp_nombre LIKE '%$busqueda%'
     )";
 }
+
+$filtro = implode(" AND ", $filtros);
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -101,31 +103,33 @@ if (!empty($_GET['search'])) {
                                 </thead>
                                 <tbody>
                                     <?php
+
+                                    Sub_Categorias::foreignKey(Sub_Categorias::LEFT, [
+                                        "subca_marca" => 'cmarp_id',
+                                        "subca_prin" => "'" . SI . "'"
+                                    ]);
+                                    Categorias_Catalogo_Principal::foreignKey(Categorias_Catalogo_Principal::LEFT, [
+                                        "ccatp_id" => 'subca_cate'
+                                    ]);
                                     $predicado = [];
                                     if ($_SESSION["datosUsuarioActual"]['usr_tipo'] != DEV) {
-                                        $predicado = ["cmarp_id_empresa" => $_SESSION["idEmpresa"]];
+                                        $predicado = ['cmarp_id_empresa' => $_SESSION["idEmpresa"]];
                                     }
 
                                     if (!empty($filtro)) {
-                                        $filtro = preg_replace('/\sAND$/', '', $filtro);
-
-                                        $predicado = !empty($predicado) ? array_merge($predicado, [SubCategorias_Catalogo_Principal::OTHER_PREDICATE => $filtro]) : [SubCategorias_Catalogo_Principal::OTHER_PREDICATE => $filtro];
+                                        if (!is_array($predicado)) $predicado = [];
+                                        $predicado[SubCategorias_Catalogo_Principal::OTHER_PREDICATE] = $filtro;
                                     }
-
-                                    Clientes_Admin::foreignKey(Clientes_Admin::INNER, [
-                                        "cliAdmi_id" => 'cmarp_id_empresa'
-                                    ]);
-                                    Categorias_Catalogo_Principal::foreignKey(Categorias_Catalogo_Principal::LEFT, [
-                                        "ccatp_id" => 'cmarp_categoria'
-                                    ]);
 
                                     $marcas = SubCategorias_Catalogo_Principal::SelectJoin(
                                         $predicado,
-                                        "*",
+                                        "cmarp_id, cmarp_nombre, cmarp_menu, cmarp_mas_productos, cmarp_id_empresa, GROUP_CONCAT(ccatp_nombre SEPARATOR ', ') AS ccatp_nombre",
                                         [
-                                            Clientes_Admin::class,
+                                            Sub_Categorias::class,
                                             Categorias_Catalogo_Principal::class
-                                        ]
+                                        ],
+                                        "",
+                                        "cmarp_id"
                                     );
                                     $num = 1;
                                     foreach ($marcas as $result) {
@@ -134,8 +138,14 @@ if (!empty($_GET['search'])) {
                                             $menu = "SI";
                                         }
                                         $masJoyas = "NO";
-                                        if ($result['cmarp_mas_joyas'] == 1) {
+                                        if ($result['cmarp_mas_productos'] == 1) {
                                             $masJoyas = "SI";
+                                        }
+
+                                        if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
+                                            $resultC = Clientes_Admin::Select([
+                                                "cliAdmi_id" => $result['cmarp_id_empresa']
+                                            ])->fetch(PDO::FETCH_ASSOC);
                                         }
                                     ?>
                                         <tr>
@@ -147,7 +157,7 @@ if (!empty($_GET['search'])) {
                                             <?php
                                             if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
                                             ?>
-                                                <td><?= $result['cliAdmi_nombre']; ?></td>
+                                                <td><?= $resultC['cliAdmi_nombre']; ?></td>
                                             <?php } ?>
                                             <td>
                                                 <div class="btn-group">
