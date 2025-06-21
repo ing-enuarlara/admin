@@ -5,6 +5,7 @@ require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
 require_once(RUTA_PROYECTO . 'class/Tipos_Catalogo_Principal.php');
 require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 
 $idPagina = 163;
 
@@ -63,7 +64,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
-    <?php //include(RUTA_PROYECTO . "includes/carga.php"); ?>
+    <?php //include(RUTA_PROYECTO . "includes/carga.php"); 
+    ?>
 
     <?php include(RUTA_PROYECTO . "includes/encabezado.php"); ?>
 
@@ -196,7 +198,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                             if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
                               try {
                                 $empresa = Clientes_Admin::Select([
-                                  'cliAdmi_id' => $datosTiposProd['ccatp_id_empresa']
+                                  'cliAdmi_id' => $datosCategorias['ccatp_id_empresa']
                                 ])->fetch(PDO::FETCH_ASSOC);
                               } catch (Exception $e) {
                                 include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
@@ -254,6 +256,111 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       <div class="form-group col-md-6">
                         <label>Palabras Claves</label>
                         <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprin_palabras_claves']; ?></textarea>
+                      </div>
+
+                      <hr>
+                      <h5>Especificaciones del Producto</h5>
+
+                      <script type="application/javascript">
+                        function agregarColor() {
+                          const container = document.getElementById("color-picker-container");
+                          const div = document.createElement("div");
+                          div.classList.add("form-group", "row", "mt-2");
+                          div.innerHTML = `
+                          <div class="col-md-6"><input type="color" class="form-control" name="especificaciones_colores[]" value="#000000"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          container.appendChild(div);
+                        }
+
+                        function agregarTalla() {
+                          const container = document.getElementById("tallas-container");
+                          const div = document.createElement("div");
+                          div.classList.add("form-group", "row", "mt-2");
+                          div.innerHTML = `
+                          <div class="col-md-6"><input type="text" class="form-control" placeholder="Talla" name="especificaciones_tallas[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          container.appendChild(div);
+                        }
+
+                        function agregarOtraEspecificacion() {
+                          const contenedor = document.getElementById("otras-especificaciones-container");
+                          const nuevaFila = document.createElement("div");
+                          nuevaFila.classList.add("row", "mb-2");
+                          nuevaFila.innerHTML = `
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          contenedor.appendChild(nuevaFila);
+                        }
+                      </script>
+
+                      <div class="form-group col-md-6">
+                        <label>Selecciona colores:</label>
+                        <div id="color-picker-container">
+                          <?php
+                          $colores = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'COLOR',
+                            'cpt_tech_prin' => SI
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numC = 1;
+                          foreach ($colores as $color) {
+                            $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numC++;
+                          } ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label>Tallas disponibles:</label>
+                        <div id="tallas-container">
+                          <?php
+                          $tallas = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'TALLA',
+                            'cpt_tech_prin' => SI
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numT = 1;
+                          foreach ($tallas as $talla) {
+                            $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control" value="<?= $talla['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numT++;
+                          } ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label>Otras especificaciones:</label>
+                        <div id="otras-especificaciones-container">
+                          <?php
+                          $otras = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'OTRO',
+                            'cpt_tech_prin' => SI
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numO = 1;
+                          foreach ($otras as $otra) {
+                            $btn = $numO == 1 ? '<button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]" value="<?= $otra['cpt_lebel'] ?>"></div>
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]" value="<?= $otra['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numO++; } ?>
+                        </div>
                       </div>
                       <div class="form-group col-md-3">
                         <label>Estado:</label>

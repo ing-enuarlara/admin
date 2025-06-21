@@ -157,7 +157,7 @@ require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
                           if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
                             try {
                               $empresa = Clientes_Admin::Select([
-                                'cliAdmi_id' => $datosTiposProd['ccatp_id_empresa']
+                                'cliAdmi_id' => $datosCategorias['ccatp_id_empresa']
                               ])->fetch(PDO::FETCH_ASSOC);
                             } catch (Exception $e) {
                               include(RUTA_PROYECTO . "includes/error-catch-to-report.php");

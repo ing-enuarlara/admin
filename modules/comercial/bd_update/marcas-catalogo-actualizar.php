@@ -19,13 +19,14 @@ SubCategorias_Catalogo_Principal::Update(
 );
 
 if (!empty($_POST["categorias"])) {
-    foreach ($_POST["categorias"] as $categoria) {
-        Sub_Categorias::deleteBeforeInsert(
+        Sub_Categorias::Delete(
             [
                 "subca_marca" => $_POST["id"],
-                "subca_cate" => $categoria,
                 "subca_prin" => SI
-            ],
+            ]
+        );
+    foreach ($_POST["categorias"] as $categoria) {
+        Sub_Categorias::Insert(
             [
                 "subca_marca" => $_POST["id"],
                 "subca_cate" => $categoria,

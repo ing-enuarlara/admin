@@ -5,6 +5,7 @@ $idPagina = 23;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
+require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 
 try {
   $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos 
@@ -97,8 +98,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <label for="exampleInputEmail1">Tipo de Imagen:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
                           <option value=""></option>
-                          <option value="<?= TIPO_IMG ?>" <?=$resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : "";?> >Imagen</option>
-                          <option value="<?= TIPO_URL ?>" <?=$resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : "";?> >Url</option>
+                          <option value="<?= TIPO_IMG ?>" <?= $resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : ""; ?>>Imagen</option>
+                          <option value="<?= TIPO_URL ?>" <?= $resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : ""; ?>>Url</option>
                         </select>
                       </div>
                       <div class="form-group col-md-6" id="tipoFile" style="display:none;">
@@ -235,6 +236,112 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <label>Palabras Claves</label>
                         <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprod_palabras_claves']; ?></textarea>
                       </div>
+
+                      <hr>
+                      <h5>Especificaciones del Producto</h5>
+
+                      <script type="application/javascript">
+                        function agregarColor() {
+                          const container = document.getElementById("color-picker-container");
+                          const div = document.createElement("div");
+                          div.classList.add("form-group", "row", "mt-2");
+                          div.innerHTML = `
+                          <div class="col-md-6"><input type="color" class="form-control" name="especificaciones_colores[]" value="#000000"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          container.appendChild(div);
+                        }
+
+                        function agregarTalla() {
+                          const container = document.getElementById("tallas-container");
+                          const div = document.createElement("div");
+                          div.classList.add("form-group", "row", "mt-2");
+                          div.innerHTML = `
+                          <div class="col-md-6"><input type="text" class="form-control" placeholder="Talla" name="especificaciones_tallas[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          container.appendChild(div);
+                        }
+
+                        function agregarOtraEspecificacion() {
+                          const contenedor = document.getElementById("otras-especificaciones-container");
+                          const nuevaFila = document.createElement("div");
+                          nuevaFila.classList.add("row", "mb-2");
+                          nuevaFila.innerHTML = `
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+                          contenedor.appendChild(nuevaFila);
+                        }
+                      </script>
+
+                      <div class="form-group col-md-6">
+                        <label>Selecciona colores:</label>
+                        <div id="color-picker-container">
+                          <?php
+                          $colores = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'COLOR',
+                            'cpt_tech_prin' => NO
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numC = 1;
+                          foreach ($colores as $color) {
+                            $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numC++;
+                          } ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label>Tallas disponibles:</label>
+                        <div id="tallas-container">
+                          <?php
+                          $tallas = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'TALLA',
+                            'cpt_tech_prin' => NO
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numT = 1;
+                          foreach ($tallas as $talla) {
+                            $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control" value="<?= $talla['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numT++;
+                          } ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label>Otras especificaciones:</label>
+                        <div id="otras-especificaciones-container">
+                          <?php
+                          $otras = Productos_Especificaciones::Select([
+                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_tipo' => 'OTRO',
+                            'cpt_tech_prin' => NO
+                          ])->fetchAll(PDO::FETCH_ASSOC);
+                          $numO = 1;
+                          foreach ($otras as $otra) {
+                            $btn = $numO == 1 ? '<button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                            <div class="row mb-2">
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]" value="<?= $otra['cpt_lebel'] ?>"></div>
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]" value="<?= $otra['cpt_value'] ?>"></div>
+                              <div class="col-md-2"><?= $btn ?></div>
+                            </div>
+                          <?php $numO++;
+                          } ?>
+                        </div>
+                      </div>
                       <div class="form-group col-md-3">
                         <label>Estado:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="estado">
@@ -306,20 +413,22 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
   <script src="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.js"></script>
   <!-- Page specific script -->
   <script>
-    function cargarImagen(tipo){
-      if(tipo.value == '<?=TIPO_IMG?>'){
+    function cargarImagen(tipo) {
+      if (tipo.value == '<?= TIPO_IMG ?>') {
         var urlImg = document.getElementById('urlImg');
-        if (urlImg) { urlImg.value = ''; }
-        document.getElementById('tipoFile').style.display='block';
-        document.getElementById('tipoUrl').style.display='none';
+        if (urlImg) {
+          urlImg.value = '';
+        }
+        document.getElementById('tipoFile').style.display = 'block';
+        document.getElementById('tipoUrl').style.display = 'none';
       }
-      
-      if(tipo.value == '<?=TIPO_URL?>'){
-        document.getElementById('tipoFile').style.display='none';
-        document.getElementById('tipoUrl').style.display='block';
+
+      if (tipo.value == '<?= TIPO_URL ?>') {
+        document.getElementById('tipoFile').style.display = 'none';
+        document.getElementById('tipoUrl').style.display = 'block';
       }
     }
-    
+
     $(document).ready(function() {
       cargarImagen(document.getElementById('tipoImg'));
     });
@@ -329,7 +438,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
       $('#detalles').summernote();
       $('#especificaciones').summernote();
       bsCustomFileInput.init();
-      
+
       //Initialize Select2 Elements
       $('.select2').select2()
 

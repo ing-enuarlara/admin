@@ -16,16 +16,17 @@ SubCategorias::Update(
 );
 
 if (!empty($_POST["categorias"])) {
+    Sub_Categorias::Delete(
+        [
+            "subca_marca" => $_POST["id"],
+            "subca_prin" => NO
+        ]
+    );
     foreach ($_POST["categorias"] as $categoria) {
-        Sub_Categorias::deleteBeforeInsert(
+        Sub_Categorias::Insert(
             [
                 "subca_marca" => $_POST["id"],
                 "subca_cate" => $categoria
-            ],
-            [
-                "subca_marca" => $_POST["id"],
-                "subca_cate" => $categoria,
-                "subca_prin" => NO
             ]
         );
     }
