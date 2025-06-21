@@ -83,7 +83,7 @@ try{
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Categoria del Catalogo" name="nombre" value="<?=$resultadoD['ccatp_nombre'];?>">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label>Ver en Destacados:</label>
+                                        <label>Ver en Menu:</label>
                                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
                                           <option value=""></option>
                                           <option value="1"<?php if($resultadoD['ccatp_menu']==1){echo "selected";}?>>SI</option>

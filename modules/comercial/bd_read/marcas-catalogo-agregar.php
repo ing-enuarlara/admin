@@ -111,7 +111,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 											</select>
 										</div>
 										<div class="form-group col-md-6" style="display:block;" id="groupMenu">
-											<label>Ver en exclusivas:</label>
+											<label>Ver en Menu:</label>
 											<select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu" id="menu" onchange="ocultarMasJoyas(this)">
 												<option value=""></option>
 												<option value="1">SI</option>

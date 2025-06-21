@@ -74,7 +74,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre de la Categoria" name="nombre">
                     </div>
                     <div class="form-group col-md-6">
-                      <label>Ver en destacados:</label>
+                      <label>Ver en Menu:</label>
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="menu">
                         <option value=""></option>
                         <option value="1">SI</option>
