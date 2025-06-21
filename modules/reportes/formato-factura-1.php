@@ -117,7 +117,7 @@ try{
 							$productos = $conexionBdComercial->query("SELECT * FROM comercial_productos 
 							INNER JOIN comercial_marcas ON cmar_id=cprod_marca
 							INNER JOIN comercial_categorias ON ccat_id=cmar_categoria
-							INNER JOIN comercial_tipo_productos ON ctipo_id=cprod_tipo
+							INNER JOIN comercial_marca_productos ON ctipo_id=cprod_tipo
 							INNER JOIN comercial_productos_fotos ON cpf_id_producto=cprod_id AND cpf_principal=1
 							INNER JOIN comercial_relacion_productos ON czpp_producto=cprod_id AND czpp_tipo=4 AND czpp_cotizacion='" . $_GET["id"] . "'
 							ORDER BY czpp_orden");

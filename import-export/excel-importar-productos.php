@@ -179,7 +179,7 @@ if($extension == 'xlsx'){
 							$tiposExistentes["FILA_" . $f] = $tipoNombre;
 						} else {
 							// Buscar si el tipo ya existe
-							$stmt = $conexionBdComercial->prepare("SELECT ctipo_id, ctipo_nombre FROM comercial_tipo_productos WHERE ctipo_nombre = ? AND ctipo_id_empresa = ?");
+							$stmt = $conexionBdComercial->prepare("SELECT ctipo_id, ctipo_nombre FROM comercial_marca_productos WHERE ctipo_nombre = ? AND ctipo_id_empresa = ?");
 							$stmt->bind_param("si", $tipoNombre, $idEmpresa);
 							$stmt->execute();
 							$resultado = $stmt->get_result();
@@ -190,7 +190,7 @@ if($extension == 'xlsx'){
 								$tiposExistentes["FILA_" . $f] = $datosTipoExistente['ctipo_nombre'];
 							} else {
 								// Insertar el nuevo tipo
-								$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_tipo_productos (ctipo_nombre, ctipo_id_empresa) VALUES (?, ?)");
+								$stmtInsert = $conexionBdComercial->prepare("INSERT INTO comercial_marca_productos (ctipo_nombre, ctipo_id_empresa) VALUES (?, ?)");
 								$stmtInsert->bind_param("si", $tipoNombre, $idEmpresa);
 								$stmtInsert->execute();
 								$arrayIndividual['cprod_tipo'] = $stmtInsert->insert_id;

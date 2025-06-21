@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-		$conexionBdComercial->query("DELETE FROM comercial_tipo_productos WHERE ctipo_id='" . $_GET["id"] . "'");
+		$conexionBdComercial->query("DELETE FROM comercial_marca_productos WHERE ctipo_id='" . $_GET["id"] . "'");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}

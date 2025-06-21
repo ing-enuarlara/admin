@@ -7,7 +7,7 @@ include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
 
 try{
-  $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos WHERE ctipo_id='".$_GET["id"]."'");
+  $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_marca_productos WHERE ctipo_id='".$_GET["id"]."'");
 } catch (Exception $e) {
   include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 }

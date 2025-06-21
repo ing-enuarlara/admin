@@ -33,7 +33,7 @@ switch ($tipo) {
 
   case TIPO:
     $where = !$esDev ? "AND ctipo_id_empresa='$idEmpresa'" : "";
-    $query = "SELECT ctipo_id AS id, ctipo_nombre AS nombre FROM comercial_tipo_productos WHERE ctipo_estado=1 $where";
+    $query = "SELECT ctipo_id AS id, ctipo_nombre AS nombre FROM comercial_marca_productos WHERE ctipo_estado=1 $where";
     break;
 
   default:

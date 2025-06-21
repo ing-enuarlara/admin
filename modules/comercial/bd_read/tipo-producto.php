@@ -85,7 +85,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     $where= "WHERE ctipo_id_empresa='".$_SESSION["idEmpresa"]."'";
                                 }
                                 try{
-                                    $tipoProd= $conexionBdComercial->query("SELECT * FROM comercial_tipo_productos $where");
+                                    $tipoProd= $conexionBdComercial->query("SELECT * FROM comercial_marca_productos $where");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
