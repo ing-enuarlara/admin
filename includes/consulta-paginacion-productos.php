@@ -14,28 +14,28 @@ $productosBD = Productos::SelectJoin(
 );
 
 $productosSiniwin = [];
-if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
-    $productosApiSiniwin = Api_Siniwin::Productos();
-    if (!empty($productosApiSiniwin)) {
-        foreach ($productosApiSiniwin as $productoApiSiniwin) {
+// if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
+//     $productosApiSiniwin = Api_Siniwin::Productos();
+//     if (!empty($productosApiSiniwin)) {
+//         foreach ($productosApiSiniwin as $productoApiSiniwin) {
 
-            $productosSiniwin[] = [
-                'cprod_id' => $productoApiSiniwin['ref'],
-                'cprod_nombre' => $productoApiSiniwin['denomination'],
-                'cprod_exitencia' => $productoApiSiniwin['Stock'] ?? 0,
-                'cprod_costo' => $productoApiSiniwin['pvp_iva'] ?? 0,
-                'cprod_detalles' => $productoApiSiniwin['observations'] ?? '',
-                'cprod_descuento' => 0,
-                'cprod_id_empresa' => 3,
-                'cprod_estado' => 1,
-                'ccat_nombre' => $productoApiSiniwin['family'] ?? '',
-                'cmar_nombre' => '',
-                'fuente' => 'apiSiniwin',
-                'store' => $productoApiSiniwin['store'] ?? ''
-            ];
-        }
-    }
-}
+//             $productosSiniwin[] = [
+//                 'cprod_id' => $productoApiSiniwin['ref'],
+//                 'cprod_nombre' => $productoApiSiniwin['denomination'],
+//                 'cprod_exitencia' => $productoApiSiniwin['Stock'] ?? 0,
+//                 'cprod_costo' => $productoApiSiniwin['pvp_iva'] ?? 0,
+//                 'cprod_detalles' => $productoApiSiniwin['observations'] ?? '',
+//                 'cprod_descuento' => 0,
+//                 'cprod_id_empresa' => 3,
+//                 'cprod_estado' => 1,
+//                 'ccat_nombre' => $productoApiSiniwin['family'] ?? '',
+//                 'cmar_nombre' => '',
+//                 'fuente' => 'apiSiniwin',
+//                 'store' => $productoApiSiniwin['store'] ?? ''
+//             ];
+//         }
+//     }
+// }
 
 if (!is_array($productosBD)) {
     $productosBD = [];
