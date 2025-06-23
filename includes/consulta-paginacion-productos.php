@@ -64,10 +64,15 @@ $productosFiltrados = array_filter($productosSinPaginar, function ($producto) {
         }
     }
     if (!empty($_REQUEST['search'])) {
+        $id = (string)($producto['cprod_id'] ?? '');
+        $codRef = (string)($producto['cprod_cod_ref'] ?? '');
+        $code = (string)($producto['cprod_ean_code'] ?? '');
+        $categoria = (string)($producto['ccat_nombre'] ?? '');
+        $marca = (string)($producto['cmar_nombre'] ?? '');
         $nombre = (string)($producto['cprod_nombre'] ?? '');
         $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
         $search = $_REQUEST['search'];
-        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false) {
+        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($categoria, $search) === false && stripos($marca, $search) === false) {
             return false;
         }
     }
