@@ -16,12 +16,20 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empt
     }
 
     try {
+        $numFotos = Productos_Fotos::numRows([ 'cpf_id_producto' => $_POST['id'] ]);
+    } catch (Exception $e) {
+        include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
+    }
+
+    $principal = $numFotos < 1 ? 1 : 0;
+    try {
         Productos_Fotos::Insert([
             'cpf_id_producto' => $_POST['id'],
             'cpf_fotos' => $fileName,
             'cpf_id_empresa' => $_SESSION["idEmpresa"],
             'cpf_tipo' => $_POST['tipoImg'],
-            'cpf_fotos_prin' => SI
+            'cpf_fotos_prin' => SI,
+            'cpf_principal' => $principal
         ]);
     } catch (Exception $e) {
         include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
