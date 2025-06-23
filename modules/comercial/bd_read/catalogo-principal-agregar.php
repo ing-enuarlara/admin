@@ -206,8 +206,8 @@ require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
                       </div>
                     </div>
                     <div class="form-group col-md-6">
-                      <label>Especificaciones</label>
-                      <textarea class="form-control" rows="3" placeholder="especificaciones del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
+                      <label>Descripción</label>
+                      <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">

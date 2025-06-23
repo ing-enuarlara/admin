@@ -232,8 +232,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles" value=""><?= $resultadoD['cprod_detalles']; ?></textarea>
                       </div>
                       <div class="form-group col-md-6">
-                        <label>Especificaciones</label>
-                        <textarea class="form-control" rows="3" placeholder="especificaciones del producto ..." name="especificaciones" id="especificaciones" value=""><?= $resultadoD['cprod_especificaciones']; ?></textarea>
+                        <label>Descripción</label>
+                        <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""><?= $resultadoD['cprod_especificaciones']; ?></textarea>
                       </div>
                       <!-- textarea -->
                       <div class="form-group col-md-6">
