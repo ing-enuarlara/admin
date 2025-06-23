@@ -3,6 +3,8 @@ require_once("../../sesion.php");
 
 $idPagina = 22;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
+require_once(RUTA_PROYECTO . 'class/Productos.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 
 $subCategoria = 0;
@@ -10,13 +12,20 @@ if (!empty($_POST["marca"])) {
     $subCategoria = $_POST["marca"];
 }
 
-try {
-    $conexionBdComercial->query("INSERT INTO comercial_productos(cprod_nombre, cprod_costo, cprod_detalles, cprod_exitencia, cprod_marca, cprod_categoria, cprod_tipo, cprod_palabras_claves, cprod_id_empresa, cprod_fecha_creacion, cprod_especificaciones)VALUES('" . $_POST["nombre"] . "', '" . $_POST["costo"] . "', '" . $_POST["detalles"] . "', '" . $_POST["existencia"] . "', '" . $subCategoria . "', '" . $_POST["categoria"] . "', '" . $_POST["tipo"] . "', '" . $_POST["paClave"] . "', '" . $_SESSION["idEmpresa"] . "', now(), '" . $_POST["especificaciones"] . "')");
-} catch (Exception $e) {
-    include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-}
-
-$idInsertU = mysqli_insert_id($conexionBdComercial);
+$idInsertU = Productos::Insert([
+    'cprod_nombre' => $_POST["nombre"],
+    'cprod_costo' => $_POST["costo"],
+    'cprod_detalles' => $_POST["detalles"],
+    'cprod_exitencia' => $_POST["existencia"],
+    'cprod_marca' => $subCategoria,
+    'cprod_categoria' => $_POST["categoria"],
+    'cprod_tipo' => $_POST["tipo"],
+    'cprod_palabras_claves' => $_POST["paClave"],
+    'cprod_id_empresa' => $_SESSION["idEmpresa"],
+    'cprod_fecha_creacion' => date("Y-m-d H:i:s"),
+    'cprod_especificaciones' => $_POST["especificaciones"],
+    'cprod_cod_ref' => $_POST["ref"]
+]);
 
 // 1. Colores
 if (!empty($_POST['especificaciones_colores'])) {
@@ -69,6 +78,13 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empt
         $fileName = $_POST['urlProducto'];
     }
 
+    Productos_Fotos::Insert([
+        'cpf_id_producto' => $idInsertU,
+        'cpf_fotos' => $fileName,
+        'cpf_id_empresa' => $_SESSION["idEmpresa"],
+        'cpf_principal' => 1,
+        'cpf_tipo' => $_POST['tipoImg']
+    ]);
     try {
         $conexionBdComercial->query("INSERT INTO comercial_productos_fotos(cpf_id_producto, cpf_fotos, cpf_id_empresa, cpf_fecha_creacion, cpf_principal, cpf_tipo) VALUES ('" . $idInsertU . "', '" . $fileName . "', '" . $_SESSION["idEmpresa"] . "', now(), 1, '" . $_POST['tipoImg'] . "')");
     } catch (Exception $e) {

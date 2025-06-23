@@ -24,7 +24,8 @@ try {
         'cprin_palabras_claves' => $_POST["paClave"],
         'cprin_id_empresa' => $_SESSION["idEmpresa"],
         'cprin_fecha_creacion' => date('Y-m-d H:i:s'),
-        'cprin_especificaciones' => $_POST["especificaciones"]
+        'cprin_especificaciones' => $_POST["especificaciones"],
+        'cprin_cod_ref' => $_POST["ref"]
     ]);
 } catch (Exception $e) {
     include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
@@ -84,18 +85,14 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empt
         $fileName = $_POST['urlProducto'];
     }
 
-    try {
-        Productos_Fotos::Insert([
-            'cpf_id_producto' => $idInsertU,
-            'cpf_fotos' => $fileName,
-            'cpf_id_empresa' => $_SESSION["idEmpresa"],
-            'cpf_principal' => 1,
-            'cpf_tipo' => $_POST['tipoImg'],
-            'cpf_fotos_prin' => SI
-        ]);
-    } catch (Exception $e) {
-        include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-    }
+    Productos_Fotos::Insert([
+        'cpf_id_producto' => $idInsertU,
+        'cpf_fotos' => $fileName,
+        'cpf_id_empresa' => $_SESSION["idEmpresa"],
+        'cpf_principal' => 1,
+        'cpf_tipo' => $_POST['tipoImg'],
+        'cpf_fotos_prin' => SI
+    ]);
 }
 
 include(RUTA_PROYECTO . "includes/guardar-historial-acciones.php");

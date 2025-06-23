@@ -97,6 +97,10 @@ require_once(RUTA_PROYECTO . 'class/Categorias_Catalogo_Principal.php');
                       <label for="exampleInputEmail1">Nombre:</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Articulo" name="nombre">
                     </div>
+                    <div class="form-group col-md-6">
+                      <label for="exampleInputEmail1">Referencia:</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Articulo" name="ref">
+                    </div>
                     <div class="form-group col-md-2">
                       <label for="exampleInputEmail1">Precio Base:</label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Articulo" name="costo">

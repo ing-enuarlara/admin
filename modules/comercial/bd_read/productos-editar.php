@@ -117,6 +117,10 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <label for="exampleInputEmail1">Nombre:</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?= $resultadoD['cprod_nombre']; ?>">
                       </div>
+                      <div class="form-group col-md-6">
+                        <label for="exampleInputEmail1">Referencia:</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref" value="<?= !empty($resultadoD['cprod_cod_ref']) ? $resultadoD['cprod_cod_ref'] : $resultadoD['cprod_id']; ?>">
+                      </div>
                       <div class="form-group col-md-2">
                         <label for="exampleInputEmail1">Precio:</label>
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>">
@@ -281,20 +285,30 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <div id="color-picker-container">
                           <?php
                           $colores = Productos_Especificaciones::Select([
-                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_id_producto' => $resultadoD['cprod_id'],
                             'cpt_tipo' => 'COLOR',
                             'cpt_tech_prin' => NO
                           ])->fetchAll(PDO::FETCH_ASSOC);
-                          $numC = 1;
-                          foreach ($colores as $color) {
-                            $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+
+                          if (!empty($colores)) {
+                            $numC = 1;
+                            foreach ($colores as $color) {
+                              $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
+                              <div class="row mb-2">
+                                <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
+                                <div class="col-md-2"><?= $btn ?></div>
+                              </div>
+                            <?php
+                              $numC++;
+                            }
+                          } else {
+                            ?>
                             <div class="row mb-2">
-                              <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
-                              <div class="col-md-2"><?= $btn ?></div>
+                              <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="#000000"></div>
+                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarColor()">+</button></div>
                             </div>
-                          <?php $numC++;
-                          } ?>
+                          <?php } ?>
                         </div>
                       </div>
 
@@ -303,20 +317,30 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <div id="tallas-container">
                           <?php
                           $tallas = Productos_Especificaciones::Select([
-                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_id_producto' => $resultadoD['cprod_id'],
                             'cpt_tipo' => 'TALLA',
                             'cpt_tech_prin' => NO
                           ])->fetchAll(PDO::FETCH_ASSOC);
-                          $numT = 1;
-                          foreach ($tallas as $talla) {
-                            $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+
+                          if (!empty($tallas)) {
+                            $numT = 1;
+                            foreach ($tallas as $talla) {
+                              $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
+                              <div class="row mb-2">
+                                <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control" value="<?= $talla['cpt_value'] ?>"></div>
+                                <div class="col-md-2"><?= $btn ?></div>
+                              </div>
+                            <?php
+                              $numT++;
+                            }
+                          } else {
+                            ?>
                             <div class="row mb-2">
-                              <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control" value="<?= $talla['cpt_value'] ?>"></div>
-                              <div class="col-md-2"><?= $btn ?></div>
+                              <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control"></div>
+                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
                             </div>
-                          <?php $numT++;
-                          } ?>
+                          <?php } ?>
                         </div>
                       </div>
 
@@ -325,21 +349,32 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <div id="otras-especificaciones-container">
                           <?php
                           $otras = Productos_Especificaciones::Select([
-                            'cpt_id_producto' => $resultadoD['cprin_id'],
+                            'cpt_id_producto' => $resultadoD['cprod_id'],
                             'cpt_tipo' => 'OTRO',
                             'cpt_tech_prin' => NO
                           ])->fetchAll(PDO::FETCH_ASSOC);
-                          $numO = 1;
-                          foreach ($otras as $otra) {
-                            $btn = $numO == 1 ? '<button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+
+                          if (!empty($otras)) {
+                            $numO = 1;
+                            foreach ($otras as $otra) {
+                              $btn = $numO == 1 ? '<button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
+                              <div class="row mb-2">
+                                <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]" value="<?= $otra['cpt_lebel'] ?>"></div>
+                                <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]" value="<?= $otra['cpt_value'] ?>"></div>
+                                <div class="col-md-2"><?= $btn ?></div>
+                              </div>
+                            <?php
+                              $numO++;
+                            }
+                          } else {
+                            ?>
                             <div class="row mb-2">
-                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]" value="<?= $otra['cpt_lebel'] ?>"></div>
-                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]" value="<?= $otra['cpt_value'] ?>"></div>
-                              <div class="col-md-2"><?= $btn ?></div>
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                              <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarOtraEspecificacion()">+</button></div>
                             </div>
-                          <?php $numO++;
-                          } ?>
+                          <?php } ?>
                         </div>
                       </div>
                       <div class="form-group col-md-3">

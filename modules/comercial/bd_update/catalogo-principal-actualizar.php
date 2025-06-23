@@ -12,6 +12,7 @@ if (!empty($_POST["marca"])) {
     $subCategoria = $_POST["marca"];
 }
 
+$codRef = $_POST["ref"] != $_POST["id"] ? $_POST["ref"] : NULL;
 Catalogo_Principal::Update(
     [
         'cprin_nombre' => $_POST["nombre"],
@@ -23,8 +24,8 @@ Catalogo_Principal::Update(
         'cprin_tipo' => $_POST["tipo"],
         'cprin_palabras_claves' => $_POST["paClave"],
         'cprin_estado' => $_POST["estado"],
-        'cprin_fecha_creacion' => date('Y-m-d H:i:s'),
-        'cprin_especificaciones' => $_POST["especificaciones"]
+        'cprin_especificaciones' => $_POST["especificaciones"],
+        'cprin_cod_ref' => $codRef
     ],
     [
         'cprin_id' => $_POST["id"]
@@ -119,7 +120,8 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empt
         ],
         [
             'cpf_id_producto' => $_POST["id"],
-            'cpf_principal' => 1
+            'cpf_principal' => 1,
+            'cpf_fotos_prin' => SI
         ]
     );
 }
