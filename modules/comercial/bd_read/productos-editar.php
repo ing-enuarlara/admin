@@ -9,7 +9,7 @@ require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 
 try {
   $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos 
-  LEFT JOIN comercial_productos_fotos ON cpf_id_producto = cprod_id AND cpf_principal = 1
+  LEFT JOIN comercial_productos_fotos ON cpf_id_producto = cprod_id AND cpf_principal = 1 AND cpf_fotos_prin = '" . NO . "'
   WHERE cprod_id='" . $_GET["id"] . "'");
 } catch (Exception $e) {
   include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
