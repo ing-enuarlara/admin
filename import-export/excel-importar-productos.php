@@ -285,7 +285,7 @@ if($extension == 'xlsx'){
 
 						$existencia = !empty($arrayIndividual['cprod_exitencia']) && $arrayIndividual['cprod_exitencia'] > 0 ? $arrayIndividual['cprod_exitencia'] : 1;
 
-						$sql .= "('".mysqli_real_escape_string($conexionBdComercial, $arrayIndividual['cprod_nombre'])."', '".$arrayIndividual['cprod_costo']."', '".$arrayIndividual['cprod_detalles']."', '".$existencia."', '".$arrayIndividual['cprod_marca']."', '".$arrayIndividual['cprod_categoria']."', '".$arrayIndividual['cprod_tipo']."', '".$arrayIndividual['cprod_palabras_claves']."', '".$arrayIndividual['cprod_cod_ref']."', '".$arrayIndividual['cprod_ean_code']."', {$idEmpresa}),";
+						$sql .= "('".mysqli_real_escape_string($conexionBdComercial, $arrayIndividual['cprod_nombre'])."', '".$arrayIndividual['cprod_costo']."', '".mysqli_real_escape_string($conexionBdComercial, $arrayIndividual['cprod_detalles'])."', '".$existencia."', '".$arrayIndividual['cprod_marca']."', '".$arrayIndividual['cprod_categoria']."', '".$arrayIndividual['cprod_tipo']."', '".$arrayIndividual['cprod_palabras_claves']."', '".$arrayIndividual['cprod_cod_ref']."', '".$arrayIndividual['cprod_ean_code']."', {$idEmpresa}),";
 
 						$productosCreados["FILA_".$f] = $arrayIndividual['cprod_cod_ref'];
 
