@@ -104,13 +104,13 @@ try {
                                             <img src="<?= $rutaFoto ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprin_nombre'] ?>" />
                                         </a>
                                         <?php
-                                        if ($resultadoFotos['cpf_principal'] != 1) {
+                                        // if ($resultadoFotos['cpf_principal'] != 1) {
                                         ?>
                                             <div class="form-group" style="display: flex;">
                                                 <a href="../bd_delete/catalogo-principal-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
                                             </div>
                                         <?php
-                                        }
+                                        // }
                                         ?>
                                     </div>
                                 <?php

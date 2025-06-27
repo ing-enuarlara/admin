@@ -67,11 +67,27 @@ include(RUTA_PROYECTO . "includes/head.php");
 								<div class="card-header">
 									<h5 class="float-sm-left">Paso a paso</h5>
 								</div>
-								<!-- /.card-header -->
 								<div class="card-body">
-									<p><b>1.</b> Descargue la plantilla de excel en este enlace. <a href="<?=REDIRECT_ROUTE."files/excel/Plantilla-Importacion-productos-fotos.xlsx"?>" target="_blank" class="btn btn-xs btn-secondary">DESCARGAR PLANTILLA</a></p>
-									<p><b>2.</b> Llene los campos en el orden que la plantilla los solicita.</p>
-									<p><b>3.</b> Finalmente guarde la plantilla ya completada, carguela en el campo que dice <mark>Subir la plantilla lista</mark> y dele click al botón importar fotos.</p>
+									<p><b>1.</b> Descargue la plantilla de Excel desde este enlace: 
+										<a href="<?=REDIRECT_ROUTE."files/excel/Plantilla-Importacion-productos-fotos.xlsx"?>" target="_blank" class="btn btn-xs btn-secondary">DESCARGAR PLANTILLA</a>
+									</p>
+
+									<p><b>2.</b> Complete el archivo Excel con los datos solicitados:</p>
+									<ul>
+										<li><b>Columna A</b>: Código, ID o Referencia del producto.</li>
+										<li><b>Columna B</b>: Nombre de la imagen (ej: <code>producto123.jpg</code>) o URL completa si ya está en internet.</li>
+										<li><b>Columna C</b>: Tipo de imagen: <code>IMG</code> si va a subir una imagen desde su ordenador, o <code>URL</code> si ya tiene la imagen en línea.</li>
+									</ul>
+
+									<p><b>3.</b> Cree una carpeta llamada <mark>imagenes</mark> y guarde allí todas las fotos correspondientes. Asegúrese de que los nombres coincidan con los que colocó en el Excel (ej: <code>producto123.jpg</code>).</p>
+
+									<p><b>4.</b> Comprima en un archivo .zip tanto el Excel como la carpeta <code>imagenes</code>. Ejemplo:</p>
+									<ul>
+										<li>📄 <code>Plantilla-Importacion-productos-fotos.xlsx</code></li>
+										<li>📁 <code>/imagenes/</code> (con todas las fotos)</li>
+									</ul>
+
+									<p><b>5.</b> Suba el archivo .zip en el campo <mark>Subir la plantilla lista</mark> y haga clic en <b>Importar fotos</b>.</p>
 								</div>
 							</div>
 
@@ -79,10 +95,11 @@ include(RUTA_PROYECTO . "includes/head.php");
 								<div class="card-header">
 									<h5 class="float-sm-left">Consideraciones</h5>
 								</div>
-								<!-- /.card-header -->
 								<div class="card-body">
-									<p><b>-></b> Tenga en cuenta, para importar las fotos, el campo Cod/Referencia/ID y URL, son obligatorios.</p>
-									<p><b>-></b> Para el campo <mark>tipo</mark>, debe tener encuenta que si ingreso una imagen debe escribir IMG o si es una URL donde esta alojada la imagen escriba URL.</p>
+									<p><b>→</b> El nombre de la imagen en el Excel debe coincidir exactamente con el nombre del archivo en la carpeta <code>imagenes</code> (incluyendo la extensión: .jpg, .png, etc.).</p>
+									<p><b>→</b> Si el tipo es <code>URL</code>, asegúrese de copiar la URL completa de la imagen (ej: <code>https://miservidor.com/imagenes/ejemplo.jpg</code>).</p>
+									<p><b>→</b> No inserte imágenes dentro del Excel. Solo use nombres de archivo o URLs.</p>
+									<p><b>→</b> El código o referencia del producto debe existir previamente en el catálogo para poder asociarle la imagen.</p>
 								</div>
 							</div>
 							<!-- /.card -->
