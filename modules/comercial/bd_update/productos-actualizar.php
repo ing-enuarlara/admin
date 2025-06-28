@@ -61,14 +61,16 @@ if (!empty($_POST['especificaciones_tallas'])) {
         ]
     );
     foreach ($_POST['especificaciones_tallas'] as $talla) {
-        Productos_Especificaciones::Insert(
-            [
-                'cpt_value' => $talla,
-                'cpt_id_producto' => $_POST["id"],
-                'cpt_id_empresa' => $_SESSION["idEmpresa"],
-                'cpt_tipo' => 'TALLA'
-            ]
-        );
+        if (!empty($talla)) {
+            Productos_Especificaciones::Insert(
+                [
+                    'cpt_value' => $talla,
+                    'cpt_id_producto' => $_POST["id"],
+                    'cpt_id_empresa' => $_SESSION["idEmpresa"],
+                    'cpt_tipo' => 'TALLA'
+                ]
+            );
+        }
     }
 }
 
@@ -84,7 +86,7 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
     for ($i = 0; $i < count($_POST['otras_labels']); $i++) {
         $label = trim($_POST['otras_labels'][$i]);
         $value = trim($_POST['otras_values'][$i]);
-        if ($label && $value) {
+        if (!empty($label) && !empty($value)) {
             Productos_Especificaciones::Insert(
                 [
                     'cpt_lebel' => $label,
