@@ -6,10 +6,10 @@ $idPagina = 56;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-try{
-    $consuluta= $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='".$_GET["id"]."'");
+try {
+    $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='" . $_GET["id"] . "'");
 } catch (Exception $e) {
-    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+    include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
 }
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 ?>
@@ -68,10 +68,10 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <?php include(RUTA_PROYECTO."includes/mensajes-informativos.php"); ?>
+                    <?php include(RUTA_PROYECTO . "includes/mensajes-informativos.php"); ?>
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="m-0 float-sm-right"><?= $paginaActual['pag_nombre']." de ".$resultadoD['cprod_nombre'] ?></h2>
+                            <h2 class="m-0 float-sm-right"><?= $paginaActual['pag_nombre'] . " de " . $resultadoD['cprod_nombre'] ?></h2>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
                                 <i class="fas fa-solid fa-plus"></i> Agregar Fotos
                             </button>
@@ -80,31 +80,31 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                         <div class="card-body">
                             <div class="row">
                                 <?php
-                                    try{
-                                        $consultaFotos= $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='".$_GET["id"]."'");
-                                    } catch (Exception $e) {
-                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
-                                    }
-                                    while($resultadoFotos = mysqli_fetch_array($consultaFotos, MYSQLI_BOTH)){
+                                try {
+                                    $consultaFotos = $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='" . $_GET["id"] . "'");
+                                } catch (Exception $e) {
+                                    include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
+                                }
+                                while ($resultadoFotos = mysqli_fetch_array($consultaFotos, MYSQLI_BOTH)) {
 
-                                        $rutaFoto = !empty($resultadoFotos['cpf_tipo']) ? ($resultadoFotos['cpf_tipo'] == TIPO_IMG ? REDIRECT_ROUTE . "files/productos/" . $resultadoFotos['cpf_fotos'] : $resultadoFotos['cpf_fotos']) : "";
+                                    $rutaFoto = !empty($resultadoFotos['cpf_tipo']) ? ($resultadoFotos['cpf_tipo'] == TIPO_IMG ? REDIRECT_ROUTE . "files/productos/" . $resultadoFotos['cpf_fotos'] : $resultadoFotos['cpf_fotos']) : "";
                                 ?>
-                                <div class="col-sm-2">
-                                    <a href="<?= $rutaFoto ?>" data-toggle="lightbox" data-title="<?= $resultadoD['cprod_nombre'] ?>" data-gallery="gallery">
-                                        <img src="<?= $rutaFoto ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
-                                    </a>
-                                    <?php
+                                    <div class="col-sm-2">
+                                        <a href="<?= $rutaFoto ?>" data-toggle="lightbox" data-title="<?= $resultadoD['cprod_nombre'] ?>" data-gallery="gallery">
+                                            <img src="<?= $rutaFoto ?>" class="img-fluid mb-2" alt="Foto para <?= $resultadoD['cprod_nombre'] ?>" />
+                                        </a>
+                                        <?php
                                         // if($resultadoFotos['cpf_principal']!=1){
-                                    ?>
+                                        ?>
                                         <div class="form-group" style="display: flex;">
                                             <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
                                         </div>
-                                    <?php
+                                        <?php
                                         // }
-                                    ?>
-                                </div>
+                                        ?>
+                                    </div>
                                 <?php
-                                    }
+                                }
                                 ?>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
                     <form class="form-horizontal" method="post" action="../bd_create/productos-fotos-guardar.php" enctype="multipart/form-data">
-                        <input type="hidden" name="id" value="<?=$_GET["id"];?>">
+                        <input type="hidden" name="id" value="<?= $_GET["id"]; ?>">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Cargar Foto</h4>
@@ -129,39 +129,48 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 <div class="form-group col-md-12">
                                     <label for="exampleInputEmail1">Tipo de Imagen:</label>
                                     <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
-                                    <option value=""></option>
-                                    <option value="<?= TIPO_IMG ?>" <?=$resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : "";?> >Imagen</option>
-                                    <option value="<?= TIPO_URL ?>" <?=$resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : "";?> >Url</option>
+                                        <option value=""></option>
+                                        <option value="<?= TIPO_IMG ?>" <?= $resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : ""; ?>>Imagen</option>
+                                        <option value="<?= TIPO_URL ?>" <?= $resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : ""; ?>>Url</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-12" id="tipoFile" style="display:none;">
                                     <label for="customFile">Foto Principal</label>
                                     <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
-                                    <label class="custom-file-label" for="customFile">Escoger Foto...</label>
+                                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto[]" multiple>
+                                        <label class="custom-file-label" for="customFile">Escoger Foto...</label>
                                     </div>
                                 </div>
+                                <script>
+                                    document.getElementById("customFile").addEventListener("change", function() {
+                                        var files = this.files;
+                                        var label = Array.from(files).map(f => f.name).join(", ");
+                                        this.nextElementSibling.innerText = label || "Escoger Foto...";
+                                    });
+                                </script>
                                 <div class="form-group col-md-12" id="tipoUrl" style="display:none;">
                                     <label for="exampleInputEmail1">Url de la Imagen:</label>
                                     <input type="text" class="form-control" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
                                 </div>
                                 <script>
-                                    function cargarImagen(tipo){
-                                    if(tipo.value == '<?=TIPO_IMG?>'){
-                                        var urlImg = document.getElementById('urlImg');
-                                        if (urlImg) { urlImg.value = ''; }
-                                        document.getElementById('tipoFile').style.display='block';
-                                        document.getElementById('tipoUrl').style.display='none';
+                                    function cargarImagen(tipo) {
+                                        if (tipo.value == '<?= TIPO_IMG ?>') {
+                                            var urlImg = document.getElementById('urlImg');
+                                            if (urlImg) {
+                                                urlImg.value = '';
+                                            }
+                                            document.getElementById('tipoFile').style.display = 'block';
+                                            document.getElementById('tipoUrl').style.display = 'none';
+                                        }
+
+                                        if (tipo.value == '<?= TIPO_URL ?>') {
+                                            document.getElementById('tipoFile').style.display = 'none';
+                                            document.getElementById('tipoUrl').style.display = 'block';
+                                        }
                                     }
-                                    
-                                    if(tipo.value == '<?=TIPO_URL?>'){
-                                        document.getElementById('tipoFile').style.display='none';
-                                        document.getElementById('tipoUrl').style.display='block';
-                                    }
-                                    }
-                                    
+
                                     $(document).ready(function() {
-                                    cargarImagen(document.getElementById('tipoImg'));
+                                        cargarImagen(document.getElementById('tipoImg'));
                                     });
                                 </script>
                             </div>

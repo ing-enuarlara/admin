@@ -106,9 +106,9 @@ try {
                                         <?php
                                         // if ($resultadoFotos['cpf_principal'] != 1) {
                                         ?>
-                                            <div class="form-group" style="display: flex;">
-                                                <a href="../bd_delete/catalogo-principal-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
-                                            </div>
+                                        <div class="form-group" style="display: flex;">
+                                            <a href="../bd_delete/catalogo-principal-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
+                                        </div>
                                         <?php
                                         // }
                                         ?>
@@ -147,10 +147,17 @@ try {
                                 <div class="form-group col-md-12" id="tipoFile" style="display:none;">
                                     <label for="customFile">Foto Principal</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
+                                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto[]" multiple>
                                         <label class="custom-file-label" for="customFile">Escoger Foto...</label>
                                     </div>
                                 </div>
+                                <script>
+                                    document.getElementById("customFile").addEventListener("change", function() {
+                                        var files = this.files;
+                                        var label = Array.from(files).map(f => f.name).join(", ");
+                                        this.nextElementSibling.innerText = label || "Escoger Foto...";
+                                    });
+                                </script>
                                 <div class="form-group col-md-12" id="tipoUrl" style="display:none;">
                                     <label for="exampleInputEmail1">Url de la Imagen:</label>
                                     <input type="text" class="form-control" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
