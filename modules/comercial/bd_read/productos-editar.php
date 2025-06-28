@@ -130,7 +130,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia" value="<?= $resultadoD['cprod_exitencia']; ?>">
                       </div>
                       <div class="form-group col-md-3">
-                        <label>Tipo:</label>
+                        <label>Marca:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
                           <option value=""></option>
                           <?php
