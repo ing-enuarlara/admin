@@ -167,6 +167,7 @@ $filtro = implode(" AND ", $filtros);
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
                                                         <a class="dropdown-item" href="marcas-catalogo-editar.php?id=<?= $result['cmarp_id']; ?>" data-toggle="tooltip">Editar</a>
+                                                        <a class="dropdown-item" href="marcas-catalogo-pagina.php?id=<?= $result['cmarp_id']; ?>" data-toggle="tooltip">Editar Información en la página</a>
                                                         <!--<div class="dropdown-divider"></div>-->
                                                         <a class="dropdown-item" href="../bd_delete/marcas-catalogo-eliminar.php?id=<?= $result['cmarp_id']; ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
                                                     </div>
