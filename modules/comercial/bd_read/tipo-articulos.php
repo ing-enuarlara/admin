@@ -62,7 +62,7 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-					    <a href="tipo-articulos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Tipo de Articulo</a>
+					    <a href="tipo-articulos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Año de Articulo</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -70,7 +70,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <thead>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Nombre Tipo de Articulo</th>
+                                    <th>Nombre Año de Articulo</th>
                                     <th>Estado</th>
                                     <?php
                                     if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){
@@ -145,7 +145,7 @@ include(RUTA_PROYECTO."includes/head.php");
                             <tfoot>
                                 <tr>
                                     <th>Nº</th>
-                                    <th>Nombre Tipo de Articulo</th>
+                                    <th>Nombre Año de Articulo</th>
                                     <th>Estado</th>
                                     <?php
                                     if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){

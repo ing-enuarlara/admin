@@ -185,7 +185,7 @@
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/tipo-articulos.php" <?= agregarClass(MENU, [184, 185, 186, 187, 188, 189]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
-                                                    <p>Tipo de Articulos</p>
+													<p>Año</p>
                                                 </a>
                                             </li>
                                         <?php } ?>

@@ -53,7 +53,7 @@ $resultadoD = Tipos_Catalogo_Principal::Select(
                   <div class="col-sm-12">
                   <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/index.php">Dashboard</a></li>
-                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-articulos.php">Ver Tipo de Articulos</a></li>
+                      <li class="breadcrumb-item"><a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/tipo-articulos.php">Ver Año de Articulos</a></li>
                       <li class="breadcrumb-item active"><?=$paginaActual['pag_nombre']?></li>
                   </ol>
                   </div><!-- /.col -->
@@ -78,7 +78,7 @@ $resultadoD = Tipos_Catalogo_Principal::Select(
                                     <input type="hidden" name="id" value="<?=$_GET["id"];?>">
                                         <div class="form-group col-md-6">
                                             <label for="exampleInputEmail1">Nombre:</label>
-                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Tipo de Articulo" name="nombre" value="<?=$resultadoD['ctipop_nombre'];?>">
+                                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Año de Articulo" name="nombre" value="<?=$resultadoD['ctipop_nombre'];?>">
                                         </div>
                                         <div class="form-group col-md-6" style="display:block;" id="groupMasJoyas">
                                             <label>Estado:</label>
