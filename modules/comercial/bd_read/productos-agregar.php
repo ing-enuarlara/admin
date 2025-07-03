@@ -239,8 +239,8 @@ include(RUTA_PROYECTO . "includes/head.php");
                         const div = document.createElement("div");
                         div.classList.add("form-group", "row", "mt-2");
                         div.innerHTML = `
-                          <div class="col-md-4"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-4"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
+                          <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
                         container.appendChild(div);

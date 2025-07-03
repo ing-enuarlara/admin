@@ -74,7 +74,7 @@ if (!empty($_POST['tallas'])) {
     }
     if (!empty($_POST['stocks'])) {
         $totalStock = array_sum(array_map('intval', $_POST['stocks']));
-        Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $idInsertU]);
+        Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $_POST["id"]]);
     }
 }
 
