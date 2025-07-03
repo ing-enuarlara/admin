@@ -6,6 +6,7 @@ include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 require_once(RUTA_PROYECTO . 'class/Productos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
 
 $subCategoria = 0;
 if (!empty($_POST["marca"])) {
@@ -18,7 +19,7 @@ Productos::Update(
         'cprod_nombre' => $_POST["nombre"],
         'cprod_costo' => $_POST["costo"],
         'cprod_detalles' => $_POST["detalles"],
-        'cprod_exitencia' => $_POST["existencia"],
+        'cprod_exitencia' => $_POST["existencia"] ?? 0,
         'cprod_marca' => $subCategoria,
         'cprod_categoria' => $_POST["categoria"],
         'cprod_tipo' => $_POST["tipo"],
@@ -52,25 +53,28 @@ if (!empty($_POST['especificaciones_colores'])) {
 }
 
 // 2. Tallas
-if (!empty($_POST['especificaciones_tallas'])) {
-    Productos_Especificaciones::Delete(
+if (!empty($_POST['tallas'])) {
+    Productos_Tallas::Delete(
         [
-            'cpt_id_producto' => $_POST["id"],
-            'cpt_tech_prin' => NO,
-            'cpt_tipo' => 'TALLA'
+            'cpta_producto' => $_POST["id"],
+            'cpta_prin' => NO
         ]
     );
-    foreach ($_POST['especificaciones_tallas'] as $talla) {
-        if (!empty($talla)) {
-            Productos_Especificaciones::Insert(
-                [
-                    'cpt_value' => $talla,
-                    'cpt_id_producto' => $_POST["id"],
-                    'cpt_id_empresa' => $_SESSION["idEmpresa"],
-                    'cpt_tipo' => 'TALLA'
-                ]
-            );
+    for ($i = 0; $i < count($_POST['tallas']); $i++) {
+        $talla = trim($_POST['tallas'][$i]);
+        $stock = max(0, intval($_POST['stocks'][$i]));
+        if (!empty($talla) && !empty($stock)) {
+            Productos_Tallas::Insert([
+                'cpta_talla' => $talla,
+                'cpta_stock' => $stock,
+                'cpta_producto' => $_POST["id"],
+                'cpta_empresa' => $_SESSION["idEmpresa"]
+            ]);
         }
+    }
+    if (!empty($_POST['stocks'])) {
+        $totalStock = array_sum(array_map('intval', $_POST['stocks']));
+        Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $idInsertU]);
     }
 }
 

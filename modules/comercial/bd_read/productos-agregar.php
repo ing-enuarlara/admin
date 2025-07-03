@@ -103,7 +103,16 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo">
                     </div>
                     <div class="form-group col-md-2">
-                      <label for="exampleInputEmail1">Existencia:</label>
+                      <label for="exampleInputEmail1">
+                        Existencia:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si vas a usar tallas con stock individual, este campo se calculará automáticamente.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia">
                     </div>
                     <div class="form-group col-md-3">
@@ -230,7 +239,8 @@ include(RUTA_PROYECTO . "includes/head.php");
                         const div = document.createElement("div");
                         div.classList.add("form-group", "row", "mt-2");
                         div.innerHTML = `
-                          <div class="col-md-6"><input type="text" class="form-control" placeholder="Talla" name="especificaciones_tallas[]"></div>
+                          <div class="col-md-4"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-4"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
                         container.appendChild(div);
@@ -258,8 +268,9 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <label>Tallas disponibles:</label>
                       <div id="tallas-container">
                         <div class="row mb-2">
-                          <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" placeholder="Talla" class="form-control"></div>
-                          <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
+                          <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
                         </div>
                       </div>
                     </div>
@@ -349,6 +360,7 @@ include(RUTA_PROYECTO . "includes/head.php");
     });
 
     $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
       // Summernote
       $('#detalles').summernote();
       $('#especificaciones').summernote();

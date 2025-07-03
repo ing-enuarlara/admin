@@ -6,6 +6,7 @@ $idPagina = 23;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
 
 try {
   $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos 
@@ -126,7 +127,16 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>">
                       </div>
                       <div class="form-group col-md-2">
-                        <label for="exampleInputEmail1">Existencia:</label>
+                        <label for="exampleInputEmail1">
+                          Existencia:
+                          <span
+                            tabindex="0"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Si vas a usar tallas con stock individual, este campo se calculará automáticamente.">
+                            <i class="fa fa-question-circle text-info"></i>
+                          </span>
+                        </label>
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia" value="<?= $resultadoD['cprod_exitencia']; ?>">
                       </div>
                       <div class="form-group col-md-3">
@@ -261,7 +271,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           const div = document.createElement("div");
                           div.classList.add("form-group", "row", "mt-2");
                           div.innerHTML = `
-                          <div class="col-md-6"><input type="text" class="form-control" placeholder="Talla" name="especificaciones_tallas[]"></div>
+                          <div class="col-md-4"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-4"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
                           container.appendChild(div);
@@ -299,7 +310,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                                 <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
                                 <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                               </div>
-                            <?php
+                          <?php
                               $numC++;
                             }
                           } ?>
@@ -310,10 +321,9 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <label>Tallas disponibles:</label>
                         <div id="tallas-container">
                           <?php
-                          $tallas = Productos_Especificaciones::Select([
-                            'cpt_id_producto' => $resultadoD['cprod_id'],
-                            'cpt_tipo' => 'TALLA',
-                            'cpt_tech_prin' => NO
+                          $tallas = Productos_Tallas::Select([
+                            'cpta_producto' => $resultadoD['cprod_id'],
+                            'cpta_prin' => NO
                           ])->fetchAll(PDO::FETCH_ASSOC);
 
                           if (!empty($tallas)) {
@@ -322,7 +332,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                               $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
                               <div class="row mb-2">
-                                <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control" value="<?= $talla['cpt_value'] ?>"></div>
+                                <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $talla['cpta_talla'] ?>" /></div>
+                                <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" value="<?= $talla['cpta_stock'] ?>" /></div>
                                 <div class="col-md-2"><?= $btn ?></div>
                               </div>
                             <?php
@@ -331,7 +342,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           } else {
                             ?>
                             <div class="row mb-2">
-                              <div class="col-md-6"><input type="text" name="especificaciones_tallas[]" class="form-control"></div>
+                              <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                              <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
                               <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
                             </div>
                           <?php } ?>
@@ -463,6 +475,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
     });
 
     $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
       // Summernote
       $('#detalles').summernote();
       $('#especificaciones').summernote();
