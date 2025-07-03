@@ -302,7 +302,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       </script>
 
                       <div class="form-group col-md-6">
-                        <label>Selecciona colores:</label>
+                        <label>Selecciona colores: <button type="button" class="btn btn-success" onclick="agregarColor()">+</button></label>
                         <div id="color-picker-container">
                           <?php
                           $colores = Productos_Especificaciones::Select([
@@ -314,22 +314,15 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           if (!empty($colores)) {
                             $numC = 1;
                             foreach ($colores as $color) {
-                              $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
                               <div class="row mb-2">
                                 <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
-                                <div class="col-md-2"><?= $btn ?></div>
+                                <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                               </div>
                             <?php
                               $numC++;
                             }
-                          } else {
-                            ?>
-                            <div class="row mb-2">
-                              <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="#000000"></div>
-                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarColor()">+</button></div>
-                            </div>
-                          <?php } ?>
+                          } ?>
                         </div>
                       </div>
 

@@ -250,13 +250,8 @@ include(RUTA_PROYECTO . "includes/head.php");
                     </script>
 
                     <div class="form-group col-md-6">
-                      <label>Selecciona colores:</label>
-                      <div id="color-picker-container">
-                        <div class="row mb-2">
-                          <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control"></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarColor()">+</button></div>
-                        </div>
-                      </div>
+                      <label>Selecciona colores: <button type="button" class="btn btn-success" onclick="agregarColor()">+</button></label>
+                      <div id="color-picker-container"></div>
                     </div>
 
                     <div class="form-group col-md-6">
