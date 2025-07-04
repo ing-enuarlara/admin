@@ -50,6 +50,14 @@ if (!empty($_POST['especificaciones_colores'])) {
             ]
         );
     }
+} else {
+    Productos_Especificaciones::Delete(
+        [
+            'cpt_id_producto' => $_POST["id"],
+            'cpt_tech_prin' => NO,
+            'cpt_tipo' => 'COLOR'
+        ]
+    );
 }
 
 // 2. Tallas
@@ -76,6 +84,13 @@ if (!empty($_POST['tallas'])) {
         $totalStock = array_sum(array_map('intval', $_POST['stocks']));
         Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $_POST["id"]]);
     }
+} else {
+    Productos_Tallas::Delete(
+        [
+            'cpta_producto' => $_POST["id"],
+            'cpta_prin' => NO
+        ]
+    );
 }
 
 // 3. Otras
@@ -102,6 +117,14 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
             );
         }
     }
+} else {
+    Productos_Especificaciones::Delete(
+        [
+            'cpt_id_producto' => $_POST["id"],
+            'cpt_tech_prin' => NO,
+            'cpt_tipo' => 'OTRO'
+        ]
+    );
 }
 
 if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empty($_POST['urlProducto']))) {
