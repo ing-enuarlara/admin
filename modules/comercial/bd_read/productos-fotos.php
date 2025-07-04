@@ -81,7 +81,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                             <div class="row">
                                 <?php
                                 try {
-                                    $consultaFotos = $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='" . $_GET["id"] . "'");
+                                    $consultaFotos = $conexionBdComercial->query("SELECT * FROM comercial_productos_fotos WHERE cpf_id_producto='" . $_GET["id"] . "' AND cpf_fotos_prin = '" . NO . "'");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
                                 }

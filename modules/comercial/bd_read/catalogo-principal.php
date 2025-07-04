@@ -92,7 +92,7 @@ if (!empty($_GET['search'])) {
                             <h2 class="m-0 float-sm-right"><?= $paginaActual['pag_nombre'] ?></h2>
                             <a href="catalogo-principal-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Articulos</a>
                             <a href="catalogo-principal-importar.php" class="btn btn-warning"><i class="fas fa-download"></i> Importar Articulos</a>
-                            <a href="catalogo-principal-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a>
+                            <!-- <a href="catalogo-principal-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a> -->
                             <a href="catalogo-principal-importar-especificacioines.php" class="btn btn-success"><i class="fas fa-download"></i> Importar Especificaciones</a>
                         </div>
                         <!-- /.card-header -->

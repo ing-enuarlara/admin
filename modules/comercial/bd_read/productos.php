@@ -93,7 +93,7 @@ $filtro = implode(" AND ", $filtros);
                             <h2 class="m-0 float-sm-right"><?= $paginaActual['pag_nombre'] ?></h2>
                             <a href="productos-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Productos</a>
                             <a href="productos-importar.php" class="btn btn-warning"><i class="fas fa-download"></i> Importar Productos</a>
-                            <a href="productos-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a>
+                            <!-- <a href="productos-importar-fotos.php" class="btn btn-info"><i class="fas fa-download"></i> Importar Fotos</a> -->
                             <a href="productos-importar-especificacioines.php" class="btn btn-success"><i class="fas fa-download"></i> Importar Especificaciones</a>
                         </div>
                         <!-- /.card-header -->
