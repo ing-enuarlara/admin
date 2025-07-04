@@ -6,7 +6,7 @@ $idPagina = 70;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 
-$mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener entre 8 y 20 caracteres.<br>- Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+$mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una mayúscula, una minúscula,<br> un número y un símbolo como @#$%&*.!?_-';
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -68,7 +68,7 @@ $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener ent
 
     function validarClave(enviada) {
         var clave = enviada.value;
-        var regex = /^[A-Za-z0-9.$*]{8,20}$/;
+        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*.!?_-])[A-Za-z\d@#$%&*.!?_-]{8,20}$/;
 
         if (regex.test(clave)) {
             document.getElementById("respuestaClave").style.color = 'green';

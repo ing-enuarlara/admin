@@ -173,7 +173,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 
                       function validarClave(enviada) {
                         var clave = enviada.value;
-                        var regex = /^[A-Za-z0-9.$*]{8,20}$/;
+                        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*.!?_-])[A-Za-z\d@#$%&*.!?_-]{8,20}$/;
 
                         if (regex.test(clave)) {
                           document.getElementById("respuestaClave").style.color = 'green';
@@ -182,7 +182,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                           $("#respuestaClave").html('Contraseña correcta');
                         } else {
                           <?php
-                          $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener entre 8 y 20 caracteres.<br>- Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+                            $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una mayúscula, una minúscula,<br> un número y un símbolo como @#$%&*.!?_-';
                           ?>
                           document.getElementById("respuestaClave").style.color = 'red';
                           document.getElementById("respuestaClave").style.display = 'block';

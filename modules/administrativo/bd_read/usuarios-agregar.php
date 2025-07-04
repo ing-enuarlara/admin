@@ -68,7 +68,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                            <form class="form-horizontal" method="post" action="../bd_create/usuarios-guardar.php" enctype="multipart/form-data">
+                <form class="form-horizontal" method="post" action="../bd_create/usuarios-guardar.php" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="form-group col-md-4">
                       <label>Tipo Usuario:</label>
@@ -76,13 +76,13 @@ include(RUTA_PROYECTO . "includes/head.php");
                         <option value=""></option>
                         <?php
                         $where = "";
-                        if ($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV) {
+                        if ($_SESSION["datosUsuarioActual"]['usr_tipo'] != DEV) {
                           $where = "WHERE utipo_id!=1";
                         }
-                        try{
+                        try {
                           $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles $where");
                         } catch (Exception $e) {
-                          include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                          include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
                         }
                         while ($resOp = mysqli_fetch_array($ussTipo, MYSQLI_BOTH)) {
                         ?>
@@ -92,7 +92,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                     </div>
 
                     <?php
-                    $mensaje = 'La clave no cumple con todos los requerimientos:<br>- Debe tener entre 8 y 20 caracteres.<br>- Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+                    $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una mayúscula, una minúscula,<br> un número y un símbolo como @#$%&*.!?_-';
                     ?>
 
                     <script>
@@ -108,7 +108,7 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                       function validarClave(enviada) {
                         var clave = enviada.value;
-                        var regex = /^[A-Za-z0-9.$*]{8,20}$/;
+                        var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&*.!?_-])[A-Za-z\d@#$%&*.!?_-]{8,20}$/;
 
                         if (regex.test(clave)) {
                           document.getElementById("respuestaClave").style.color = 'green';

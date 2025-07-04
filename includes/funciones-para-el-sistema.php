@@ -12,8 +12,8 @@ function subirArchivosAlServidor($archivoCargado, $prefijo, $destino)
 
 function validarClave($clave)
 {
-	$regex = "/^[a-zA-Z0-9\.\*]{8,20}$/";
-	return preg_match($regex, $clave);
+    $regex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\@\#\$\%\&\*\.\!\?\-\_])[A-Za-z\d\@\#\$\%\&\*\.\!\?\-\_]{8,20}$/";
+    return preg_match($regex, $clave);
 }
 
 function generarCodigo($longitud = 10)

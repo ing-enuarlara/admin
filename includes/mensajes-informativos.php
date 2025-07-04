@@ -99,7 +99,11 @@ if(!empty($_GET['success']) || !empty($_GET['info']) || !empty($_GET['warning'])
             case 'ER_2':
                 $mensaje = 'La clave no cumple con todos los requerimientos:<br>
                             - Debe tener entre 8 y 20 caracteres.<br>
-                            - Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).';
+                            - Solo se admiten caracteres de la a-z, A-Z, números(0-9) y los siguientes simbolos(. y $).<br>
+                            - Al menos una letra minúscula.<br>
+                            - Al menos una letra mayúscula.<br>
+                            - Al menos un número.<br>
+                            - Al menos un símbolo especial entre: @ # $ % & * . ! ? - _.';
             break;
 
             case 'ER_3':

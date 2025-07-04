@@ -47,7 +47,7 @@
     
         $validarClave=validarClave($_POST["clave"]);
         if($validarClave!=true){
-            echo '<script type="text/javascript">window.location.href="../bd_read/usuarios-editar.php?error=ER_2";</script>';
+            echo '<script type="text/javascript">window.location.href="../bd_read/usuarios-editar.php?id='.$_POST["id"].'&error=ER_2";</script>';
             exit();
         }
 
