@@ -119,6 +119,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                     $nomCategoria = mysqli_fetch_array($categoria, MYSQLI_BOTH);
 
                                     $texto = htmlspecialchars(strip_tags($result['blogs_contenido']));
+                                    $palabrasClaves = htmlspecialchars(strip_tags($result['blogs_palabras_claves']));
                                 ?>
                                 <tr>
                                     <td><?=$num;?></td>
@@ -130,7 +131,12 @@ include(RUTA_PROYECTO."includes/head.php");
                                         <?=substr($texto, 0, 100)?>...
                                     </td>
                                     <td><?=$nomCategoria['catblo_nombre'];?></td>
-                                    <td><?=$result['blogs_palabras_claves'];?></td>
+                                    <td title="<?=$palabrasClaves;?>"
+                                        data-observacion="<?=$palabrasClaves;?>"
+                                        onclick="toggleFullText(this)"
+                                        style="cursor: pointer;">
+                                        <?=substr($palabrasClaves, 0, 100)?>...
+                                    </td>
                                     <td><?=$nomResponsable['usr_nombre'];?></td>
                                     <td><?= date('d/m/Y H:i', strtotime($result['blogs_fecha_creacion'])); ?></td>
                                     <?php
