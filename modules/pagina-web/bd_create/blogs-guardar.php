@@ -5,7 +5,7 @@
     include(RUTA_PROYECTO."includes/verificar-paginas.php");
 
     try{
-        $conexionBdPaginaWeb->query("INSERT INTO blogs(blogs_titulo, blogs_contenido, blogs_palabras_claves, blogs_responsable, blogs_id_categoria, blogs_fecha_creacion, blogs_id_empresa)VALUES('" . $_POST["titulo"] . "', '" . $_POST["contenido"] . "', '" . $_POST["pClaves"] . "', '" . $_SESSION["datosUsuarioActual"]['usr_id'] . "', '" . $_POST["categoria"] . "', '" . $_POST["fecha"] . "', '".$_SESSION["idEmpresa"]."')");
+        $conexionBdPaginaWeb->query("INSERT INTO blogs(blogs_titulo, blogs_contenido, blogs_palabras_claves, blogs_responsable, blogs_id_categoria, blogs_fecha_creacion, blogs_id_empresa)VALUES('" . mysqli_real_escape_string($conexionBdPaginaWeb, $_POST["titulo"]) . "', '" . mysqli_real_escape_string($conexionBdPaginaWeb, $_POST["contenido"]) . "', '" . $_POST["pClaves"] . "', '" . $_SESSION["datosUsuarioActual"]['usr_id'] . "', '" . $_POST["categoria"] . "', '" . $_POST["fecha"] . "', '".$_SESSION["idEmpresa"]."')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
