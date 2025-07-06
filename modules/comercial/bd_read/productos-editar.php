@@ -114,31 +114,165 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         <label for="exampleInputEmail1">Url de la Imagen:</label>
                         <input type="text" class="form-control" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
                       </div>
+
                       <div class="form-group col-md-6">
                         <label for="exampleInputEmail1">Nombre:</label>
                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?= $resultadoD['cprod_nombre']; ?>">
                       </div>
-                      <div class="form-group col-md-6">
-                        <label for="exampleInputEmail1">Referencia:</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref" value="<?= !empty($resultadoD['cprod_cod_ref']) ? $resultadoD['cprod_cod_ref'] : $resultadoD['cprod_id']; ?>">
-                      </div>
+
                       <div class="form-group col-md-2">
                         <label for="exampleInputEmail1">Precio:</label>
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>">
                       </div>
+
                       <div class="form-group col-md-2">
-                        <label for="exampleInputEmail1">
-                          Existencia:
-                          <span
-                            tabindex="0"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Si vas a usar tallas con stock individual, este campo se calculará automáticamente.">
-                            <i class="fa fa-question-circle text-info"></i>
-                          </span>
-                        </label>
+                        <label for="exampleInputEmail1">Referencia:</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref" value="<?= !empty($resultadoD['cprod_cod_ref']) ? $resultadoD['cprod_cod_ref'] : $resultadoD['cprod_id']; ?>">
+                      </div>
+
+                      <div class="form-group col-md-2">
+                        <label for="exampleInputEmail1">Existencia:</label>
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia" value="<?= $resultadoD['cprod_exitencia']; ?>">
                       </div>
+
+                    <div class="form-group col-md-11">
+                      <label for="prodVariacion">
+                        Producto con variación?
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si vas a usar variación del producto, como stockage por talla o color, o diferentes colores por tallas, puedes activar este checkbox.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
+                      <?php
+                      $variaciones = Productos_Tallas::Select([
+                        'cpta_producto' => $resultadoD['cprod_id'],
+                        'cpta_prin' => NO
+                      ])->fetchAll(PDO::FETCH_ASSOC);
+                      $check = (!empty($variaciones) && count(array_filter($variaciones))) ? "checked" : "";
+                      ?>
+                      <div class="input-group">
+                          <label class="switchToggle">
+                            <input type="checkbox" name="prodVariacion" id="prodVariacion" <?= $check; ?> onchange="habilitarVariacion()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <span class="slider red round"></span>
+                          </label>
+                      </div>
+                    </div>
+
+                      <div class="form-group col-md-6" id="variacion" style="display:none;">
+                        <label>Variaciones disponibles:</label>
+                        <div id="tallas-container">
+                          <?php
+                          if (!empty($variaciones) && count(array_filter($variaciones))) {
+                            $numT = 1;
+                            foreach ($variaciones as $variacion) {
+                              $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
+                          ?>
+                              <div class="row mb-2">
+                                <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $variacion['cpta_talla'] ?? '' ?>" /></div>
+                                <div class="col-md-4">
+                                  <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
+                                    <option value="">Selecciona un color</option>
+                                    <option value="#000000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000000' ? 'selected' : '' ?> >Negro</option>
+                                    <option value="#1C1C1C" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#1C1C1C' ? 'selected' : '' ?> >Negro carbón</option>
+                                    <option value="#2F4F4F" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#2F4F4F' ? 'selected' : '' ?> >Gris oscuro</option>
+                                    <option value="#696969" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#696969' ? 'selected' : '' ?> >Gris</option>
+                                    <option value="#D3D3D3" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#D3D3D3' ? 'selected' : '' ?> >Gris claro</option>
+                                    <option value="#FFFFFF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFFFF' ? 'selected' : '' ?> >Blanco</option>
+                                    <option value="#FF0000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF0000' ? 'selected' : '' ?> >Rojo</option>
+                                    <option value="#800000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#800000' ? 'selected' : '' ?> >Rojo oscuro</option>
+                                    <option value="#DC143C" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DC143C' ? 'selected' : '' ?> >Carmesí</option>
+                                    <option value="#FF6347" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF6347' ? 'selected' : '' ?> >Tomate</option>
+                                    <option value="#FFA500" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFA500' ? 'selected' : '' ?> >Naranja</option>
+                                    <option value="#FF8C00" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF8C00' ? 'selected' : '' ?> >Naranja oscuro</option>
+                                    <option value="#FFD700" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFD700' ? 'selected' : '' ?> >Dorado</option>
+                                    <option value="#FFFF00" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFF00' ? 'selected' : '' ?> >Amarillo</option>
+                                    <option value="#FFFACD" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFACD' ? 'selected' : '' ?> >Amarillo pálido</option>
+                                    <option value="#008000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#008000' ? 'selected' : '' ?> >Verde</option>
+                                    <option value="#006400" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#006400' ? 'selected' : '' ?> >Verde oscuro</option>
+                                    <option value="#90EE90" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#90EE90' ? 'selected' : '' ?> >Verde claro</option>
+                                    <option value="#00FF7F" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#00FF7F' ? 'selected' : '' ?> >Verde primavera</option>
+                                    <option value="#00FFFF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#00FFFF' ? 'selected' : '' ?> >Cian</option>
+                                    <option value="#40E0D0" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#40E0D0' ? 'selected' : '' ?> >Turquesa</option>
+                                    <option value="#20B2AA" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#20B2AA' ? 'selected' : '' ?> >Verde azulado</option>
+                                    <option value="#0000FF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#0000FF' ? 'selected' : '' ?> >Azul</option>
+                                    <option value="#000080" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000080' ? 'selected' : '' ?> >Azul marino</option>
+                                    <option value="#4682B4" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#4682B4' ? 'selected' : '' ?> >Azul acero</option>
+                                    <option value="#87CEFA" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#87CEFA' ? 'selected' : '' ?> >Azul cielo</option>
+                                    <option value="#800080" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#800080' ? 'selected' : '' ?> >Morado</option>
+                                    <option value="#8A2BE2" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#8A2BE2' ? 'selected' : '' ?> >Violeta</option>
+                                    <option value="#DA70D6" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DA70D6' ? 'selected' : '' ?> >Orquídea</option>
+                                    <option value="#4B0082" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#4B0082' ? 'selected' : '' ?> >Índigo</option>
+                                    <option value="#A52A2A" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#A52A2A' ? 'selected' : '' ?> >Marrón</option>
+                                    <option value="#8B4513" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#8B4513' ? 'selected' : '' ?> >Marrón madera</option>
+                                    <option value="#D2691E" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#D2691E' ? 'selected' : '' ?> >Chocolate</option>
+                                    <option value="#F5DEB3" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#F5DEB3' ? 'selected' : '' ?> >Beige</option>
+                                    <option value="#FFC0CB" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFC0CB' ? 'selected' : '' ?> >Rosa</option>
+                                    <option value="#FF69B4" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF69B4' ? 'selected' : '' ?> >Rosa fuerte</option>
+                                    <option value="#DB7093" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DB7093' ? 'selected' : '' ?> >Rosa pálido</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" value="<?= $variacion['cpta_stock'] ?? '' ?>" /></div>
+                                <div class="col-md-2"><?= $btn ?></div>
+                              </div>
+                            <?php
+                              $numT++;
+                            }
+                          } else {
+                            ?>
+                            <div class="row mb-2">
+                              <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                              <div class="col-md-4">
+                                <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
+                                  <option value="">Selecciona un color</option>
+                                  <option value="#000000">Negro</option>
+                                  <option value="#1C1C1C">Negro carbón</option>
+                                  <option value="#2F4F4F">Gris oscuro</option>
+                                  <option value="#696969">Gris</option>
+                                  <option value="#D3D3D3">Gris claro</option>
+                                  <option value="#FFFFFF">Blanco</option>
+                                  <option value="#FF0000">Rojo</option>
+                                  <option value="#800000">Rojo oscuro</option>
+                                  <option value="#DC143C">Carmesí</option>
+                                  <option value="#FF6347">Tomate</option>
+                                  <option value="#FFA500">Naranja</option>
+                                  <option value="#FF8C00">Naranja oscuro</option>
+                                  <option value="#FFD700">Dorado</option>
+                                  <option value="#FFFF00">Amarillo</option>
+                                  <option value="#FFFACD">Amarillo pálido</option>
+                                  <option value="#008000">Verde</option>
+                                  <option value="#006400">Verde oscuro</option>
+                                  <option value="#90EE90">Verde claro</option>
+                                  <option value="#00FF7F">Verde primavera</option>
+                                  <option value="#00FFFF">Cian</option>
+                                  <option value="#40E0D0">Turquesa</option>
+                                  <option value="#20B2AA">Verde azulado</option>
+                                  <option value="#0000FF">Azul</option>
+                                  <option value="#000080">Azul marino</option>
+                                  <option value="#4682B4">Azul acero</option>
+                                  <option value="#87CEFA">Azul cielo</option>
+                                  <option value="#800080">Morado</option>
+                                  <option value="#8A2BE2">Violeta</option>
+                                  <option value="#DA70D6">Orquídea</option>
+                                  <option value="#4B0082">Índigo</option>
+                                  <option value="#A52A2A">Marrón</option>
+                                  <option value="#8B4513">Marrón madera</option>
+                                  <option value="#D2691E">Chocolate</option>
+                                  <option value="#F5DEB3">Beige</option>
+                                  <option value="#FFC0CB">Rosa</option>
+                                  <option value="#FF69B4">Rosa fuerte</option>
+                                  <option value="#DB7093">Rosa pálido</option>
+                                </select>
+                              </div>
+                              <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
+                            </div>
+                          <?php } ?>
+                        </div>
+                      </div>
+
                       <div class="form-group col-md-3">
                         <label>Marca:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
@@ -173,6 +307,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           <?php } ?>
                         </select>
                       </div>
+
                       <div class="form-group col-md-6">
                         <label>Categoria:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria" onchange="traerSubCategorias()">
@@ -208,6 +343,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                         </select>
                         <span id="mensaje" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
                       </div>
+
                       <div class="form-group col-md-6" id="subCategoria-container" style="display:none;">
                         <label>Sub-Categoria:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca" id="marca" disabled>
@@ -236,122 +372,26 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           }
                         </script>
                       </div>
+
                       <!-- textarea -->
                       <div class="form-group col-md-6">
                         <label>Detalles</label>
                         <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles" value=""><?= $resultadoD['cprod_detalles']; ?></textarea>
                       </div>
+
                       <div class="form-group col-md-6">
                         <label>Descripción</label>
                         <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""><?= $resultadoD['cprod_especificaciones']; ?></textarea>
                       </div>
+
                       <!-- textarea -->
                       <div class="form-group col-md-6">
                         <label>Palabras Claves</label>
                         <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprod_palabras_claves']; ?></textarea>
                       </div>
 
-                      <hr>
-                      <h5>Especificaciones del Producto</h5>
-
-                      <script type="application/javascript">
-                        function agregarColor() {
-                          const container = document.getElementById("color-picker-container");
-                          const div = document.createElement("div");
-                          div.classList.add("form-group", "row", "mt-2");
-                          div.innerHTML = `
-                          <div class="col-md-6"><input type="color" class="form-control" name="especificaciones_colores[]" value="#000000"></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
-                        `;
-                          container.appendChild(div);
-                        }
-
-                        function agregarTalla() {
-                          const container = document.getElementById("tallas-container");
-                          const div = document.createElement("div");
-                          div.classList.add("form-group", "row", "mt-2");
-                          div.innerHTML = `
-                          <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
-                        `;
-                          container.appendChild(div);
-                        }
-
-                        function agregarOtraEspecificacion() {
-                          const contenedor = document.getElementById("otras-especificaciones-container");
-                          const nuevaFila = document.createElement("div");
-                          nuevaFila.classList.add("row", "mb-2");
-                          nuevaFila.innerHTML = `
-                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
-                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
-                        `;
-                          contenedor.appendChild(nuevaFila);
-                        }
-                      </script>
-
                       <div class="form-group col-md-6">
-                        <label>Selecciona colores: <button type="button" class="btn btn-success" onclick="agregarColor()">+</button></label>
-                        <div id="color-picker-container">
-                          <?php
-                          $colores = Productos_Especificaciones::Select([
-                            'cpt_id_producto' => $resultadoD['cprod_id'],
-                            'cpt_tipo' => 'COLOR',
-                            'cpt_tech_prin' => NO
-                          ])->fetchAll(PDO::FETCH_ASSOC);
-
-                          if (!empty($colores)) {
-                            $numC = 1;
-                            foreach ($colores as $color) {
-                              $btn = $numC == 1 ? '<button type="button" class="btn btn-success" onclick="agregarColor()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
-                          ?>
-                              <div class="row mb-2">
-                                <div class="col-md-6"><input type="color" name="especificaciones_colores[]" class="form-control" value="<?= $color['cpt_value'] ?>"></div>
-                                <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
-                              </div>
-                          <?php
-                              $numC++;
-                            }
-                          } ?>
-                        </div>
-                      </div>
-
-                      <div class="form-group col-md-6">
-                        <label>Tallas disponibles:</label>
-                        <div id="tallas-container">
-                          <?php
-                          $tallas = Productos_Tallas::Select([
-                            'cpta_producto' => $resultadoD['cprod_id'],
-                            'cpta_prin' => NO
-                          ])->fetchAll(PDO::FETCH_ASSOC);
-
-                          if (!empty($tallas)) {
-                            $numT = 1;
-                            foreach ($tallas as $talla) {
-                              $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarTalla()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
-                          ?>
-                              <div class="row mb-2">
-                                <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $talla['cpta_talla'] ?>" /></div>
-                                <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" value="<?= $talla['cpta_stock'] ?>" /></div>
-                                <div class="col-md-2"><?= $btn ?></div>
-                              </div>
-                            <?php
-                              $numT++;
-                            }
-                          } else {
-                            ?>
-                            <div class="row mb-2">
-                              <div class="col-md-5"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                              <div class="col-md-5"><input type="number" name="stocks[]" placeholder="Stock (Opcional)" class="form-control" /></div>
-                              <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarTalla()">+</button></div>
-                            </div>
-                          <?php } ?>
-                        </div>
-                      </div>
-
-                      <div class="form-group col-md-6">
-                        <label>Otras especificaciones:</label>
+                        <label>Especificaciones del Producto:</label>
                         <div id="otras-especificaciones-container">
                           <?php
                           $otras = Productos_Especificaciones::Select([
@@ -383,6 +423,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           <?php } ?>
                         </div>
                       </div>
+
                       <div class="form-group col-md-3">
                         <label>Estado:</label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="estado">
@@ -453,7 +494,136 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
   <!-- Summernote -->
   <script src="<?= REDIRECT_ROUTE ?>plugins/summernote/summernote-bs4.min.js"></script>
   <!-- Page specific script -->
-  <script>
+  <script type="application/javascript">
+    
+    function habilitarVariacion() {
+      var prodVariacion = document.getElementById("prodVariacion");
+      var variacion = document.getElementById("variacion");
+      const tallasContainer = document.getElementById("tallas-container");
+
+      if (prodVariacion.checked) {
+        variacion.style.display = "block";
+      } else {
+        variacion.style.display = "none";
+        tallasContainer.innerHTML = `
+        <div class="row mb-2">
+          <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+          <div class="col-md-4">
+            <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
+              <option value="">Selecciona un color</option>
+              <option value="#000000">Negro</option>
+              <option value="#1C1C1C">Negro carbón</option>
+              <option value="#2F4F4F">Gris oscuro</option>
+              <option value="#696969">Gris</option>
+              <option value="#D3D3D3">Gris claro</option>
+              <option value="#FFFFFF">Blanco</option>
+              <option value="#FF0000">Rojo</option>
+              <option value="#800000">Rojo oscuro</option>
+              <option value="#DC143C">Carmesí</option>
+              <option value="#FF6347">Tomate</option>
+              <option value="#FFA500">Naranja</option>
+              <option value="#FF8C00">Naranja oscuro</option>
+              <option value="#FFD700">Dorado</option>
+              <option value="#FFFF00">Amarillo</option>
+              <option value="#FFFACD">Amarillo pálido</option>
+              <option value="#008000">Verde</option>
+              <option value="#006400">Verde oscuro</option>
+              <option value="#90EE90">Verde claro</option>
+              <option value="#00FF7F">Verde primavera</option>
+              <option value="#00FFFF">Cian</option>
+              <option value="#40E0D0">Turquesa</option>
+              <option value="#20B2AA">Verde azulado</option>
+              <option value="#0000FF">Azul</option>
+              <option value="#000080">Azul marino</option>
+              <option value="#4682B4">Azul acero</option>
+              <option value="#87CEFA">Azul cielo</option>
+              <option value="#800080">Morado</option>
+              <option value="#8A2BE2">Violeta</option>
+              <option value="#DA70D6">Orquídea</option>
+              <option value="#4B0082">Índigo</option>
+              <option value="#A52A2A">Marrón</option>
+              <option value="#8B4513">Marrón madera</option>
+              <option value="#D2691E">Chocolate</option>
+              <option value="#F5DEB3">Beige</option>
+              <option value="#FFC0CB">Rosa</option>
+              <option value="#FF69B4">Rosa fuerte</option>
+              <option value="#DB7093">Rosa pálido</option>
+            </select>
+          </div>
+          <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
+        </div>`;
+      }
+      $('.select2').select2()
+    }
+    
+    function agregarVariacion() {
+      const container = document.getElementById("tallas-container");
+      const div = document.createElement("div");
+      div.classList.add("form-group", "row", "mt-2");
+      div.innerHTML = `
+                          <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-4">
+                            <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
+                              <option value="">Selecciona un color</option>
+                              <option value="#000000">Negro</option>
+                              <option value="#1C1C1C">Negro carbón</option>
+                              <option value="#2F4F4F">Gris oscuro</option>
+                              <option value="#696969">Gris</option>
+                              <option value="#D3D3D3">Gris claro</option>
+                              <option value="#FFFFFF">Blanco</option>
+                              <option value="#FF0000">Rojo</option>
+                              <option value="#800000">Rojo oscuro</option>
+                              <option value="#DC143C">Carmesí</option>
+                              <option value="#FF6347">Tomate</option>
+                              <option value="#FFA500">Naranja</option>
+                              <option value="#FF8C00">Naranja oscuro</option>
+                              <option value="#FFD700">Dorado</option>
+                              <option value="#FFFF00">Amarillo</option>
+                              <option value="#FFFACD">Amarillo pálido</option>
+                              <option value="#008000">Verde</option>
+                              <option value="#006400">Verde oscuro</option>
+                              <option value="#90EE90">Verde claro</option>
+                              <option value="#00FF7F">Verde primavera</option>
+                              <option value="#00FFFF">Cian</option>
+                              <option value="#40E0D0">Turquesa</option>
+                              <option value="#20B2AA">Verde azulado</option>
+                              <option value="#0000FF">Azul</option>
+                              <option value="#000080">Azul marino</option>
+                              <option value="#4682B4">Azul acero</option>
+                              <option value="#87CEFA">Azul cielo</option>
+                              <option value="#800080">Morado</option>
+                              <option value="#8A2BE2">Violeta</option>
+                              <option value="#DA70D6">Orquídea</option>
+                              <option value="#4B0082">Índigo</option>
+                              <option value="#A52A2A">Marrón</option>
+                              <option value="#8B4513">Marrón madera</option>
+                              <option value="#D2691E">Chocolate</option>
+                              <option value="#F5DEB3">Beige</option>
+                              <option value="#FFC0CB">Rosa</option>
+                              <option value="#FF69B4">Rosa fuerte</option>
+                              <option value="#DB7093">Rosa pálido</option>
+                            </select>
+                          </div>
+                          <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+      container.appendChild(div);
+      $('.select2').select2()
+    }
+
+    function agregarOtraEspecificacion() {
+      const contenedor = document.getElementById("otras-especificaciones-container");
+      const nuevaFila = document.createElement("div");
+      nuevaFila.classList.add("row", "mb-2");
+      nuevaFila.innerHTML = `
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Etiqueta" name="otras_labels[]"></div>
+                          <div class="col-md-5"><input type="text" class="form-control" placeholder="Valor" name="otras_values[]"></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                        `;
+      contenedor.appendChild(nuevaFila);
+    }
+
     function cargarImagen(tipo) {
       if (tipo.value == '<?= TIPO_IMG ?>') {
         var urlImg = document.getElementById('urlImg');

@@ -31,69 +31,44 @@ Productos::Update(
     ['cprod_id' => $_POST["id"]]
 );
 
-// 1. Colores
-if (!empty($_POST['especificaciones_colores'])) {
-    Productos_Especificaciones::Delete(
-        [
-            'cpt_id_producto' => $_POST["id"],
-            'cpt_tech_prin' => NO,
-            'cpt_tipo' => 'COLOR'
-        ]
-    );
-    foreach ($_POST['especificaciones_colores'] as $color) {
-        Productos_Especificaciones::Insert(
-            [
-                'cpt_value' => $color,
-                'cpt_id_producto' => $_POST["id"],
-                'cpt_id_empresa' => $_SESSION["idEmpresa"],
-                'cpt_tipo' => 'COLOR'
-            ]
-        );
+// 1. Tallas
+Productos_Tallas::Delete([
+    'cpta_producto' => $_POST["id"],
+    'cpta_prin' => NO
+]);
+$maxLength = max(
+    count($_POST['tallas'] ?? []),
+    count($_POST['colores'] ?? []),
+    count($_POST['stocks'] ?? [])
+);
+$totalStock = 0;
+for ($i = 0; $i < $maxLength; $i++) {
+    $talla = isset($_POST['tallas'][$i]) ? trim($_POST['tallas'][$i]) : '';
+    $color = isset($_POST['colores'][$i]) ? trim($_POST['colores'][$i]) : '';
+    $stock = isset($_POST['stocks'][$i]) ? max(0, intval($_POST['stocks'][$i])) : 0;
+
+    // Si los tres están vacíos, omitir esta fila
+    if (empty($talla) && empty($color) && $stock === 0) {
+        continue;
     }
-} else {
-    Productos_Especificaciones::Delete(
-        [
-            'cpt_id_producto' => $_POST["id"],
-            'cpt_tech_prin' => NO,
-            'cpt_tipo' => 'COLOR'
-        ]
-    );
+
+    // Insertar
+    Productos_Tallas::Insert([
+        'cpta_talla' => $talla,
+        'cpta_color' => $color,
+        'cpta_stock' => $stock,
+        'cpta_producto' => $_POST["id"],
+        'cpta_empresa' => $_SESSION["idEmpresa"]
+    ]);
+
+    $totalStock += $stock;
+}
+// Actualizar existencia solo si totalStock > 0
+if ($totalStock > 0) {
+    Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $_POST["id"]]);
 }
 
-// 2. Tallas
-if (!empty($_POST['tallas'])) {
-    Productos_Tallas::Delete(
-        [
-            'cpta_producto' => $_POST["id"],
-            'cpta_prin' => NO
-        ]
-    );
-    for ($i = 0; $i < count($_POST['tallas']); $i++) {
-        $talla = trim($_POST['tallas'][$i]);
-        $stock = max(0, intval($_POST['stocks'][$i]));
-        if (!empty($talla) && !empty($stock)) {
-            Productos_Tallas::Insert([
-                'cpta_talla' => $talla,
-                'cpta_stock' => $stock,
-                'cpta_producto' => $_POST["id"],
-                'cpta_empresa' => $_SESSION["idEmpresa"]
-            ]);
-        }
-    }
-    if (!empty($_POST['stocks'])) {
-        $totalStock = array_sum(array_map('intval', $_POST['stocks']));
-        Productos::Update(['cprod_exitencia' => $totalStock], ['cprod_id' => $_POST["id"]]);
-    }
-} else {
-    Productos_Tallas::Delete(
-        [
-            'cpta_producto' => $_POST["id"],
-            'cpta_prin' => NO
-        ]
-    );
-}
-
-// 3. Otras
+// 2. Otras
 if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
     Productos_Especificaciones::Delete(
         [

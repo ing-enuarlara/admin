@@ -6,7 +6,7 @@ require_once RUTA_PROYECTO.'/class/Tables/BDT_JoinImplements.php';
 class Productos_Tallas extends BDT_Tablas implements BDT_JoinImplements {
     public static $schema = BDMODCOMERCIAL;
 
-    public static $tableName = 'comercial_productos_tallas';
+    public static $tableName = 'comercial_tallas_color_stock';
 
     public static $primaryKey = 'cpta_id';
 
