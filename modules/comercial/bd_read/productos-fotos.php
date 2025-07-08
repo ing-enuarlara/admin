@@ -5,6 +5,7 @@ $idPagina = 56;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
+require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
 
 try {
     $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos WHERE cprod_id='" . $_GET["id"] . "'");
@@ -12,6 +13,19 @@ try {
     include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
 }
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
+
+$coloresVariacion = Productos_Tallas::Select(
+    [
+        'cpta_producto' => $resultadoD['cprod_id'],
+        'cpta_prin' => NO
+    ], "cpta_color"
+)->fetchAll(PDO::FETCH_ASSOC);
+$colores = [];
+foreach ($coloresVariacion as $color) {
+    if (!in_array($color['cpta_color'], $colores)) {
+        $colores[] = $color['cpta_color'];
+    }
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -126,6 +140,17 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <?php if (!empty($colores) && count(array_filter($colores))) { ?>
+                                    <div class="form-group col-md-12">
+                                        <label for="exampleInputEmail1">Relacionar con color:</label>
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="color" id="color">
+                                            <option value="">Para el Producto General</option>
+                                            <?php foreach ($colores as $color) { ?>
+                                                <option value="<?= $color ?>" ><?= $coloresBases[$color]; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                <?php } ?>
                                 <div class="form-group col-md-12">
                                     <label for="exampleInputEmail1">Tipo de Imagen:</label>
                                     <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">

@@ -37,7 +37,8 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !e
                 'cpf_fotos' => $fileName,
                 'cpf_id_empresa' => $_SESSION["idEmpresa"],
                 'cpf_tipo' => $_POST['tipoImg'],
-                'cpf_principal' => $esPrimera && $i === 0 ? 1 : 0
+                'cpf_principal' => $esPrimera && $i === 0 ? 1 : 0,
+                'cpf_color' => $_POST['color'] ?? NULL
             ]);
         } catch (Exception $e) {
             include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
