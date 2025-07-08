@@ -129,6 +129,7 @@ $filtro = implode(" AND ", $filtros);
                                     require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
                                     require_once(RUTA_PROYECTO . 'class/Categorias.php');
                                     require_once(RUTA_PROYECTO . 'class/SubCategorias.php');
+                                    require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
                                     require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
                                     require_once(RUTA_PROYECTO . 'class/ApiSiniwin.php');
 
