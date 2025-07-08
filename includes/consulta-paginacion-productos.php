@@ -6,11 +6,13 @@ if (empty($_REQUEST["nume"])) {
 
 $productosBD = Productos::SelectJoin(
     $predicado,
-    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre",
+    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
     [
         Categorias::class,
         SubCategorias::class
-    ]
+    ],
+    "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
+    "cprod_id"
 );
 
 $productosSiniwin = [];
@@ -71,8 +73,9 @@ $productosFiltrados = array_filter($productosSinPaginar, function ($producto) {
         $marca = (string)($producto['cmar_nombre'] ?? '');
         $nombre = (string)($producto['cprod_nombre'] ?? '');
         $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
+        $referencias = (string)($producto['cprod_referencias'] ?? '');
         $search = $_REQUEST['search'];
-        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($categoria, $search) === false && stripos($marca, $search) === false) {
+        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($categoria, $search) === false && stripos($marca, $search) === false && stripos($referencias, $search)) {
             return false;
         }
     }

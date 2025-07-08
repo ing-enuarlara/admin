@@ -96,7 +96,16 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       </div>
 
                       <div class="form-group col-md-6">
-                        <label for="exampleInputEmail1">Tipo de Imagen:</label>
+                        <label for="exampleInputEmail1">
+                          Tipo de Imagen:
+                          <span
+                            tabindex="0"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="SI vas a subir la imagen directo de tu ordenador, escoge 'Imagen' o si vas a colocar una imagen que esta en la web, escoge 'Url'.">
+                            <i class="fa fa-question-circle text-info"></i>
+                          </span>
+                        </label>
                         <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
                           <option value=""></option>
                           <option value="<?= TIPO_IMG ?>" <?= $resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : ""; ?>>Imagen</option>
@@ -126,12 +135,30 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="exampleInputEmail1">Referencia:</label>
+                        <label for="exampleInputEmail1">
+                          Referencia:
+                          <span
+                            tabindex="0"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="En la variación del producto, puedes tambien manejar referencia para cada variación del producto.">
+                            <i class="fa fa-question-circle text-info"></i>
+                          </span>
+                        </label>
                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref" value="<?= !empty($resultadoD['cprod_cod_ref']) ? $resultadoD['cprod_cod_ref'] : $resultadoD['cprod_id']; ?>">
                       </div>
 
                       <div class="form-group col-md-2">
-                        <label for="exampleInputEmail1">Existencia:</label>
+                        <label for="exampleInputEmail1">
+                          Existencia:
+                          <span
+                            tabindex="0"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Si vas a usar variación del producto, puedes dejar este campo vacio y colocar por cada variación su stock y esta existencia total la calculara el sistema.">
+                            <i class="fa fa-question-circle text-info"></i>
+                          </span>
+                        </label>
                         <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia" value="<?= $resultadoD['cprod_exitencia']; ?>">
                       </div>
 
@@ -171,8 +198,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                               $btn = $numT == 1 ? '<button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button>' : '<button type="button" class="btn btn-danger" onclick="this.closest(\'.row\').remove()">-</button>';
                           ?>
                               <div class="row mb-2">
-                                <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $variacion['cpta_talla'] ?? '' ?>" /></div>
-                                <div class="col-md-4">
+                                <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $variacion['cpta_talla'] ?? '' ?>" /></div>
+                                <div class="col-md-3">
                                   <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                                     <option value="">Selecciona un color</option>
                                     <option value="#000000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000000' ? 'selected' : '' ?> >Negro</option>
@@ -214,7 +241,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                                     <option value="#DB7093" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DB7093' ? 'selected' : '' ?> >Rosa pálido</option>
                                   </select>
                                 </div>
-                                <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" value="<?= $variacion['cpta_stock'] ?? '' ?>" /></div>
+                                <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" value="<?= $variacion['cpta_stock'] ?? '' ?>" /></div>
+                                <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" value="<?= $variacion['cpta_referencia'] ?? '' ?>" /></div>
                                 <div class="col-md-2"><?= $btn ?></div>
                               </div>
                             <?php
@@ -223,8 +251,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           } else {
                             ?>
                             <div class="row mb-2">
-                              <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                              <div class="col-md-4">
+                              <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                              <div class="col-md-3">
                                 <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                                   <option value="">Selecciona un color</option>
                                   <option value="#000000">Negro</option>
@@ -266,7 +294,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                                   <option value="#DB7093">Rosa pálido</option>
                                 </select>
                               </div>
-                              <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                              <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                              <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
                               <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
                             </div>
                           <?php } ?>
@@ -507,8 +536,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
         variacion.style.display = "none";
         tallasContainer.innerHTML = `
         <div class="row mb-2">
-          <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-          <div class="col-md-4">
+          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+          <div class="col-md-3">
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
@@ -550,7 +579,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
               <option value="#DB7093">Rosa pálido</option>
             </select>
           </div>
-          <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
           <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
         </div>`;
       }
@@ -562,8 +592,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
       const div = document.createElement("div");
       div.classList.add("form-group", "row", "mt-2");
       div.innerHTML = `
-                          <div class="col-md-3"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-4">
+                          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-3">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -605,7 +635,8 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                               <option value="#DB7093">Rosa pálido</option>
                             </select>
                           </div>
-                          <div class="col-md-3"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
       container.appendChild(div);

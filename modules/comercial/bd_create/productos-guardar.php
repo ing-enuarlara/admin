@@ -32,16 +32,18 @@ $idInsertU = Productos::Insert([
 $maxLength = max(
     count($_POST['tallas'] ?? []),
     count($_POST['colores'] ?? []),
-    count($_POST['stocks'] ?? [])
+    count($_POST['stocks'] ?? []),
+    count($_POST['referencias'] ?? [])
 );
 $totalStock = 0;
 for ($i = 0; $i < $maxLength; $i++) {
     $talla = isset($_POST['tallas'][$i]) ? trim($_POST['tallas'][$i]) : '';
     $color = isset($_POST['colores'][$i]) ? trim($_POST['colores'][$i]) : '';
     $stock = isset($_POST['stocks'][$i]) ? max(0, intval($_POST['stocks'][$i])) : 0;
+    $referencia = isset($_POST['referencias'][$i]) ? trim($_POST['referencias'][$i]) : '';
 
     // Si los tres están vacíos, omitir esta fila
-    if (empty($talla) && empty($color) && $stock === 0) {
+    if (empty($talla) && empty($color) && $stock === 0 && empty($referencias)) {
         continue;
     }
 
@@ -50,6 +52,7 @@ for ($i = 0; $i < $maxLength; $i++) {
         'cpta_talla' => $talla,
         'cpta_color' => $color,
         'cpta_stock' => $stock,
+        'cpta_referencia' => $referencia,
         'cpta_producto' => $idInsertU,
         'cpta_empresa' => $_SESSION["idEmpresa"]
     ]);
