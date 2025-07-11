@@ -64,9 +64,8 @@ $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una m
             }
         });
     }
-    $(document).ready(function() {mostrar(document.getElementById("pais"))});
     function mostrar(data) {
-        if(data.value == "Colombia"){
+        if(data.value === 37){
             document.getElementById("local").style.display = "block";
             document.getElementById("extrangero").style.display = "none";
         }else{
@@ -211,7 +210,7 @@ $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una m
                                         <div class="form-group col-md-11">
                                             <label for="passwordInput">Contraseña:</label>
                                             <div class="input-group">
-                                                <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave" pattern="[A-Za-z0-9]+">
+                                                <input type="password" class="form-control col-md-4" id="passwordInput" onchange="validarClave(this)" placeholder="Ingrese una contraseña" name="clave">
                                                 <div class="input-group-prepend" onclick="cambiarTipoInput()">
                                                     <span class="input-group-text"><i class="fas fa-eye"></i></span>
                                                 </div>
@@ -272,29 +271,22 @@ $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una m
 
                                         <div class="form-group col-md-4">
                                             <label>pais:</label>
-                                            <select data-placeholder="Escoja una opción" class="form-control pais" style="width: 100%;" name="pais" id="pais" onChange="mostrar(this)">
+                                            <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="pais" id="pais" onChange="mostrar(this)">
                                                 <option value=""></option>
                                                 <?php
-                                                $service_url = 'https://restcountries.com/v3.1/all';
-                                                $jsonObject = json_decode(file_get_contents($service_url), true);
-                                                foreach ($jsonObject as $object) {
-                                                    $nombrePais = $object["name"]["common"];
-                                                    $banderaPais = $object["flags"]["png"];
-                                                    $selected = "";
-                                                    if ($resultadoD['cli_pais'] == $nombrePais) {
-                                                        $selected = "selected";
-                                                    }
-                                                ?>
-                                                    <option value="<?= $nombrePais; ?>" data-icon="<?= $banderaPais; ?>" <?= $selected ?>>
-                                                        <?= $nombrePais ?>
-                                                    </option>
-                                                <?php
+                                                try{
+                                                    $consulta = $conexionBdAdmin->query("SELECT * FROM localidad_paises");
+                                                } catch (Exception $e) {
+                                                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
+                                                while ($resOp = mysqli_fetch_array($consulta, MYSQLI_BOTH)) {
                                                 ?>
+                                                    <option value="<?= $resOp['pais_id']; ?>" <?= $resOp['pais_id'] == $resultadoD['cli_pais'] ? 'selected' : ''?> ><?= $resOp['pais_nombre'] ?></option>
+                                                <?php } ?>
                                             </select>
                                         </div>
 
-                                        <div id="local" style="display: block;">
+                                        <div id="local" style="display: none;">
                                             <div class="form-group col-md-4">
                                                 <label>Ciudad:</label>
                                                 <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ciudad">
@@ -317,10 +309,10 @@ $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una m
                                             </div>
                                         </div>
 
-                                        <div id="extrangero" style="display: none;">
+                                        <div id="extrangero" style="display: block;">
                                             <div class="form-group col-md-4">
-                                                <label for="ciudadInput">City:</label>
-                                                <input type="text" class="form-control" id="ciudadInput" placeholder="City" name="ciuExtra" value="<?= $resultadoD['cli_ciudad_extranjera'] ?>">
+                                                <label for="ciudadInput">Ciudad:</label>
+                                                <input type="text" class="form-control" id="ciudadInput" placeholder="Ciudad" name="ciuExtra" value="<?= $resultadoD['cli_ciudad_extranjera'] ?>">
                                             </div>
                                         </div>
 
@@ -405,6 +397,7 @@ $mensaje = 'La contraseña debe tener entre 8 y 20 caracteres,<br> incluir una m
         $(function() {
             bsCustomFileInput.init();
         });
+        $(document).ready(function() {mostrar(document.getElementById("pais"))});
     </script>
     <script>
         $(function() {

@@ -21,10 +21,10 @@ try {
 	<div style="font-family: Consolas; padding: 10px; background-color: black; color:greenyellow;">
 		<strong>ERROR DE EJECUCIÓN</strong><br>
 		Lo sentimos, ha ocurrido un error.<br>
-		Pero no se preocupe, hemos reportado este error automáticamente al personal de soporte de la plataforma SINTIA para que lo solucione lo antes posible.<br>
+		Pero no se preocupe, hemos reportado este error automáticamente al personal de soporte de AdminOCB para que lo solucione lo antes posible.<br>
 		
 		<p>
-			Si necesita ayuda urgente, comuniquese con el personal encargado de la plataforma y reporte los siguientes datos:<br>
+			Si necesita ayuda urgente, comuniquese con el personal encargado del CRM y reporte los siguientes datos:<br>
 			<b>ID del reporte del error:</b> <?=$idReporteError;?>.<br>
 			<b>Número del error:</b> <?=$numError;?>.
 			<?php if($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV){?>

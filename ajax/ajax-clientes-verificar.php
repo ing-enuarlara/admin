@@ -3,7 +3,7 @@ include("../modules/sesion.php");
 
 if($_POST["opcion"]==1){
 	try{
-		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."'");
+		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id_empresa = ".$_SESSION["idEmpresa"]." AND (cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."')");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}
@@ -30,7 +30,7 @@ if($_POST["opcion"]==1){
 
 if($_POST["opcion"]==2){
 	try{
-		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id!='".$_POST["idCliente"]."' AND (cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."')");
+		$consulta=$conexionBdComercial->query("SELECT * FROM comercial_clientes WHERE cli_id!='".$_POST["idCliente"]."' AND cli_id_empresa = ".$_SESSION["idEmpresa"]." AND (cli_usuario='".trim($_POST["usuario"])."' OR cli_documento='".trim($_POST["usuario"])."')");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}

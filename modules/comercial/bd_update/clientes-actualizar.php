@@ -6,13 +6,13 @@
 
     $pais=$_POST["pais"];
     if(empty($_POST["pais"])){
-        $pais="Colombia";
+        $pais=37;
     }
     
     $ciudad=$_POST["ciudad"];
     $city=NULL;
-    if($_POST["pais"]!="Colombia"){
-        $ciudad=1122;
+    if($_POST["pais"]!=37){
+        $ciudad=1121;
         $city=$_POST["ciuExtra"];
     }
 
