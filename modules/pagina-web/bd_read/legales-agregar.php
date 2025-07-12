@@ -80,6 +80,14 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <label for="contenido">Contenido:</label>
                       <textarea name="contenido" id="contenido"></textarea>
                     </div>
+
+                    <div class="form-group col-md-6">
+                      <label for="customFile">Documento:</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="documento">
+                        <label class="custom-file-label" for="customFile">Escoger Documento...</label>
+                      </div>
+                    </div>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">

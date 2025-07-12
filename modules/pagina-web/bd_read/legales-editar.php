@@ -90,6 +90,19 @@ $resultadoD = mysqli_fetch_array($consulta, MYSQLI_BOTH);
                     </div>
 
                     <div class="form-group col-md-6">
+                      <label for="customFile">
+                        Documento:
+                        <?php if(!empty($resultadoD['pal_documento'])){ ?>
+                          <a href="<?= REDIRECT_ROUTE ?>files/documentos/<?= $resultadoD['pal_documento']; ?>" target="_blank">Ver Documento</a>
+                        <?php } ?>
+                      </label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="documento">
+                        <label class="custom-file-label" for="customFile">Escoger Documento...</label>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Ultima Actualización:</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" value="<?= $resultadoD['pal_modificacion']; ?>" readonly>
                     </div>
