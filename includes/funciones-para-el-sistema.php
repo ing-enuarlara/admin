@@ -40,7 +40,7 @@ function validarAccesoModulo($empresa, $modulo)
 
 	global $conexionBdAdmin, $datosUsuarioActual;
 
-	if ($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV) {
+	if ($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV || (!empty($_SESSION['admin']) && ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2))) {
 		return true;
 	}
 
