@@ -4,44 +4,44 @@ if (empty($_REQUEST["nume"])) {
     $_REQUEST["nume"] = 1;
 }
 
-$productosBD = Productos::SelectJoin(
-    $predicado,
-    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
-    [
-        Categorias::class,
-        SubCategorias::class
-    ],
-    "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
-    "cprod_id"
-);
+// $productosBD = Productos::SelectJoin(
+//     $predicado,
+//     "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
+//     [
+//         Categorias::class,
+//         SubCategorias::class
+//     ],
+//     "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
+//     "cprod_id"
+// );
 
 $productosSiniwin = [];
-// if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
-//     $productosApiSiniwin = Api_Siniwin::Productos();
-//     if (!empty($productosApiSiniwin)) {
-//         foreach ($productosApiSiniwin as $productoApiSiniwin) {
+if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
+    $productosApiSiniwin = Api_Siniwin::Productos();
+    if (!empty($productosApiSiniwin)) {
+        foreach ($productosApiSiniwin as $productoApiSiniwin) {
 
-//             $productosSiniwin[] = [
-//                 'cprod_id' => $productoApiSiniwin['ref'],
-//                 'cprod_nombre' => $productoApiSiniwin['denomination'],
-//                 'cprod_exitencia' => $productoApiSiniwin['Stock'] ?? 0,
-//                 'cprod_costo' => $productoApiSiniwin['pvp_iva'] ?? 0,
-//                 'cprod_detalles' => $productoApiSiniwin['observations'] ?? '',
-//                 'cprod_descuento' => 0,
-//                 'cprod_id_empresa' => 3,
-//                 'cprod_estado' => 1,
-//                 'ccat_nombre' => $productoApiSiniwin['family'] ?? '',
-//                 'cmar_nombre' => '',
-//                 'fuente' => 'apiSiniwin',
-//                 'store' => $productoApiSiniwin['store'] ?? ''
-//             ];
-//         }
-//     }
-// }
-
-if (!is_array($productosBD)) {
-    $productosBD = [];
+            $productosSiniwin[] = [
+                'cprod_id' => $productoApiSiniwin['ref'],
+                'cprod_nombre' => $productoApiSiniwin['denomination'],
+                'cprod_exitencia' => $productoApiSiniwin['Stock'] ?? 0,
+                'cprod_costo' => $productoApiSiniwin['pvp_iva'] ?? 0,
+                'cprod_detalles' => $productoApiSiniwin['observations'] ?? '',
+                'cprod_descuento' => 0,
+                'cprod_id_empresa' => 3,
+                'cprod_estado' => 1,
+                'ccat_nombre' => $productoApiSiniwin['family'] ?? '',
+                'cmar_nombre' => '',
+                'fuente' => 'apiSiniwin',
+                'store' => $productoApiSiniwin['store'] ?? ''
+            ];
+        }
+    }
 }
+
+// if (!is_array($productosBD)) {
+    $productosBD = [];
+// }
 if (!is_array($productosSiniwin)) {
     $productosSiniwin = [];
 }
