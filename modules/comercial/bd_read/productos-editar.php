@@ -203,42 +203,19 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                                   <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                                     <option value="">Selecciona un color</option>
                                     <option value="#000000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000000' ? 'selected' : '' ?> >Negro</option>
-                                    <option value="#1C1C1C" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#1C1C1C' ? 'selected' : '' ?> >Negro carbón</option>
-                                    <option value="#2F4F4F" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#2F4F4F' ? 'selected' : '' ?> >Gris oscuro</option>
                                     <option value="#696969" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#696969' ? 'selected' : '' ?> >Gris</option>
-                                    <option value="#D3D3D3" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#D3D3D3' ? 'selected' : '' ?> >Gris claro</option>
                                     <option value="#FFFFFF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFFFF' ? 'selected' : '' ?> >Blanco</option>
                                     <option value="#FF0000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF0000' ? 'selected' : '' ?> >Rojo</option>
-                                    <option value="#800000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#800000' ? 'selected' : '' ?> >Rojo oscuro</option>
-                                    <option value="#DC143C" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DC143C' ? 'selected' : '' ?> >Carmesí</option>
-                                    <option value="#FF6347" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF6347' ? 'selected' : '' ?> >Tomate</option>
                                     <option value="#FFA500" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFA500' ? 'selected' : '' ?> >Naranja</option>
-                                    <option value="#FF8C00" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF8C00' ? 'selected' : '' ?> >Naranja oscuro</option>
-                                    <option value="#FFD700" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFD700' ? 'selected' : '' ?> >Dorado</option>
                                     <option value="#FFFF00" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFF00' ? 'selected' : '' ?> >Amarillo</option>
-                                    <option value="#FFFACD" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFACD' ? 'selected' : '' ?> >Amarillo pálido</option>
                                     <option value="#008000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#008000' ? 'selected' : '' ?> >Verde</option>
-                                    <option value="#006400" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#006400' ? 'selected' : '' ?> >Verde oscuro</option>
-                                    <option value="#90EE90" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#90EE90' ? 'selected' : '' ?> >Verde claro</option>
-                                    <option value="#00FF7F" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#00FF7F' ? 'selected' : '' ?> >Verde primavera</option>
-                                    <option value="#00FFFF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#00FFFF' ? 'selected' : '' ?> >Cian</option>
-                                    <option value="#40E0D0" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#40E0D0' ? 'selected' : '' ?> >Turquesa</option>
-                                    <option value="#20B2AA" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#20B2AA' ? 'selected' : '' ?> >Verde azulado</option>
                                     <option value="#0000FF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#0000FF' ? 'selected' : '' ?> >Azul</option>
-                                    <option value="#000080" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000080' ? 'selected' : '' ?> >Azul marino</option>
-                                    <option value="#4682B4" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#4682B4' ? 'selected' : '' ?> >Azul acero</option>
-                                    <option value="#87CEFA" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#87CEFA' ? 'selected' : '' ?> >Azul cielo</option>
                                     <option value="#800080" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#800080' ? 'selected' : '' ?> >Morado</option>
                                     <option value="#8A2BE2" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#8A2BE2' ? 'selected' : '' ?> >Violeta</option>
-                                    <option value="#DA70D6" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DA70D6' ? 'selected' : '' ?> >Orquídea</option>
-                                    <option value="#4B0082" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#4B0082' ? 'selected' : '' ?> >Índigo</option>
                                     <option value="#A52A2A" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#A52A2A' ? 'selected' : '' ?> >Marrón</option>
-                                    <option value="#8B4513" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#8B4513' ? 'selected' : '' ?> >Marrón madera</option>
                                     <option value="#D2691E" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#D2691E' ? 'selected' : '' ?> >Chocolate</option>
                                     <option value="#F5DEB3" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#F5DEB3' ? 'selected' : '' ?> >Beige</option>
                                     <option value="#FFC0CB" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFC0CB' ? 'selected' : '' ?> >Rosa</option>
-                                    <option value="#FF69B4" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF69B4' ? 'selected' : '' ?> >Rosa fuerte</option>
-                                    <option value="#DB7093" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#DB7093' ? 'selected' : '' ?> >Rosa pálido</option>
                                   </select>
                                 </div>
                                 <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" value="<?= $variacion['cpta_stock'] ?? '' ?>" /></div>
@@ -256,42 +233,19 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                                 <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                                   <option value="">Selecciona un color</option>
                                   <option value="#000000">Negro</option>
-                                  <option value="#1C1C1C">Negro carbón</option>
-                                  <option value="#2F4F4F">Gris oscuro</option>
                                   <option value="#696969">Gris</option>
-                                  <option value="#D3D3D3">Gris claro</option>
                                   <option value="#FFFFFF">Blanco</option>
                                   <option value="#FF0000">Rojo</option>
-                                  <option value="#800000">Rojo oscuro</option>
-                                  <option value="#DC143C">Carmesí</option>
-                                  <option value="#FF6347">Tomate</option>
                                   <option value="#FFA500">Naranja</option>
-                                  <option value="#FF8C00">Naranja oscuro</option>
-                                  <option value="#FFD700">Dorado</option>
                                   <option value="#FFFF00">Amarillo</option>
-                                  <option value="#FFFACD">Amarillo pálido</option>
                                   <option value="#008000">Verde</option>
-                                  <option value="#006400">Verde oscuro</option>
-                                  <option value="#90EE90">Verde claro</option>
-                                  <option value="#00FF7F">Verde primavera</option>
-                                  <option value="#00FFFF">Cian</option>
-                                  <option value="#40E0D0">Turquesa</option>
-                                  <option value="#20B2AA">Verde azulado</option>
                                   <option value="#0000FF">Azul</option>
-                                  <option value="#000080">Azul marino</option>
-                                  <option value="#4682B4">Azul acero</option>
-                                  <option value="#87CEFA">Azul cielo</option>
                                   <option value="#800080">Morado</option>
                                   <option value="#8A2BE2">Violeta</option>
-                                  <option value="#DA70D6">Orquídea</option>
-                                  <option value="#4B0082">Índigo</option>
                                   <option value="#A52A2A">Marrón</option>
-                                  <option value="#8B4513">Marrón madera</option>
                                   <option value="#D2691E">Chocolate</option>
                                   <option value="#F5DEB3">Beige</option>
                                   <option value="#FFC0CB">Rosa</option>
-                                  <option value="#FF69B4">Rosa fuerte</option>
-                                  <option value="#DB7093">Rosa pálido</option>
                                 </select>
                               </div>
                               <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
@@ -541,42 +495,19 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
-              <option value="#1C1C1C">Negro carbón</option>
-              <option value="#2F4F4F">Gris oscuro</option>
               <option value="#696969">Gris</option>
-              <option value="#D3D3D3">Gris claro</option>
               <option value="#FFFFFF">Blanco</option>
               <option value="#FF0000">Rojo</option>
-              <option value="#800000">Rojo oscuro</option>
-              <option value="#DC143C">Carmesí</option>
-              <option value="#FF6347">Tomate</option>
               <option value="#FFA500">Naranja</option>
-              <option value="#FF8C00">Naranja oscuro</option>
-              <option value="#FFD700">Dorado</option>
               <option value="#FFFF00">Amarillo</option>
-              <option value="#FFFACD">Amarillo pálido</option>
               <option value="#008000">Verde</option>
-              <option value="#006400">Verde oscuro</option>
-              <option value="#90EE90">Verde claro</option>
-              <option value="#00FF7F">Verde primavera</option>
-              <option value="#00FFFF">Cian</option>
-              <option value="#40E0D0">Turquesa</option>
-              <option value="#20B2AA">Verde azulado</option>
               <option value="#0000FF">Azul</option>
-              <option value="#000080">Azul marino</option>
-              <option value="#4682B4">Azul acero</option>
-              <option value="#87CEFA">Azul cielo</option>
               <option value="#800080">Morado</option>
               <option value="#8A2BE2">Violeta</option>
-              <option value="#DA70D6">Orquídea</option>
-              <option value="#4B0082">Índigo</option>
               <option value="#A52A2A">Marrón</option>
-              <option value="#8B4513">Marrón madera</option>
               <option value="#D2691E">Chocolate</option>
               <option value="#F5DEB3">Beige</option>
               <option value="#FFC0CB">Rosa</option>
-              <option value="#FF69B4">Rosa fuerte</option>
-              <option value="#DB7093">Rosa pálido</option>
             </select>
           </div>
           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
@@ -597,42 +528,19 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
-                              <option value="#1C1C1C">Negro carbón</option>
-                              <option value="#2F4F4F">Gris oscuro</option>
                               <option value="#696969">Gris</option>
-                              <option value="#D3D3D3">Gris claro</option>
                               <option value="#FFFFFF">Blanco</option>
                               <option value="#FF0000">Rojo</option>
-                              <option value="#800000">Rojo oscuro</option>
-                              <option value="#DC143C">Carmesí</option>
-                              <option value="#FF6347">Tomate</option>
                               <option value="#FFA500">Naranja</option>
-                              <option value="#FF8C00">Naranja oscuro</option>
-                              <option value="#FFD700">Dorado</option>
                               <option value="#FFFF00">Amarillo</option>
-                              <option value="#FFFACD">Amarillo pálido</option>
                               <option value="#008000">Verde</option>
-                              <option value="#006400">Verde oscuro</option>
-                              <option value="#90EE90">Verde claro</option>
-                              <option value="#00FF7F">Verde primavera</option>
-                              <option value="#00FFFF">Cian</option>
-                              <option value="#40E0D0">Turquesa</option>
-                              <option value="#20B2AA">Verde azulado</option>
                               <option value="#0000FF">Azul</option>
-                              <option value="#000080">Azul marino</option>
-                              <option value="#4682B4">Azul acero</option>
-                              <option value="#87CEFA">Azul cielo</option>
                               <option value="#800080">Morado</option>
                               <option value="#8A2BE2">Violeta</option>
-                              <option value="#DA70D6">Orquídea</option>
-                              <option value="#4B0082">Índigo</option>
                               <option value="#A52A2A">Marrón</option>
-                              <option value="#8B4513">Marrón madera</option>
                               <option value="#D2691E">Chocolate</option>
                               <option value="#F5DEB3">Beige</option>
                               <option value="#FFC0CB">Rosa</option>
-                              <option value="#FF69B4">Rosa fuerte</option>
-                              <option value="#DB7093">Rosa pálido</option>
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>

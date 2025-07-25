@@ -165,42 +165,19 @@ include(RUTA_PROYECTO . "includes/head.php");
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
-                              <option value="#1C1C1C">Negro carbón</option>
-                              <option value="#2F4F4F">Gris oscuro</option>
                               <option value="#696969">Gris</option>
-                              <option value="#D3D3D3">Gris claro</option>
                               <option value="#FFFFFF">Blanco</option>
                               <option value="#FF0000">Rojo</option>
-                              <option value="#800000">Rojo oscuro</option>
-                              <option value="#DC143C">Carmesí</option>
-                              <option value="#FF6347">Tomate</option>
                               <option value="#FFA500">Naranja</option>
-                              <option value="#FF8C00">Naranja oscuro</option>
-                              <option value="#FFD700">Dorado</option>
                               <option value="#FFFF00">Amarillo</option>
-                              <option value="#FFFACD">Amarillo pálido</option>
                               <option value="#008000">Verde</option>
-                              <option value="#006400">Verde oscuro</option>
-                              <option value="#90EE90">Verde claro</option>
-                              <option value="#00FF7F">Verde primavera</option>
-                              <option value="#00FFFF">Cian</option>
-                              <option value="#40E0D0">Turquesa</option>
-                              <option value="#20B2AA">Verde azulado</option>
                               <option value="#0000FF">Azul</option>
-                              <option value="#000080">Azul marino</option>
-                              <option value="#4682B4">Azul acero</option>
-                              <option value="#87CEFA">Azul cielo</option>
                               <option value="#800080">Morado</option>
                               <option value="#8A2BE2">Violeta</option>
-                              <option value="#DA70D6">Orquídea</option>
-                              <option value="#4B0082">Índigo</option>
                               <option value="#A52A2A">Marrón</option>
-                              <option value="#8B4513">Marrón madera</option>
                               <option value="#D2691E">Chocolate</option>
                               <option value="#F5DEB3">Beige</option>
                               <option value="#FFC0CB">Rosa</option>
-                              <option value="#FF69B4">Rosa fuerte</option>
-                              <option value="#DB7093">Rosa pálido</option>
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
@@ -399,42 +376,19 @@ include(RUTA_PROYECTO . "includes/head.php");
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
-              <option value="#1C1C1C">Negro carbón</option>
-              <option value="#2F4F4F">Gris oscuro</option>
               <option value="#696969">Gris</option>
-              <option value="#D3D3D3">Gris claro</option>
               <option value="#FFFFFF">Blanco</option>
               <option value="#FF0000">Rojo</option>
-              <option value="#800000">Rojo oscuro</option>
-              <option value="#DC143C">Carmesí</option>
-              <option value="#FF6347">Tomate</option>
               <option value="#FFA500">Naranja</option>
-              <option value="#FF8C00">Naranja oscuro</option>
-              <option value="#FFD700">Dorado</option>
               <option value="#FFFF00">Amarillo</option>
-              <option value="#FFFACD">Amarillo pálido</option>
               <option value="#008000">Verde</option>
-              <option value="#006400">Verde oscuro</option>
-              <option value="#90EE90">Verde claro</option>
-              <option value="#00FF7F">Verde primavera</option>
-              <option value="#00FFFF">Cian</option>
-              <option value="#40E0D0">Turquesa</option>
-              <option value="#20B2AA">Verde azulado</option>
               <option value="#0000FF">Azul</option>
-              <option value="#000080">Azul marino</option>
-              <option value="#4682B4">Azul acero</option>
-              <option value="#87CEFA">Azul cielo</option>
               <option value="#800080">Morado</option>
               <option value="#8A2BE2">Violeta</option>
-              <option value="#DA70D6">Orquídea</option>
-              <option value="#4B0082">Índigo</option>
               <option value="#A52A2A">Marrón</option>
-              <option value="#8B4513">Marrón madera</option>
               <option value="#D2691E">Chocolate</option>
               <option value="#F5DEB3">Beige</option>
               <option value="#FFC0CB">Rosa</option>
-              <option value="#FF69B4">Rosa fuerte</option>
-              <option value="#DB7093">Rosa pálido</option>
             </select>
           </div>
           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
@@ -455,42 +409,19 @@ include(RUTA_PROYECTO . "includes/head.php");
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
-                              <option value="#1C1C1C">Negro carbón</option>
-                              <option value="#2F4F4F">Gris oscuro</option>
                               <option value="#696969">Gris</option>
-                              <option value="#D3D3D3">Gris claro</option>
                               <option value="#FFFFFF">Blanco</option>
                               <option value="#FF0000">Rojo</option>
-                              <option value="#800000">Rojo oscuro</option>
-                              <option value="#DC143C">Carmesí</option>
-                              <option value="#FF6347">Tomate</option>
                               <option value="#FFA500">Naranja</option>
-                              <option value="#FF8C00">Naranja oscuro</option>
-                              <option value="#FFD700">Dorado</option>
                               <option value="#FFFF00">Amarillo</option>
-                              <option value="#FFFACD">Amarillo pálido</option>
                               <option value="#008000">Verde</option>
-                              <option value="#006400">Verde oscuro</option>
-                              <option value="#90EE90">Verde claro</option>
-                              <option value="#00FF7F">Verde primavera</option>
-                              <option value="#00FFFF">Cian</option>
-                              <option value="#40E0D0">Turquesa</option>
-                              <option value="#20B2AA">Verde azulado</option>
                               <option value="#0000FF">Azul</option>
-                              <option value="#000080">Azul marino</option>
-                              <option value="#4682B4">Azul acero</option>
-                              <option value="#87CEFA">Azul cielo</option>
                               <option value="#800080">Morado</option>
                               <option value="#8A2BE2">Violeta</option>
-                              <option value="#DA70D6">Orquídea</option>
-                              <option value="#4B0082">Índigo</option>
                               <option value="#A52A2A">Marrón</option>
-                              <option value="#8B4513">Marrón madera</option>
                               <option value="#D2691E">Chocolate</option>
                               <option value="#F5DEB3">Beige</option>
                               <option value="#FFC0CB">Rosa</option>
-                              <option value="#FF69B4">Rosa fuerte</option>
-                              <option value="#DB7093">Rosa pálido</option>
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
