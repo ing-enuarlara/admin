@@ -19,7 +19,7 @@
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
 
-    if(isset($_POST["modulo"])){
+    if(!empty($_POST["modulo"])){
         try{
             $conexionBdAdmin->query("DELETE FROM modulos_clien_admin WHERE mxca_id_cliAdmin='" . $_POST["id"] . "'");
         } catch (Exception $e) {
@@ -37,6 +37,36 @@
             }
             
             $contador++;
+        }
+
+        if(!empty($_POST["subModulos"])){
+            $numero = (count($_POST["subModulos"]));
+            $contador = 0;        
+            while ($contador < $numero) {
+
+                try{
+                    $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["subModulos"][$contador] . "','" . $_POST["id"] . "')");
+                } catch (Exception $e) {
+                    include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                }
+                
+                $contador++;
+            }
+
+            if(!empty($_POST["itemSubModulos"])){
+                $numero = (count($_POST["itemSubModulos"]));
+                $contador = 0;        
+                while ($contador < $numero) {
+
+                    try{
+                        $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["itemSubModulos"][$contador] . "','" . $_POST["id"] . "')");
+                    } catch (Exception $e) {
+                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                    }
+                    
+                    $contador++;
+                }
+            }
         }
     }else{
         try{

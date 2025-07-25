@@ -74,7 +74,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form class="form-horizontal" method="post" action="../bd_update/clientes-admin-actualizar.php">
-                                <input type="hidden" name="id" value="<?=$_GET["id"];?>">
+                                <input type="hidden" name="id" id="idEmpresa" value="<?=$_GET["id"];?>">
                                 <input type="hidden" name="ussPrincipal" value="<?=$resultadoD['cliAdmi_id_uss_principal']?>">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
@@ -112,11 +112,11 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                     <!-- /.form group -->
                                     <div class="form-group col-md-6">
                                         <label>Modulos:</label>
-                                        <select class="select2" multiple="multiple" data-placeholder="Escoge los modulos" style="width: 100%;" name="modulo[]">
+                                        <select class="select2" multiple="multiple" data-placeholder="Escoge los modulos" style="width: 100%;" name="modulo[]" id="modulo" onchange="traerSubModulos()">
                                             <option value=""></option>
                                                 <?php
                                                 try{
-                                                  $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos");
+                                                  $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_padre IS NULL OR mod_padre=''");
                                                 } catch (Exception $e) {
                                                   include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
@@ -128,11 +128,66 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                                     }
                                                     $numZ = $consultaModulos->num_rows;
                                                 ?>
-                                                    <option value="<?=$resOp[0];?>"<?php if($numZ>0){echo "selected";}?> ><?=$resOp['mod_nombre'];?></option>
+                                                    <option value="<?=$resOp['mod_id'];?>"<?php if($numZ>0){echo "selected";}?> ><?=$resOp['mod_nombre'];?></option>
                                                 <?php
                                                 }
                                                 ?>
                                         </select>
+                                        <span id="mensajeM" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="subModulos-container" style="display:none;">
+                                      <label>Sub-Modulos:</label>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los subModulos" style="width: 100%;" name="subModulos[]" id="subModulos" onchange="traerItemSubModulos()" disabled>
+                                      </select>
+                                      <script type="application/javascript">
+                                        $(document).ready(traerSubModulos(document.getElementById('modulo')));
+
+                                        function traerSubModulos(enviada) {
+                                          var modulo = $('#modulo').val();
+                                          var idEmpresa = $('#idEmpresa').val();
+                                          document.getElementById('subModulos').removeAttribute('disabled');
+
+                                          datos = "modulos=" + (modulo) + "&idEmpresa=" + (idEmpresa) + "&opcion=1";
+                                          $('#mensajeM').show();
+                                          $.ajax({
+                                            type: "POST",
+                                            url: "../../../ajax/ajax-traer-sub-modulos.php",
+                                            data: datos,
+                                            success: function(response) {
+                                              $('#subModulos').empty();
+                                              $('#subModulos').append(response);
+                                              traerItemSubModulos(document.getElementById('subModulos'))
+                                            }
+                                          });
+                                        }
+                                      </script>
+                                      <span id="mensajeSM" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="itemSubModulos-container" style="display:none;">
+                                      <label>Items Sub-Modulos:</label>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los Items de los subModulos" style="width: 100%;" name="itemSubModulos[]" id="itemSubModulos" disabled>
+                                      </select>
+                                      <script type="application/javascript">
+                                        function traerItemSubModulos(enviada) {
+                                          var subModulos = $('#subModulos').val();
+                                          var idEmpresa = $('#idEmpresa').val();
+                                          document.getElementById('itemSubModulos').removeAttribute('disabled');
+
+                                          datos = "subModulos=" + (subModulos) + "&idEmpresa=" + (idEmpresa) + "&opcion=2";
+                                          $('#mensajeSM').show();
+                                          $.ajax({
+                                            type: "POST",
+                                            url: "../../../ajax/ajax-traer-sub-modulos.php",
+                                            data: datos,
+                                            success: function(response) {
+                                              $('#itemSubModulos').empty();
+                                              $('#itemSubModulos').append(response);
+                                            }
+                                          });
+                                        }
+                                      </script>
                                     </div>
                                     <!-- Date -->
                                     <div class="form-group col-md-6">
