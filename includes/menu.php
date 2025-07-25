@@ -32,14 +32,12 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::DASHBOARD)) { ?>
-                    <li <?= agregarClass(MENU_PADRE, [1]) ?>>
-                        <a href="<?= REDIRECT_ROUTE ?>modules/index.php" <?= agregarClass(MENU, [1]) ?>>
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                <?php } ?>
+                <li <?= agregarClass(MENU_PADRE, [1]) ?>>
+                    <a href="<?= REDIRECT_ROUTE ?>modules/index.php" <?= agregarClass(MENU, [1]) ?>>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
                 <?php
                 if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CUENTA)) {
                     $arrayPaginas = [109, 111, 113, 114, 115, 117, 122, 123, 124, 125];

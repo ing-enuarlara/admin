@@ -107,7 +107,7 @@ include(RUTA_PROYECTO."includes/head.php");
                                             <option value=""></option>
                                             <?php
                                             try{
-                                              $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_padre IS NULL OR mod_padre=''");
+                                              $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id != 1 AND (mod_padre IS NULL OR mod_padre='')");
                                             } catch (Exception $e) {
                                               include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                             }

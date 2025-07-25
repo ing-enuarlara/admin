@@ -6,7 +6,6 @@
     exit();
   }
   $idPagina = 1;
-  include(RUTA_PROYECTO."includes/verificar-paginas.php");
   include(RUTA_PROYECTO."includes/head.php");
 ?>
 
