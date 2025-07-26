@@ -13,8 +13,8 @@ switch($_SERVER['HTTP_HOST']){
         break;
 
         case 'adminzefe.ing-enuarlara.com';
-        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/');
-        define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/');
+        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/admin/');
+        define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/admin/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 }
