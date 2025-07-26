@@ -71,7 +71,16 @@ include(RUTA_PROYECTO . "includes/head.php");
                 <form class="form-horizontal" method="post" action="../bd_create/usuarios-guardar.php" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="form-group col-md-4">
-                      <label>Tipo Usuario:</label>
+                      <label>
+                        Tipo Usuario:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si asignas el rol 'Admin Principal' al usuario, para cambiar mas adelabte el rol de usuario, deberas comunicarte con el administrador del CRM.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ussTipo">
                         <option value=""></option>
                         <?php
@@ -217,6 +226,7 @@ include(RUTA_PROYECTO . "includes/head.php");
   </script>
   <script>
     $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
       //Initialize Select2 Elements
       $('.select2').select2()
 

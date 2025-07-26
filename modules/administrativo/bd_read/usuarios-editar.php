@@ -136,13 +136,23 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label>Tipo Usuario:</label>
+                      <label>
+                        Tipo Usuario:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si el usuario es 'Admin Principal', para cambiar este rol deberas comunicarte con el administrador del CRM.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="ussTipo" <?= $_SESSION['idEmpresa']!=1 && $resultadoD['usr_tipo'] ==2 ? "disabled" : "" ?> >
                         <option value=""></option>
                         <?php
                         $where = "";
                         if ($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV) {
-                          $where = "WHERE utipo_id=2 OR utipo_id_empresa='".$_SESSION["idEmpresa"]."'";
+                          $isAdminPrincipal = $resultadoD['usr_tipo'] == 2 ? "utipo_id = 2 OR" : "";
+                          $where = "WHERE {$isAdminPrincipal} utipo_id_empresa='".$_SESSION["idEmpresa"]."'";
                         }
                         try{
                           $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles $where");
@@ -355,6 +365,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
   </script>
   <script>
     $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
       //Initialize Select2 Elements
       $('.select2').select2()
 
