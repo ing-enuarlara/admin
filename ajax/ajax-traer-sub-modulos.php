@@ -200,7 +200,7 @@ if ( $_POST['opcion'] == 5 ) {
         if (!empty($_POST['itemSubModulos'])) { $modulos = $modulos . "," . $_POST['itemSubModulos']; }
 
         try{
-            $consultaVistas = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id_modulo IN (".$modulos.")");
+            $consultaVistas = $conexionBdSistema->query("SELECT * FROM sistema_paginas WHERE pag_id_modulo IN (".$modulos.") AND (pag_tipo_crud=2 OR pag_tipo_crud=4)");
         } catch (Exception $e) {
             include(RUTA_PROYECTO."includes/error-catch-to-report.php");
         }

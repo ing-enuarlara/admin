@@ -88,7 +88,9 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                             <option value=""></option>
                                                 <?php
                                                 try{
-                                                  $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id != 1 AND (mod_padre IS NULL OR mod_padre='')");
+                                                  $conOp = $conexionBdAdmin->query("SELECT m.* FROM modulos_clien_admin mca 
+                                                  INNER JOIN " . BDMODSISTEMA . ".sistema_modulos m ON mod_id=mxca_id_modulo AND (mod_padre IS NULL OR mod_padre='')
+                                                  WHERE mxca_id_cliAdmin='".$_SESSION["idEmpresa"]."'");
                                                 } catch (Exception $e) {
                                                   include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                                 }
@@ -140,7 +142,7 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
 
                                     <div class="form-group col-md-6" id="itemSubModulos-container" style="display:none;">
                                       <label>Items Sub-Modulos:</label>
-                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los Items de los subModulos" style="width: 100%;" name="itemSubModulos[]" id="itemSubModulos" disabled>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los Items de los subModulos" style="width: 100%;" name="itemSubModulos[]" id="itemSubModulos" onchange="traerPaginas()" disabled>
                                       </select>
                                       <script type="application/javascript">
                                         function traerItemSubModulos(enviada) {
@@ -169,7 +171,6 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                       <select class="select2" multiple="multiple" data-placeholder="Escoge las vistas" style="width: 100%;" name="paginas[]" id="paginas" disabled>
                                       </select>
                                       <script type="application/javascript">
-                                        traerPaginas();
                                         function traerPaginas(enviada) {
                                           var modulo = $('#modulo').val();
                                           var subModulos = $('#subModulos').val();
