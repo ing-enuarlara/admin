@@ -5,6 +5,10 @@ $idPagina = 42;
 
 include(RUTA_PROYECTO."includes/verificar-paginas.php");
 include(RUTA_PROYECTO."includes/head.php");
+$filtroAdmin='';
+if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
+    $filtroAdmin .= " AND (utipo_id=2 OR utipo_id_empresa='".$_SESSION["idEmpresa"]."')";
+}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -60,7 +64,7 @@ include(RUTA_PROYECTO."includes/head.php");
                 <div class="card">
                     <div class="card-header">
                         <h2 class="m-0 float-sm-right"><?=$paginaActual['pag_nombre']?></h2>
-                        <?php if($_SESSION["idEmpresa"]==1){ ?><a href="roles-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Rol</a><?php }?>
+                        <a href="roles-agregar.php" class="btn btn-primary"><i class="fas fa-solid fa-plus"></i> Agregar Rol</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -69,13 +73,18 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Rol</th>
-                                    <?php if($_SESSION["idEmpresa"]==1){ ?><th></th><?php }?>
+                                    <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
+                                        <th>Nombre Empresa</th>
+                                    <?php }?>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 try{
-                                    $roles= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles");
+                                    $roles= $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles
+                                    INNER JOIN ".BDADMIN.".clientes_admin ON cliAdmi_id=utipo_id_empresa 
+                                    WHERE utipo_id=utipo_id {$filtroAdmin}");
                                 } catch (Exception $e) {
                                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                                 }
@@ -86,21 +95,24 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <td><?=$num;?></td>
                                     <td><?=$result['utipo_nombre'];?></td>
-                                    <?php if($_SESSION["idEmpresa"]==1){ ?>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-info">Acciones</button>
-                                            <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="roles-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
-                                                <!--<div class="dropdown-divider"></div>-->
-                                                <a class="dropdown-item" href="../bd_delete/roles-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
-                                            </div>
-                                        </div>
-                                    </td>
+                                    <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
+                                        <td><?=$result['cliAdmi_nombre'];?></td>
                                     <?php }?>
+                                    <td>
+                                        <?php if($result['utipo_id_empresa']==$_SESSION["idEmpresa"] || $_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info">Acciones</button>
+                                                <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a class="dropdown-item" href="roles-editar.php?id=<?=$result[0];?>" data-toggle="tooltip">Editar</a>
+                                                    <!--<div class="dropdown-divider"></div>-->
+                                                    <a class="dropdown-item" href="../bd_delete/roles-eliminar.php?id=<?=$result[0];?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" data-toggle="tooltip">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        <?php }?>
+                                    </td>
                                 </tr>
 								<?php $num++;}?>
                             </tbody>
@@ -108,7 +120,10 @@ include(RUTA_PROYECTO."includes/head.php");
                                 <tr>
                                     <th>Nº</th>
                                     <th>Rol</th>
-                                    <?php if($_SESSION["idEmpresa"]==1){ ?><th></th><?php }?>
+                                    <?php if($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV){ ?>
+                                        <th>Nombre Empresa</th>
+                                    <?php }?>
+                                    <th></th>
                                 </tr>
                             </tfoot>
                         </table>

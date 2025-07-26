@@ -44,7 +44,7 @@
             while ($contador < $numero) {
 
                 try{
-                    $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["subModulos"][$contador] . "','" . $_POST["id"] . "')");
+                    $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["subModulos"][$contador] . "','" . $idInsert . "')");
                 } catch (Exception $e) {
                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }
@@ -58,7 +58,7 @@
                 while ($contador < $numero) {
 
                     try{
-                        $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["itemSubModulos"][$contador] . "','" . $_POST["id"] . "')");
+                        $conexionBdAdmin->query("INSERT INTO modulos_clien_admin(mxca_id_modulo, mxca_id_cliAdmin)VALUES('" . $_POST["itemSubModulos"][$contador] . "','" . $idInsert . "')");
                     } catch (Exception $e) {
                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                     }

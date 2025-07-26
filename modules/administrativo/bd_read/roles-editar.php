@@ -74,11 +74,123 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form class="form-horizontal" method="post" action="../bd_update/roles-actualizar.php" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?=$_GET["id"];?>">
+                                <input type="hidden" name="id" id="idRol" value="<?=$_GET["id"];?>">
                                 <div class="card-body">
                                     <div class="form-group col-md-6">
                                         <label for="exampleInputEmail1">Nombre:</label>
                                         <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del rol" name="nombre" value="<?=$resultadoD['utipo_nombre'];?>">
+                                    </div>
+                                
+                                    <h3>Permisos del Rol</h3>
+                                    <div class="form-group col-md-6">
+                                        <label>Modulos:</label>
+                                        <select class="select2" multiple="multiple" data-placeholder="Escoge los modulos" style="width: 100%;" name="modulo[]" id="modulo" onchange="traerSubModulos()">
+                                            <option value=""></option>
+                                                <?php
+                                                try{
+                                                  $conOp = $conexionBdSistema->query("SELECT * FROM sistema_modulos WHERE mod_id != 1 AND (mod_padre IS NULL OR mod_padre='')");
+                                                } catch (Exception $e) {
+                                                  include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                }
+                                                while($resOp = mysqli_fetch_array($conOp, MYSQLI_BOTH)){
+                                                    try{
+                                                        $consultaModulos=$conexionBdAdministrativo->query("SELECT * FROM administrativo_permisos_rol WHERE perol_id_rol='".$resultadoD['utipo_id']."' AND perol_id_entidad='".$resOp['mod_id']."' AND perol_tipo='MOD'");
+                                                    } catch (Exception $e) {
+                                                        include(RUTA_PROYECTO."includes/error-catch-to-report.php");
+                                                    }
+                                                    $numZ = $consultaModulos->num_rows;
+                                                ?>
+                                                    <option value="<?=$resOp['mod_id'];?>"<?php if($numZ>0){echo "selected";}?> ><?=$resOp['mod_nombre'];?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                        </select>
+                                        <span id="mensajeM" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="subModulos-container" style="display:none;">
+                                      <label>Sub-Modulos:</label>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los subModulos" style="width: 100%;" name="subModulos[]" id="subModulos" onchange="traerItemSubModulos()" disabled>
+                                      </select>
+                                      <script type="application/javascript">
+                                        $(document).ready(traerSubModulos(document.getElementById('modulo')));
+
+                                        function traerSubModulos(enviada) {
+                                          var modulo = $('#modulo').val();
+                                          var idRol = $('#idRol').val();
+                                          document.getElementById('subModulos').removeAttribute('disabled');
+
+                                          datos = "modulos=" + (modulo) + "&idRol=" + (idRol) + "&opcion=3";
+                                          $('#mensajeM').show();
+                                          $.ajax({
+                                            type: "POST",
+                                            url: "../../../ajax/ajax-traer-sub-modulos.php",
+                                            data: datos,
+                                            success: function(response) {
+                                              $('#subModulos').empty();
+                                              $('#subModulos').append(response);
+                                              traerItemSubModulos(document.getElementById('subModulos'));
+                                              traerPaginas();
+                                            }
+                                          });
+                                        }
+                                      </script>
+                                      <span id="mensajeSM" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="itemSubModulos-container" style="display:none;">
+                                      <label>Items Sub-Modulos:</label>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge los Items de los subModulos" style="width: 100%;" name="itemSubModulos[]" id="itemSubModulos" disabled>
+                                      </select>
+                                      <script type="application/javascript">
+                                        function traerItemSubModulos(enviada) {
+                                          var subModulos = $('#subModulos').val();
+                                          var idRol = $('#idRol').val();
+                                          document.getElementById('itemSubModulos').removeAttribute('disabled');
+
+                                          datos = "subModulos=" + (subModulos) + "&idRol=" + (idRol) + "&opcion=4";
+                                          $('#mensajeSM').show();
+                                          $.ajax({
+                                            type: "POST",
+                                            url: "../../../ajax/ajax-traer-sub-modulos.php",
+                                            data: datos,
+                                            success: function(response) {
+                                              $('#itemSubModulos').empty();
+                                              $('#itemSubModulos').append(response);
+                                              traerPaginas();
+                                            }
+                                          });
+                                        }
+                                      </script>
+                                    </div>
+
+                                    <div class="form-group col-md-6" id="paginas-container" style="display:none;">
+                                      <label>Vistas:</label>
+                                      <select class="select2" multiple="multiple" data-placeholder="Escoge las vistas" style="width: 100%;" name="paginas[]" id="paginas" disabled>
+                                      </select>
+                                      <script type="application/javascript">
+                                        traerPaginas();
+                                        function traerPaginas(enviada) {
+                                          var modulo = $('#modulo').val();
+                                          var subModulos = $('#subModulos').val();
+                                          var itemSubModulos = $('#itemSubModulos').val();
+                                          var idRol = $('#idRol').val();
+                                          document.getElementById('paginas').removeAttribute('disabled');
+
+                                          datos = "modulos=" + (modulo) + "&subModulos=" + (subModulos) + "&itemSubModulos=" + (itemSubModulos) + "&idRol=" + (idRol) + "&opcion=5";
+                                          $('#mensajeP').show();
+                                          $.ajax({
+                                            type: "POST",
+                                            url: "../../../ajax/ajax-traer-sub-modulos.php",
+                                            data: datos,
+                                            success: function(response) {
+                                              $('#paginas').empty();
+                                              $('#paginas').append(response);
+                                            }
+                                          });
+                                        }
+                                      </script>
+                                      <span id="mensajeP" style="color: #6017dc; display:none;">Cargando vistas, espere un momento por favor.</span>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

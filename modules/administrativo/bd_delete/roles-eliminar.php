@@ -6,6 +6,7 @@
 
     try{
 		$conexionBdAdministrativo->query("DELETE FROM administrativo_roles WHERE utipo_id='" . $_GET["id"] . "'");
+        $conexionBdAdministrativo->query("DELETE FROM administrativo_permisos_rol WHERE perol_id_rol='" . $_GET["id"] . "'");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}

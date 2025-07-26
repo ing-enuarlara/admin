@@ -77,7 +77,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                         <?php
                         $where = "";
                         if ($_SESSION["datosUsuarioActual"]['usr_tipo'] != DEV) {
-                          $where = "WHERE utipo_id!=1";
+                          $where = "WHERE utipo_id=2 OR utipo_id_empresa='".$_SESSION["idEmpresa"]."'";
                         }
                         try {
                           $ussTipo = $conexionBdAdministrativo->query("SELECT * FROM administrativo_roles $where");
