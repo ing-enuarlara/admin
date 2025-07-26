@@ -24,6 +24,16 @@ if (isset($_SESSION["id"])) {
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        let docTitle = document.title;
+        window.addEventListener("blur", ()=>{
+          document.title="Regresa Pronto ;)";
+        });
+        window.addEventListener("focus", ()=>{
+          document.title=docTitle;
+        });
+    </script>
 </head>
 
 <body class="hold-transition login-page">
