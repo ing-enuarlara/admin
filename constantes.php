@@ -11,6 +11,12 @@ switch($_SERVER['HTTP_HOST']){
         define('REDIRECT_ROUTE', 'https://adminocb.oceanblue.es/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
+
+        case 'adminzefe.ing-enuarlara.com';
+        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/');
+        define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/');
+        error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
+        break;
 }
 
 include(RUTA_PROYECTO."sensitive.php");
