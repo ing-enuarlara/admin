@@ -39,7 +39,7 @@
                     </a>
                 </li>
                 <?php
-                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CUENTA)) {
+                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CUENTA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MI_CUENTA)) {
                     $arrayPaginas = [109, 111, 113, 114, 115, 117, 122, 123, 124, 125];
                 ?>
                     <li <?= agregarClass(MENU_PADRE, $arrayPaginas) ?>>
@@ -48,7 +48,7 @@
                             <p>Mi Cuenta<i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::EDITAR_PERFIL)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::EDITAR_PERFIL) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::EDITAR_PERFIL) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 109, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/perfil-editar.php" <?= agregarClass(MENU, [109]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -56,7 +56,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MIS_VENTAS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MIS_VENTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MIS_VENTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 113, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/mis-ventas.php" <?= agregarClass(MENU, [113]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -64,7 +64,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MIS_PEDIDOS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MIS_PEDIDOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MIS_PEDIDOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 114, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/mis-pedidos.php" <?= agregarClass(MENU, [114]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -72,7 +72,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CAMBIAR_CLAVE)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CAMBIAR_CLAVE) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CAMBIAR_CLAVE) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 111, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/clave-editar.php" <?= agregarClass(MENU, [111]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -80,7 +80,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CALENDARIO)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MI_CALENDARIO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MI_CALENDARIO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 115, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/mi-calendario.php" <?= agregarClass(MENU, [115, 117]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -88,7 +88,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MENSAJES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MENSAJES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MENSAJES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 122, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/mi_cuenta/bd_read/mailbox.php" <?= agregarClass(MENU, [122, 123, 124, 125]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -100,7 +100,7 @@
                     </li>
                 <?php } ?>
                 <?php
-                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ADMINISTRATIVO)) {
+                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ADMINISTRATIVO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::ADMINISTRATIVO)) {
                     $arrayPaginas = [42, 43, 45, 48, 49, 67];
                 ?>
                     <li <?= agregarClass(MENU_PADRE, $arrayPaginas) ?>>
@@ -109,7 +109,7 @@
                             <p>Administrativo<i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ROLES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ROLES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::ROLES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 42, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/administrativo/bd_read/roles.php" <?= agregarClass(MENU, [42, 43, 45]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -117,7 +117,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::USUARIOS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::USUARIOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::USUARIOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 48, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/administrativo/bd_read/usuarios.php" <?= agregarClass(MENU, [48, 49, 67]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -129,7 +129,7 @@
                     </li>
                 <?php } ?>
                 <?php
-                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COMERCIAL)) {
+                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COMERCIAL) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::COMERCIAL)) {
                     $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189];
 
                     $arrayPaginas2 = [160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190];
@@ -142,7 +142,7 @@
                             <p>Comercial<i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CLIENTES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CLIENTES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CLIENTES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 69, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/clientes.php" <?= agregarClass(MENU, [69, 70, 71]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -156,14 +156,14 @@
                                 </a>
                             </li> -->
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATALOGO_PRINCIPAL)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATALOGO_PRINCIPAL) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CATALOGO_PRINCIPAL)) { ?>
                                 <li <?= agregarClass(MENU_PADRE, $arrayPaginas2) ?>>
                                     <a href="#" <?= agregarClass(MENU, $arrayPaginas2) ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Catalogo Principal<i class="right fas fa-angle-left"></i></p>
                                     </a>
                                     <ul class="nav nav-treeview" <?= agregarClass(SUB_MENU, $arrayPaginas2) ?>>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATEGORIAS_CATALOGO)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATEGORIAS_CATALOGO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CATEGORIAS_CATALOGO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 172, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/categorias-catalogo.php" <?= agregarClass(MENU, [172, 173, 174, 175, 176, 177]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -171,7 +171,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SUBCATEGORIAS_CATALOGO)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SUBCATEGORIAS_CATALOGO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::SUBCATEGORIAS_CATALOGO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 178, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/marcas-catalogo.php" <?= agregarClass(MENU, [178, 179, 180, 181, 182, 183, 190]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -179,7 +179,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::TIPOS_ARTICULOS)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::TIPOS_ARTICULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::TIPOS_ARTICULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 184, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/tipo-articulos.php" <?= agregarClass(MENU, [184, 185, 186, 187, 188, 189]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -187,7 +187,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ARTICULOS)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::ARTICULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::ARTICULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 160, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/catalogo-principal.php" <?= agregarClass(MENU, [160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -198,14 +198,14 @@
                                     </ul>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PRODUCTOS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PRODUCTOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PRODUCTOS)) { ?>
                                 <li <?= agregarClass(MENU_PADRE, $arrayPaginas3) ?>>
                                     <a href="#" <?= agregarClass(MENU, $arrayPaginas3) ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Producto<i class="right fas fa-angle-left"></i></p>
                                     </a>
                                     <ul class="nav nav-treeview" <?= agregarClass(SUB_MENU, $arrayPaginas3) ?>>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATEGORIAS)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CATEGORIAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CATEGORIAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 26, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/categorias.php" <?= agregarClass(MENU, [26, 27, 29]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -213,7 +213,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SUBCATEGORIAS)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SUBCATEGORIAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::SUBCATEGORIAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 32, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/marcas.php" <?= agregarClass(MENU, [32, 33, 35]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -221,7 +221,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::TIPOS_PRODUCTOS)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::TIPOS_PRODUCTOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::TIPOS_PRODUCTOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 59, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/tipo-producto.php" <?= agregarClass(MENU, [59, 60, 62]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -229,7 +229,7 @@
                                                 </a>
                                             </li>
                                         <?php } ?>
-                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PRODUCTO)) { ?>
+                                        <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PRODUCTO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PRODUCTO) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 20, 'PAG')) { ?>
                                             <li class="nav-item">
                                                 <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/productos.php" <?= agregarClass(MENU, [20, 21, 23, 56, 145, 146, 147]) ?>>
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -240,7 +240,7 @@
                                     </ul>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::OFERTAS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::OFERTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::OFERTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 154, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/ofertas.php" <?= agregarClass(MENU, [154, 155, 157]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -248,7 +248,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COTIZACIONES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COTIZACIONES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::COTIZACIONES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 75, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/cotizaciones.php" <?= agregarClass(MENU, [75, 76, 77]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -256,7 +256,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PEDIDOS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PEDIDOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PEDIDOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 87, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/pedidos.php" <?= agregarClass(MENU, [87, 88]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -264,7 +264,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::REMISIONES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::REMISIONES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::REMISIONES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 95, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/remisiones.php" <?= agregarClass(MENU, [95, 96, 98]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -272,7 +272,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::FACTURACION)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::FACTURACION) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::FACTURACION) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 103, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/facturacion.php" <?= agregarClass(MENU, [103, 105, 107]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -284,7 +284,7 @@
                     </li>
                 <?php } ?>
                 <?php
-                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SISTEMA)) {
+                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SISTEMA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::SISTEMA)) {
                     $arrayPaginas = [2, 3, 4, 8, 9, 10, 83];
                 ?>
                     <li <?= agregarClass(MENU_PADRE, $arrayPaginas) ?>>
@@ -293,7 +293,7 @@
                             <p>Sistema<i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CONFIG_SISTEMA)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CONFIG_SISTEMA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CONFIG_SISTEMA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 83, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/sistema/bd_read/configuracion-sistema.php" <?= agregarClass(MENU, [83]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -301,7 +301,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINAS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PAGINAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 2, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/sistema/bd_read/paginas.php" <?= agregarClass(MENU, [2, 3, 4]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -309,7 +309,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MODULOS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::MODULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::MODULOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 8, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/sistema/bd_read/modulos.php" <?= agregarClass(MENU, [8, 9, 10]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -317,7 +317,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::HISTORIAL_ACCIONES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::HISTORIAL_ACCIONES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::HISTORIAL_ACCIONES)) { ?>
                                 <li class="nav-item">
                                     <a href="#" <?= agregarClass(MENU, []) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -329,7 +329,7 @@
                     </li>
                 <?php } ?>
                 <?php
-                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINA_WEB)) {
+                if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINA_WEB) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PAGINA_WEB)) {
                     $arrayPaginas = [38, 40, 50, 51, 52, 130, 131, 133, 136, 137, 138, 139, 140, 142, 148, 149, 151];
                 ?>
                     <li <?= agregarClass(MENU_PADRE, $arrayPaginas) ?>>
@@ -338,21 +338,22 @@
                             <p>Pagina Web<i class="right fas fa-angle-left"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::BLOGS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::BLOGS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::BLOGS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 130, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/blogs.php" <?= agregarClass(MENU, [130, 131, 133, 137, 138]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Blogs</p>
                                     </a>
                                 </li>
+                            <?php if (validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 139, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/categorias-blogs.php" <?= agregarClass(MENU, [139, 140, 142]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Categorias Blogs</p>
                                     </a>
                                 </li>
-                            <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SLIDERS_BANNERS)) { ?>
+                            <?php } } ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::SLIDERS_BANNERS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::SLIDERS_BANNERS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 148, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/sliders.php" <?= agregarClass(MENU, [148, 149, 151]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -360,7 +361,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::RESENAS)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::RESENAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::RESENAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 136, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/feedback.php" <?= agregarClass(MENU, [136]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -368,7 +369,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CONFIG_PAGINA)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CONFIG_PAGINA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CONFIG_PAGINA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 38, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/configuracion.php" <?= agregarClass(MENU, [38]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -376,7 +377,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COLOR_PAGINA)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COLOR_PAGINA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::COLOR_PAGINA) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 40, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/configuracion-color-store.php" <?= agregarClass(MENU, [40]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -384,7 +385,7 @@
                                     </a>
                                 </li>
                             <?php } ?>
-                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINAS_LEGALES)) { ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINAS_LEGALES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::PAGINAS_LEGALES) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 50, 'PAG')) { ?>
                                 <li class="nav-item">
                                     <a href="<?= REDIRECT_ROUTE ?>modules/pagina-web/bd_read/legales.php" <?= agregarClass(MENU, [50, 51, 52]) ?>>
                                         <i class="far fa-circle nav-icon"></i>
@@ -395,7 +396,7 @@
                         </ul>
                     </li>
                 <?php } ?>
-                <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CLIENTES_ADMIN)) { ?>
+                <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CLIENTES_ADMIN) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::CLIENTES_ADMIN) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 14, 'PAG')) { ?>
                     <li <?= agregarClass(MENU_PADRE, [14, 15, 16]) ?>>
                         <a href="<?= REDIRECT_ROUTE ?>modules/client_admin/bd_read/clientes-admin.php" <?= agregarClass(MENU, [14, 15, 16]) ?>>
                             <i class="nav-icon fas fa-business-time"></i>

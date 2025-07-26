@@ -59,6 +59,30 @@ function validarAccesoModulo($empresa, $modulo)
 	return false;
 }
 
+function validarAccesoRol($rol, $entidad, $tipo = "MOD")
+{
+
+	global $conexionBdAdministrativo;
+
+	if ($_SESSION["datosUsuarioActual"]['usr_tipo']==DEV || $_SESSION["datosUsuarioActual"]['usr_tipo']==ADMIN_PRINCIPAL || (!empty($_SESSION['admin']) && ($_SESSION['admin'] == 1 || $_SESSION['admin'] == 2))) {
+		return true;
+	}
+
+	try{
+		$consulta = $conexionBdAdministrativo->query("SELECT * FROM administrativo_permisos_rol WHERE perol_id_rol='" . $rol . "' AND perol_id_entidad='" . $entidad . "' AND perol_tipo='" . $tipo . "'");
+	} catch (Exception $e) {
+		echo "Excepción catpurada: ".$e->getMessage();
+		exit();
+	}
+	$numRegistros = $consulta->num_rows;
+
+	if ($numRegistros > 0) {
+		return true;
+	}
+
+	return false;
+}
+
 function validarAccesoDirectoPaginas(){
 	if(empty($_SERVER['HTTP_REFERER'])){
 		return false;
