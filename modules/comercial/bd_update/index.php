@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="mensaje">
-        <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminOCBLogo" width="100">
+        <img src="<?=REDIRECT_ROUTE?>files/logo/logo.png" alt="AdminZEFELogo" width="100">
         <p><span style='font-family:Arial; font-weight:bold;'>No tienes permiso para entrar aqui.</samp></p>
         <p>Redireccionando en 2 segundos...</p>
     </div>

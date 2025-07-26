@@ -4,16 +4,16 @@ if (empty($_REQUEST["nume"])) {
     $_REQUEST["nume"] = 1;
 }
 
-// $productosBD = Productos::SelectJoin(
-//     $predicado,
-//     "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
-//     [
-//         Categorias::class,
-//         SubCategorias::class
-//     ],
-//     "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
-//     "cprod_id"
-// );
+$productosBD = Productos::SelectJoin(
+    $predicado,
+    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_categoria, cprod_marca, cprod_id_empresa, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
+    [
+        Categorias::class,
+        SubCategorias::class
+    ],
+    "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
+    "cprod_id"
+);
 
 $productosSiniwin = [];
 if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"] == 3) {
@@ -39,9 +39,9 @@ if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV || $_SESSION["idEmpresa"]
     }
 }
 
-// if (!is_array($productosBD)) {
+if (!is_array($productosBD)) {
     $productosBD = [];
-// }
+}
 if (!is_array($productosSiniwin)) {
     $productosSiniwin = [];
 }

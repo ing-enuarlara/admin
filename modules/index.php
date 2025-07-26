@@ -246,7 +246,7 @@
                   <div class="small-box bg-info">
                     <div class="inner">
                       <h3><?=$cliAdmin;?></h3>
-                      <p>Clientes AdminOCB</p>
+                      <p>Clientes AdminZEFE</p>
                     </div>
                     <div class="icon">
                     <i class="ion ion-person-stalker"></i>
