@@ -17,7 +17,7 @@ if (!isset($idPagina)) {
 	}
 	$paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
 
-	if (!validarAccesoModulo($_SESSION["idEmpresa"], $paginaActual['pag_id_modulo'])) {
+	if (!validarAccesoModulo($_SESSION["idEmpresa"], $paginaActual['pag_id_modulo']) || !validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], $paginaActual['pag_id_modulo']) || !validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], $idPagina, 'PAG')) {
 		$rutaSalida= REDIRECT_ROUTE."modules";
 		$mensaje= "La empresa NO tiene permiso a este modulo.";
 		$paso=false;
