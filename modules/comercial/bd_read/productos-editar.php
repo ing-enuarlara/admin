@@ -299,7 +299,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       </div>
                     </div>
 
-                      <div class="form-group col-md-6" id="variacion" style="display:none;">
+                      <div class="form-group col-md-8" id="variacion" style="display:none;">
                         <label>Variaciones disponibles:</label>
                         <div id="tallas-container">
                           <?php
