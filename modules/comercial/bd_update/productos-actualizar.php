@@ -39,6 +39,7 @@ Productos_Tallas::Delete([
 $maxLength = max(
     count($_POST['tallas'] ?? []),
     count($_POST['colores'] ?? []),
+    count($_POST['colores2'] ?? []),
     count($_POST['stocks'] ?? []),
     count($_POST['referencias'] ?? [])
 );
@@ -46,6 +47,7 @@ $totalStock = 0;
 for ($i = 0; $i < $maxLength; $i++) {
     $talla = isset($_POST['tallas'][$i]) ? trim($_POST['tallas'][$i]) : '';
     $color = isset($_POST['colores'][$i]) ? trim($_POST['colores'][$i]) : '';
+    $color2 = isset($_POST['colores2'][$i]) ? trim($_POST['colores2'][$i]) : '';
     $stock = isset($_POST['stocks'][$i]) ? max(0, intval($_POST['stocks'][$i])) : 0;
     $referencia = isset($_POST['referencias'][$i]) ? trim($_POST['referencias'][$i]) : '';
 
@@ -58,6 +60,7 @@ for ($i = 0; $i < $maxLength; $i++) {
     Productos_Tallas::Insert([
         'cpta_talla' => $talla,
         'cpta_color' => $color,
+        'cpta_color2' => $color2,
         'cpta_stock' => $stock,
         'cpta_referencia' => $referencia,
         'cpta_producto' => $_POST["id"],

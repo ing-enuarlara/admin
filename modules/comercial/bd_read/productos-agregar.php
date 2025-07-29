@@ -257,12 +257,12 @@ include(RUTA_PROYECTO . "includes/head.php");
                       </div>
                     </div>
                     
-                    <div class="form-group col-md-8" id="variacion" style="display:none;">
+                    <div class="form-group col-md-12" id="variacion" style="display:none;">
                       <label>Variaciones disponibles:</label>
                       <div id="tallas-container">
                         <div class="row mb-2">
-                          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-3">
+                          <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-2">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -281,9 +281,28 @@ include(RUTA_PROYECTO . "includes/head.php");
                               <option value="#FFC0CB">Rosa</option>
                             </select>
                           </div>
-                          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-2">
+                            <select name="colores2[]" data-placeholder="Segundo color (Opcional)" class="form-control select2" style="width: 100%;">
+                              <option value="">Segundo color (Opcional)</option>
+                              <option value="#000000">Negro</option>
+                              <option value="#696969">Gris</option>
+                              <option value="#FFFFFF">Blanco</option>
+                              <option value="#FF0000">Rojo</option>
+                              <option value="#FFA500">Naranja</option>
+                              <option value="#FFFF00">Amarillo</option>
+                              <option value="#008000">Verde</option>
+                              <option value="#0000FF">Azul</option>
+                              <option value="#800080">Morado</option>
+                              <option value="#8A2BE2">Violeta</option>
+                              <option value="#A52A2A">Marrón</option>
+                              <option value="#D2691E">Chocolate</option>
+                              <option value="#F5DEB3">Beige</option>
+                              <option value="#FFC0CB">Rosa</option>
+                            </select>
+                          </div>
+                          <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
                           <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
+                          <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
                         </div>
                       </div>
                     </div>
@@ -371,8 +390,8 @@ include(RUTA_PROYECTO . "includes/head.php");
         variacion.style.display = "none";
         tallasContainer.innerHTML = `
         <div class="row mb-2">
-          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-          <div class="col-md-3">
+          <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+          <div class="col-md-2">
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
@@ -391,9 +410,28 @@ include(RUTA_PROYECTO . "includes/head.php");
               <option value="#FFC0CB">Rosa</option>
             </select>
           </div>
-          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+          <div class="col-md-2">
+            <select name="colores2[]" data-placeholder="Segundo color (Opcional)" class="form-control select2" style="width: 100%;">
+              <option value="">Segundo color (Opcional)</option>
+              <option value="#000000">Negro</option>
+              <option value="#696969">Gris</option>
+              <option value="#FFFFFF">Blanco</option>
+              <option value="#FF0000">Rojo</option>
+              <option value="#FFA500">Naranja</option>
+              <option value="#FFFF00">Amarillo</option>
+              <option value="#008000">Verde</option>
+              <option value="#0000FF">Azul</option>
+              <option value="#800080">Morado</option>
+              <option value="#8A2BE2">Violeta</option>
+              <option value="#A52A2A">Marrón</option>
+              <option value="#D2691E">Chocolate</option>
+              <option value="#F5DEB3">Beige</option>
+              <option value="#FFC0CB">Rosa</option>
+            </select>
+          </div>
+          <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
           <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
-          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
+          <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
         </div>`;
       }
       $('.select2').select2()
@@ -404,8 +442,8 @@ include(RUTA_PROYECTO . "includes/head.php");
       const div = document.createElement("div");
       div.classList.add("form-group", "row", "mt-2");
       div.innerHTML = `
-                          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-3">
+                          <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-2">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -424,9 +462,28 @@ include(RUTA_PROYECTO . "includes/head.php");
                               <option value="#FFC0CB">Rosa</option>
                             </select>
                           </div>
-                          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-2">
+                            <select name="colores2[]" data-placeholder="Segundo color (Opcional)" class="form-control select2" style="width: 100%;">
+                              <option value="">Segundo color (Opcional)</option>
+                              <option value="#000000">Negro</option>
+                              <option value="#696969">Gris</option>
+                              <option value="#FFFFFF">Blanco</option>
+                              <option value="#FF0000">Rojo</option>
+                              <option value="#FFA500">Naranja</option>
+                              <option value="#FFFF00">Amarillo</option>
+                              <option value="#008000">Verde</option>
+                              <option value="#0000FF">Azul</option>
+                              <option value="#800080">Morado</option>
+                              <option value="#8A2BE2">Violeta</option>
+                              <option value="#A52A2A">Marrón</option>
+                              <option value="#D2691E">Chocolate</option>
+                              <option value="#F5DEB3">Beige</option>
+                              <option value="#FFC0CB">Rosa</option>
+                            </select>
+                          </div>
+                          <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
                           <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
+                          <div class="col-md-1"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
       container.appendChild(div);
       $('.select2').select2()
