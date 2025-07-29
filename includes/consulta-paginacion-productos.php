@@ -12,7 +12,9 @@ $productosBD = Productos::SelectJoin(
         SubCategorias::class
     ],
     "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
-    "cprod_id"
+    "cprod_id",
+    "",
+    "cprod_id DESC",
 );
 
 // APLICAR FILTROS
