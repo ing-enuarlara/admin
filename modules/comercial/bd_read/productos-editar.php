@@ -142,7 +142,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
 
                       <div class="form-group col-md-2">
                         <label for="exampleInputEmail1">Precio:</label>
-                        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>">
+                        <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>" step="0.01">
                       </div>
 
                       <div class="form-group col-md-3">
