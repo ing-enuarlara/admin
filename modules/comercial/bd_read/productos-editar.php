@@ -365,12 +365,6 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       </div>
                     </div>
 
-                    <!-- textarea -->
-                    <div class="form-group col-md-6">
-                      <label>Palabras Claves</label>
-                      <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprod_palabras_claves']; ?></textarea>
-                    </div>
-
                     <div class="form-group col-md-6">
                       <label>Especificaciones del Producto:</label>
                       <div id="otras-especificaciones-container">
@@ -403,6 +397,12 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                           </div>
                         <?php } ?>
                       </div>
+                    </div>
+
+                    <!-- textarea -->
+                    <div class="form-group col-md-6">
+                      <label>Palabras Claves</label>
+                      <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprod_palabras_claves']; ?></textarea>
                     </div>
 
                     <div class="form-group col-md-3">
