@@ -103,88 +103,23 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <label for="exampleInputEmail1">Nombre:</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre">
                     </div>
+
+                    <div class="col-sm-6">
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label>Detalles</label>
+                        <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <label>Descripción</label>
+                      <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
+                    </div>
                     
                     <div class="form-group col-md-2">
                       <label for="exampleInputEmail1">Precio:</label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo">
-                    </div>
-
-                    <div class="form-group col-md-2">
-                      <label for="exampleInputEmail1">
-                        Referencia:
-                        <span
-                          tabindex="0"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="En la variación del producto, puedes tambien manejar referencia para cada variación del producto.">
-                          <i class="fa fa-question-circle text-info"></i>
-                        </span>
-                      </label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref">
-                    </div>
-
-                    <div class="form-group col-md-2" id="existecia">
-                      <label for="exampleInputEmail1">
-                        Existencia:
-                        <span
-                          tabindex="0"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Si vas a usar variación del producto, puedes dejar este campo vacio y colocar por cada variación su stock y esta existencia total la calculara el sistema.">
-                          <i class="fa fa-question-circle text-info"></i>
-                        </span>
-                      </label>
-                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia">
-                    </div>
-
-                    <div class="form-group col-md-11">
-                      <label for="prodVariacion">
-                        Producto con variación?
-                        <span
-                          tabindex="0"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Si vas a usar variación del producto, como stockage por talla o color, o diferentes colores por tallas, puedes activar este checkbox.">
-                          <i class="fa fa-question-circle text-info"></i>
-                        </span>
-                      </label>
-                      <div class="input-group">
-                          <label class="switchToggle">
-                            <input type="checkbox" name="prodVariacion" id="prodVariacion" value="1" onchange="habilitarVariacion()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                            <span class="slider red round"></span>
-                          </label>
-                      </div>
-                    </div>
-                    
-                    <div class="form-group col-md-6" id="variacion" style="display:none;">
-                      <label>Variaciones disponibles:</label>
-                      <div id="tallas-container">
-                        <div class="row mb-2">
-                          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-3">
-                            <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
-                              <option value="">Selecciona un color</option>
-                              <option value="#000000">Negro</option>
-                              <option value="#696969">Gris</option>
-                              <option value="#FFFFFF">Blanco</option>
-                              <option value="#FF0000">Rojo</option>
-                              <option value="#FFA500">Naranja</option>
-                              <option value="#FFFF00">Amarillo</option>
-                              <option value="#008000">Verde</option>
-                              <option value="#0000FF">Azul</option>
-                              <option value="#800080">Morado</option>
-                              <option value="#8A2BE2">Violeta</option>
-                              <option value="#A52A2A">Marrón</option>
-                              <option value="#D2691E">Chocolate</option>
-                              <option value="#F5DEB3">Beige</option>
-                              <option value="#FFC0CB">Rosa</option>
-                            </select>
-                          </div>
-                          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
-                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
-                        </div>
-                      </div>
                     </div>
 
                     <div class="form-group col-md-3">
@@ -275,17 +210,82 @@ include(RUTA_PROYECTO . "includes/head.php");
                       </script>
                     </div>
 
-                    <div class="col-sm-6">
-                      <!-- textarea -->
-                      <div class="form-group">
-                        <label>Detalles</label>
-                        <textarea class="form-control" rows="3" placeholder="Detalles del producto ..." name="detalles" id="detalles"></textarea>
-                      </div>
+                    <div class="form-group col-md-2" id="existecia">
+                      <label for="exampleInputEmail1">
+                        Existencia:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si vas a usar variación del producto, puedes dejar este campo vacio y colocar por cada variación su stock y esta existencia total la calculara el sistema.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
+                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Existencia del Producto" name="existencia">
                     </div>
 
-                    <div class="form-group col-md-6">
-                      <label>Descripción</label>
-                      <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
+                    <div class="form-group col-md-3">
+                      <label for="exampleInputEmail1">
+                        Referencia:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="En la variación del producto, puedes tambien manejar referencia para cada variación del producto.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref">
+                    </div>
+
+                    <div class="form-group col-md-11">
+                      <label for="prodVariacion">
+                        Producto con variación?
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si vas a usar variación del producto, como stockage por talla o color, o diferentes colores por tallas, puedes activar este checkbox.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
+                      <div class="input-group">
+                          <label class="switchToggle">
+                            <input type="checkbox" name="prodVariacion" id="prodVariacion" value="1" onchange="habilitarVariacion()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                            <span class="slider red round"></span>
+                          </label>
+                      </div>
+                    </div>
+                    
+                    <div class="form-group col-md-8" id="variacion" style="display:none;">
+                      <label>Variaciones disponibles:</label>
+                      <div id="tallas-container">
+                        <div class="row mb-2">
+                          <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
+                          <div class="col-md-4">
+                            <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
+                              <option value="">Selecciona un color</option>
+                              <option value="#000000">Negro</option>
+                              <option value="#696969">Gris</option>
+                              <option value="#FFFFFF">Blanco</option>
+                              <option value="#FF0000">Rojo</option>
+                              <option value="#FFA500">Naranja</option>
+                              <option value="#FFFF00">Amarillo</option>
+                              <option value="#008000">Verde</option>
+                              <option value="#0000FF">Azul</option>
+                              <option value="#800080">Morado</option>
+                              <option value="#8A2BE2">Violeta</option>
+                              <option value="#A52A2A">Marrón</option>
+                              <option value="#D2691E">Chocolate</option>
+                              <option value="#F5DEB3">Beige</option>
+                              <option value="#FFC0CB">Rosa</option>
+                            </select>
+                          </div>
+                          <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
+                          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
+                        </div>
+                      </div>
                     </div>
 
                     <div class="form-group col-md-6">
@@ -372,7 +372,7 @@ include(RUTA_PROYECTO . "includes/head.php");
         tallasContainer.innerHTML = `
         <div class="row mb-2">
           <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
@@ -392,7 +392,7 @@ include(RUTA_PROYECTO . "includes/head.php");
             </select>
           </div>
           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
           <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
         </div>`;
       }
@@ -405,7 +405,7 @@ include(RUTA_PROYECTO . "includes/head.php");
       div.classList.add("form-group", "row", "mt-2");
       div.innerHTML = `
                           <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-3">
+                          <div class="col-md-4">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -425,7 +425,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
       container.appendChild(div);
