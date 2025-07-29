@@ -68,15 +68,15 @@
                 }
 
                 try{
-                    $consultaPaginaActual = $conexionBdSistema->query("SELECT pag_padre FROM sistema_paginas WHERE pag_id='" . $_POST["paginas"][$contador] . "'");
+                    $consultaPaginaActual = $conexionBdSistema->query("SELECT pag_hija FROM sistema_paginas WHERE pag_id='" . $_POST["paginas"][$contador] . "'");
                 } catch (Exception $e) {
                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }
                 $paginaActual = mysqli_fetch_array($consultaPaginaActual, MYSQLI_BOTH);
 
-                if(!empty($paginaActual["pag_padre"])){
+                if(!empty($paginaActual["pag_hija"])){
                     try{
-                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_tipo)VALUES('" . $paginaActual["pag_padre"] . "','" . $idInsertU . "','PAG')");
+                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_tipo)VALUES('" . $paginaActual["pag_hija"] . "','" . $idInsertU . "','PAG')");
                     } catch (Exception $e) {
                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                     }
