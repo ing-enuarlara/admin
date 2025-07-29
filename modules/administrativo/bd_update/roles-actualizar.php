@@ -22,7 +22,7 @@
         while ($contador < $numero) {
 
             try{
-                $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol)VALUES('" . $_POST["modulo"][$contador] . "','" . $_POST["id"] . "')");
+                $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_id_empresa)VALUES('" . $_POST["modulo"][$contador] . "','" . $_POST["id"] . "', '" . $_SESSION["idEmpresa"] . "')");
             } catch (Exception $e) {
                 include(RUTA_PROYECTO."includes/error-catch-to-report.php");
             }
@@ -36,7 +36,7 @@
             while ($contador < $numero) {
 
                 try{
-                    $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol)VALUES('" . $_POST["subModulos"][$contador] . "','" . $_POST["id"] . "')");
+                    $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_id_empresa)VALUES('" . $_POST["subModulos"][$contador] . "','" . $_POST["id"] . "', '" . $_SESSION["idEmpresa"] . "')");
                 } catch (Exception $e) {
                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }
@@ -50,7 +50,7 @@
                 while ($contador < $numero) {
 
                     try{
-                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol)VALUES('" . $_POST["itemSubModulos"][$contador] . "','" . $_POST["id"] . "')");
+                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_id_empresa)VALUES('" . $_POST["itemSubModulos"][$contador] . "','" . $_POST["id"] . "', '" . $_SESSION["idEmpresa"] . "')");
                     } catch (Exception $e) {
                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                     }
@@ -66,7 +66,7 @@
             while ($contador < $numero) {
 
                 try{
-                    $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_tipo)VALUES('" . $_POST["paginas"][$contador] . "','" . $_POST["id"] . "','PAG')");
+                    $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_id_empresa, perol_tipo)VALUES('" . $_POST["paginas"][$contador] . "','" . $_POST["id"] . "', '" . $_SESSION["idEmpresa"] . "','PAG')");
                 } catch (Exception $e) {
                     include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                 }
@@ -80,7 +80,7 @@
 
                 if(!empty($paginaActual["pag_hija"])){
                     try{
-                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_tipo)VALUES('" . $paginaActual["pag_hija"] . "','" . $idInsertU . "','PAG')");
+                        $conexionBdAdministrativo->query("INSERT INTO administrativo_permisos_rol(perol_id_entidad, perol_id_rol, perol_id_empresa, perol_tipo)VALUES('" . $paginaActual["pag_hija"] . "','" . $_POST["id"] . "', '" . $_SESSION["idEmpresa"] . "','PAG')");
                     } catch (Exception $e) {
                         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
                     }
