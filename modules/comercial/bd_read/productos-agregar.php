@@ -262,7 +262,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <div id="tallas-container">
                         <div class="row mb-2">
                           <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -282,7 +282,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
                         </div>
                       </div>
@@ -372,7 +372,7 @@ include(RUTA_PROYECTO . "includes/head.php");
         tallasContainer.innerHTML = `
         <div class="row mb-2">
           <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
               <option value="">Selecciona un color</option>
               <option value="#000000">Negro</option>
@@ -392,7 +392,7 @@ include(RUTA_PROYECTO . "includes/head.php");
             </select>
           </div>
           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
           <div class="col-md-2"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
         </div>`;
       }
@@ -405,7 +405,7 @@ include(RUTA_PROYECTO . "includes/head.php");
       div.classList.add("form-group", "row", "mt-2");
       div.innerHTML = `
                           <div class="col-md-2"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                             <select name="colores[]" data-placeholder="Selecciona un color" class="form-control select2" style="width: 100%;">
                               <option value="">Selecciona un color</option>
                               <option value="#000000">Negro</option>
@@ -425,7 +425,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             </select>
                           </div>
                           <div class="col-md-2"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-4"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-2"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
       container.appendChild(div);
