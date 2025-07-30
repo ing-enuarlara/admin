@@ -18,7 +18,7 @@ $coloresVariacion = Productos_Tallas::Select(
     [
         'cpta_producto' => $resultadoD['cprod_id'],
         'cpta_prin' => NO
-    ], "cpta_color"
+    ], "cpta_color, cpta_color2"
 )->fetchAll(PDO::FETCH_ASSOC);
 $colores = [];
 foreach ($coloresVariacion as $color) {
@@ -112,6 +112,9 @@ foreach ($coloresVariacion as $color) {
                                         ?>
                                         <div class="form-group" style="display: flex;">
                                             <a href="../bd_delete/productos-fotos-eliminar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Este registro se eliminará del sistema, Desea continuar bajo su responsabilidad?')){return false;}" class="btn btn-danger" style="margin: auto;"><i class="fa fa-trash"></i></a>
+                                            <?php if ($resultadoFotos['cpf_principal'] == 1 ) { ?>
+                                                <a href="../bd_update/productos-principal-actualizar.php?id=<?= $_GET["id"] ?>&idPf=<?= $resultadoFotos['cpf_id'] ?>" onClick="if(!confirm('Desea convertir esta foto en la principal del producto?')){return false;}" class="btn btn-danger" style="margin: auto;" title="Convertir a principal"><i class="fa fa-trash"></i></a>
+                                            <?php } ?>
                                         </div>
                                         <?php
                                         // }
