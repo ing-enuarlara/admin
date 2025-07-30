@@ -225,7 +225,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                     </div>
 
                     <div class="form-group col-md-3">
-                      <label for="exampleInputEmail1">
+                      <label for="inputReferencia">
                         Referencia:
                         <span
                           tabindex="0"
@@ -235,7 +235,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                           <i class="fa fa-question-circle text-info"></i>
                         </span>
                       </label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Referencia del Producto" name="ref">
+                      <input type="text" class="form-control" id="inputReferencia" placeholder="Referencia del Producto" name="ref">
                     </div>
 
                     <div class="form-group col-md-11">
@@ -301,7 +301,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             </select>
                           </div>
                           <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-3"><input type="text" name="referencias[]" id="refQuemada" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
                         </div>
                       </div>
@@ -383,9 +383,13 @@ include(RUTA_PROYECTO . "includes/head.php");
       var prodVariacion = document.getElementById("prodVariacion");
       var variacion = document.getElementById("variacion");
       const tallasContainer = document.getElementById("tallas-container");
+      const inputReferencia = document.getElementById("inputReferencia");
+      const referencia = inputReferencia.value || '';
 
       if (prodVariacion.checked) {
         variacion.style.display = "block";
+        const refQuemada = document.getElementById("refQuemada");
+        refQuemada.value = referencia;
       } else {
         variacion.style.display = "none";
         tallasContainer.innerHTML = `
@@ -430,7 +434,7 @@ include(RUTA_PROYECTO . "includes/head.php");
             </select>
           </div>
           <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+          <div class="col-md-3"><input type="text" name="referencias[]" id="refQuemada" placeholder="Referencia" class="form-control" value="${referencia}" /></div>
           <div class="col-md-1"><button type="button" class="btn btn-success" onclick="agregarVariacion()">+</button></div>
         </div>`;
       }
@@ -438,6 +442,8 @@ include(RUTA_PROYECTO . "includes/head.php");
     }
 
     function agregarVariacion() {
+      const inputReferencia = document.getElementById("inputReferencia");
+      const referencia = inputReferencia.value || '';
       const container = document.getElementById("tallas-container");
       const div = document.createElement("div");
       div.classList.add("form-group", "row", "mt-2");
@@ -482,7 +488,7 @@ include(RUTA_PROYECTO . "includes/head.php");
                             </select>
                           </div>
                           <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
-                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" /></div>
+                          <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" value="${referencia}" /></div>
                           <div class="col-md-1"><button type="button" class="btn btn-danger" onclick="this.closest('.row').remove()">-</button></div>
                         `;
       container.appendChild(div);
