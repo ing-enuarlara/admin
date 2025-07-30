@@ -13,5 +13,5 @@
 
 	include(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 
-	echo '<script type="text/javascript">window.location.href="../bd_read/productos-fotos.php?id='.$_GET['id'].'&success=SC_2";</script>';
+	echo '<script type="text/javascript">window.location.href="../bd_read/productos-fotos.php?id='.$_GET['id'].'";</script>';
 	exit();
