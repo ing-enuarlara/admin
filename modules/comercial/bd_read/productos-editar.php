@@ -85,42 +85,6 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                 <form class="form-horizontal" method="post" action="../bd_update/productos-actualizar.php" enctype="multipart/form-data">
                   <input type="hidden" name="id" value="<?= $_GET["id"]; ?>">
                   <div class="card-body">
-                    <div class="col-md-6" style="margin-top: 10px;">
-                      <div class="filtr-item col-md-12" data-category="1" data-sort="white sample">
-                        <a href="<?= $rutaFoto ?>" data-toggle="lightbox" data-title="Foto principal del producto">
-                          <img src="<?= $rutaFoto ?>" class="img-fluid mb-2" alt="white sample" style="margin-left: auto; margin-right: auto; display: flex; flex-wrap: wrap; width: 200px;" />
-                        </a>
-                      </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                      <label for="exampleInputEmail1">
-                        Tipo de Imagen:
-                        <span
-                          tabindex="0"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="SI vas a subir la imagen directo de tu ordenador, escoge 'Imagen' o si vas a colocar una imagen que esta en la web, escoge 'Url'.">
-                          <i class="fa fa-question-circle text-info"></i>
-                        </span>
-                      </label>
-                      <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
-                        <option value=""></option>
-                        <option value="<?= TIPO_IMG ?>" <?= $resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : ""; ?>>Imagen</option>
-                        <option value="<?= TIPO_URL ?>" <?= $resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : ""; ?>>Url</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-6" id="tipoFile" style="display:none;">
-                      <label for="customFile">Foto Principal</label>
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto">
-                        <label class="custom-file-label" for="customFile">Escoger Foto...</label>
-                      </div>
-                    </div>
-                    <div class="form-group col-md-6" id="tipoUrl" style="display:none;">
-                      <label for="exampleInputEmail1">Url de la Imagen:</label>
-                      <input type="text" class="form-control" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
-                    </div>
 
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Nombre:</label>

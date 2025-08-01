@@ -108,29 +108,6 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
     );
 }
 
-if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name']) || !empty($_POST['urlProducto']))) {
-    if (!empty($_FILES['ftProducto']['name'])) {
-        $destino = RUTA_PROYECTO . "files/productos";
-        $fileName = subirArchivosAlServidor($_FILES['ftProducto'], 'ftp', $destino);
-    }
-
-    if (!empty($_POST['urlProducto'])) {
-        $fileName = $_POST['urlProducto'];
-    }
-
-    Productos_Fotos::Update(
-        [
-            'cpf_fotos' => $fileName,
-            'cpf_tipo' => $_POST['tipoImg']
-        ],
-        [
-            'cpf_id_producto' => $_POST["id"],
-            'cpf_principal' => 1,
-            'cpf_fotos_prin' => NO
-        ]
-    );
-}
-
 include(RUTA_PROYECTO . "includes/guardar-historial-acciones.php");
 
 echo '<script type="text/javascript">window.location.href="../bd_read/productos.php";</script>';
