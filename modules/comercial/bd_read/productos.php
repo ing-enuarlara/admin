@@ -11,6 +11,9 @@ $filtros = [];
 if (!empty($_GET["cliAdmin"])) {
     $filtros[] = "cprod_id_empresa='" . $_GET["cliAdmin"] . "'";
 }
+if (!empty($_GET["marca"])) {
+    $filtros[] = "cprod_tipo='" . $_GET["marca"] . "'";
+}
 if (!empty($_GET["cat"])) {
     $filtros[] = "cprod_categoria='" . $_GET["cat"] . "'";
 }
@@ -27,6 +30,7 @@ if (!empty($_GET['search'])) {
         cprod_nombre LIKE '%$busqueda%' OR 
         cprod_cod_ref LIKE '%$busqueda%' OR 
         cprod_ean_code LIKE '%$busqueda%' OR 
+        ctipo_nombre LIKE '%$busqueda%' OR 
         ccat_nombre LIKE '%$busqueda%' OR 
         cmar_nombre LIKE '%$busqueda%'
     )";
