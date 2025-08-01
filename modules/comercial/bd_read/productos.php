@@ -155,6 +155,8 @@ $filtro = implode(" AND ", $filtros);
                                     if ($numRegistros > 0) {
                                         $num = $inicio + 1;
                                         foreach ($productos as $result) {
+                                            $categoria = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
+
                                             $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
                                             $subCategoria = !empty($result['cmar_nombre']) ? $result['cmar_nombre'] : "";
