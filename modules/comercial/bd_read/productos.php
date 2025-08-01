@@ -108,6 +108,7 @@ $filtro = implode(" AND ", $filtros);
                                         <th>Nombre Producto</th>
                                         <th>Precio</th>
                                         <th>Existencia</th>
+                                        <th>Marca</th>
                                         <th>Categoria</th>
                                         <th>Sub-Categoria</th>
                                         <th>Estado</th>
@@ -127,12 +128,16 @@ $filtro = implode(" AND ", $filtros);
                                     }
                                     require_once(RUTA_PROYECTO . 'class/Productos.php');
                                     require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
+                                    require_once(RUTA_PROYECTO . 'class/Tipos_Productos.php');
                                     require_once(RUTA_PROYECTO . 'class/Categorias.php');
                                     require_once(RUTA_PROYECTO . 'class/SubCategorias.php');
                                     require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
                                     require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
                                     require_once(RUTA_PROYECTO . 'class/ApiSiniwin.php');
 
+                                    Tipos_Productos::foreignKey(Tipos_Productos::LEFT, [
+                                        "ctipo_id" => 'cprod_tipo'
+                                    ]);
                                     Categorias::foreignKey(Categorias::LEFT, [
                                         "ccat_id" => 'cprod_categoria'
                                     ]);
@@ -200,6 +205,9 @@ $filtro = implode(" AND ", $filtros);
                                                 <td style="text-align: right;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
                                                 <td>
+                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marca=<?= $result['cprod_tipo']; ?>"><?= $categoria; ?></a>
+                                                </td>
+                                                <td>
                                                     <a href="<?= $_SERVER['PHP_SELF']; ?>?cat=<?= $result['cprod_categoria']; ?>"><?= $categoria; ?></a>
                                                 </td>
                                                 <td>
@@ -243,6 +251,7 @@ $filtro = implode(" AND ", $filtros);
                                         <th>Nombre Producto</th>
                                         <th>Precio</th>
                                         <th>Existencia</th>
+                                        <th>Marca</th>
                                         <th>Categoria</th>
                                         <th>Sub-Categoria</th>
                                         <th>Estado</th>
