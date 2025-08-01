@@ -32,7 +32,8 @@ if (!empty($_GET['search'])) {
         cprod_ean_code LIKE '%$busqueda%' OR 
         ctipo_nombre LIKE '%$busqueda%' OR 
         ccat_nombre LIKE '%$busqueda%' OR 
-        cmar_nombre LIKE '%$busqueda%'
+        cmar_nombre LIKE '%$busqueda%' OR 
+        cprod_referencias LIKE '%$busqueda%'
     )";
 }
 
