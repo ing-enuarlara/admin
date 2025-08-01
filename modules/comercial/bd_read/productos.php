@@ -155,7 +155,7 @@ $filtro = implode(" AND ", $filtros);
                                     if ($numRegistros > 0) {
                                         $num = $inicio + 1;
                                         foreach ($productos as $result) {
-                                            $categoria = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
+                                            $marca = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
 
                                             $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
@@ -207,7 +207,7 @@ $filtro = implode(" AND ", $filtros);
                                                 <td style="text-align: right;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
                                                 <td>
-                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marca=<?= $result['cprod_tipo']; ?>"><?= $categoria; ?></a>
+                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marca=<?= $result['cprod_tipo']; ?>"><?= $marca; ?></a>
                                                 </td>
                                                 <td>
                                                     <a href="<?= $_SERVER['PHP_SELF']; ?>?cat=<?= $result['cprod_categoria']; ?>"><?= $categoria; ?></a>
