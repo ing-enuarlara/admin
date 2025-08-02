@@ -49,7 +49,7 @@ $productosFiltrados = array_filter($productosBD, function ($producto) {
         $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
         $referencias = (string)($producto['cprod_referencias'] ?? '');
         $search = $_REQUEST['search'];
-        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($marca, $search) === false && stripos($categoria, $search) === false && stripos($subCate, $search) === false && stripos($referencias, $search)) {
+        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($marca, $search) === false && stripos($categoria, $search) === false && stripos($subCate, $search) === false && stripos($referencias, $search) === false) {
             return false;
         }
     }
