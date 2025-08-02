@@ -23,6 +23,9 @@ if (!empty($_GET["subCat"])) {
 if (!empty($_GET["estado"])) {
     $filtros[] = "cprod_estado='" . $_GET["estado"] . "'";
 }
+if (!empty($_GET['search'])) {
+    $busqueda = $_GET['search'];
+}
 
 $filtro = implode(" AND ", $filtros);
 ?>
