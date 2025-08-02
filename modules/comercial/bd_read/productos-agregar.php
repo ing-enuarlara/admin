@@ -93,6 +93,11 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <label for="exampleInputEmail1">Precio:</label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" step="0.01">
                     </div>
+                    
+                    <div class="form-group col-md-2">
+                      <label for="inputDescuento">Descuento:</label>
+                      <input type="number" class="form-control" id="inputDescuento" placeholder="Tiene descuento el Producto?" name="desc">
+                    </div>
 
                     <div class="form-group col-md-3">
                       <label>Marca:</label>

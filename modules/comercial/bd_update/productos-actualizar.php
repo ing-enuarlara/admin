@@ -26,7 +26,8 @@ Productos::Update(
         'cprod_palabras_claves' => $_POST["paClave"],
         'cprod_estado' => $_POST["estado"],
         'cprod_especificaciones' => $_POST["especificaciones"],
-        'cprod_cod_ref' => $codRef
+        'cprod_cod_ref' => $codRef,
+        'cprod_descuento' => $_POST["desc"] ?? 0
     ],
     ['cprod_id' => $_POST["id"]]
 );

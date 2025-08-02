@@ -25,7 +25,8 @@ $idInsertU = Productos::Insert([
     'cprod_id_empresa' => $_SESSION["idEmpresa"],
     'cprod_fecha_creacion' => date("Y-m-d H:i:s"),
     'cprod_especificaciones' => $_POST["especificaciones"],
-    'cprod_cod_ref' => $_POST["ref"]
+    'cprod_cod_ref' => $_POST["ref"],
+    'cprod_descuento' => $_POST["desc"] ?? 0
 ]);
 
 // 1. Tallas
