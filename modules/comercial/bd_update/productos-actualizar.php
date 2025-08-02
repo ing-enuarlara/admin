@@ -27,7 +27,7 @@ Productos::Update(
         'cprod_estado' => $_POST["estado"],
         'cprod_especificaciones' => $_POST["especificaciones"],
         'cprod_cod_ref' => $codRef,
-        'cprod_descuento' => $_POST["desc"] ?? 0
+        'cprod_descuento' => $_POST["desc"] ?? NULL
     ],
     ['cprod_id' => $_POST["id"]]
 );
