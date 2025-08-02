@@ -8,36 +8,23 @@ include(RUTA_PROYECTO . "includes/head.php");
 
 $filtros = [];
 
-// if (!empty($_GET["cliAdmin"])) {
-//     $filtros[] = "cprod_id_empresa='" . $_GET["cliAdmin"] . "'";
-// }
-// if (!empty($_GET["marca"])) {
-//     $filtros[] = "cprod_tipo='" . $_GET["marca"] . "'";
-// }
-// if (!empty($_GET["cat"])) {
-//     $filtros[] = "cprod_categoria='" . $_GET["cat"] . "'";
-// }
-// if (!empty($_GET["subCat"])) {
-//     $filtros[] = "cprod_marca='" . $_GET["subCat"] . "'";
-// }
-// if (!empty($_GET["estado"])) {
-//     $filtros[] = "cprod_estado='" . $_GET["estado"] . "'";
-// }
-// if (!empty($_GET['search'])) {
-//     $busqueda = $_GET['search'];
-//     $filtros[] = "(
-//         cprod_id LIKE '%$busqueda%' OR 
-//         cprod_nombre LIKE '%$busqueda%' OR 
-//         cprod_cod_ref LIKE '%$busqueda%' OR 
-//         cprod_ean_code LIKE '%$busqueda%' OR 
-//         ctipo_nombre LIKE '%$busqueda%' OR 
-//         ccat_nombre LIKE '%$busqueda%' OR 
-//         cmar_nombre LIKE '%$busqueda%' OR 
-//         cprod_referencias LIKE '%$busqueda%'
-//     )";
-// }
+if (!empty($_GET["cliAdmin"])) {
+    $filtros[] = "cprod_id_empresa='" . $_GET["cliAdmin"] . "'";
+}
+if (!empty($_GET["marca"])) {
+    $filtros[] = "cprod_tipo='" . $_GET["marca"] . "'";
+}
+if (!empty($_GET["cat"])) {
+    $filtros[] = "cprod_categoria='" . $_GET["cat"] . "'";
+}
+if (!empty($_GET["subCat"])) {
+    $filtros[] = "cprod_marca='" . $_GET["subCat"] . "'";
+}
+if (!empty($_GET["estado"])) {
+    $filtros[] = "cprod_estado='" . $_GET["estado"] . "'";
+}
 
-// $filtro = implode(" AND ", $filtros);
+$filtro = implode(" AND ", $filtros);
 ?>
 
 <!-- Google Font: Source Sans Pro -->
