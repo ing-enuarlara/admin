@@ -6,13 +6,14 @@ if (empty($_REQUEST["nume"])) {
 
 $productosBD = Productos::SelectJoin(
     $predicado,
-    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias",
+    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias, GROUP_CONCAT(cpta_cod_ean SEPARATOR ', ') AS cprod_cod_ean",
     [
         Tipos_Productos::class,
         Categorias::class,
-        SubCategorias::class
+        SubCategorias::class,
+        Productos_Tallas::class
     ],
-    "LEFT JOIN " . Productos_Tallas::$schema . "." . Productos_Tallas::$tableName . " ON cpta_producto = cprod_id AND cpta_prin = 'NO'",
+    "",
     "cprod_id",
     "",
     "cprod_id DESC"
@@ -48,8 +49,9 @@ $productosFiltrados = array_filter($productosBD, function ($producto) {
         $nombre = (string)($producto['cprod_nombre'] ?? '');
         $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
         $referencias = (string)($producto['cprod_referencias'] ?? '');
+        $codsEan = (string)($producto['cprod_cod_ean'] ?? '');
         $search = $_REQUEST['search'];
-        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($marca, $search) === false && stripos($categoria, $search) === false && stripos($subCate, $search) === false && stripos($referencias, $search) === false) {
+        if (stripos($nombre, $search) === false && stripos($palabras, $search) === false && stripos($id, $search) === false && stripos($codRef, $search) === false && stripos($code, $search) === false && stripos($marca, $search) === false && stripos($categoria, $search) === false && stripos($subCate, $search) === false && stripos($referencias, $search) === false && stripos($codsEan, $search) === false) {
             return false;
         }
     }

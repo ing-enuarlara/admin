@@ -139,6 +139,11 @@ $filtro = implode(" AND ", $filtros);
                                     SubCategorias::foreignKey(SubCategorias::LEFT, [
                                         "cmar_id" => 'cprod_marca'
                                     ]);
+                                    
+                                    Productos_Tallas::foreignKey(Productos_Tallas::LEFT, [
+                                        "cpta_producto" => 'cprod_id',
+                                        "cpta_prin" => 'NO'
+                                    ]);
 
                                     if (!empty($filtro)) {
                                         if (!is_array($predicado)) $predicado = [];
