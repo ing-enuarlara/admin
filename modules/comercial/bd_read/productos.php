@@ -142,7 +142,7 @@ $filtro = implode(" AND ", $filtros);
                                     
                                     Productos_Tallas::foreignKey(Productos_Tallas::LEFT, [
                                         "cpta_producto" => 'cprod_id',
-                                        "cpta_prin" => 'NO'
+                                        "cpta_prin" => "'" . NO . "'"
                                     ]);
 
                                     if (!empty($filtro)) {
