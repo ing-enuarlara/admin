@@ -203,7 +203,7 @@ $filtro = implode(" AND ", $filtros);
                                                         <img src="<?= $rutaFoto ?>" width="40">
                                                     <?php } ?>
                                                 </td>
-                                                <td><?= $result['cprod_nombre']; ?></td>
+                                                <td style="text-transform: uppercase;"><?= $result['cprod_nombre']; ?></td>
                                                 <td style="text-align: right;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
                                                 <td>
