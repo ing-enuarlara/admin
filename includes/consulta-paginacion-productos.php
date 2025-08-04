@@ -30,9 +30,6 @@ $productosFiltrados = array_filter($productosBD, function ($producto) {
     if (!empty($_REQUEST['subCate']) && ($producto['cmar_nombre'] ?? '') != $_REQUEST['subCate']) {
         return false;
     }
-    if (!empty($_REQUEST['tipo']) && ($producto['cmar_nombre'] ?? '') != $_REQUEST['tipo']) {
-        return false;
-    }
     if (!empty($_REQUEST['pClave'])) {
         $palabras = (string)($producto['cprod_palabras_claves'] ?? '');
         if (stripos($palabras, $_REQUEST['pClave']) === false) {

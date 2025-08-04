@@ -11,8 +11,8 @@ $filtros = [];
 if (!empty($_GET["cliAdmin"])) {
     $filtros[] = "cprod_id_empresa='" . $_GET["cliAdmin"] . "'";
 }
-if (!empty($_GET["marca"])) {
-    $filtros[] = "cprod_tipo='" . $_GET["marca"] . "'";
+if (!empty($_GET["marc"])) {
+    $filtros[] = "cprod_tipo='" . $_GET["marc"] . "'";
 }
 if (!empty($_GET["cat"])) {
     $filtros[] = "cprod_categoria='" . $_GET["cat"] . "'";
@@ -155,7 +155,7 @@ $filtro = implode(" AND ", $filtros);
                                     if ($numRegistros > 0) {
                                         $num = $inicio + 1;
                                         foreach ($productos as $result) {
-                                            $marca = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
+                                            $marc = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
 
                                             $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
 
@@ -207,7 +207,7 @@ $filtro = implode(" AND ", $filtros);
                                                 <td style="text-align: right;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
                                                 <td>
-                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marca=<?= $result['cprod_tipo']; ?>"><?= $marca; ?></a>
+                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marc=<?= $result['cprod_tipo']; ?>"><?= $marc; ?></a>
                                                 </td>
                                                 <td>
                                                     <a href="<?= $_SERVER['PHP_SELF']; ?>?cat=<?= $result['cprod_categoria']; ?>"><?= $categoria; ?></a>
