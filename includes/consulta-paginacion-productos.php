@@ -6,7 +6,7 @@ if (empty($_REQUEST["nume"])) {
 
 $productosBD = Productos::SelectJoin(
     $predicado,
-    "cprod_id, cprod_cod_ref, cprod_nombre, cprod_costo, cprod_descuento, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias, GROUP_CONCAT(cpta_cod_ean SEPARATOR ', ') AS cprod_cod_ean",
+    "cprod_id, cprod_cod_ref, cprod_ean_code, cprod_nombre, cprod_costo, cprod_descuento, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre, GROUP_CONCAT(cpta_referencia SEPARATOR ', ') AS cprod_referencias, GROUP_CONCAT(cpta_cod_ean SEPARATOR ', ') AS cprod_cod_ean",
     [
         Tipos_Productos::class,
         Categorias::class,
