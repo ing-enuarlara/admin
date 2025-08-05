@@ -227,6 +227,11 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                     </div>
 
                     <div class="form-group col-md-3">
+                      <label for="inputCodigoEan">Codigo EAN:</label>
+                      <input type="text" class="form-control" id="inputCodigoEan" placeholder="Codigo EAN del Producto" name="codigoEAN" value="<?= $resultadoD['cprod_ean_code']; ?>">
+                    </div>
+
+                    <div class="form-group col-md-3">
                       <label for="inputReferencia">
                         Referencia:
                         <span

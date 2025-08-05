@@ -202,6 +202,11 @@ include(RUTA_PROYECTO . "includes/head.php");
                     </div>
 
                     <div class="form-group col-md-3">
+                      <label for="inputCodigoEan">Codigo EAN:</label>
+                      <input type="text" class="form-control" id="inputCodigoEan" placeholder="Codigo EAN del Producto" name="codigoEAN">
+                    </div>
+
+                    <div class="form-group col-md-3">
                       <label for="inputReferencia">
                         Referencia:
                         <span

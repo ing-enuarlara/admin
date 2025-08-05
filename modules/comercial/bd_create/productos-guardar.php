@@ -26,6 +26,7 @@ $idInsertU = Productos::Insert([
     'cprod_fecha_creacion' => date("Y-m-d H:i:s"),
     'cprod_especificaciones' => $_POST["especificaciones"],
     'cprod_cod_ref' => $_POST["ref"],
+    'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
     'cprod_descuento' => $_POST["desc"] ?? NULL
 ]);
 
