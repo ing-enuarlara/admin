@@ -12,41 +12,52 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !e
 
         foreach ($_FILES['ftProducto']['tmp_name'] as $i => $tmpName) {
             if ($_FILES['ftProducto']['error'][$i] === UPLOAD_ERR_OK) {
-                $originalName = $_FILES['ftProducto']['name'][$i];
-                $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-                $nuevoNombre = uniqid('ftp_') . '.webp';
-                $rutaDestino = $destino . '/' . $nuevoNombre;
-
-                // Convertir imagen a WebP según su tipo original
-                switch ($extension) {
-                    case 'jpg':
-                    case 'jpeg':
-                        $image = imagecreatefromjpeg($tmpName);
-                        break;
-                    case 'png':
-                        $image = imagecreatefrompng($tmpName);
-                        // Manejo de transparencia
-                        imagepalettetotruecolor($image);
-                        imagealphablending($image, true);
-                        imagesavealpha($image, true);
-                        break;
-                    case 'gif':
-                        $image = imagecreatefromgif($tmpName);
-                        break;
-                    default:
-                        // Si no es un formato soportado, omitir
-                        continue 2;
-                }
-
-                if ($image !== false) {
-                    // Guardar como WebP
-                    imagewebp($image, $rutaDestino, 80); // calidad entre 0-100
-                    imagedestroy($image); // liberar memoria
-                    $fileNames[] = $nuevoNombre;
-                }
+                $nuevoNombre = uniqid('ftp_') . '.' . pathinfo($_FILES['ftProducto']['name'][$i], PATHINFO_EXTENSION);
+                move_uploaded_file($tmpName, $destino . '/' . $nuevoNombre);
+                $fileNames[] = $nuevoNombre;
             }
         }
     }
+    // if (!empty($_FILES['ftProducto']['name'][0])) {
+    //     $destino = RUTA_PROYECTO . "files/productos";
+
+    //     foreach ($_FILES['ftProducto']['tmp_name'] as $i => $tmpName) {
+    //         if ($_FILES['ftProducto']['error'][$i] === UPLOAD_ERR_OK) {
+    //             $originalName = $_FILES['ftProducto']['name'][$i];
+    //             $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
+    //             $nuevoNombre = uniqid('ftp_') . '.webp';
+    //             $rutaDestino = $destino . '/' . $nuevoNombre;
+
+    //             // Convertir imagen a WebP según su tipo original
+    //             switch ($extension) {
+    //                 case 'jpg':
+    //                 case 'jpeg':
+    //                     $image = imagecreatefromjpeg($tmpName);
+    //                     break;
+    //                 case 'png':
+    //                     $image = imagecreatefrompng($tmpName);
+    //                     // Manejo de transparencia
+    //                     imagepalettetotruecolor($image);
+    //                     imagealphablending($image, true);
+    //                     imagesavealpha($image, true);
+    //                     break;
+    //                 case 'gif':
+    //                     $image = imagecreatefromgif($tmpName);
+    //                     break;
+    //                 default:
+    //                     // Si no es un formato soportado, omitir
+    //                     continue 2;
+    //             }
+
+    //             if ($image !== false) {
+    //                 // Guardar como WebP
+    //                 imagewebp($image, $rutaDestino, 80); // calidad entre 0-100
+    //                 imagedestroy($image); // liberar memoria
+    //                 $fileNames[] = $nuevoNombre;
+    //             }
+    //         }
+    //     }
+    // }
 
     if (!empty($_POST['urlProducto'])) {
         $fileNames[] = $_POST['urlProducto'];
