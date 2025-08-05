@@ -22,8 +22,13 @@ $coloresVariacion = Productos_Tallas::Select(
 )->fetchAll(PDO::FETCH_ASSOC);
 $colores = [];
 foreach ($coloresVariacion as $color) {
-    if (!in_array($color['cpta_color'], $colores)) {
-        $colores[] = $color['cpta_color'];
+    // Si no hay segundo color, solo se muestra el primero
+    $key = trim($color['cpta_color']) . "|" . trim($color['cpta_color2']); // Para que sean únicos por pareja
+    if (!isset($colores[$key])) {
+        $colores[$key] = [
+            'color1' => $color['cpta_color'],
+            'color2' => $color['cpta_color2']
+        ];
     }
 }
 ?>
@@ -146,10 +151,15 @@ foreach ($coloresVariacion as $color) {
                                 <?php if (!empty($colores) && count(array_filter($colores))) { ?>
                                     <div class="form-group col-md-12">
                                         <label for="exampleInputEmail1">Relacionar con color:</label>
-                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="color" id="color">
+                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="colorCombo" id="colorCombo">
                                             <option value="">Para el Producto General</option>
-                                            <?php foreach ($colores as $color) { ?>
-                                                <option value="<?= $color ?>" ><?= $coloresBases[$color]; ?></option>
+                                            <?php foreach ($colores as $key => $combo) { 
+                                                $texto = $coloresBases[$combo['color1']] ?? $combo['color1'];
+                                                if ($combo['color2']) {
+                                                    $texto .= ' / ' . ($coloresBases[$combo['color2']] ?? $combo['color2']);
+                                                }
+                                            ?>
+                                                <option value="<?= $combo['color1'].'|'.$combo['color2'] ?>"> <?= $texto ?> </option>
                                             <?php } ?>
                                         </select>
                                     </div>

@@ -70,6 +70,15 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !e
     }
 
     $esPrimera = $numFotos < 1;
+
+    $colorCombo = $_POST['colorCombo']; // Puede ser vacío
+    if ($colorCombo) {
+        $comboArr = explode('|', $colorCombo, 2);
+        $color1 = $comboArr[0] ?? null;
+        $color2 = $comboArr[1] ?? null;
+    } else {
+        $color1 = $color2 = null;
+    }
     foreach ($fileNames as $i => $fileName) {
         try {
             Productos_Fotos::Insert([
@@ -78,7 +87,8 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !e
                 'cpf_id_empresa' => $_SESSION["idEmpresa"],
                 'cpf_tipo' => $_POST['tipoImg'],
                 'cpf_principal' => $esPrimera && $i === 0 ? 1 : 0,
-                'cpf_color' => $_POST['color'] ?? NULL
+                'cpf_color' => $color1 ?? NULL,
+                'cpf_color2' => $color2 ?? NULL
             ]);
         } catch (Exception $e) {
             include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
