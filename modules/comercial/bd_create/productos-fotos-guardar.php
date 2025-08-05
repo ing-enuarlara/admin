@@ -74,10 +74,10 @@ if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !e
     $colorCombo = $_POST['colorCombo']; // Puede ser vacío
     if ($colorCombo) {
         $comboArr = explode('|', $colorCombo, 2);
-        $color1 = $comboArr[0] ?? null;
-        $color2 = $comboArr[1] ?? null;
+        $color1 = $comboArr[0] ?? NULL;
+        $color2 = $comboArr[1] ?? NULL;
     } else {
-        $color1 = $color2 = null;
+        $color1 = $color2 = NULL;
     }
     foreach ($fileNames as $i => $fileName) {
         try {
