@@ -206,7 +206,7 @@ $filtro = implode(" AND ", $filtros);
                                                 </td>
                                                 <td style="text-transform: uppercase;"><?= $result['cprod_nombre']; ?></td>
                                                 <td style="text-align: right;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
-                                                <td style="text-align: right;"><?= number_format(($result['cprod_costo'] * $result['cprod_descuento'] / 100), 2, ",", "."); ?> € (- <?= $result['cprod_descuento']; ?>%)</td>
+                                                <td style="text-align: right;"><?= number_format(($result['cprod_costo'] * $result['cprod_descuento'] / 100), 2, ",", "."); ?> €<br>(- <?= $result['cprod_descuento']; ?>%)</td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
                                                 <td>
                                                     <a href="<?= $_SERVER['PHP_SELF']; ?>?marc=<?= $result['cprod_tipo']; ?>"><?= $marc; ?></a>
