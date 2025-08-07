@@ -88,12 +88,12 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <label>Descripción</label>
                       <textarea class="form-control" rows="3" placeholder="Descripción del producto ..." name="especificaciones" id="especificaciones" value=""></textarea>
                     </div>
-                    
+
                     <div class="form-group col-md-2">
                       <label for="exampleInputEmail1">Precio:</label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" step="0.01">
                     </div>
-                    
+
                     <div class="form-group col-md-2">
                       <label for="inputDescuento">Descuento:</label>
                       <input type="number" class="form-control" id="inputDescuento" placeholder="Tiene descuento el Producto?" name="desc">
@@ -232,13 +232,13 @@ include(RUTA_PROYECTO . "includes/head.php");
                         </span>
                       </label>
                       <div class="input-group">
-                          <label class="switchToggle">
-                            <input type="checkbox" name="prodVariacion" id="prodVariacion" value="1" onchange="habilitarVariacion()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
-                            <span class="slider red round"></span>
-                          </label>
+                        <label class="switchToggle">
+                          <input type="checkbox" name="prodVariacion" id="prodVariacion" value="1" onchange="habilitarVariacion()" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+                          <span class="slider red round"></span>
+                        </label>
                       </div>
                     </div>
-                    
+
                     <div class="form-group col-md-12" id="variacion" style="display:none;">
                       <label>Variaciones disponibles:</label>
                       <div id="tallas-container">
@@ -300,13 +300,19 @@ include(RUTA_PROYECTO . "includes/head.php");
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="col-sm-6">
                       <!-- textarea -->
                       <div class="form-group">
                         <label>Palabras Claves</label>
                         <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"></textarea>
                       </div>
+                    </div>
+
+                    <div class="form-group col-md-6" id="relacion-productos-container">
+                      <label>Relacionar Productos:</label>
+                      <select data-placeholder="Escoja los productos relacionados" class="form-control select2" multiple="multiple" style="width: 100%;" name="productos[]" id="productos-select">
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->

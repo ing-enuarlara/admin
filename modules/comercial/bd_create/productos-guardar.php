@@ -7,6 +7,7 @@ require_once(RUTA_PROYECTO . 'class/Productos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Relacion.php');
 
 $subCategoria = 0;
 if (!empty($_POST["marca"])) {
@@ -86,6 +87,16 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
                 'cpt_tipo' => 'OTRO'
             ]);
         }
+    }
+}
+
+// GUARDAR RELACION DE PRODUCTOS
+if(!empty($_POST["productos"])){
+    foreach ($_POST["productos"] AS $producto){
+        Productos_Relacion::Insert([
+            'cpre_producto' => $idInsertU,
+            'cpre_producto_relacion' => $producto
+        ]);
     }
 }
 

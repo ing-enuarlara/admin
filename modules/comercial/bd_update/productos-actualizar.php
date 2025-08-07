@@ -7,6 +7,7 @@ require_once(RUTA_PROYECTO . 'class/Productos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
+require_once(RUTA_PROYECTO . 'class/Productos_Relacion.php');
 
 $subCategoria = 0;
 if (!empty($_POST["marca"])) {
@@ -111,6 +112,19 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
             'cpt_tipo' => 'OTRO'
         ]
     );
+}
+
+// GUARDAR RELACION DE PRODUCTOS
+if(!empty($_POST["productos"])){
+    Productos_Relacion::Delete(['cpre_producto' => $_POST["id"]]);
+    foreach ($_POST["productos"] AS $producto){
+        Productos_Relacion::Insert([
+            'cpre_producto' => $_POST["id"],
+            'cpre_producto_relacion' => $producto
+        ]);
+    }
+} else {
+    Productos_Relacion::Delete(['cpre_producto' => $_POST["id"]]);
 }
 
 include(RUTA_PROYECTO . "includes/guardar-historial-acciones.php");

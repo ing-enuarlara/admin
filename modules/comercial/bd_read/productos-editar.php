@@ -5,19 +5,14 @@ $idPagina = 23;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
+require_once(RUTA_PROYECTO . "class/Productos.php");
+require_once(RUTA_PROYECTO . "class/Productos_Relacion.php");
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
 
-try {
-  $consuluta = $conexionBdComercial->query("SELECT * FROM comercial_productos 
-  LEFT JOIN comercial_productos_fotos ON cpf_id_producto = cprod_id AND cpf_principal = 1 AND cpf_fotos_prin = '" . NO . "'
-  WHERE cprod_id='" . $_GET["id"] . "'");
-} catch (Exception $e) {
-  include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-}
-$resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
-
-$rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_IMG ? REDIRECT_ROUTE . "files/productos/" . $resultadoD['cpf_fotos'] : $resultadoD['cpf_fotos']) : "";
+$resultadoD = Productos::Select([
+  'cprod_id' => $_GET['id']
+], "*")->fetch(PDO::FETCH_ASSOC);
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -106,7 +101,7 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                       <label for="exampleInputEmail1">Precio:</label>
                       <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Precio del Producto" name="costo" value="<?= $resultadoD['cprod_costo']; ?>" step="0.01">
                     </div>
-                    
+
                     <div class="form-group col-md-2">
                       <label for="inputDescuento">Descuento:</label>
                       <input type="number" class="form-control" id="inputDescuento" placeholder="Tiene descuento el Producto?" name="desc" value="<?= $resultadoD['cprod_descuento']; ?>">
@@ -417,6 +412,32 @@ $rutaFoto = !empty($resultadoD['cpf_tipo']) ? ($resultadoD['cpf_tipo'] == TIPO_I
                     <div class="form-group col-md-6">
                       <label>Palabras Claves</label>
                       <textarea class="form-control" rows="1" placeholder="Best Seller, Cadenas, Cadenas 50cm, Tienda, ..." name="paClave"><?= $resultadoD['cprod_palabras_claves']; ?></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6" id="relacion-productos-container">
+                      <label>Relacionar Productos:</label>
+                      <select data-placeholder="Escoja los productos relacionados" class="form-control select2" multiple="multiple" style="width: 100%;" name="productos[]" id="productos-select">
+                        <?php
+                          Productos::foreignKey(Productos::INNER, [
+                              "cprod_id_empresa" => $_SESSION["idEmpresa"],
+                              "AND" => "(cpre_producto = {$_GET["id"]} AND cprod_id = cpre_producto_relacion) OR (cpre_producto_relacion = {$_GET["id"]} AND cprod_id = cpre.cpre_producto)"
+                          ]);
+                          $result = Productos_Relacion::SelectJoin(
+                              [
+                                  Productos_Relacion::OTHER_PREDICATE => "cprod_id != {$_GET["id"]}"
+
+                              ],
+                              "cprod_id, cprod_nombre",
+                              [
+                                  Productos::class
+                              ]
+                          );
+
+                          foreach ($result AS $resProducto) {
+                        ?>
+                          <option selected value="<?= $resProducto['cprod_id']; ?>"><?= strtoupper($resProducto['cprod_nombre']); ?></option>
+                        <?php } ?>
+                      </select>
                     </div>
 
                     <div class="form-group col-md-3">
