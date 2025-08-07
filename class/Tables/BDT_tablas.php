@@ -306,7 +306,7 @@ abstract class BDT_Tablas implements BDT_Interface
                 if (!empty($joinKey)) {
                     $conditionsJoin = [];
                     foreach ($joinKey as $onclave => $onvalor) {
-                        if ($onclave === 'AND' || $onvalor === 'OR') {
+                        if ($onclave === 'AND' || $onclave === 'OR') {
                             $conditionsJoin[] = "($onvalor)";
                         } else {
                             $asociacion = explode(" ", $onclave);
