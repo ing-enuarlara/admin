@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
-        <img src="<?= REDIRECT_ROUTE ?>files/logo/logo.png" alt="AdminZEFE" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminZEFE</span>
+        <img src="<?= REDIRECT_ROUTE ?>files/logo/logo2.png" alt="AdminOCB" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">AdminOCB</span>
     </a>
 
     <!-- Sidebar -->
@@ -400,7 +400,7 @@
                     <li <?= agregarClass(MENU_PADRE, [14, 15, 16]) ?>>
                         <a href="<?= REDIRECT_ROUTE ?>modules/client_admin/bd_read/clientes-admin.php" <?= agregarClass(MENU, [14, 15, 16]) ?>>
                             <i class="nav-icon fas fa-business-time"></i>
-                            <p>Clientes AdminZEFE</p>
+                            <p>Clientes AdminOCB</p>
                         </a>
                     </li>
                 <?php }

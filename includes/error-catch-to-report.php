@@ -21,7 +21,7 @@ try {
 	<div style="font-family: Consolas; padding: 10px; background-color: black; color:greenyellow;">
 		<strong>ERROR DE EJECUCIÓN</strong><br>
 		Lo sentimos, ha ocurrido un error.<br>
-		Pero no se preocupe, hemos reportado este error automáticamente al personal de soporte de AdminZEFE para que lo solucione lo antes posible.<br>
+		Pero no se preocupe, hemos reportado este error automáticamente al personal de soporte de AdminOCB para que lo solucione lo antes posible.<br>
 		
 		<p>
 			Si necesita ayuda urgente, comuniquese con el personal encargado del CRM y reporte los siguientes datos:<br>
