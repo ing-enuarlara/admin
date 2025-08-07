@@ -17,6 +17,12 @@ switch($_SERVER['HTTP_HOST']){
         define('REDIRECT_ROUTE', 'https://adminzefe.ing-enuarlara.com/admin/');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
+
+        case 'adminocb.ing-enuarlara.com';
+        define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/admin/');
+        define('REDIRECT_ROUTE', 'https://adminocb.ing-enuarlara.com/admin/');
+        error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
+        break;
 }
 
 include(RUTA_PROYECTO."sensitive.php");
