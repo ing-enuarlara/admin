@@ -7,6 +7,15 @@ $(document).ready(function () {
             type: "GET",
             url: "../../../ajax/ajax-buscar-productos.php",
             dataType: "json",
+            data: function (params) {
+                var extra = {};
+                if (window.PRODUCTO_ID) {
+                    extra.idProducto = window.PRODUCTO_ID;
+                }
+                return $.extend({
+                    q: params.term
+                }, extra);
+            },
             processResults: function (items) {
                 return {
                     results: items.map(function (item) {
