@@ -118,10 +118,16 @@ if (!empty($_POST['otras_labels']) && !empty($_POST['otras_values'])) {
 if(!empty($_POST["productos"])){
     Productos_Relacion::Delete(['cpre_producto' => $_POST["id"]]);
     foreach ($_POST["productos"] AS $producto){
-        Productos_Relacion::Insert([
-            'cpre_producto' => $_POST["id"],
-            'cpre_producto_relacion' => $producto
+        $existe = Productos_Relacion::numRows([
+            'cpre_producto' => $producto,
+            'cpre_producto_relacion' => $_POST["id"]
         ]);
+        if ( $existe < 1 ) {
+            Productos_Relacion::Insert([
+                'cpre_producto' => $_POST["id"],
+                'cpre_producto_relacion' => $producto
+            ]);
+        }
     }
 } else {
     Productos_Relacion::Delete(['cpre_producto' => $_POST["id"]]);

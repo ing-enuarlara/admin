@@ -22,7 +22,9 @@ try {
 			'cpta_prin' => NO
 		]
 	);
-	Combos_Productos::Delete([ 'ccp_producto' => $_GET["id"] ]);
+	Combos_Productos::Delete([
+		Combos_Productos::OTHER_PREDICATE => "(ccp_producto = {$_GET["id"]} OR cpre_producto_relacion = {$_GET["id"]})"
+	]);
 } catch (Exception $e) {
 	include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
 }

@@ -155,7 +155,7 @@ abstract class BDT_Tablas implements BDT_Interface
 
         foreach ($predicado as $clave => $valor) {
             if ($clave === self::OTHER_PREDICATE) {
-                $where .= $clave . "  {$valor} ";
+                $where .= "{$valor} AND ";
             } else {
                 $where .= $clave . " = '{$valor}' AND ";
             }
