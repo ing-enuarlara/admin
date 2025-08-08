@@ -130,7 +130,7 @@
                 <?php } ?>
                 <?php
                 if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COMERCIAL) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::COMERCIAL)) {
-                    $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189];
+                    $arrayPaginas = [20, 21, 23, 26, 27, 29, 32, 33, 35, 56, 59, 60, 62, 69, 70, 71, 75, 76, 77, 87, 88, 95, 96, 98, 103, 105, 107, 145, 146, 147, 154, 155, 157, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 193, 194, 196];
 
                     $arrayPaginas2 = [160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190];
 
@@ -238,6 +238,14 @@
                                             </li>
                                         <?php } ?>
                                     </ul>
+                                </li>
+                            <?php } ?>
+                            <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COMBOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::COMBOS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 193, 'PAG')) { ?>
+                                <li class="nav-item">
+                                    <a href="<?= REDIRECT_ROUTE ?>modules/comercial/bd_read/combos.php" <?= agregarClass(MENU, [193, 194, 196]) ?>>
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Combos</p>
+                                    </a>
                                 </li>
                             <?php } ?>
                             <?php if (validarAccesoModulo($_SESSION["idEmpresa"], Modulos::OFERTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], Modulos::OFERTAS) && validarAccesoRol($_SESSION["datosUsuarioActual"]['usr_tipo'], 154, 'PAG')) { ?>

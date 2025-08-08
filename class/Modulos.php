@@ -47,6 +47,7 @@ class Modulos extends BDT_Tablas implements BDT_JoinImplements
     public const SUBCATEGORIAS          = 39;
     public const TIPOS_PRODUCTOS        = 40;
     public const PRODUCTO               = 41;
+    public const COMBOS                 = 42;
 
     public static $schema = BDMODSISTEMA;
 

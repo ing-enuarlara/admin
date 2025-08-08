@@ -5,6 +5,7 @@ $idPagina = 25;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
+	require_once(RUTA_PROYECTO . "class/Combos_Productos.php");
 
 try {
 	$conexionBdComercial->query("DELETE FROM comercial_productos WHERE cprod_id='" . $_GET["id"] . "'");
@@ -21,6 +22,7 @@ try {
 			'cpta_prin' => NO
 		]
 	);
+	Combos_Productos::Delete([ 'ccp_producto' => $_GET["id"] ]);
 } catch (Exception $e) {
 	include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
 }
