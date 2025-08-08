@@ -57,7 +57,7 @@
             <div class="row">
               
               <?php
-              if(validarAccesoModulo($_SESSION["idEmpresa"], 3)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::FACTURACION)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE factura_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -81,8 +81,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/facturacion.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <?php
+              } 
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::COTIZACIONES)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE cotiz_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -106,8 +107,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/cotizaciones.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <?php
+              } 
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PEDIDOS)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE pedid_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -131,8 +133,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/pedidos.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <?php
+              } 
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::REMISIONES)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE remi_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -156,8 +159,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/remisiones.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-              
               <?php
+              } 
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::CLIENTES)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE cli_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -181,10 +185,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/comercial/bd_read/clientes.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <?php
               }
-              if(validarAccesoModulo($_SESSION["idEmpresa"], 2)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::USUARIOS)){
               $where="";
               if($_SESSION["datosUsuarioActual"]['usr_tipo']!=DEV){
                   $where= "WHERE usr_id_empresa='".$_SESSION["idEmpresa"]."'";
@@ -208,10 +211,9 @@
                   <a href="<?=REDIRECT_ROUTE?>modules/administrativo/bd_read/usuarios.php" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
-
               <?php
               }
-              if(validarAccesoModulo($_SESSION["idEmpresa"], 7)){
+              if(validarAccesoModulo($_SESSION["idEmpresa"], Modulos::PAGINA_WEB)){
               try{
                 $visitas= $conexionBdPaginaWeb->query("SELECT SUM(vis_visitas) AS vis_visitas FROM visitas_paginas WHERE vis_id_empresa='".$_SESSION["idEmpresa"]."'");
                 $numVisitas = mysqli_fetch_array($visitas, MYSQLI_BOTH);
