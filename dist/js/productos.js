@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const url = new URL(window.location.href);
+    const idProducto = url.searchParams.get("id");
     $("#productos-select").select2({
         placeholder: "Escoja los productos relacionados",
         multiple: true,
@@ -9,11 +11,11 @@ $(document).ready(function () {
             dataType: "json",
             data: function (params) {
                 var extra = {};
-                if (window.PRODUCTO_ID) {
-                    extra.idProducto = window.PRODUCTO_ID;
+                if (idProducto) {
+                    extra.idProducto = idProducto;
                 }
                 return $.extend({
-                    q: params.term
+                    term: params.term
                 }, extra);
             },
             processResults: function (items) {

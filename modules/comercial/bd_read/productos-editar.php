@@ -530,7 +530,6 @@ $resultadoD = Productos::Select([
       })
 
     })
-    window.PRODUCTO_ID = <?= !empty($_GET['id']) ? intval($_GET['id']) : 'null' ?>;
   </script>
   <script src="<?= REDIRECT_ROUTE ?>dist/js/productos.js"></script>
   <?php include(RUTA_PROYECTO . "includes/pie.php"); ?>
