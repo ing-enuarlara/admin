@@ -430,7 +430,7 @@ $resultadoD = Productos::Select([
                               "cprod_id, cprod_nombre",
                               [
                                   Productos::class
-                              ]
+                              ],"","cprod_id"
                           );
 
                           foreach ($result AS $resProducto) {
