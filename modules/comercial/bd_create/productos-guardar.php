@@ -15,17 +15,17 @@ if (!empty($_POST["marca"])) {
 }
 
 $idInsertU = Productos::Insert([
-    'cprod_nombre' => $_POST["nombre"],
+    'cprod_nombre' => mysqli_real_escape_string($conexionBdComercial, $_POST["nombre"]),
     'cprod_costo' => $_POST["costo"],
-    'cprod_detalles' => $_POST["detalles"],
+    'cprod_detalles' => mysqli_real_escape_string($conexionBdComercial, $_POST["detalles"]),
     'cprod_exitencia' => $_POST["existencia"] ?? 0,
     'cprod_marca' => $subCategoria,
     'cprod_categoria' => $_POST["categoria"],
     'cprod_tipo' => $_POST["tipo"],
-    'cprod_palabras_claves' => $_POST["paClave"],
+    'cprod_palabras_claves' => mysqli_real_escape_string($conexionBdComercial, $_POST["paClave"]),
     'cprod_id_empresa' => $_SESSION["idEmpresa"],
     'cprod_fecha_creacion' => date("Y-m-d H:i:s"),
-    'cprod_especificaciones' => $_POST["especificaciones"],
+    'cprod_especificaciones' => mysqli_real_escape_string($conexionBdComercial, $_POST["especificaciones"]),
     'cprod_cod_ref' => $_POST["ref"],
     'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
     'cprod_descuento' => $_POST["desc"] ?? NULL
