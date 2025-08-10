@@ -4727,7 +4727,7 @@ S2.define('select2/i18n/en',[],function () {
     inputTooShort: function (args) {
       var remainingChars = args.minimum - args.input.length;
 
-      var message = 'Por favor, ingrese ' + remainingChars + ' o mas caracteres para buscar el producto.';
+      var message = 'Por favor, ingrese ' + remainingChars + ' o mas caracteres para buscar.';
 
       return message;
     },
@@ -4747,7 +4747,7 @@ S2.define('select2/i18n/en',[],function () {
       return 'No results found';
     },
     searching: function () {
-      return 'Searching…';
+      return 'Buscando…';
     },
     removeAllItems: function () {
       return 'Remove all items';
