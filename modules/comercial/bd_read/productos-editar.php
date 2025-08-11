@@ -455,7 +455,7 @@ $resultadoD = Productos::Select([
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
                   </div>
                 </form>
               </div>
