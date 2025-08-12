@@ -102,5 +102,5 @@ if(!empty($_POST["productos"])){
 
 include(RUTA_PROYECTO . "includes/guardar-historial-acciones.php");
 
-echo '<script type="text/javascript">window.location.href="../bd_read/productos-editar.php?id=' . $idInsertU . '";</script>';
+echo '<script type="text/javascript">window.location.href="../bd_read/productos.php";</script>';
 exit();
