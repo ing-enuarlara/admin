@@ -27,6 +27,7 @@ Productos::Update(
         'cprod_palabras_claves' => mysqli_real_escape_string($conexionBdComercial, $_POST["paClave"]),
         'cprod_estado' => $_POST["estado"],
         'cprod_especificaciones' => mysqli_real_escape_string($conexionBdComercial, $_POST["especificaciones"]),
+        'cprod_nucleo_web' => $_POST["nucleo"] ?? NULL,
         'cprod_cod_ref' => $codRef,
         'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
         'cprod_descuento' => $_POST["desc"] ?? NULL

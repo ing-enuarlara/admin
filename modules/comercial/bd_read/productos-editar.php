@@ -227,6 +227,20 @@ $resultadoD = Productos::Select([
                     </div>
 
                     <div class="form-group col-md-3">
+                      <label for="inputNucleo">
+                        Nucleo Web:
+                        <span
+                          tabindex="0"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Si tienes variación de producto, coloca aqui un referente unico que contenga todos los colores del producto para poder relacionarlos en la web.">
+                          <i class="fa fa-question-circle text-info"></i>
+                        </span>
+                      </label>
+                      <input type="text" class="form-control" id="inputNucleo" placeholder="Nucleo Web del Producto" name="nucleo" value="<?= $resultadoD['cprod_nucleo_web'] ?? ""; ?>">
+                    </div>
+
+                    <div class="form-group col-md-3">
                       <label for="inputReferencia">
                         Referencia:
                         <span
