@@ -25,6 +25,24 @@ if (!empty($_GET["estado"])) {
 }
 if (!empty($_GET['search'])) {
     $busqueda = $_GET['search'];
+    $filtros[] = "(
+        cprod_id LIKE '%$busqueda%' OR 
+        cprod_nombre LIKE '%$busqueda%' OR 
+        cprod_cod_ref LIKE '%$busqueda%' OR 
+        cprod_ean_code LIKE '%$busqueda%' OR 
+        ctipo_nombre LIKE '%$busqueda%' OR 
+        ccat_nombre LIKE '%$busqueda%' OR 
+        cmar_nombre LIKE '%$busqueda%' OR 
+        cprod_nucleo_web LIKE '%$busqueda%'
+        OR EXISTS (
+            SELECT 1
+            FROM ".BDMODCOMERCIAL.".comercial_tallas_color_stock AS c2
+            WHERE c2.cpta_producto = cprod_id
+                AND c2.cpta_prin = 'NO'
+                AND (c2.cpta_referencia LIKE '%$busqueda%'
+                OR  c2.cpta_cod_ean   LIKE '%$busqueda%')
+        )
+    )";
 }
 
 $filtro = implode(" AND ", $filtros);
@@ -140,7 +158,7 @@ $filtro = implode(" AND ", $filtros);
                                     SubCategorias::foreignKey(SubCategorias::LEFT, [
                                         "cmar_id" => 'cprod_marca'
                                     ]);
-                                    
+
                                     Productos_Tallas::foreignKey(Productos_Tallas::LEFT, [
                                         "cpta_producto" => 'cprod_id',
                                         "cpta_prin" => "'" . NO . "'"
@@ -154,6 +172,23 @@ $filtro = implode(" AND ", $filtros);
                                     include(RUTA_PROYECTO . "includes/consulta-paginacion-productos.php");
 
                                     if ($numRegistros > 0) {
+
+                                        $productos = Productos::SelectJoin(
+                                            $predicado,
+                                            "cprod_id, cprod_nucleo_web, cprod_cod_ref, cprod_ean_code, cprod_nombre, cprod_costo, cprod_descuento, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre",
+                                            [
+                                                Tipos_Productos::class,
+                                                Categorias::class,
+                                                SubCategorias::class,
+                                                Productos_Tallas::class
+                                            ],
+                                            "",
+                                            "cprod_id",
+                                            "",
+                                            "cprod_id DESC",
+                                            "LIMIT {$inicio}, {$registros}"
+                                        );
+
                                         $num = $inicio + 1;
                                         foreach ($productos as $result) {
                                             $marc = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
