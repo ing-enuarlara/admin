@@ -17,19 +17,12 @@ if (!empty($filtro)) {
         "",
         "cprod_id"
     );
+
+    $numRegistros = !empty($numProductosBD) ? count($numProductosBD) : 0;
 } else {
-    $numProductosBD = Productos::SelectJoin(
-        $predicado,
-        "cprod_id",
-        [
-            Productos_Tallas::class
-        ],
-        "",
-        "cprod_id"
-    );
+    $numRegistros = Productos::numRows($predicado);
 }
 
-$numRegistros = !empty($numProductosBD) ? count($numProductosBD) : 0;
 $registros = 10;
 $pagina = !empty($_REQUEST['nume']) ? intval($_REQUEST["nume"]) : 1;
 if (is_numeric($pagina)) {

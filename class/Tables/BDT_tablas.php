@@ -15,6 +15,8 @@ abstract class BDT_Tablas implements BDT_Interface
 
     public static $tableName;
 
+    public static $primaryKey;
+
     public static  $tableAs;
 
     /**
@@ -367,7 +369,7 @@ abstract class BDT_Tablas implements BDT_Interface
      */
     public static function numRows(array $predicado = [])
     {
-        $consulta   = self::Select($predicado);
+        $consulta   = self::Select($predicado, static::$primaryKey);
         $numRecords = $consulta->rowCount();
 
         return $numRecords;
