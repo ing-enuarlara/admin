@@ -32,6 +32,24 @@ $(document).ready(function () {
     });
 });
 
+function cargarImagen(tipo) {
+    if (tipo.value == 'IMG') {
+        var urlImg = document.getElementById('urlImg');
+        if (urlImg) { urlImg.value = ''; }
+        document.getElementById('tipoFile').style.display = 'block';
+        document.getElementById('tipoUrl').style.display = 'none';
+    }
+
+    if (tipo.value == 'URL') {
+        document.getElementById('tipoFile').style.display = 'none';
+        document.getElementById('tipoUrl').style.display = 'block';
+    }
+}
+
+$(document).ready(function () {
+    cargarImagen(document.getElementById('tipoImg'));
+});
+
 function habilitarVariacion() {
     var prodVariacion = document.getElementById("prodVariacion");
     var variacion = document.getElementById("variacion");
@@ -48,44 +66,6 @@ function habilitarVariacion() {
         tallasContainer.innerHTML = `
         <div class="row mb-2">
             <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-            <div class="col-md-1">
-                <select name="colores[]" data-placeholder="1º color" class="form-control select2" style="width: 100%;">
-                <option value="">1º color</option>
-                <option value="#000000">Negro</option>
-                <option value="#696969">Gris</option>
-                <option value="#FFFFFF">Blanco</option>
-                <option value="#FF0000">Rojo</option>
-                <option value="#FFA500">Naranja</option>
-                <option value="#FFFF00">Amarillo</option>
-                <option value="#008000">Verde</option>
-                <option value="#0000FF">Azul</option>
-                <option value="#800080">Morado</option>
-                <option value="#8A2BE2">Violeta</option>
-                <option value="#A52A2A">Marrón</option>
-                <option value="#D2691E">Chocolate</option>
-                <option value="#F5DEB3">Beige</option>
-                <option value="#FFC0CB">Rosa</option>
-                </select>
-            </div>
-            <div class="col-md-1">
-                <select name="colores2[]" data-placeholder="2º color (Opcional)" class="form-control select2" style="width: 100%;">
-                <option value="">2º color (Opcional)</option>
-                <option value="#000000">Negro</option>
-                <option value="#696969">Gris</option>
-                <option value="#FFFFFF">Blanco</option>
-                <option value="#FF0000">Rojo</option>
-                <option value="#FFA500">Naranja</option>
-                <option value="#FFFF00">Amarillo</option>
-                <option value="#008000">Verde</option>
-                <option value="#0000FF">Azul</option>
-                <option value="#800080">Morado</option>
-                <option value="#8A2BE2">Violeta</option>
-                <option value="#A52A2A">Marrón</option>
-                <option value="#D2691E">Chocolate</option>
-                <option value="#F5DEB3">Beige</option>
-                <option value="#FFC0CB">Rosa</option>
-                </select>
-            </div>
             <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
             <div class="col-md-3"><input type="text" name="referencias[]" id="refQuemada" placeholder="Referencia" class="form-control" value="${referencia}" /></div>
             <div class="col-md-3"><input type="text" name="codEan[]" placeholder="EAN" class="form-control" /></div>
@@ -103,44 +83,6 @@ function agregarVariacion() {
     div.classList.add("form-group", "row", "mt-2");
     div.innerHTML = `
                         <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                        <div class="col-md-1">
-                        <select name="colores[]" data-placeholder="1º color" class="form-control select2" style="width: 100%;">
-                            <option value="">1º color</option>
-                            <option value="#000000">Negro</option>
-                            <option value="#696969">Gris</option>
-                            <option value="#FFFFFF">Blanco</option>
-                            <option value="#FF0000">Rojo</option>
-                            <option value="#FFA500">Naranja</option>
-                            <option value="#FFFF00">Amarillo</option>
-                            <option value="#008000">Verde</option>
-                            <option value="#0000FF">Azul</option>
-                            <option value="#800080">Morado</option>
-                            <option value="#8A2BE2">Violeta</option>
-                            <option value="#A52A2A">Marrón</option>
-                            <option value="#D2691E">Chocolate</option>
-                            <option value="#F5DEB3">Beige</option>
-                            <option value="#FFC0CB">Rosa</option>
-                        </select>
-                        </div>
-                        <div class="col-md-1">
-                        <select name="colores2[]" data-placeholder="2º color (Opcional)" class="form-control select2" style="width: 100%;">
-                            <option value="">2º color (Opcional)</option>
-                            <option value="#000000">Negro</option>
-                            <option value="#696969">Gris</option>
-                            <option value="#FFFFFF">Blanco</option>
-                            <option value="#FF0000">Rojo</option>
-                            <option value="#FFA500">Naranja</option>
-                            <option value="#FFFF00">Amarillo</option>
-                            <option value="#008000">Verde</option>
-                            <option value="#0000FF">Azul</option>
-                            <option value="#800080">Morado</option>
-                            <option value="#8A2BE2">Violeta</option>
-                            <option value="#A52A2A">Marrón</option>
-                            <option value="#D2691E">Chocolate</option>
-                            <option value="#F5DEB3">Beige</option>
-                            <option value="#FFC0CB">Rosa</option>
-                        </select>
-                        </div>
                         <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
                         <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" value="${referencia}" /></div>
                         <div class="col-md-3"><input type="text" name="codEan[]" placeholder="EAN" class="form-control" /></div>

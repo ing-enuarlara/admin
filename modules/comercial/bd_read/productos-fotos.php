@@ -13,24 +13,6 @@ try {
     include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
 }
 $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
-
-$coloresVariacion = Productos_Tallas::Select(
-    [
-        'cpta_producto' => $resultadoD['cprod_id'],
-        'cpta_prin' => NO
-    ], "cpta_color, cpta_color2"
-)->fetchAll(PDO::FETCH_ASSOC);
-$colores = [];
-foreach ($coloresVariacion as $color) {
-    // Si no hay segundo color, solo se muestra el primero
-    $key = trim($color['cpta_color']) . "|" . trim($color['cpta_color2']); // Para que sean únicos por pareja
-    if (!isset($colores[$key])) {
-        $colores[$key] = [
-            'color1' => $color['cpta_color'],
-            'color2' => $color['cpta_color2']
-        ];
-    }
-}
 ?>
 
 <!-- Google Font: Source Sans Pro -->
@@ -148,22 +130,6 @@ foreach ($coloresVariacion as $color) {
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <?php if (!empty($colores) && count(array_filter($colores))) { ?>
-                                    <div class="form-group col-md-12">
-                                        <label for="exampleInputEmail1">Relacionar con color:</label>
-                                        <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="colorCombo" id="colorCombo">
-                                            <option value="">Para el Producto General</option>
-                                            <?php foreach ($colores as $key => $combo) { 
-                                                $texto = $coloresBases[$combo['color1']] ?? $combo['color1'];
-                                                if ($combo['color2']) {
-                                                    $texto .= ' / ' . ($coloresBases[$combo['color2']] ?? $combo['color2']);
-                                                }
-                                            ?>
-                                                <option value="<?= $combo['color1'].'|'.$combo['color2'] ?>"> <?= $texto ?> </option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                <?php } ?>
                                 <div class="form-group col-md-12">
                                     <label for="exampleInputEmail1">Tipo de Imagen:</label>
                                     <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
@@ -173,7 +139,7 @@ foreach ($coloresVariacion as $color) {
                                     </select>
                                 </div>
                                 <div class="form-group col-md-12" id="tipoFile" style="display:none;">
-                                    <label for="customFile">Foto Principal</label>
+                                    <label for="customFile">Fotos del producto</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="customFile" name="ftProducto[]" multiple>
                                         <label class="custom-file-label" for="customFile">Escoger Foto...</label>

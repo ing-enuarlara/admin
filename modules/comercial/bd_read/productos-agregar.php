@@ -72,6 +72,33 @@ include(RUTA_PROYECTO . "includes/head.php");
                 <form class="form-horizontal" method="post" action="../bd_create/productos-guardar.php" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="form-group col-md-6">
+                      <label for="exampleInputEmail1">Tipo de Imagen:</label>
+                      <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
+                        <option value=""></option>
+                        <option value="<?= TIPO_IMG ?>" selected>Imagen</option>
+                        <option value="<?= TIPO_URL ?>">Url</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6" id="tipoFile" style="display:none;">
+                      <label for="customFile">Fotos del producto</label>
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="ftProducto[]" multiple>
+                        <label class="custom-file-label" for="customFile">Escoger Fotos...</label>
+                      </div>
+                    </div>
+                    <script>
+                        document.getElementById("customFile").addEventListener("change", function() {
+                            var files = this.files;
+                            var label = Array.from(files).map(f => f.name).join(", ");
+                            this.nextElementSibling.innerText = label || "Escoger Foto...";
+                        });
+                    </script>
+                    <div class="form-group col-md-6" id="tipoUrl" style="display:none;">
+                      <label for="exampleInputEmail1">Url de la Imagen:</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Url de la Imagen" name="urlProducto" id="urlImg">
+                    </div>
+                    <hr>
+                    <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Nombre:</label>
                       <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre">
                     </div>
@@ -258,44 +285,6 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <div id="tallas-container">
                         <div class="row mb-2">
                           <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                          <div class="col-md-1">
-                            <select name="colores[]" data-placeholder="1º color" class="form-control select2" style="width: 100%;">
-                              <option value="">Selecciona un color</option>
-                              <option value="#000000">Negro</option>
-                              <option value="#696969">Gris</option>
-                              <option value="#FFFFFF">Blanco</option>
-                              <option value="#FF0000">Rojo</option>
-                              <option value="#FFA500">Naranja</option>
-                              <option value="#FFFF00">Amarillo</option>
-                              <option value="#008000">Verde</option>
-                              <option value="#0000FF">Azul</option>
-                              <option value="#800080">Morado</option>
-                              <option value="#8A2BE2">Violeta</option>
-                              <option value="#A52A2A">Marrón</option>
-                              <option value="#D2691E">Chocolate</option>
-                              <option value="#F5DEB3">Beige</option>
-                              <option value="#FFC0CB">Rosa</option>
-                            </select>
-                          </div>
-                          <div class="col-md-1">
-                            <select name="colores2[]" data-placeholder="2º color (Opcional)" class="form-control select2" style="width: 100%;">
-                              <option value="">2º color (Opcional)</option>
-                              <option value="#000000">Negro</option>
-                              <option value="#696969">Gris</option>
-                              <option value="#FFFFFF">Blanco</option>
-                              <option value="#FF0000">Rojo</option>
-                              <option value="#FFA500">Naranja</option>
-                              <option value="#FFFF00">Amarillo</option>
-                              <option value="#008000">Verde</option>
-                              <option value="#0000FF">Azul</option>
-                              <option value="#800080">Morado</option>
-                              <option value="#8A2BE2">Violeta</option>
-                              <option value="#A52A2A">Marrón</option>
-                              <option value="#D2691E">Chocolate</option>
-                              <option value="#F5DEB3">Beige</option>
-                              <option value="#FFC0CB">Rosa</option>
-                            </select>
-                          </div>
                           <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
                           <div class="col-md-3"><input type="text" name="referencias[]" id="refQuemada" placeholder="Referencia" class="form-control" /></div>
                           <div class="col-md-3"><input type="text" name="codEan[]" placeholder="EAN" class="form-control" /></div>

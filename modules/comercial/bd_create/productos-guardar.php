@@ -35,8 +35,6 @@ $idInsertU = Productos::Insert([
 // 1. Tallas
 $maxLength = max(
     count($_POST['tallas'] ?? []),
-    count($_POST['colores'] ?? []),
-    count($_POST['colores2'] ?? []),
     count($_POST['stocks'] ?? []),
     count($_POST['referencias'] ?? []),
     count($_POST['codEan'] ?? [])
@@ -44,8 +42,6 @@ $maxLength = max(
 $totalStock = 0;
 for ($i = 0; $i < $maxLength; $i++) {
     $talla = isset($_POST['tallas'][$i]) ? trim($_POST['tallas'][$i]) : '';
-    $color = isset($_POST['colores'][$i]) ? trim($_POST['colores'][$i]) : '';
-    $color2 = isset($_POST['colores2'][$i]) ? trim($_POST['colores2'][$i]) : '';
     $stock = isset($_POST['stocks'][$i]) ? max(0, intval($_POST['stocks'][$i])) : 0;
     $referencia = isset($_POST['referencias'][$i]) ? trim($_POST['referencias'][$i]) : '';
     $codEan = isset($_POST['codEan'][$i]) ? trim($_POST['codEan'][$i]) : '';
@@ -58,8 +54,6 @@ for ($i = 0; $i < $maxLength; $i++) {
     // Insertar
     Productos_Tallas::Insert([
         'cpta_talla' => $talla,
-        'cpta_color' => $color,
-        'cpta_color2' => $color2,
         'cpta_stock' => $stock,
         'cpta_referencia' => $referencia,
         'cpta_cod_ean' => $codEan,
@@ -98,6 +92,41 @@ if(!empty($_POST["productos"])){
             'cpre_producto' => $idInsertU,
             'cpre_producto_relacion' => $producto
         ]);
+    }
+}
+
+
+
+if (!empty($_POST['tipoImg']) && (!empty($_FILES['ftProducto']['name'][0]) || !empty($_POST['urlProducto']))) {
+    $fileNames = [];
+    if (!empty($_FILES['ftProducto']['name'][0])) {
+        $destino = RUTA_PROYECTO . "files/productos";
+
+        foreach ($_FILES['ftProducto']['tmp_name'] as $i => $tmpName) {
+            if ($_FILES['ftProducto']['error'][$i] === UPLOAD_ERR_OK) {
+                $nuevoNombre = uniqid('ftp_') . '.' . pathinfo($_FILES['ftProducto']['name'][$i], PATHINFO_EXTENSION);
+                move_uploaded_file($tmpName, $destino . '/' . $nuevoNombre);
+                $fileNames[] = $nuevoNombre;
+            }
+        }
+    }
+
+    if (!empty($_POST['urlProducto'])) {
+        $fileNames[] = $_POST['urlProducto'];
+    }
+
+    foreach ($fileNames as $i => $fileName) {
+        try {
+            Productos_Fotos::Insert([
+                'cpf_id_producto' => $idInsertU,
+                'cpf_fotos' => $fileName,
+                'cpf_id_empresa' => $_SESSION["idEmpresa"],
+                'cpf_tipo' => $_POST['tipoImg'],
+                'cpf_principal' => $i === 0 ? 1 : 0
+            ]);
+        } catch (Exception $e) {
+            include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
+        }
     }
 }
 

@@ -291,44 +291,6 @@ $resultadoD = Productos::Select([
                         ?>
                             <div class="row mb-2">
                               <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" value="<?= $variacion['cpta_talla'] ?? '' ?>" /></div>
-                              <div class="col-md-1">
-                                <select name="colores[]" data-placeholder="1º color" class="form-control select2" style="width: 100%;">
-                                  <option value="">1º color</option>
-                                  <option value="#000000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#000000' ? 'selected' : '' ?>>Negro</option>
-                                  <option value="#696969" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#696969' ? 'selected' : '' ?>>Gris</option>
-                                  <option value="#FFFFFF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFFFF' ? 'selected' : '' ?>>Blanco</option>
-                                  <option value="#FF0000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FF0000' ? 'selected' : '' ?>>Rojo</option>
-                                  <option value="#FFA500" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFA500' ? 'selected' : '' ?>>Naranja</option>
-                                  <option value="#FFFF00" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFFF00' ? 'selected' : '' ?>>Amarillo</option>
-                                  <option value="#008000" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#008000' ? 'selected' : '' ?>>Verde</option>
-                                  <option value="#0000FF" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#0000FF' ? 'selected' : '' ?>>Azul</option>
-                                  <option value="#800080" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#800080' ? 'selected' : '' ?>>Morado</option>
-                                  <option value="#8A2BE2" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#8A2BE2' ? 'selected' : '' ?>>Violeta</option>
-                                  <option value="#A52A2A" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#A52A2A' ? 'selected' : '' ?>>Marrón</option>
-                                  <option value="#D2691E" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#D2691E' ? 'selected' : '' ?>>Chocolate</option>
-                                  <option value="#F5DEB3" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#F5DEB3' ? 'selected' : '' ?>>Beige</option>
-                                  <option value="#FFC0CB" <?= !empty($variacion['cpta_color']) && $variacion['cpta_color'] == '#FFC0CB' ? 'selected' : '' ?>>Rosa</option>
-                                </select>
-                              </div>
-                              <div class="col-md-1">
-                                <select name="colores2[]" data-placeholder="2º color (Opcional)" class="form-control select2" style="width: 100%;">
-                                  <option value="">2º color (Opcional)</option>
-                                  <option value="#000000" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#000000' ? 'selected' : '' ?>>Negro</option>
-                                  <option value="#696969" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#696969' ? 'selected' : '' ?>>Gris</option>
-                                  <option value="#FFFFFF" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#FFFFFF' ? 'selected' : '' ?>>Blanco</option>
-                                  <option value="#FF0000" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#FF0000' ? 'selected' : '' ?>>Rojo</option>
-                                  <option value="#FFA500" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#FFA500' ? 'selected' : '' ?>>Naranja</option>
-                                  <option value="#FFFF00" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#FFFF00' ? 'selected' : '' ?>>Amarillo</option>
-                                  <option value="#008000" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#008000' ? 'selected' : '' ?>>Verde</option>
-                                  <option value="#0000FF" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#0000FF' ? 'selected' : '' ?>>Azul</option>
-                                  <option value="#800080" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#800080' ? 'selected' : '' ?>>Morado</option>
-                                  <option value="#8A2BE2" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#8A2BE2' ? 'selected' : '' ?>>Violeta</option>
-                                  <option value="#A52A2A" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#A52A2A' ? 'selected' : '' ?>>Marrón</option>
-                                  <option value="#D2691E" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#D2691E' ? 'selected' : '' ?>>Chocolate</option>
-                                  <option value="#F5DEB3" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#F5DEB3' ? 'selected' : '' ?>>Beige</option>
-                                  <option value="#FFC0CB" <?= !empty($variacion['cpta_color2']) && $variacion['cpta_color2'] == '#FFC0CB' ? 'selected' : '' ?>>Rosa</option>
-                                </select>
-                              </div>
                               <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" value="<?= $variacion['cpta_stock'] ?? '' ?>" /></div>
                               <div class="col-md-3"><input type="text" name="referencias[]" placeholder="Referencia" class="form-control" value="<?= $variacion['cpta_referencia'] ?? '' ?>" /></div>
                               <div class="col-md-3"><input type="text" name="codEan[]" placeholder="EAN" class="form-control" value="<?= $variacion['cpta_cod_ean'] ?? '' ?>" /></div>
@@ -341,44 +303,6 @@ $resultadoD = Productos::Select([
                           ?>
                           <div class="row mb-2">
                             <div class="col-md-1"><input type="text" name="tallas[]" placeholder="Talla" class="form-control" /></div>
-                            <div class="col-md-1">
-                              <select name="colores[]" data-placeholder="1º color" class="form-control select2" style="width: 100%;">
-                                <option value="">1º color</option>
-                                <option value="#000000">Negro</option>
-                                <option value="#696969">Gris</option>
-                                <option value="#FFFFFF">Blanco</option>
-                                <option value="#FF0000">Rojo</option>
-                                <option value="#FFA500">Naranja</option>
-                                <option value="#FFFF00">Amarillo</option>
-                                <option value="#008000">Verde</option>
-                                <option value="#0000FF">Azul</option>
-                                <option value="#800080">Morado</option>
-                                <option value="#8A2BE2">Violeta</option>
-                                <option value="#A52A2A">Marrón</option>
-                                <option value="#D2691E">Chocolate</option>
-                                <option value="#F5DEB3">Beige</option>
-                                <option value="#FFC0CB">Rosa</option>
-                              </select>
-                            </div>
-                            <div class="col-md-1">
-                              <select name="colores2[]" data-placeholder="2º color (Opcional)" class="form-control select2" style="width: 100%;">
-                                <option value="">2º color (Opcional)</option>
-                                <option value="#000000">Negro</option>
-                                <option value="#696969">Gris</option>
-                                <option value="#FFFFFF">Blanco</option>
-                                <option value="#FF0000">Rojo</option>
-                                <option value="#FFA500">Naranja</option>
-                                <option value="#FFFF00">Amarillo</option>
-                                <option value="#008000">Verde</option>
-                                <option value="#0000FF">Azul</option>
-                                <option value="#800080">Morado</option>
-                                <option value="#8A2BE2">Violeta</option>
-                                <option value="#A52A2A">Marrón</option>
-                                <option value="#D2691E">Chocolate</option>
-                                <option value="#F5DEB3">Beige</option>
-                                <option value="#FFC0CB">Rosa</option>
-                              </select>
-                            </div>
                             <div class="col-md-1"><input type="number" name="stocks[]" placeholder="Stock" class="form-control" /></div>
                             <div class="col-md-3"><input type="text" name="referencias[]" id="refQuemada" placeholder="Referencia" class="form-control" /></div>
                             <div class="col-md-3"><input type="text" name="codEan[]" placeholder="EAN" class="form-control" /></div>
