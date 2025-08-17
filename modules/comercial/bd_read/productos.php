@@ -15,10 +15,10 @@ if (!empty($_GET["marc"])) {
     $filtros[] = "cprod_tipo='" . $_GET["marc"] . "'";
 }
 if (!empty($_GET["cat"])) {
-    $filtros[] = "cprod_categoria='" . $_GET["cat"] . "'";
+    $filtros[] = "prct_categoria='" . $_GET["cat"] . "'";
 }
 if (!empty($_GET["subCat"])) {
-    $filtros[] = "cprod_marca='" . $_GET["subCat"] . "'";
+    $filtros[] = "psct_subcategoria='" . $_GET["subCat"] . "'";
 }
 if (!empty($_GET["estado"])) {
     $filtros[] = "cprod_estado='" . $_GET["estado"] . "'";
