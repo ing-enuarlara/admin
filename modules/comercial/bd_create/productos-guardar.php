@@ -8,19 +8,14 @@ require_once(RUTA_PROYECTO . 'class/Productos_Fotos.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Especificaciones.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
 require_once(RUTA_PROYECTO . 'class/Productos_Relacion.php');
-
-$subCategoria = 0;
-if (!empty($_POST["marca"])) {
-    $subCategoria = $_POST["marca"];
-}
+require_once(RUTA_PROYECTO . 'class/Producto_Categorias.php');
+require_once(RUTA_PROYECTO . 'class/Producto_Sub_Categorias.php');
 
 $idInsertU = Productos::Insert([
     'cprod_nombre' => mysqli_real_escape_string($conexionBdComercial, $_POST["nombre"]),
     'cprod_costo' => $_POST["costo"],
     'cprod_detalles' => mysqli_real_escape_string($conexionBdComercial, $_POST["detalles"]),
     'cprod_exitencia' => $_POST["existencia"] ?? 0,
-    'cprod_marca' => $subCategoria,
-    'cprod_categoria' => $_POST["categoria"],
     'cprod_tipo' => $_POST["tipo"],
     'cprod_palabras_claves' => mysqli_real_escape_string($conexionBdComercial, $_POST["paClave"]),
     'cprod_id_empresa' => $_SESSION["idEmpresa"],
@@ -31,6 +26,32 @@ $idInsertU = Productos::Insert([
     'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
     'cprod_descuento' => $_POST["desc"] ?? NULL
 ]);
+
+// Guardamos Categorias
+if (!empty($_POST['categoria'])) {
+    foreach ($_POST['categoria'] as $categoria) {
+        Producto_Categorias::Insert(
+            [
+                'prct_producto' => $_POST["id"],
+                'prct_categoria' => $categoria,
+                'prct_id_empresa' => $_SESSION["idEmpresa"]
+            ]
+        );
+    }
+}
+
+// Guardamos SubCategorias
+if (!empty($_POST['marca'])) {
+    foreach ($_POST['marca'] as $categoria) {
+        Producto_Sub_Categorias::Insert(
+            [
+                'psct_producto' => $_POST["id"],
+                'psct_subcategoria' => $categoria,
+                'psct_id_empresa' => $_SESSION["idEmpresa"]
+            ]
+        );
+    }
+}
 
 // 1. Tallas
 $maxLength = max(

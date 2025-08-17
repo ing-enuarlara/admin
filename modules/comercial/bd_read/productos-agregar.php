@@ -5,6 +5,7 @@ $idPagina = 21;
 
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
+require_once(RUTA_PROYECTO . "class/Categorias.php");
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -131,59 +132,31 @@ include(RUTA_PROYECTO . "includes/head.php");
                       <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="tipo">
                         <option value=""></option>
                         <?php
-                        $where = "";
+                        $predicado['ctipo_estado'] = 1;
                         if ($_SESSION["datosUsuarioActual"]['usr_tipo'] != DEV) {
-                          $where = "AND ctipo_id_empresa='" . $_SESSION["idEmpresa"] . "'";
+                          $predicado['ctipo_id_empresa'] = $_SESSION["idEmpresa"];
                         }
-                        try {
-                          $consultaTiposProd = $conexionBdComercial->query("SELECT * FROM comercial_marca_productos WHERE ctipo_estado=1 $where");
-                        } catch (Exception $e) {
-                          include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-                        }
-                        while ($datosTiposProd = mysqli_fetch_array($consultaTiposProd, MYSQLI_BOTH)) {
-                          $nombreEmpresa = '';
-                          if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
-                            try {
-                              $empresa = $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='" . $datosTiposProd['ctipo_id_empresa'] . "'");
-                            } catch (Exception $e) {
-                              include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-                            }
-                            $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                            $nombreEmpresa = "[" . $nomEmpresa['cliAdmi_nombre'] . "]";
-                          }
+                        $consultaTiposProd = Tipos_Productos::Select($predicado, "ctipo_id, ctipo_nombre")->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($consultaTiposProd as $datosTiposProd) {
                         ?>
-                          <option value="<?= $datosTiposProd[0]; ?>"><?= $datosTiposProd['ctipo_nombre'] . $nombreEmpresa; ?></option>
+                          <option value="<?= $datosTiposProd['ctipo_id']; ?>"><?= $datosTiposProd['ctipo_nombre']; ?></option>
                         <?php } ?>
                       </select>
                     </div>
 
                     <div class="form-group col-md-6">
                       <label>Categoria:</label>
-                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria" id="categoria" onchange="traerSubCategorias()">
+                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="categoria[]" multiple="multiple" id="categoria" onchange="traerSubCategorias()">
                         <option value=""></option>
                         <?php
-                        $where = "";
+                        $predicado = [];
                         if ($_SESSION["datosUsuarioActual"]['usr_tipo'] != DEV) {
-                          $where = "WHERE ccat_id_empresa='" . $_SESSION["idEmpresa"] . "'";
+                          $predicado['ccat_id_empresa'] = $_SESSION["idEmpresa"];
                         }
-                        try {
-                          $consultaCategorias = $conexionBdComercial->query("SELECT * FROM comercial_categorias $where");
-                        } catch (Exception $e) {
-                          include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-                        }
-                        while ($datosCategorias = mysqli_fetch_array($consultaCategorias, MYSQLI_BOTH)) {
-                          $nombreEmpresa = '';
-                          if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
-                            try {
-                              $empresa = $conexionBdAdmin->query("SELECT * FROM clientes_admin WHERE cliAdmi_id='" . $datosCategorias['ccat_id_empresa'] . "'");
-                            } catch (Exception $e) {
-                              include(RUTA_PROYECTO . "includes/error-catch-to-report.php");
-                            }
-                            $nomEmpresa = mysqli_fetch_array($empresa, MYSQLI_BOTH);
-                            $nombreEmpresa = "[" . $nomEmpresa['cliAdmi_nombre'] . "]";
-                          }
+                        $consultaCategorias = Categorias::Select($predicado, "ccat_id, ccat_nombre")->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($consultaCategorias as $datosCategorias) {
                         ?>
-                          <option value="<?= $datosCategorias[0]; ?>"><?= $datosCategorias['ccat_nombre'] . $nombreEmpresa; ?></option>
+                          <option value="<?= $datosCategorias['ccat_id']; ?>"><?= $datosCategorias['ccat_nombre']; ?></option>
                         <?php } ?>
                       </select>
                       <span id="mensaje" style="color: #6017dc; display:none;">Espere un momento por favor.</span>
@@ -191,15 +164,13 @@ include(RUTA_PROYECTO . "includes/head.php");
 
                     <div class="form-group col-md-6" id="subCategoria-container" style="display:none;">
                       <label>Sub-Categoria:</label>
-                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca" id="marca" disabled>
+                      <select data-placeholder="Escoja una opción" class="form-control select2" style="width: 100%;" name="marca[]" multiple="multiple" id="marca" disabled>
                       </select>
                       <script type="application/javascript">
                         function traerSubCategorias(enviada) {
                           var categoria = $('#categoria').val();
                           document.getElementById('marca').removeAttribute('disabled');
-
                           datos = "categoria=" + (categoria);
-                          console.log(datos);
                           $('#mensaje').show();
                           $.ajax({
                             type: "POST",

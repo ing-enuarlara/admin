@@ -2,20 +2,28 @@
 include("../modules/sesion.php");
 require_once(RUTA_PROYECTO . 'class/SubCategorias.php');
 require_once(RUTA_PROYECTO . 'class/Sub_Categorias.php');
-require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
+require_once(RUTA_PROYECTO . 'class/Producto_Sub_Categorias.php');
+
+if (!empty($_POST['id'])) {
+    $arraySubCate = Producto_Sub_Categorias::Select([
+        'psct_producto' => $_POST['id'],
+    ], "psct_subcategoria")->fetchAll(PDO::FETCH_COLUMN);
+}
 
 SubCategorias::foreignKey(SubCategorias::INNER, [
     "cmar_id" => 'subca_marca'
 ]);
 $consultaSubCategorias = Sub_Categorias::SelectJoin(
     [
-        "subca_cate" => $_POST["categoria"],
-        "subca_prin" => NO
+        "subca_prin" => NO,
+        Sub_Categorias::OTHER_PREDICATE => "subca_cate IN (".$_POST['categoria'].")"
     ],
     "cmar.*",
     [
         SubCategorias::class
-    ]
+    ], 
+    "", 
+    "cmar_id"
 );
 
 if (!empty($consultaSubCategorias)) {
@@ -26,18 +34,11 @@ if (!empty($consultaSubCategorias)) {
     </script>
     <?php
     foreach ($consultaSubCategorias as $datosSubCategorias) {
-
-        $nombreEmpresa = '';
-        if ($_SESSION["datosUsuarioActual"]['usr_tipo'] == DEV) {
-            $empresa = Clientes_Admin::Select(['cliAdmi_id' => $datosSubCategorias['cmar_id_empresa']])->fetch(PDO::FETCH_ASSOC);
-            $nombreEmpresa = "[" . $empresa['cliAdmi_nombre'] . "]";
-        }
         $selected = '';
-        if (!empty($_POST["subCategoria"]) && $_POST["subCategoria"] == $datosSubCategorias['cmar_id']) {
+        if (!empty($arraySubCate) && in_array($datosSubCategorias['cmar_id'], $arraySubCate)) {
             $selected = 'selected';
         }
-
-        echo '<option value="' . $datosSubCategorias['cmar_id'] . '" ' . $selected . '>' . $datosSubCategorias['cmar_nombre'] . $nombreEmpresa . '</option>';
+        echo '<option value="' . $datosSubCategorias['cmar_id'] . '" ' . $selected . '>' . $datosSubCategorias['cmar_nombre'] . '</option>';
     }
     exit();
 } else {
