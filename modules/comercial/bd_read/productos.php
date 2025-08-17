@@ -31,12 +31,10 @@ if (!empty($_GET['search'])) {
         cprod_cod_ref LIKE '%$busqueda%' OR 
         cprod_ean_code LIKE '%$busqueda%' OR 
         ctipo_nombre LIKE '%$busqueda%' OR 
-        ccat_nombre LIKE '%$busqueda%' OR 
-        cmar_nombre LIKE '%$busqueda%' OR 
         cprod_nucleo_web LIKE '%$busqueda%'
         OR EXISTS (
             SELECT 1
-            FROM ".BDMODCOMERCIAL.".comercial_tallas_color_stock AS c2
+            FROM " . BDMODCOMERCIAL . ".comercial_tallas_color_stock AS c2
             WHERE c2.cpta_producto = cprod_id
                 AND c2.cpta_prin = 'NO'
                 AND (c2.cpta_referencia LIKE '%$busqueda%'
@@ -147,22 +145,29 @@ $filtro = implode(" AND ", $filtros);
                                     require_once(RUTA_PROYECTO . 'class/SubCategorias.php');
                                     require_once(RUTA_PROYECTO . 'class/Productos_Tallas.php');
                                     require_once(RUTA_PROYECTO . 'class/Clientes_Admin.php');
-                                    require_once(RUTA_PROYECTO . 'class/ApiSiniwin.php');
+                                    require_once(RUTA_PROYECTO . 'class/Producto_Categorias.php');
+                                    require_once(RUTA_PROYECTO . 'class/Producto_Sub_Categorias.php');
 
                                     Tipos_Productos::foreignKey(Tipos_Productos::LEFT, [
                                         "ctipo_id" => 'cprod_tipo'
                                     ]);
+                                    Producto_Categorias::foreignKey(Producto_Categorias::LEFT, [
+                                        "prct_producto" => 'cprod_id'
+                                    ]);
                                     Categorias::foreignKey(Categorias::LEFT, [
-                                        "ccat_id" => 'cprod_categoria'
+                                        "ccat_id" => 'prct_categoria'
+                                    ]);
+                                    Producto_Sub_Categorias::foreignKey(Producto_Sub_Categorias::LEFT, [
+                                        "psct_producto" => 'cprod_id'
                                     ]);
                                     SubCategorias::foreignKey(SubCategorias::LEFT, [
-                                        "cmar_id" => 'cprod_marca'
+                                        "cmar_id" => 'psct_subcategoria'
                                     ]);
 
-                                    Productos_Tallas::foreignKey(Productos_Tallas::LEFT, [
-                                        "cpta_producto" => 'cprod_id',
-                                        "cpta_prin" => "'" . NO . "'"
-                                    ]);
+                                    // Productos_Tallas::foreignKey(Productos_Tallas::LEFT, [
+                                    //     "cpta_producto" => 'cprod_id',
+                                    //     "cpta_prin" => "'" . NO . "'"
+                                    // ]);
 
                                     if (!empty($filtro)) {
                                         if (!is_array($predicado)) $predicado = [];
@@ -175,12 +180,13 @@ $filtro = implode(" AND ", $filtros);
 
                                         $productos = Productos::SelectJoin(
                                             $predicado,
-                                            "cprod_id, cprod_nucleo_web, cprod_cod_ref, cprod_ean_code, cprod_nombre, cprod_costo, cprod_descuento, cprod_exitencia, cprod_estado, cprod_tipo, cprod_categoria, cprod_marca, cprod_id_empresa, ctipo_nombre, ccat_nombre, cmar_nombre",
+                                            "cprod_id, cprod_nucleo_web, cprod_cod_ref, cprod_ean_code, cprod_nombre, cprod_costo, cprod_descuento, cprod_exitencia, cprod_estado, cprod_tipo, cprod_id_empresa, ctipo_nombre, GROUP_CONCAT(DISTINCT ccat.ccat_nombre ORDER BY ccat.ccat_nombre SEPARATOR ', ') AS ccat_nombres, GROUP_CONCAT(DISTINCT cmar.cmar_nombre ORDER BY cmar.cmar_nombre SEPARATOR ', ') AS cmar_nombres",
                                             [
                                                 Tipos_Productos::class,
+                                                Producto_Categorias::class,
                                                 Categorias::class,
-                                                SubCategorias::class,
-                                                Productos_Tallas::class
+                                                Producto_Sub_Categorias::class,
+                                                SubCategorias::class
                                             ],
                                             "",
                                             "cprod_id",
@@ -192,10 +198,8 @@ $filtro = implode(" AND ", $filtros);
                                         $num = $inicio + 1;
                                         foreach ($productos as $result) {
                                             $marc = !empty($result['ctipo_nombre']) ? $result['ctipo_nombre'] : "";
-
-                                            $categoria = !empty($result['ccat_nombre']) ? $result['ccat_nombre'] : "";
-
-                                            $subCategoria = !empty($result['cmar_nombre']) ? $result['cmar_nombre'] : "";
+                                            $categoria = !empty($result['ccat_nombres']) ? $result['ccat_nombres'] : "";
+                                            $subCategoria = !empty($result['cmar_nombres']) ? $result['cmar_nombres'] : "";
 
                                             $estado = "Activo";
                                             $color = "green";
@@ -240,22 +244,16 @@ $filtro = implode(" AND ", $filtros);
                                                     <?php } ?>
                                                 </td>
                                                 <td style="text-transform: uppercase;"><?= $result['cprod_nombre']; ?></td>
-                                                <td style="text-align: right;; color: green;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
+                                                <td style="text-align: right; color: green;"><?= number_format($result['cprod_costo'], 2, ",", "."); ?> €</td>
                                                 <td style="text-align: right; color: red;">
                                                     <?php if (!empty($result['cprod_descuento']) && $result['cprod_descuento'] > 0) { ?>
                                                         - <?= $result['cprod_descuento']; ?>%<br>(- <?= number_format(($result['cprod_costo'] * $result['cprod_descuento'] / 100), 2, ",", "."); ?> €)
                                                     <?php } ?>
                                                 </td>
                                                 <td style="color: <?= $colorExistencia; ?>;"><?= $result['cprod_exitencia']; ?></td>
-                                                <td>
-                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?marc=<?= $result['cprod_tipo']; ?>"><?= $marc; ?></a>
-                                                </td>
-                                                <td>
-                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?cat=<?= $result['cprod_categoria']; ?>"><?= $categoria; ?></a>
-                                                </td>
-                                                <td>
-                                                    <a href="<?= $_SERVER['PHP_SELF']; ?>?subCat=<?= $result['cprod_marca']; ?>"><?= $subCategoria; ?></a>
-                                                </td>
+                                                <td><?= $marc; ?></td>
+                                                <td><?= $categoria; ?></td>
+                                                <td><?= $subCategoria; ?></td>
                                                 <td>
                                                     <a style="color: <?= $color; ?>;" href="<?= $_SERVER['PHP_SELF']; ?>?estado=<?= $result['cprod_estado']; ?>"><?= $estado; ?></a>
                                                 </td>

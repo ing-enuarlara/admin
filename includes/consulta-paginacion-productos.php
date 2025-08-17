@@ -10,9 +10,10 @@ if (!empty($filtro)) {
         "cprod_id",
         [
             Tipos_Productos::class,
+            Producto_Categorias::class,
             Categorias::class,
-            SubCategorias::class,
-            Productos_Tallas::class
+            Producto_Sub_Categorias::class,
+            SubCategorias::class
         ],
         "",
         "cprod_id"
