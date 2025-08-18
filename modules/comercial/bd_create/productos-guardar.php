@@ -32,7 +32,7 @@ if (!empty($_POST['categoria'])) {
     foreach ($_POST['categoria'] as $categoria) {
         Producto_Categorias::Insert(
             [
-                'prct_producto' => $_POST["id"],
+                'prct_producto' => $idInsertU,
                 'prct_categoria' => $categoria,
                 'prct_id_empresa' => $_SESSION["idEmpresa"]
             ]
@@ -45,7 +45,7 @@ if (!empty($_POST['marca'])) {
     foreach ($_POST['marca'] as $categoria) {
         Producto_Sub_Categorias::Insert(
             [
-                'psct_producto' => $_POST["id"],
+                'psct_producto' => $idInsertU,
                 'psct_subcategoria' => $categoria,
                 'psct_id_empresa' => $_SESSION["idEmpresa"]
             ]
