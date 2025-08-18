@@ -133,9 +133,8 @@ $resultadoD = mysqli_fetch_array($consuluta, MYSQLI_BOTH);
                                 <div class="form-group col-md-12">
                                     <label for="exampleInputEmail1">Tipo de Imagen:</label>
                                     <select data-placeholder="Escoja una opción" class="form-control select2" onchange="cargarImagen(this)" style="width: 100%;" name="tipoImg" id="tipoImg">
-                                        <option value=""></option>
-                                        <option value="<?= TIPO_IMG ?>" <?= $resultadoD['cpf_tipo'] == TIPO_IMG ? "selected" : ""; ?>>Imagen</option>
-                                        <option value="<?= TIPO_URL ?>" <?= $resultadoD['cpf_tipo'] == TIPO_URL ? "selected" : ""; ?>>Url</option>
+                                        <option value="<?= TIPO_IMG ?>" selected>Imagen</option>
+                                        <option value="<?= TIPO_URL ?>">Url</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-12" id="tipoFile" style="display:none;">
