@@ -6,6 +6,7 @@ $idPagina = 21;
 include(RUTA_PROYECTO . "includes/verificar-paginas.php");
 include(RUTA_PROYECTO . "includes/head.php");
 require_once(RUTA_PROYECTO . "class/Categorias.php");
+require_once(RUTA_PROYECTO . "class/Tipos_Productos.php");
 ?>
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
