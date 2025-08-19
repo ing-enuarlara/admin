@@ -285,8 +285,8 @@ require_once(RUTA_PROYECTO . "class/Tipos_Productos.php");
                     </div>
 
                     <div class="form-group col-md-6" id="relacion-productos-container">
-                      <label>Relacionar Productos:</label>
-                      <select data-placeholder="Escoja los productos relacionados" class="form-control select2" multiple="multiple" style="width: 100%;" name="productos[]" id="productos-select">
+                      <label>Combinar Productos:</label>
+                      <select data-placeholder="Escoja los productos a combinar" class="form-control select2" multiple="multiple" style="width: 100%;" name="productos[]" id="productos-select">
                       </select>
                     </div>
                   </div>
