@@ -92,7 +92,7 @@ $arrayCate = Producto_Categorias::Select([
 
                     <div class="form-group col-md-6">
                       <label for="exampleInputEmail1">Nombre:</label>
-                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?= $resultadoD['cprod_nombre']; ?>">
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nombre del Producto" name="nombre" value="<?= htmlspecialchars($resultadoD['cprod_nombre']); ?>">
                     </div>
 
                     <!-- textarea -->
