@@ -2,7 +2,7 @@
     require_once(RUTA_PROYECTO."includes/guardar-historial-acciones.php");
 ?>
 <footer class="main-footer">
-    <strong>Copyright &copy; <?=date("Y");?> <a href="https://ing-enuarlara.com" target="_blank">@ing-enuarlara.com ®™</a> & <a href="https://developer.oceanblue.es" target="_blank">Ocean Blue Developer ®™</a>.</strong> Todos los Derechos son Reservados.
+    <strong>Copyright &copy; <?=date("Y");?> <a href="https://developer.oceanblue.es" target="_blank">Ocean Blue Developer ®™</a> & <a href="https://ing-enuarlara.com" target="_blank">@ing-enuarlara.com ®™</a>.</strong> Todos los Derechos son Reservados.
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> OCB-1.0.0<br>
         <?php
