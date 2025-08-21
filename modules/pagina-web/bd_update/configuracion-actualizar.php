@@ -9,7 +9,7 @@
 		$fileName = subirArchivosAlServidor($_FILES['foto'], 'lg', $destino);
 
 		try{
-			$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+			$conexionBdPaginaWeb->query("UPDATE pagina_configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 		} catch (Exception $e) {
 			include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 		}
@@ -26,7 +26,7 @@
 		$fileFavicon = subirArchivosAlServidor($_FILES['favicon'], 'ico', $destino);
 
 		try{
-			$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_favicon='" . $fileFavicon . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+			$conexionBdPaginaWeb->query("UPDATE pagina_configuracion SET conf_favicon='" . $fileFavicon . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 		} catch (Exception $e) {
 			include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 		}
@@ -38,7 +38,7 @@
 	}
 
 	try{
-		$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_descripcion_pagina='" . $_POST["descripcionPagina"] . "', conf_descripcion_corta='" . $_POST["descripcionCorta"] . "', conf_palabras_claves='" . $_POST["palabrasClaves"] . "', conf_email='" . trim($_POST["email"]) . "', conf_telefono='" . trim($_POST["telefono"]) . "', conf_web='" . $_POST["web"] . "', conf_direccion='" . $_POST["direccion"] . "', conf_envios='" . $_POST["envios"] . "', conf_text_encabezado='" . $_POST["textEncabezado"] . "', conf_facebook='" . $_POST["facebook"] . "', conf_instagram='" . $_POST["instagram"] . "', conf_tiktok='" . $_POST["tiktok"] . "', conf_whatsapp='" . $whatsapp . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+		$conexionBdPaginaWeb->query("UPDATE pagina_configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_descripcion_pagina='" . $_POST["descripcionPagina"] . "', conf_descripcion_corta='" . $_POST["descripcionCorta"] . "', conf_palabras_claves='" . $_POST["palabrasClaves"] . "', conf_email='" . trim($_POST["email"]) . "', conf_telefono='" . trim($_POST["telefono"]) . "', conf_web='" . $_POST["web"] . "', conf_direccion='" . $_POST["direccion"] . "', conf_envios='" . $_POST["envios"] . "', conf_text_encabezado='" . $_POST["textEncabezado"] . "', conf_facebook='" . $_POST["facebook"] . "', conf_instagram='" . $_POST["instagram"] . "', conf_tiktok='" . $_POST["tiktok"] . "', conf_whatsapp='" . $whatsapp . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}

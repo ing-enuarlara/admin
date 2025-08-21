@@ -15,7 +15,7 @@
         }
 
 		try{
-			$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+			$conexionBdPaginaWeb->query("UPDATE pagina_configuracion SET conf_logo='" . $fileName . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 		} catch (Exception $e) {
 			include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 		}
@@ -40,7 +40,7 @@
     }
 
 	try{
-		$conexionBdPaginaWeb->query("UPDATE configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . trim($_POST["email"]) . "', conf_telefono='" . trim($_POST["telefono"]) . "', conf_direccion='" . $_POST["direccion"] . "', conf_ciudad='" . $_POST["ciudad"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
+		$conexionBdPaginaWeb->query("UPDATE pagina_configuracion SET conf_empresa='" . $_POST["nombre"] . "', conf_email='" . trim($_POST["email"]) . "', conf_telefono='" . trim($_POST["telefono"]) . "', conf_direccion='" . $_POST["direccion"] . "', conf_ciudad='" . $_POST["ciudad"] . "' WHERE conf_id_empresa='" . $_POST["id"] . "'");
 	} catch (Exception $e) {
 		include(RUTA_PROYECTO."includes/error-catch-to-report.php");
 	}

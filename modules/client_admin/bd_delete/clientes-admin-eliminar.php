@@ -67,7 +67,7 @@
 
     try{
         $conexionBdPaginaWeb->query("DELETE FROM general_color_store WHERE gcs_id_empresa='" . $_GET["id"] . "'");
-        $conexionBdPaginaWeb->query("DELETE FROM configuracion WHERE conf_id_empresa='" . $_GET["id"] . "'");
+        $conexionBdPaginaWeb->query("DELETE FROM pagina_configuracion WHERE conf_id_empresa='" . $_GET["id"] . "'");
         $conexionBdPaginaWeb->query("DELETE FROM pagina_legales WHERE pal_id_empresa='" . $_GET["id"] . "'");
         $conexionBdPaginaWeb->query("DELETE FROM blogs WHERE blogs_id_categoria='" . $_GET["id"] . "'");
         $conexionBdPaginaWeb->query("DELETE FROM categorias_blogs WHERE catblo_id_empresa='" . $_GET["id"] . "'");

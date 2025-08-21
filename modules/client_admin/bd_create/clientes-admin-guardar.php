@@ -76,7 +76,7 @@
     }
 
     try{
-        $conexionBdPaginaWeb->query("INSERT INTO configuracion (conf_empresa, conf_email, conf_telefono, conf_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["email"] . "', '" . $_POST["telefono"] . "', '" . $idInsert . "')");
+        $conexionBdPaginaWeb->query("INSERT INTO pagina_configuracion (conf_empresa, conf_email, conf_telefono, conf_id_empresa)VALUES('" . $_POST["nombre"] . "', '" . $_POST["email"] . "', '" . $_POST["telefono"] . "', '" . $idInsert . "')");
     } catch (Exception $e) {
         include(RUTA_PROYECTO."includes/error-catch-to-report.php");
     }
