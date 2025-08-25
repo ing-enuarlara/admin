@@ -14,7 +14,7 @@ if (isset($_SESSION["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminOCB 1.0 | Login</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="<?=REDIRECT_ROUTE?>files/logo/favicon2.ico">
+    <link rel="shortcut icon" href="<?=REDIRECT_ROUTE?>files/logo/favicon3.ico">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
