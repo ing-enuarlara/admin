@@ -1,39 +1,21 @@
-Options +FollowSymLinks
+# (Opcional) Si te lo permite el vhost; si da error, bórralo
+# Options +SymLinksIfOwnerMatch
 
-RewriteEngine on
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /admin/
 
-RewriteBase /ing-enuarlara.co/
-RewriteRule ^(/)$ admin/index.php [L]
-RewriteRule ^(index/)$ admin/modules/index.php [L]
+    # No reescribir si el recurso físico existe
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
 
-# RewriteCond %{HTTP_HOST} ^admin\.com$ [OR]
-# RewriteCond %{HTTP_HOST} ^www\.admin\.com$
-# RewriteRule ^(.*)$ "https\:\/\/admin\.com\/$1" [R=301,L]
+    # /admin/ → /admin/index.php
+    RewriteRule ^$ index.php [L,QSA]
 
-# RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
+    # /admin/index/ → /admin/modules/index.php
+    RewriteRule ^index/?$ modules/index.php [L,QSA]
 
-# RewriteRule ^([^\.]+)$ $1.php [NC,L]
-# RewriteRule ^([^\.]+)$ $1.html [NC,L]
-
-# php -- BEGIN cPanel-generated handler, do not edit
-# This domain inherits the “PHP” package.
-# php -- END cPanel-generated handler, do not edit
-
-# # Asegurando el arcgivo htaccess
-# <Files .htaccess>
-# order allow,deny
-# deny from allow
-# </File>
-
-# Denegar acceso a robots maliciosos
-# RewriteBase /
-# RewriteCond %{HTTP_USER_AGENT} ^Anarchie [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^Zeus. *Webster [OR]
-# RewriteCond %{HTTP_USER_AGENT} ^Zeus
-# RewriteRule ^.* - [F,L]
+    # (Opcional) catch‑all hacia index.php
+    # RewriteRule . index.php [L,QSA]
+</IfModule>
