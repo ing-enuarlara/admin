@@ -22,8 +22,8 @@ $idInsertU = Productos::Insert([
     'cprod_fecha_creacion' => date("Y-m-d H:i:s"),
     'cprod_especificaciones' => mysqli_real_escape_string($conexionBdComercial, $_POST["especificaciones"]),
     'cprod_nucleo_web' => $_POST["nucleo"],
-    'cprod_cod_ref' => $_POST["ref"],
-    'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
+    'cprod_cod_ref' => mysqli_real_escape_string($conexionBdComercial, $_POST["ref"]),
+    'cprod_ean_code' => mysqli_real_escape_string($conexionBdComercial, $_POST["codigoEAN"]) ?? NULL,
     'cprod_descuento' => $_POST["desc"] ?? NULL
 ]);
 
@@ -76,8 +76,8 @@ for ($i = 0; $i < $maxLength; $i++) {
     Productos_Tallas::Insert([
         'cpta_talla' => $talla,
         'cpta_stock' => $stock,
-        'cpta_referencia' => $referencia,
-        'cpta_cod_ean' => $codEan,
+        'cpta_referencia' => mysqli_real_escape_string($conexionBdComercial, $referencia),
+        'cpta_cod_ean' => mysqli_real_escape_string($conexionBdComercial, $codEan),
         'cpta_producto' => $idInsertU,
         'cpta_empresa' => $_SESSION["idEmpresa"]
     ]);

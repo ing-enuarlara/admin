@@ -11,7 +11,7 @@ require_once(RUTA_PROYECTO . 'class/Productos_Relacion.php');
 require_once(RUTA_PROYECTO . 'class/Producto_Categorias.php');
 require_once(RUTA_PROYECTO . 'class/Producto_Sub_Categorias.php');
 
-$codRef = $_POST["ref"] != $_POST["id"] ? $_POST["ref"] : NULL;
+$codRef = $_POST["ref"] != $_POST["id"] ? mysqli_real_escape_string($conexionBdComercial, $_POST["ref"]) : NULL;
 Productos::Update(
     [
         'cprod_nombre' => mysqli_real_escape_string($conexionBdComercial, $_POST["nombre"]),
@@ -24,7 +24,7 @@ Productos::Update(
         'cprod_especificaciones' => mysqli_real_escape_string($conexionBdComercial, $_POST["especificaciones"]),
         'cprod_nucleo_web' => $_POST["nucleo"] ?? NULL,
         'cprod_cod_ref' => $codRef,
-        'cprod_ean_code' => $_POST["codigoEAN"] ?? NULL,
+        'cprod_ean_code' => mysqli_real_escape_string($conexionBdComercial, $_POST["codigoEAN"]) ?? NULL,
         'cprod_descuento' => $_POST["desc"] ?? NULL
     ],
     ['cprod_id' => $_POST["id"]]
@@ -89,8 +89,8 @@ for ($i = 0; $i < $maxLength; $i++) {
     Productos_Tallas::Insert([
         'cpta_talla' => $talla,
         'cpta_stock' => $stock,
-        'cpta_referencia' => $referencia,
-        'cpta_cod_ean' => $codEan,
+        'cpta_referencia' => mysqli_real_escape_string($conexionBdComercial, $referencia),
+        'cpta_cod_ean' => mysqli_real_escape_string($conexionBdComercial, $codEan),
         'cpta_producto' => $_POST["id"],
         'cpta_empresa' => $_SESSION["idEmpresa"]
     ]);
