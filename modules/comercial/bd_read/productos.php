@@ -24,7 +24,7 @@ if (!empty($_GET["estado"])) {
     $filtros[] = "cprod_estado='" . $_GET["estado"] . "'";
 }
 if (!empty($_GET['search'])) {
-    $busqueda = $_GET['search'];
+    $busqueda = mysqli_real_escape_string($conexionBdComercial, $_GET['search']);
     $filtros[] = "(
         cprod_id LIKE '%$busqueda%' OR 
         cprod_nombre LIKE '%$busqueda%' OR 
