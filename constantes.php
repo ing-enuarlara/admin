@@ -7,9 +7,9 @@ switch($_SERVER['HTTP_HOST']){
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
 
-        case 'adminocb.es';
+        case 'app.adminocb.es';
         define('RUTA_PROYECTO', $_SERVER['DOCUMENT_ROOT'].'/admin/');
-        define('REDIRECT_ROUTE', 'https://adminocb.es/admin/');
+        define('REDIRECT_ROUTE', 'https://app.adminocb.es/admin/');
         define('ENVIROMENT', 'PROD');
         error_reporting (E_ALL ^ E_NOTICE ^ E_WARNING);
         break;
